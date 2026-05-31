@@ -1,0 +1,60 @@
+api:
+  host: "0.0.0.0"
+  port: 8080
+  mode: "debug"
+  node_id: "node-1"
+  enable_cluster: true
+
+database:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "postgres"
+  dbname: "parser_db"
+  sslmode: "disable"
+  max_conns: 20
+
+logger:
+  log_level: "info"
+  log_dir: "./logs"
+  max_file_size: 104857600
+  max_backups: 10
+  compress: false
+  console_output: true
+
+protocol:
+  serial:
+    port_name: "COM1"
+    baud_rate: 9600
+    data_bits: 8
+    stop_bits: 1
+    parity: "N"
+    timeout_ms: 5000
+  tcp:
+    host: "0.0.0.0"
+    port: 9000
+    timeout_ms: 30000
+    buffer_size: 4096
+    is_server: true
+  private:
+    header_len: 13
+    max_packet_len: 4096
+
+validator:
+  enable_crc16: true
+  enable_crc32: true
+  enable_checksum: true
+  enable_length_check: true
+  min_packet_len: 4
+  max_packet_len: 65535
+
+cluster:
+  enabled: true
+  strategy: "round_robin"
+  heartbeat_secs: 10
+  nodes:
+    - "http://localhost:8080"
+    - "http://localhost:8081"
+  weights:
+    - 1
+    - 1
