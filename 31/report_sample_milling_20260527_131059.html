@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNC Simulation Report - sample_milling.nc</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #1e1e1e; color: #e0e0e0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #4fc3f7; border-bottom: 2px solid #4fc3f7; padding-bottom: 10px; margin-bottom: 20px; }
+        h2 { color: #81c784; margin-top: 25px; margin-bottom: 15px; }
+        h3 { color: #ffb74d; margin-top: 20px; margin-bottom: 10px; }
+        .summary { background: #2d2d2d; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .summary-item { background: #3d3d3d; padding: 15px; border-radius: 6px; border-left: 3px solid #4fc3f7; }
+        .summary-item .label { font-size: 12px; color: #888; text-transform: uppercase; }
+        .summary-item .value { font-size: 20px; font-weight: bold; margin-top: 5px; }
+        .status-pass { color: #81c784; }
+        .status-warn { color: #ffb74d; }
+        .status-fail { color: #e57373; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #4fc3f7; color: #1e1e1e; padding: 12px; text-align: left; font-weight: bold; }
+        td { padding: 10px 12px; border-bottom: 1px solid #444; }
+        tr:nth-child(even) { background: #2d2d2d; }
+        tr:hover { background: #3d3d3d; }
+        .event-list { max-height: 400px; overflow-y: auto; }
+        .collision-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+        .collision-critical { background: #e57373; color: #fff; }
+        .collision-warning { background: #ffb74d; color: #1e1e1e; }
+        .limit-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; background: #ff9800; color: #fff; }
+        .section { background: #2d2d2d; border-radius: 8px; padding: 20px; margin-top: 20px; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; color: #666; font-size: 12px; border-top: 1px solid #444; }
+        .no-events { color: #81c784; padding: 20px; text-align: center; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CNC Simulation Report</h1>
+        <div class="summary">
+            <h2>Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="label">File</div>
+                    <div class="value">sample_milling.nc</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Machine</div>
+                    <div class="value">VMC-850</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Commands</div>
+                    <div class="value">72</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Processed</div>
+                    <div class="value">72</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Path Length</div>
+                    <div class="value">1783.02 mm</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Rapid Length</div>
+                    <div class="value">893.52 mm</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Feed Length</div>
+                    <div class="value">889.50 mm</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Duration</div>
+                    <div class="value">0.78 s</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Verification Status</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="label">Collisions</div>
+                    <div class="value status-fail">96 collisions detected</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Limit Violations</div>
+                    <div class="value status-fail">99 violations</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Errors</div>
+                    <div class="value status-pass">0 none</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Warnings</div>
+                    <div class="value status-warn">16 warnings</div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h2>Collision Detection (97 events)</h2>
+            <div class="event-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Distance (mm)</th>
+                            <th>Position</th>
+                            <th>Objects</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=0.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=-20.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=-20.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=-20.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=-20.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=-20.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=-10.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=-10.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=-10.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-warning">WARNING</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>1.6228</td>
+                <td>X=-30.000, Y=-10.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder near worktable, distance: 1.6228mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=0.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=0.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=0.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=0.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=10.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=10.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=10.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=10.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=20.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-30.000, Y=20.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=20.000, Z=-5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=20.000, Z=-5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=20.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=20.000, Z=5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=20.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=30.000, Y=20.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=-3.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=-3.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=15.000, Y=0.000, Z=-3.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=15.000, Y=0.000, Z=-3.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-15.000, Y=0.000, Z=-3.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-15.000, Y=0.000, Z=-3.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=-3.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=-3.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=5.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=0.000, Y=0.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=-25.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=-25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=-25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=40.000, Y=-25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=40.000, Y=-25.000, Z=-2.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=40.000, Y=25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=40.000, Y=25.000, Z=-2.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=-25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=-25.000, Z=-2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-40.000, Y=-25.000, Z=5.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=-15.000, Z=50.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=-15.000, Z=-10.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=-15.000, Z=-10.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=20.000, Y=-15.000, Z=-10.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=20.000, Y=-15.000, Z=-10.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=20.000, Y=15.000, Z=-10.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=20.000, Y=15.000, Z=-10.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=15.000, Z=-10.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=15.000, Z=-10.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=15.000, Z=-10.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=15.000, Z=-10.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=15.000, Z=-10.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-20.000, Y=15.000, Z=-10.000</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-35.000, Y=-20.000, Z=2.000</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-35.000, Y=-20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-35.000, Y=-20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=35.000, Y=-20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=35.000, Y=-20.000, Z=-2.500</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=35.000, Y=20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>tool_holder_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=35.000, Y=20.000, Z=-2.500</td>
+                <td>tool_holder / worktable</td>
+                <td>Tool holder collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-35.000, Y=20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-35.000, Y=-20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><span class="collision-badge collision-critical">COLLISION</span></td>
+                <td>spindle_to_worktable</td>
+                <td>0.0000</td>
+                <td>X=-35.000, Y=-20.000, Z=-2.500</td>
+                <td>spindle / worktable</td>
+                <td>Spindle collides with worktable, distance: 0.0000mm</td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h2>Axis Limit Violations (99 events)</h2>
+            <div class="event-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Status</th>
+                            <th>Axis</th>
+                            <th>Limit Type</th>
+                            <th>Distance (mm)</th>
+                            <th>Position (mm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+            <tr>
+                <td>12</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>30.0000</td>
+                <td>-30.000</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>5.0000</td>
+                <td>-5.000</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>3.0000</td>
+                <td>-3.000</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>3.0000</td>
+                <td>-3.000</td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>37</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>37</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>38</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>38</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>38</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>39</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>39</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>39</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>40</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>41</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>42</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>42</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>44</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.0000</td>
+                <td>-2.000</td>
+            </tr>
+            <tr>
+                <td>45</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>45</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>46</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>46</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>40.0000</td>
+                <td>-40.000</td>
+            </tr>
+            <tr>
+                <td>47</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>25.0000</td>
+                <td>-25.000</td>
+            </tr>
+            <tr>
+                <td>48</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>48</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>15.0000</td>
+                <td>-15.000</td>
+            </tr>
+            <tr>
+                <td>49</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>49</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>15.0000</td>
+                <td>-15.000</td>
+            </tr>
+            <tr>
+                <td>49</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>15.0000</td>
+                <td>-15.000</td>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>51</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>52</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>52</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>53</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>53</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>54</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>54</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>10.0000</td>
+                <td>-10.000</td>
+            </tr>
+            <tr>
+                <td>55</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>55</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>56</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>56</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>57</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>57</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>57</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>58</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>58</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>58</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>59</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>59</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>60</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>61</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>61</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>62</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>62</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>62</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>63</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>63</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>63</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Z</td>
+                <td>min</td>
+                <td>2.5000</td>
+                <td>-2.500</td>
+            </tr>
+            <tr>
+                <td>64</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>64</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>65</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>65</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>66</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>66</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>67</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>67</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>68</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>68</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+            <tr>
+                <td>69</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>X</td>
+                <td>min</td>
+                <td>35.0000</td>
+                <td>-35.000</td>
+            </tr>
+            <tr>
+                <td>69</td>
+                <td><span class="limit-badge">LIMIT</span></td>
+                <td>Y</td>
+                <td>min</td>
+                <td>20.0000</td>
+                <td>-20.000</td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section"><h2>Errors</h2><div class="no-events">No errors detected</div></div>
+
+        
+        <div class="section">
+            <h2>Warnings (16 events)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Line</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            <tr>
+                <td>2</td>
+                <td>Unknown word: O</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Unsupported G-code: G54</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Unsupported G-code: G40</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Unsupported G-code: G80</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Unsupported G-code: G49</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Tool change T1 not fully supported</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Unsupported G-code: G43</td>
+            </tr>
+            <tr>
+                <td>43</td>
+                <td>Unsupported G-code: G42</td>
+            </tr>
+            <tr>
+                <td>48</td>
+                <td>Unsupported G-code: G40</td>
+            </tr>
+            <tr>
+                <td>54</td>
+                <td>Unsupported G-code: G99</td>
+            </tr>
+            <tr>
+                <td>54</td>
+                <td>Unsupported G-code: G81</td>
+            </tr>
+            <tr>
+                <td>58</td>
+                <td>Unsupported G-code: G80</td>
+            </tr>
+            <tr>
+                <td>64</td>
+                <td>Unsupported G-code: G41</td>
+            </tr>
+            <tr>
+                <td>69</td>
+                <td>Unsupported G-code: G40</td>
+            </tr>
+            <tr>
+                <td>75</td>
+                <td>Unsupported G-code: G49</td>
+            </tr>
+            <tr>
+                <td>75</td>
+                <td>Unsupported G-code: G80</td>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            CNC Simulator v1.0.0 | Generated 2026-05-27 13:10:59
+        </div>
+    </div>
+</body>
+</html>

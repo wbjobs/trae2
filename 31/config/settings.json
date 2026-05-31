@@ -1,0 +1,47 @@
+{
+    "machine": {
+        "name": "VMC-850",
+        "type": "VMC",
+        "axes": ["X", "Y", "Z"],
+        "limits": {
+            "X": {"min": 0, "max": 850},
+            "Y": {"min": 0, "max": 500},
+            "Z": {"min": 0, "max": 500}
+        },
+        "home_position": {"X": 0, "Y": 0, "Z": 500},
+        "feed_rate_max": 10000,
+        "spindle_speed_max": 12000
+    },
+    "collision": {
+        "tool_holder_radius": 25,
+        "tool_holder_length": 60,
+        "spindle_radius": 50,
+        "spindle_length": 150,
+        "worktable_size": [900, 550, 100],
+        "worktable_position": [0, 0, 0],
+        "fixture_height": 80,
+        "min_distance_warning": 5.0,
+        "min_distance_collision": 0.1
+    },
+    "simulation": {
+        "time_step": 0.001,
+        "max_path_error": 0.001,
+        "collision_check_enabled": true,
+        "limit_check_enabled": true
+    },
+    "ui": {
+        "theme": "dark",
+        "show_grid": true,
+        "show_axes": true,
+        "show_tool_path": true,
+        "camera_distance": 1500,
+        "background_color": [30, 30, 30]
+    },
+    "report": {
+        "output_dir": "./reports",
+        "template": "default",
+        "include_collision_details": true,
+        "include_path_statistics": true,
+        "format": "html"
+    }
+}

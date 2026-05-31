@@ -1,0 +1,13 @@
+Parsed 72 commands
+Simulator ready with 72 commands
+
+Simulation complete after 2164 steps
+  Commands processed: 72/72
+  Total path length: 19.79 mm
+  Rapid path length: 0.00 mm
+  Feed path length: 19.79 mm
+  Path points: 2093
+  Events: 2263
+  Event types: {'command_processed': 24, 'segment_started': 98, 'position_update': 2093, 'segment_completed': 48}
+
+✓ No errors during simulation
