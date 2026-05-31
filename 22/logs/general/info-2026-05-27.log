@@ -1,0 +1,25 @@
+{"timestamp":"2026-05-27T03:06:01.895Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":9112}
+{"timestamp":"2026-05-27T03:06:01.939Z","level":"info","module":"Receiver","message":"ECU Message Receiver started","nodeId":"node-01","pid":9112,"data":{"threadPool":true,"rateLimit":"5000/s"}}
+{"timestamp":"2026-05-27T03:06:01.970Z","level":"info","module":"Receiver","message":"UDP ECU interface listening on 0.0.0.0:9000","nodeId":"node-01","pid":9112}
+{"timestamp":"2026-05-27T03:06:01.972Z","level":"info","module":"Receiver","message":"TCP ECU interface listening on 0.0.0.0:9001","nodeId":"node-01","pid":9112}
+{"timestamp":"2026-05-27T03:15:40.749Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T03:15:40.770Z","level":"info","module":"Receiver","message":"ECU Message Receiver started","nodeId":"node-01","pid":17084,"data":{"threadPool":true,"rateLimit":"5000/s"}}
+{"timestamp":"2026-05-27T03:15:40.781Z","level":"info","module":"Receiver","message":"UDP ECU interface listening on 0.0.0.0:9000","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T03:15:40.783Z","level":"info","module":"Receiver","message":"TCP ECU interface listening on 0.0.0.0:9001","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T03:15:40.784Z","level":"info","module":"Server","message":"HTTP server listening on http://0.0.0.0:8080","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T04:17:00.090Z","level":"info","module":"Receiver","message":"ECU Message Receiver stopped","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T04:17:00.090Z","level":"info","module":"Cluster","message":"Cluster manager shut down","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T04:17:00.425Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:00.444Z","level":"info","module":"Receiver","message":"ECU Message Receiver started","nodeId":"node-01","pid":15948,"data":{"threadPool":true,"rateLimit":"5000/s"}}
+{"timestamp":"2026-05-27T04:17:00.466Z","level":"info","module":"Receiver","message":"UDP ECU interface listening on 0.0.0.0:9000","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:00.471Z","level":"info","module":"Receiver","message":"TCP ECU interface listening on 0.0.0.0:9001","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:00.472Z","level":"info","module":"Server","message":"HTTP server listening on http://0.0.0.0:8080","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:44.712Z","level":"info","module":"Receiver","message":"ECU Message Receiver stopped","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:44.713Z","level":"info","module":"Cluster","message":"Cluster manager shut down","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:45.049Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.070Z","level":"info","module":"Receiver","message":"ECU Message Receiver started","nodeId":"node-01","pid":25724,"data":{"threadPool":true,"rateLimit":"5000/s"}}
+{"timestamp":"2026-05-27T04:17:45.082Z","level":"info","module":"Receiver","message":"UDP ECU interface listening on 0.0.0.0:9000","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.086Z","level":"info","module":"Receiver","message":"TCP ECU interface listening on 0.0.0.0:9001","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.086Z","level":"info","module":"Cluster","message":"Listening on 127.0.0.1:7001","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.088Z","level":"info","module":"Server","message":"HTTP server listening on http://0.0.0.0:8080","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.092Z","level":"info","module":"Cluster","message":"Node node-01 (主节点-01) initialized","nodeId":"node-01","pid":25724}

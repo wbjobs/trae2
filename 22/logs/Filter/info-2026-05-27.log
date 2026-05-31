@@ -1,0 +1,4 @@
+{"timestamp":"2026-05-27T03:06:01.895Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":9112}
+{"timestamp":"2026-05-27T03:15:40.749Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":17084}
+{"timestamp":"2026-05-27T04:17:00.425Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":15948}
+{"timestamp":"2026-05-27T04:17:45.049Z","level":"info","module":"Filter","message":"Loaded 7 filtering rules","nodeId":"node-01","pid":25724}

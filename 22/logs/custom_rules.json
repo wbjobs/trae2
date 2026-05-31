@@ -1,0 +1,16 @@
+[
+  {
+    "priority": 85,
+    "description": "Block 0x3E TesterPresent",
+    "name": "Test Rule",
+    "conditions": {
+      "sid": [
+        "0x3E"
+      ]
+    },
+    "action": "block",
+    "id": "rule-1779847045867",
+    "createdAt": "2026-05-27T01:57:25.867Z",
+    "enabled": true
+  }
+]

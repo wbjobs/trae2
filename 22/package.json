@@ -1,0 +1,19 @@
+{
+  "name": "vehicle-diagnostic-cluster",
+  "version": "1.0.0",
+  "description": "车规级车载诊断报文转发与过滤服务集群",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "start:node1": "set NODE_ID=node-01&& node backend/server.js",
+    "start:node2": "set NODE_ID=node-02&& node backend/server.js",
+    "start:node3": "set NODE_ID=node-03&& node backend/server.js",
+    "cluster": "start \"Node-01\" cmd /k \"set NODE_ID=node-01&& node backend/server.js\" && start \"Node-02\" cmd /k \"set NODE_ID=node-02&& node backend/server.js\" && start \"Node-03\" cmd /k \"set NODE_ID=node-03&& node backend/server.js\""
+  },
+  "keywords": ["vehicle", "diagnostic", "cluster", "ecu", "uds", "can"],
+  "author": "Vehicle Diagnostic Cluster",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

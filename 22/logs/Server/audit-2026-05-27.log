@@ -1,0 +1,5 @@
+{"timestamp":"2026-05-27T03:15:40.784Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","pid":17084,"data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001}}
+{"timestamp":"2026-05-27T04:17:00.089Z","level":"audit","module":"Server","message":"Service shutting down","nodeId":"node-01","pid":17084,"data":{"nodeId":"node-01"}}
+{"timestamp":"2026-05-27T04:17:00.473Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","pid":15948,"data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001}}
+{"timestamp":"2026-05-27T04:17:44.712Z","level":"audit","module":"Server","message":"Service shutting down","nodeId":"node-01","pid":15948,"data":{"nodeId":"node-01"}}
+{"timestamp":"2026-05-27T04:17:45.089Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","pid":25724,"data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001}}

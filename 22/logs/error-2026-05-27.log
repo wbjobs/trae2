@@ -1,0 +1,5 @@
+{"timestamp":"2026-05-27T01:53:44.153Z","level":"error","module":"Receiver","message":"Inject test message failed","nodeId":"node-01","data":{"error":"function () { [native code] } could not be cloned."}}
+{"timestamp":"2026-05-27T01:53:44.298Z","level":"error","module":"Receiver","message":"Inject test message failed","nodeId":"node-01","data":{"error":"function () { [native code] } could not be cloned."}}
+{"timestamp":"2026-05-27T01:53:59.283Z","level":"error","module":"Receiver","message":"Inject test message failed","nodeId":"node-01","data":{"error":"function () { [native code] } could not be cloned."}}
+{"timestamp":"2026-05-27T01:53:59.833Z","level":"error","module":"Receiver","message":"Inject test message failed","nodeId":"node-01","data":{"error":"function () { [native code] } could not be cloned."}}
+{"timestamp":"2026-05-27T01:55:12.833Z","level":"error","module":"Receiver","message":"Inject test message failed","nodeId":"node-01","data":{"error":"function () { [native code] } could not be cloned."}}

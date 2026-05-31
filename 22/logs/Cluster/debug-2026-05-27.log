@@ -1,0 +1,696 @@
+{"timestamp":"2026-05-27T04:17:45.094Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.095Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.095Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:45.095Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:46.101Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:46.101Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:46.101Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:46.101Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:47.111Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:47.111Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:47.111Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:47.111Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:48.114Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:48.114Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:48.114Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:48.114Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:49.125Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:49.125Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:49.125Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:49.125Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:50.131Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:50.131Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:50.131Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:50.131Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:51.144Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:51.145Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:51.145Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:51.145Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:52.157Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:52.158Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:52.158Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:52.158Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:53.163Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:53.163Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:53.163Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:53.163Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:54.169Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:54.169Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:54.169Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:54.169Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:55.181Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:55.181Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:55.181Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:55.181Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:56.190Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:56.190Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:56.190Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:56.190Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:57.197Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:57.197Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:57.197Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:57.197Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:58.214Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:58.214Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:58.214Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:58.214Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:59.214Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:59.214Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:59.214Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:17:59.214Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:00.218Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:00.218Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:00.218Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:00.218Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:01.220Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:01.220Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:01.220Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:01.220Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:02.231Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:02.231Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:02.231Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:02.231Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:03.239Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:03.240Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:03.240Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:03.240Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:04.247Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:04.247Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:04.247Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:04.247Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:05.252Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:05.252Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:05.252Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:05.252Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:06.254Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:06.255Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:06.255Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:06.255Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:07.261Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:07.262Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:07.262Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:07.262Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:08.268Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:08.268Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:08.268Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:08.268Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:09.269Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:09.269Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:09.270Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:09.270Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:10.280Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:10.280Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:10.280Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:10.280Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:11.282Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:11.282Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:11.282Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:11.282Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:12.287Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:12.287Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:12.287Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:12.287Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:13.294Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:13.295Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:13.295Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:13.295Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:14.297Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:14.297Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:14.297Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:14.297Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:15.299Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:15.299Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:15.299Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:15.299Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:16.299Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:16.299Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:16.299Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:16.299Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:17.301Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:17.301Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:17.301Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:17.301Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:18.315Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:18.315Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:18.315Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:18.315Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:19.332Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:19.332Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:19.332Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:19.332Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:20.334Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:20.334Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:20.334Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:20.334Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:21.336Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:21.336Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:21.336Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:21.336Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:22.343Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:22.343Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:22.343Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:22.343Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:23.349Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:23.349Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:23.349Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:23.349Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:24.366Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:24.366Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:24.366Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:24.366Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:25.368Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:25.369Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:25.369Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:25.369Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:26.373Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:26.373Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:26.373Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:26.373Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:27.383Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:27.383Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:27.383Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:27.383Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:28.396Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:28.396Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:28.396Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:28.396Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:29.399Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:29.399Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:29.399Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:29.400Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:30.415Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:30.415Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:30.415Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:30.415Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:31.423Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:31.423Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:31.423Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:31.423Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:32.435Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:32.435Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:32.435Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:32.435Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:33.442Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:33.442Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:33.442Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:33.442Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:34.444Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:34.444Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:34.444Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:34.444Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:35.457Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:35.457Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:35.457Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:35.457Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:36.466Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:36.466Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:36.466Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:36.466Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:37.473Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:37.473Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:37.473Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:37.473Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:38.483Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:38.483Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:38.483Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:38.483Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:39.488Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:39.488Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:39.488Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:39.488Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:40.493Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:40.493Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:40.493Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:40.493Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:41.496Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:41.497Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:41.497Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:41.497Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:42.498Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:42.498Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:42.498Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:42.498Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:43.501Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:43.501Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:43.501Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:43.501Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:44.515Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:44.515Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:44.515Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:44.515Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:45.525Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:45.526Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:45.526Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:45.526Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:46.530Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:46.530Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:46.530Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:46.530Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:47.547Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:47.547Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:47.547Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:47.547Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:48.568Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:48.569Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:48.569Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:48.569Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:49.575Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:49.575Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:49.575Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:49.575Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:50.578Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:50.578Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:50.578Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:50.579Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:51.594Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:51.594Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:51.594Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:51.594Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:52.611Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:52.611Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:52.611Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:52.611Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:53.626Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:53.626Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:53.627Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:53.627Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:54.628Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:54.628Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:54.628Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:54.628Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:55.631Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:55.631Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:55.632Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:55.632Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:56.643Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:56.643Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:56.643Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:56.643Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:57.644Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:57.644Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:57.644Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:57.644Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:58.645Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:58.645Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:58.645Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:58.645Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:59.646Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:59.647Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:59.647Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:18:59.647Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:00.661Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:00.661Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:00.661Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:00.661Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:01.663Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:01.663Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:01.663Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:01.663Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:02.679Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:02.679Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:02.679Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:02.679Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:03.684Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:03.684Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:03.684Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:03.684Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:04.696Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:04.696Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:04.696Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:04.696Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:05.697Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:05.698Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:05.698Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:05.698Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:06.713Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:06.713Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:06.713Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:06.713Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:07.729Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:07.729Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:07.730Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:07.730Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:08.745Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:08.745Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:08.745Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:08.745Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:09.830Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:09.834Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:09.834Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:09.834Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:10.852Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:10.852Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:10.852Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:10.853Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:11.867Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:11.868Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:11.868Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:11.868Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:12.872Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:12.872Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:12.872Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:12.872Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:13.876Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:13.876Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:13.876Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:13.876Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:14.890Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:14.891Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:14.891Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:14.891Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:15.907Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:15.907Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:15.907Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:15.907Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:16.908Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:16.909Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:16.909Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:16.909Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:17.911Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:17.911Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:17.911Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:17.911Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:18.915Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:18.915Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:18.915Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:18.915Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:19.926Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:19.926Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:19.926Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:19.926Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:20.929Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:20.929Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:20.929Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:20.929Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:21.945Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:21.945Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:21.945Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:21.945Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:22.959Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:22.959Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:22.959Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:22.959Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:23.976Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:23.976Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:23.976Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:23.976Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:24.979Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:24.980Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:24.980Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:24.980Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:25.993Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:25.993Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:25.993Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:25.993Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:27.009Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:27.009Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:27.009Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:27.009Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:28.014Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:28.014Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:28.014Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:28.014Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:29.025Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:29.025Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:29.025Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:29.025Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:30.028Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:30.028Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:30.028Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:30.029Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:31.039Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:31.039Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:31.040Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:31.040Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:32.051Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:32.051Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:32.051Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:32.051Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:33.060Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:33.060Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:33.060Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:33.060Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:34.064Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:34.064Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:34.064Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:34.064Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:35.065Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:35.065Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:35.065Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:35.066Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:36.076Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:36.076Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:36.076Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:36.076Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:37.079Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:37.080Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:37.080Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:37.080Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:38.085Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:38.085Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:38.085Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:38.085Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:39.086Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:39.086Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:39.086Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:39.086Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:40.091Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:40.092Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:40.092Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:40.092Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:41.102Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:41.102Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:41.102Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:41.102Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:42.108Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:42.108Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:42.108Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:42.108Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:43.114Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:43.114Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:43.114Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:43.114Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:44.129Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:44.129Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:44.130Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:44.130Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:45.129Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:45.129Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:45.129Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:45.129Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:46.134Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:46.135Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:46.135Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:46.135Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:47.138Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:47.138Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:47.138Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:47.138Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:48.141Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:48.142Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:48.142Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:48.142Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:49.146Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:49.146Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:49.146Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:49.146Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:50.150Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:50.150Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:50.150Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:50.150Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:51.155Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:51.155Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:51.155Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:51.155Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:52.156Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:52.156Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:52.156Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:52.157Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:53.158Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:53.159Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:53.159Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:53.159Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:54.160Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:54.160Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:54.160Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:54.160Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:55.173Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:55.173Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:55.173Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:55.173Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:56.175Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:56.175Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:56.175Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:56.175Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:57.177Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:57.177Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:57.177Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:57.177Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:58.185Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:58.186Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:58.186Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:58.186Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:59.191Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:59.192Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:59.192Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:19:59.192Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:00.196Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:00.196Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:00.196Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:00.196Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:01.209Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:01.209Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:01.209Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:01.209Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:02.212Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:02.213Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:02.213Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:02.213Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:03.214Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:03.214Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:03.214Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:03.214Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:04.226Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:04.229Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:04.229Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:04.229Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:05.237Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:05.237Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:05.237Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:05.237Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:06.240Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:06.241Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:06.241Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:06.241Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:07.244Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:07.245Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:07.245Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:07.245Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:08.259Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:08.259Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:08.259Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:08.259Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:09.304Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:09.304Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:09.304Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:09.304Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:10.316Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:10.316Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:10.317Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:10.317Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:11.332Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:11.332Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:11.332Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:11.332Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:12.345Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:12.345Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:12.345Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:12.345Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:13.363Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:13.364Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:13.364Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:13.365Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:14.381Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:14.381Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:14.381Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:14.381Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:15.382Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:15.382Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:15.382Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:15.382Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:16.392Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:16.393Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:16.397Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:16.397Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:17.413Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:17.413Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:17.413Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:17.413Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:18.415Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:18.416Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:18.416Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:18.416Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:19.426Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:19.426Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:19.426Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:19.426Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:20.429Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:20.429Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:20.429Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:20.429Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:21.444Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:21.444Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:21.444Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:21.444Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:22.445Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:22.446Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:22.446Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:22.446Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:23.447Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:23.447Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:23.447Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:23.447Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:24.460Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:24.460Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:24.460Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:24.460Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:25.471Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:25.471Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:25.471Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:25.471Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:26.479Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:26.479Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:26.479Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:26.479Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:27.480Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:27.480Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:27.480Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:27.480Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:28.495Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:28.495Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:28.495Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:28.495Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:29.497Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:29.497Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:29.497Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:29.497Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:30.507Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:30.507Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:30.507Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:30.507Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:31.509Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:31.509Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:31.509Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:31.509Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:32.519Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:32.519Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:32.519Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:32.519Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:33.523Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:33.523Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:33.524Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:33.524Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:34.525Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:34.525Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:34.525Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:34.526Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:35.529Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:35.529Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:35.529Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:35.529Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:36.532Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:36.532Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:36.532Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:36.532Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:37.544Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:37.544Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:37.545Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:37.545Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:38.547Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:38.547Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:38.547Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:38.547Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:39.572Z","level":"debug","module":"Cluster","message":"Connection error to peer node-03","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:39.573Z","level":"debug","module":"Cluster","message":"Connection error to peer node-02","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:39.573Z","level":"debug","module":"Cluster","message":"Reconnecting to node-02 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}
+{"timestamp":"2026-05-27T04:20:39.573Z","level":"debug","module":"Cluster","message":"Reconnecting to node-03 in 1000ms (attempt 1)","nodeId":"node-01","pid":25724}

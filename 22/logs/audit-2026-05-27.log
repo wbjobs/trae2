@@ -1,0 +1,9 @@
+{"timestamp":"2026-05-27T01:34:50.711Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001,"clusterPort":7001}}
+{"timestamp":"2026-05-27T01:39:21.624Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001,"clusterPort":7001}}
+{"timestamp":"2026-05-27T01:53:27.630Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001,"clusterPort":7001}}
+{"timestamp":"2026-05-27T01:55:01.516Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001,"clusterPort":7001}}
+{"timestamp":"2026-05-27T01:56:38.438Z","level":"audit","module":"Server","message":"Service cluster started","nodeId":"node-01","data":{"nodeId":"node-01","httpPort":8080,"ecuUdpPort":9000,"ecuTcpPort":9001,"clusterPort":7001}}
+{"timestamp":"2026-05-27T01:57:13.819Z","level":"audit","module":"Filter","message":"Message BLOCKED by rule: 阻断诊断会话控制","nodeId":"node-01","data":{"ruleId":"rule-001","messageId":"msg-1779847033819-55ugw43cr","sid":"0x10","did":null}}
+{"timestamp":"2026-05-27T01:57:25.876Z","level":"audit","module":"Filter","message":"New filter rule added","nodeId":"node-01","data":{"ruleId":"rule-1779847045867","name":"Test Rule"}}
+{"timestamp":"2026-05-27T01:57:26.088Z","level":"audit","module":"Filter","message":"Message BLOCKED by rule: Test Rule","nodeId":"node-01","data":{"ruleId":"rule-1779847045867","messageId":"msg-1779847046088-569vheoyk","sid":"0x3E","did":null}}
+{"timestamp":"2026-05-27T02:55:45.084Z","level":"audit","module":"Server","message":"Service shutting down","nodeId":"node-01","data":{"nodeId":"node-01"}}

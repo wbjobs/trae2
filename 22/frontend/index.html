@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>车规级诊断报文转发与过滤服务集群</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <svg viewBox="0 0 48 48" width="32" height="32">
+            <rect x="4" y="8" width="40" height="32" rx="4" fill="none" stroke="#00d4ff" stroke-width="2"/>
+            <rect x="10" y="14" width="10" height="10" rx="1" fill="#00d4ff"/>
+            <rect x="24" y="14" width="10" height="10" rx="1" fill="#00ff88"/>
+            <rect x="10" y="28" width="10" height="6" rx="1" fill="#ffaa00"/>
+            <rect x="24" y="28" width="10" height="6" rx="1" fill="#ff4466"/>
+          </svg>
+          <h1>车载诊断报文集群</h1>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="status-indicator" id="connectionStatus">
+          <span class="status-dot"></span>
+          <span id="statusText">连接中...</span>
+        </div>
+        <div class="node-info">
+          <span class="label">节点:</span>
+          <span id="nodeId">--</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="sidebar">
+      <div class="nav-item active" data-section="dashboard">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        <span>实时监控</span>
+      </div>
+      <div class="nav-item" data-section="messages">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+        <span>报文流</span>
+      </div>
+      <div class="nav-item" data-section="rules">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>过滤规则</span>
+      </div>
+      <div class="nav-item" data-section="cluster">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <span>集群节点</span>
+      </div>
+      <div class="nav-item" data-section="logs">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span>日志审计</span>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <section id="section-dashboard" class="section active">
+        <div class="section-header">
+          <h2>实时状态监控</h2>
+          <div class="section-actions">
+            <button class="btn btn-primary" id="refreshBtn">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+              刷新
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#00d4ff33;color:#00d4ff;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="totalMessages">0</div>
+              <div class="stat-label">总报文数</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#00ff8833;color:#00ff88;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="forwardedMessages">0</div>
+              <div class="stat-label">已转发</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#ff446633;color:#ff4466;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="blockedMessages">0</div>
+              <div class="stat-label">已阻断</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#ffaa0033;color:#ffaa00;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="activeRules">0</div>
+              <div class="stat-label">活跃规则</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#a855f733;color:#a855f7;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="onlineNodes">0</div>
+              <div class="stat-label">在线节点</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:#00d4ff33;color:#00d4ff;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 8V4l8 8-8 8v-4H4V8z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="cpuUsage">0%</div>
+              <div class="stat-label">CPU负载</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>ECU 接口状态</h3>
+          </div>
+          <div class="card-body">
+            <div class="ecu-interfaces" id="ecuInterfaces">
+              <div class="empty-state">加载中...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>最近报文</h3>
+            <span class="badge badge-info" id="recentMsgCount">0</span>
+          </div>
+          <div class="card-body">
+            <div class="message-list" id="recentMessages">
+              <div class="empty-state">暂无报文数据</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-messages" class="section">
+        <div class="section-header">
+          <h2>报文流监控</h2>
+          <div class="section-actions">
+            <button class="btn btn-danger" id="clearBufferBtn">清空缓冲区</button>
+            <button class="btn btn-primary" id="injectBtn">注入测试报文</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>报文列表</h3>
+            <div class="filter-controls">
+              <select id="msgProtocolFilter" class="select">
+                <option value="">全部协议</option>
+                <option value="TCP">TCP</option>
+                <option value="UDP">UDP</option>
+                <option value="INJECTED">注入</option>
+              </select>
+              <select id="msgSidFilter" class="select">
+                <option value="">全部 SID</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="message-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>时间戳</th>
+                    <th>ID</th>
+                    <th>SID</th>
+                    <th>服务名称</th>
+                    <th>DID</th>
+                    <th>协议</th>
+                    <th>长度</th>
+                    <th>源节点</th>
+                    <th>数据</th>
+                  </tr>
+                </thead>
+                <tbody id="messageTableBody">
+                  <tr><td colspan="9" class="empty-cell">加载中...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>阻断报文</h3>
+            <span class="badge badge-danger" id="blockedMsgCount">0</span>
+          </div>
+          <div class="card-body">
+            <div class="blocked-list" id="blockedMessagesList">
+              <div class="empty-state">暂无阻断报文</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-rules" class="section">
+        <div class="section-header">
+          <h2>过滤规则管理</h2>
+          <div class="section-actions">
+            <button class="btn btn-success" id="addRuleBtn">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              新增规则
+            </button>
+            <button class="btn btn-primary" id="reloadRulesBtn">重载规则</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>规则列表</h3>
+          </div>
+          <div class="card-body">
+            <div class="rules-list" id="rulesList">
+              <div class="empty-state">加载中...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-cluster" class="section">
+        <div class="section-header">
+          <h2>集群节点管理</h2>
+          <div class="section-actions">
+            <button class="btn btn-primary" id="refreshClusterBtn">刷新状态</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>集群概览</h3>
+          </div>
+          <div class="card-body">
+            <div class="cluster-overview" id="clusterOverview">
+              <div class="empty-state">加载中...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>节点列表</h3>
+          </div>
+          <div class="card-body">
+            <div class="node-table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>节点ID</th>
+                    <th>地址</th>
+                    <th>端口</th>
+                    <th>状态</th>
+                    <th>CPU</th>
+                    <th>内存</th>
+                    <th>最后心跳</th>
+                  </tr>
+                </thead>
+                <tbody id="nodeTableBody">
+                  <tr><td colspan="7" class="empty-cell">加载中...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-logs" class="section">
+        <div class="section-header">
+          <h2>日志审计</h2>
+          <div class="section-actions">
+            <select id="logLevelFilter" class="select">
+              <option value="info">INFO</option>
+              <option value="audit">AUDIT</option>
+              <option value="warn">WARN</option>
+              <option value="error">ERROR</option>
+              <option value="debug">DEBUG</option>
+            </select>
+            <button class="btn btn-primary" id="refreshLogsBtn">刷新日志</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>审计日志</h3>
+          </div>
+          <div class="card-body">
+            <div class="log-viewer" id="logViewer">
+              <div class="empty-state">加载中...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">标题</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
