@@ -1,0 +1,11 @@
+E:\标注项目\trae2\100\target\debug\deps\console-c81ae4a557a1a8ef.d: C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\lib.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\common_term.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\kb.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\term.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\utils.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\windows_term\mod.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\ansi.rs
+
+E:\标注项目\trae2\100\target\debug\deps\libconsole-c81ae4a557a1a8ef.rmeta: C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\lib.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\common_term.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\kb.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\term.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\utils.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\windows_term\mod.rs C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\ansi.rs
+
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\lib.rs:
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\common_term.rs:
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\kb.rs:
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\term.rs:
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\utils.rs:
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\windows_term\mod.rs:
+C:\Users\gengq\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\console-0.15.11\src\ansi.rs:

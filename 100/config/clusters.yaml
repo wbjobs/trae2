@@ -1,0 +1,58 @@
+version: "1.0"
+clusters:
+  - name: production
+    cluster_type: docker
+    description: "生产环境Docker集群"
+    nodes:
+      - name: node-01
+        host: 192.168.1.101
+        port: 22
+        user: root
+        key_file: ~/.ssh/id_rsa
+        timeout: 30
+        enabled: true
+      - name: node-02
+        host: 192.168.1.102
+        port: 22
+        user: root
+        key_file: ~/.ssh/id_rsa
+        timeout: 30
+        enabled: true
+      - name: node-03
+        host: 192.168.1.103
+        port: 22
+        user: root
+        key_file: ~/.ssh/id_rsa
+        timeout: 30
+        enabled: true
+
+  - name: staging
+    cluster_type: k8s
+    description: "测试环境Kubernetes集群"
+    nodes:
+      - name: k8s-master
+        host: 10.0.0.10
+        port: 22
+        user: admin
+        password: your_password_here
+        timeout: 30
+        enabled: true
+      - name: k8s-worker-01
+        host: 10.0.0.11
+        port: 22
+        user: admin
+        password: your_password_here
+        timeout: 30
+        enabled: true
+
+  - name: development
+    cluster_type: swarm
+    description: "开发环境Docker Swarm集群"
+    nodes:
+      - name: swarm-manager
+        host: 172.16.0.10
+        port: 22
+        user: devops
+        key_file: ~/.ssh/dev_key
+        timeout: 30
+        enabled: true
