@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "name": "迈克尔逊干涉仪",
+    "description": "经典迈克尔逊干涉仪配置模板"
+  },
+  "light_source": {
+    "wavelength": 632.8,
+    "power": 1.0,
+    "beam_diameter": 5.0,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "elements": [
+    {
+      "id": "bs1",
+      "type": "beam_splitter",
+      "position": {
+        "x": 100,
+        "y": 0,
+        "z": 0
+      },
+      "parameters": {
+        "split_ratio": 0.5,
+        "reflectivity": 0.5,
+        "transmission": 0.5
+      }
+    },
+    {
+      "id": "m1",
+      "type": "mirror",
+      "position": {
+        "x": 200,
+        "y": 0,
+        "z": 0
+      },
+      "parameters": {
+        "reflectivity": 0.95,
+        "diameter": 25.4
+      }
+    },
+    {
+      "id": "m2",
+      "type": "mirror",
+      "position": {
+        "x": 100,
+        "y": 100,
+        "z": 0
+      },
+      "parameters": {
+        "reflectivity": 0.95,
+        "diameter": 25.4
+      }
+    },
+    {
+      "id": "detector",
+      "type": "detector",
+      "position": {
+        "x": 100,
+        "y": -50,
+        "z": 0
+      },
+      "parameters": {
+        "resolution": 1024,
+        "sensitivity": 1.0
+      }
+    }
+  ]
+}

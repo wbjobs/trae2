@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "name": "马赫-曾德尔干涉仪",
+    "description": "马赫-曾德尔干涉仪配置模板，用于相移测量"
+  },
+  "light_source": {
+    "wavelength": 632.8,
+    "power": 1.0,
+    "beam_diameter": 5.0,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "elements": [
+    {
+      "id": "lens1",
+      "type": "lens",
+      "position": {
+        "x": 50,
+        "y": 0,
+        "z": 0
+      },
+      "parameters": {
+        "focal_length": 100,
+        "diameter": 25.4,
+        "refractive_index": 1.5
+      }
+    },
+    {
+      "id": "bs1",
+      "type": "beam_splitter",
+      "position": {
+        "x": 150,
+        "y": 0,
+        "z": 0
+      },
+      "parameters": {
+        "split_ratio": 0.5,
+        "reflectivity": 0.5
+      }
+    },
+    {
+      "id": "m1",
+      "type": "mirror",
+      "position": {
+        "x": 250,
+        "y": 0,
+        "z": 0
+      },
+      "parameters": {
+        "reflectivity": 0.95
+      }
+    },
+    {
+      "id": "m2",
+      "type": "mirror",
+      "position": {
+        "x": 150,
+        "y": 100,
+        "z": 0
+      },
+      "parameters": {
+        "reflectivity": 0.95
+      }
+    },
+    {
+      "id": "bs2",
+      "type": "beam_splitter",
+      "position": {
+        "x": 250,
+        "y": 100,
+        "z": 0
+      },
+      "parameters": {
+        "split_ratio": 0.5
+      }
+    },
+    {
+      "id": "detector",
+      "type": "detector",
+      "position": {
+        "x": 350,
+        "y": 100,
+        "z": 0
+      },
+      "parameters": {
+        "resolution": 1024
+      }
+    }
+  ]
+}
