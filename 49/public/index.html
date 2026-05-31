@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复古机械组装 - Mech Assembly</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="start-screen" class="screen visible">
+        <div class="start-content">
+            <h1 class="game-title">⚙ 复古机械组装 ⚙</h1>
+            <p class="game-subtitle">Mech Assembly Simulator</p>
+            
+            <div class="start-form">
+                <div class="form-group">
+                    <label for="player-name">玩家名称</label>
+                    <input type="text" id="player-name" placeholder="输入你的名字" value="机械师">
+                </div>
+                
+                <div class="form-group">
+                    <label for="room-id">房间ID</label>
+                    <input type="text" id="room-id" placeholder="输入或留空创建新房间" value="workshop">
+                </div>
+                
+                <div class="form-group">
+                    <label for="level-select">选择关卡</label>
+                    <select id="level-select">
+                        <option value="level1">关卡1: 齿轮入门 (简单)</option>
+                        <option value="level2">关卡2: 杠杆原理 (中等)</option>
+                        <option value="level3">关卡3: 时钟机械 (困难)</option>
+                    </select>
+                </div>
+                
+                <button id="start-btn" class="btn btn-primary">开始游戏</button>
+                
+                <div class="server-status">
+                    <span id="server-indicator" class="status-dot offline"></span>
+                    <span id="server-text">连接服务器中...</span>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>操作说明</h3>
+                <ul>
+                    <li>🖱 <strong>鼠标左键</strong> - 选择/拖动零件</li>
+                    <li>🔄 <strong>Ctrl + 滚轮</strong> - 旋转零件</li>
+                    <li>⌨ <strong>X/Y/Z</strong> - 沿轴旋转</li>
+                    <li>🗑 <strong>Delete</strong> - 拆卸零件</li>
+                    <li>🎯 <strong>靠近零件</strong> - 自动吸附组装</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div id="game-container"></div>
+        
+        <div class="game-ui">
+            <div class="ui-panel top-left">
+                <div class="level-info">
+                    <h3 id="level-name">关卡1: 齿轮入门</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-bar" class="progress-fill"></div>
+                        </div>
+                        <span id="progress-text">进度: 0/0</span>
+                    </div>
+                </div>
+                <div id="part-info" class="part-info">未选中零件</div>
+            </div>
+            
+            <div class="ui-panel top-right">
+                <h3>玩家列表</h3>
+                <div id="player-list" class="player-list"></div>
+            </div>
+            
+            <div class="ui-panel bottom-left">
+                <h3>聊天</h3>
+                <div id="chat-messages" class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="发送消息...">
+                    <button id="chat-send" class="btn btn-small">发送</button>
+                </div>
+            </div>
+            
+            <div class="ui-panel bottom-right">
+                <button id="save-btn" class="btn btn-secondary">💾 保存</button>
+                <button id="menu-btn" class="btn btn-secondary">⚙ 菜单</button>
+            </div>
+            
+            <div class="ui-panel animation-controls">
+                <h3>动画控制</h3>
+                <div class="animation-buttons">
+                    <button id="anim-play-btn" class="btn btn-small">▶️ 播放</button>
+                    <button id="anim-pause-btn" class="btn btn-small">⏸️ 暂停</button>
+                    <button id="anim-speed-up" class="btn btn-small">⏩ 加速</button>
+                    <button id="anim-speed-down" class="btn btn-small">⏪ 减速</button>
+                </div>
+                <div class="animation-speed">
+                    <span>速度: <span id="anim-speed-value">1.0</span>x</span>
+                </div>
+                <button id="editor-btn" class="btn btn-primary btn-small">🔧 关卡编辑器</button>
+            </div>
+        </div>
+        
+        <div id="complete-overlay" class="complete-overlay">
+            <div class="complete-content">
+                <h2>🎉 关卡完成！</h2>
+                <p>恭喜你成功组装了机械结构！</p>
+                <div id="final-scores" class="final-scores"></div>
+                <div class="complete-actions">
+                    <button id="restart-btn" class="btn btn-primary">重新开始</button>
+                    <button id="next-level-btn" class="btn btn-secondary">下一关</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/node_modules/three/build/three.min.js"></script>
+    <script src="/js/OrbitControls.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/animationSystem.js"></script>
+    <script src="/js/partRenderer.js"></script>
+    <script src="/js/animationController.js"></script>
+    <script src="/js/gameClient.js"></script>
+    <script>
+        const game = new GameClient();
+        let serverConnected = false;
+
+        function updateServerStatus(connected) {
+            serverConnected = connected;
+            const indicator = document.getElementById('server-indicator');
+            const text = document.getElementById('server-text');
+            if (connected) {
+                indicator.classList.remove('offline');
+                indicator.classList.add('online');
+                text.textContent = '服务器已连接';
+            } else {
+                indicator.classList.remove('online');
+                indicator.classList.add('offline');
+                text.textContent = '服务器未连接';
+            }
+        }
+
+        function tryConnect() {
+            try {
+                game.connectToServer(window.location.origin);
+                game.socket.on('connect', () => {
+                    updateServerStatus(true);
+                });
+                game.socket.on('disconnect', () => {
+                    updateServerStatus(false);
+                });
+            } catch (e) {
+                console.error('Connection error:', e);
+                setTimeout(tryConnect, 2000);
+            }
+        }
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            const playerName = document.getElementById('player-name').value || '匿名玩家';
+            const roomId = document.getElementById('room-id').value || 'default_room';
+            const levelId = document.getElementById('level-select').value;
+
+            if (!serverConnected) {
+                alert('正在连接服务器，请稍候...');
+                return;
+            }
+
+            document.getElementById('start-screen').classList.remove('visible');
+            document.getElementById('game-screen').classList.add('visible');
+            
+            if (!game.initialized) {
+                game.init();
+            } else {
+                game.clearScene();
+            }
+            
+            game.joinRoom(roomId, playerName, levelId);
+
+            const levelNames = {
+                'level1': '关卡1: 齿轮入门',
+                'level2': '关卡2: 杠杆原理',
+                'level3': '关卡3: 时钟机械'
+            };
+            document.getElementById('level-name').textContent = levelNames[levelId] || levelId;
+        });
+
+        document.getElementById('chat-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChat();
+            }
+        });
+
+        document.getElementById('chat-send').addEventListener('click', sendChat);
+
+        function sendChat() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (message) {
+                game.sendChatMessage(message);
+                input.value = '';
+            }
+        }
+
+        document.getElementById('save-btn').addEventListener('click', () => {
+            const slotId = prompt('输入存档槽位名称:', 'save1');
+            if (slotId) {
+                game.saveGame(slotId);
+            }
+        });
+
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            if (confirm('确定返回主菜单吗？')) {
+                document.getElementById('game-screen').classList.remove('visible');
+                document.getElementById('start-screen').classList.add('visible');
+                if (game.socket) {
+                    game.socket.disconnect();
+                }
+                setTimeout(tryConnect, 500);
+            }
+        });
+
+        document.getElementById('anim-play-btn').addEventListener('click', () => {
+            if (game.animationController) {
+                game.animationController.startAnimations();
+            }
+        });
+
+        document.getElementById('anim-pause-btn').addEventListener('click', () => {
+            if (game.animationController) {
+                game.animationController.stopAnimations();
+            }
+        });
+
+        document.getElementById('anim-speed-up').addEventListener('click', () => {
+            if (game.animationController) {
+                const newSpeed = Math.min(5, game.animationController.animationSystem.speed + 0.5);
+                game.animationController.setSpeed(newSpeed);
+                document.getElementById('anim-speed-value').textContent = newSpeed.toFixed(1);
+            }
+        });
+
+        document.getElementById('anim-speed-down').addEventListener('click', () => {
+            if (game.animationController) {
+                const newSpeed = Math.max(0.5, game.animationController.animationSystem.speed - 0.5);
+                game.animationController.setSpeed(newSpeed);
+                document.getElementById('anim-speed-value').textContent = newSpeed.toFixed(1);
+            }
+        });
+
+        document.getElementById('editor-btn').addEventListener('click', () => {
+            if (game.levelEditor) {
+                if (game.levelEditor.isActive) {
+                    game.closeLevelEditor();
+                } else {
+                    game.openLevelEditor();
+                }
+            }
+        });
+
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            document.getElementById('complete-overlay').classList.remove('visible');
+            game.clearScene();
+            game.socket.emit('request-state');
+        });
+
+        document.getElementById('next-level-btn').addEventListener('click', () => {
+            document.getElementById('complete-overlay').classList.remove('visible');
+            document.getElementById('game-screen').classList.remove('visible');
+            document.getElementById('start-screen').classList.add('visible');
+            
+            const levelSelect = document.getElementById('level-select');
+            const currentIndex = levelSelect.selectedIndex;
+            if (currentIndex < levelSelect.options.length - 1) {
+                levelSelect.selectedIndex = currentIndex + 1;
+            }
+        });
+
+        tryConnect();
+    </script>
+</body>
+</html>
