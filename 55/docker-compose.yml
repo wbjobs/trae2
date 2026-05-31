@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: fault-analysis-service
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./models:/app/models
+    environment:
+      - CONFIG_PATH=/app/config.yaml
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - fault-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: fault-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - fault-net
+
+volumes:
+  redis-data:
+
+networks:
+  fault-net:
+    driver: bridge

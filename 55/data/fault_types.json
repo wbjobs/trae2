@@ -1,0 +1,84 @@
+{
+  "fault_types": [
+    {
+      "id": "FT001",
+      "name": "电机过热",
+      "category": "机械故障",
+      "description": "电机运行温度超过正常范围，可能由过载、散热不良或绕组故障引起",
+      "keywords": ["过热", "高温", "发烫", "温度高", "发热", "温升"],
+      "severity": "high"
+    },
+    {
+      "id": "FT002",
+      "name": "轴承损坏",
+      "category": "机械故障",
+      "description": "轴承出现磨损、异响或卡死现象",
+      "keywords": ["轴承", "异响", "磨损", "卡死", "噪音", "转动不顺"],
+      "severity": "high"
+    },
+    {
+      "id": "FT003",
+      "name": "传感器故障",
+      "category": "电气故障",
+      "description": "传感器输出异常或无信号，可能由接线松动或传感器损坏引起",
+      "keywords": ["传感器", "无信号", "读数异常", "偏差大", "检测不到"],
+      "severity": "medium"
+    },
+    {
+      "id": "FT004",
+      "name": "液压系统泄漏",
+      "category": "液压故障",
+      "description": "液压系统出现油液泄漏，导致压力不足或动作异常",
+      "keywords": ["泄漏", "漏油", "渗油", "压力低", "油液", "密封"],
+      "severity": "medium"
+    },
+    {
+      "id": "FT005",
+      "name": "PLC通信异常",
+      "category": "电气故障",
+      "description": "PLC与上位机或其他设备通信中断或数据异常",
+      "keywords": ["PLC", "通信", "连接", "网络", "数据异常", "超时"],
+      "severity": "high"
+    },
+    {
+      "id": "FT006",
+      "name": "驱动器报警",
+      "category": "电气故障",
+      "description": "伺服驱动器或变频器出现报警代码，保护机制触发",
+      "keywords": ["驱动器", "报警", "变频器", "伺服", "故障码", "过流"],
+      "severity": "high"
+    },
+    {
+      "id": "FT007",
+      "name": "气动系统压力不足",
+      "category": "气动故障",
+      "description": "气动系统气压低于设定值，导致气缸动作缓慢或无力",
+      "keywords": ["气压", "压力不足", "气缸", "动作慢", "无力", "气源"],
+      "severity": "medium"
+    },
+    {
+      "id": "FT008",
+      "name": "输送带卡滞",
+      "category": "机械故障",
+      "description": "输送带运行不畅或停止，可能由异物卡入或传动部件损坏引起",
+      "keywords": ["输送带", "卡滞", "不转", "停机", "皮带", "卡住"],
+      "severity": "high"
+    },
+    {
+      "id": "FT009",
+      "name": "冷却系统故障",
+      "category": "辅助系统",
+      "description": "冷却系统无法正常工作，导致设备过热",
+      "keywords": ["冷却", "散热", "风扇", "水冷", "温度过高"],
+      "severity": "medium"
+    },
+    {
+      "id": "FT010",
+      "name": "润滑系统故障",
+      "category": "辅助系统",
+      "description": "润滑系统供油不足或异常，导致磨损加剧",
+      "keywords": ["润滑", "供油", "油位", "黄油", "缺油"],
+      "severity": "medium"
+    }
+  ]
+}
