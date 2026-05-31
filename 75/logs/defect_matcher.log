@@ -1,0 +1,76 @@
+[2026-05-27 20:43:35] [defect_matcher] [INFO] DefectMatcher module initialized
+[2026-05-27 20:43:35] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 20:43:35] [defect_matcher] [INFO] Knowledge base indexed: 59 keywords, 10 categories
+[2026-05-27 20:43:38] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 20:43:41] [defect_matcher] [INFO] Task test-001: Defect matched - 放电故障 (D003), confidence=0.994, is_defect=True
+[2026-05-27 20:51:51] [defect_matcher] [INFO] DefectMatcher module initialized with ensemble classifier
+[2026-05-27 20:51:51] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 20:51:51] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 20:51:51] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 20:51:51] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 20:51:51] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-000: Defect matched - 放电故障 (D003), confidence=0.2641, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.264112}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-001: Defect matched - 温度异常 (D002), confidence=0.3758, is_defect=False, top_candidates=[{'code': 'D002', 'name': '温度异常', 'confidence': 0.375772}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-002: Defect matched - 放电故障 (D003), confidence=0.1357, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.135728}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-003: Defect matched - 渗漏油 (D004), confidence=0.4818, is_defect=False, top_candidates=[{'code': 'D004', 'name': '渗漏油', 'confidence': 0.481827}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-004: Defect matched - 接地异常 (D006), confidence=0.4746, is_defect=False, top_candidates=[{'code': 'D006', 'name': '接地异常', 'confidence': 0.474552}, {'code': 'D005', 'name': '机械损伤', 'confidence': 0.215695}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-005: Defect matched - 机械损伤 (D005), confidence=0.1840, is_defect=False, top_candidates=[{'code': 'D005', 'name': '机械损伤', 'confidence': 0.184027}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-006: Defect matched - 放电故障 (D003), confidence=0.1942, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.194167}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task test-acc-007: Defect matched - 温度异常 (D002), confidence=0.0975, is_defect=False, top_candidates=[{'code': 'D002', 'name': '温度异常', 'confidence': 0.0975}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 20:51:53] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 20:51:53] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task neg-000: Defect matched - 放电故障 (D003), confidence=0.1133, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.113258}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task neg-001: Defect matched - 温度异常 (D002), confidence=0.1008, is_defect=False, top_candidates=[{'code': 'D002', 'name': '温度异常', 'confidence': 0.100758}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task neg-002: Defect matched - 渗漏油 (D004), confidence=0.1257, is_defect=False, top_candidates=[{'code': 'D004', 'name': '渗漏油', 'confidence': 0.125682}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task neg-003: Defect matched - 绝缘老化 (D001), confidence=0.0000, is_defect=False, top_candidates=[{'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Task neg-004: Defect matched - 绝缘老化 (D001), confidence=0.0000, is_defect=False, top_candidates=[{'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 20:51:53] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 20:51:54] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 20:51:54] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 20:54:13] [defect_matcher] [INFO] DefectMatcher module initialized with ensemble classifier
+[2026-05-27 20:54:13] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 20:54:13] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 20:54:13] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 20:54:13] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 20:54:13] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-000: Defect matched - 放电故障 (D003), confidence=0.4754, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.475402}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-001: Defect matched - 温度异常 (D002), confidence=0.6764, is_defect=True, top_candidates=[{'code': 'D002', 'name': '温度异常', 'confidence': 0.67639}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-002: Defect matched - 放电故障 (D003), confidence=0.2443, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.24431}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-003: Defect matched - 渗漏油 (D004), confidence=0.8673, is_defect=True, top_candidates=[{'code': 'D004', 'name': '渗漏油', 'confidence': 0.867288}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-004: Defect matched - 接地异常 (D006), confidence=0.8542, is_defect=True, top_candidates=[{'code': 'D006', 'name': '接地异常', 'confidence': 0.854193}, {'code': 'D005', 'name': '机械损伤', 'confidence': 0.388251}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-005: Defect matched - 机械损伤 (D005), confidence=0.3312, is_defect=False, top_candidates=[{'code': 'D005', 'name': '机械损伤', 'confidence': 0.331248}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-006: Defect matched - 放电故障 (D003), confidence=0.3495, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.3495}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task test-acc-007: Defect matched - 温度异常 (D002), confidence=0.1755, is_defect=False, top_candidates=[{'code': 'D002', 'name': '温度异常', 'confidence': 0.1755}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] DefectMatcher module initialized with ensemble classifier
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 20:54:14] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 20:54:14] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task neg-000: Defect matched - 放电故障 (D003), confidence=0.2039, is_defect=False, top_candidates=[{'code': 'D003', 'name': '放电故障', 'confidence': 0.203864}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task neg-001: Defect matched - 温度异常 (D002), confidence=0.1814, is_defect=False, top_candidates=[{'code': 'D002', 'name': '温度异常', 'confidence': 0.181364}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task neg-002: Defect matched - 渗漏油 (D004), confidence=0.2262, is_defect=False, top_candidates=[{'code': 'D004', 'name': '渗漏油', 'confidence': 0.226227}, {'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task neg-003: Defect matched - 绝缘老化 (D001), confidence=0.0000, is_defect=False, top_candidates=[{'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 20:54:14] [defect_matcher] [INFO] Task neg-004: Defect matched - 绝缘老化 (D001), confidence=0.0000, is_defect=False, top_candidates=[{'code': 'D001', 'name': '绝缘老化', 'confidence': 0.0}, {'code': 'D002', 'name': '温度异常', 'confidence': 0.0}, {'code': 'D003', 'name': '放电故障', 'confidence': 0.0}]
+[2026-05-27 21:11:10] [defect_matcher] [INFO] DefectMatcher module initialized with ensemble classifier
+[2026-05-27 21:11:10] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 21:11:10] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 21:11:11] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 21:11:11] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 21:11:11] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 21:24:38] [defect_matcher] [INFO] DefectMatcher module initialized with ensemble classifier
+[2026-05-27 21:24:38] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 21:24:38] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 21:24:38] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 21:24:38] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 21:24:39] [defect_matcher] [INFO] DefectMatcher module fully initialized
+[2026-05-27 21:27:58] [defect_matcher] [INFO] DefectMatcher module initialized with ensemble classifier
+[2026-05-27 21:27:58] [defect_matcher] [INFO] Loaded 10 defect types from ./data/defect_kb.json
+[2026-05-27 21:27:58] [defect_matcher] [INFO] Knowledge base indexed: 10 categories
+[2026-05-27 21:27:58] [defect_matcher] [INFO] TF-IDF corpus built: 10 docs, 59 terms
+[2026-05-27 21:27:58] [defect_matcher] [INFO] Ensemble classifier initialized with weighted components
+[2026-05-27 21:27:58] [defect_matcher] [INFO] DefectMatcher module fully initialized

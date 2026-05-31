@@ -1,0 +1,24 @@
+[2026-05-27 20:43:35] [remediation_advisor] [INFO] RemediationAdvisor module initialized
+[2026-05-27 20:43:35] [remediation_advisor] [INFO] Loaded 10 remediation templates
+[2026-05-27 20:43:38] [remediation_advisor] [INFO] Push service initialized
+[2026-05-27 20:43:38] [remediation_advisor] [INFO] RemediationAdvisor module fully initialized
+[2026-05-27 20:43:44] [remediation_advisor] [WARNING] No push URL configured, skipping HTTP push
+[2026-05-27 20:43:44] [remediation_advisor] [INFO] Task test-001: Remediation generated - level=critical, measures=7, push_status=skipped
+[2026-05-27 20:43:44] [remediation_advisor] [INFO] RemediationAdvisor module shut down
+[2026-05-27 20:51:51] [remediation_advisor] [INFO] RemediationAdvisor module initialized
+[2026-05-27 20:51:53] [remediation_advisor] [INFO] Loaded 10 remediation templates
+[2026-05-27 20:51:54] [remediation_advisor] [INFO] Push service initialized
+[2026-05-27 20:51:54] [remediation_advisor] [INFO] RemediationAdvisor module fully initialized
+[2026-05-27 21:11:10] [remediation_advisor] [INFO] RemediationAdvisor module initialized
+[2026-05-27 21:11:10] [remediation_advisor] [INFO] Loaded 10 remediation templates
+[2026-05-27 21:11:11] [remediation_advisor] [INFO] Push service initialized
+[2026-05-27 21:11:11] [remediation_advisor] [INFO] RemediationAdvisor module fully initialized
+[2026-05-27 21:21:15] [remediation_advisor] [INFO] RemediationAdvisor module shut down
+[2026-05-27 21:24:38] [remediation_advisor] [INFO] RemediationAdvisor module initialized
+[2026-05-27 21:24:38] [remediation_advisor] [INFO] Loaded 10 remediation templates
+[2026-05-27 21:24:39] [remediation_advisor] [INFO] Push service initialized
+[2026-05-27 21:24:39] [remediation_advisor] [INFO] RemediationAdvisor module fully initialized
+[2026-05-27 21:27:58] [remediation_advisor] [INFO] RemediationAdvisor module initialized
+[2026-05-27 21:27:58] [remediation_advisor] [INFO] Loaded 10 remediation templates
+[2026-05-27 21:27:58] [remediation_advisor] [INFO] Push service initialized
+[2026-05-27 21:27:58] [remediation_advisor] [INFO] RemediationAdvisor module fully initialized

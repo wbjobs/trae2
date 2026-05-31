@@ -1,0 +1,57 @@
+[2026-05-27 20:43:35] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 20:43:35] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 20:43:35] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 20:43:37] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 20:43:41] [semantic_analyzer] [INFO] Task test-001: Semantic analysis completed, intent=maintenance_request, severity=critical, keywords_count=8, entities_count=1
+[2026-05-27 20:51:51] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 20:51:51] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 20:51:51] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 20:51:51] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-000: Semantic analysis completed, intent=status_check, severity=critical, keywords_count=10, entities_count=1
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-001: Semantic analysis completed, intent=defect_report, severity=normal, keywords_count=10, entities_count=1
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-002: Semantic analysis completed, intent=defect_report, severity=critical, keywords_count=7, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-003: Semantic analysis completed, intent=defect_report, severity=normal, keywords_count=9, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-004: Semantic analysis completed, intent=general_inquiry, severity=critical, keywords_count=8, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-005: Semantic analysis completed, intent=maintenance_request, severity=normal, keywords_count=10, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-006: Semantic analysis completed, intent=maintenance_request, severity=critical, keywords_count=9, entities_count=1
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task test-acc-007: Semantic analysis completed, intent=defect_report, severity=major, keywords_count=7, entities_count=1
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task neg-000: Semantic analysis completed, intent=general_inquiry, severity=critical, keywords_count=5, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task neg-001: Semantic analysis completed, intent=status_check, severity=major, keywords_count=5, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task neg-002: Semantic analysis completed, intent=defect_report, severity=major, keywords_count=5, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task neg-003: Semantic analysis completed, intent=defect_report, severity=normal, keywords_count=5, entities_count=0
+[2026-05-27 20:51:53] [semantic_analyzer] [INFO] Task neg-004: Semantic analysis completed, intent=general_inquiry, severity=normal, keywords_count=4, entities_count=0
+[2026-05-27 20:51:54] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 20:54:13] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 20:54:13] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 20:54:13] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 20:54:13] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-000: Semantic analysis completed, intent=status_check, severity=critical, keywords_count=10, entities_count=1
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-001: Semantic analysis completed, intent=defect_report, severity=normal, keywords_count=10, entities_count=1
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-002: Semantic analysis completed, intent=defect_report, severity=critical, keywords_count=7, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-003: Semantic analysis completed, intent=defect_report, severity=normal, keywords_count=9, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-004: Semantic analysis completed, intent=general_inquiry, severity=critical, keywords_count=8, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-005: Semantic analysis completed, intent=maintenance_request, severity=normal, keywords_count=10, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-006: Semantic analysis completed, intent=maintenance_request, severity=critical, keywords_count=9, entities_count=1
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task test-acc-007: Semantic analysis completed, intent=defect_report, severity=major, keywords_count=7, entities_count=1
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task neg-000: Semantic analysis completed, intent=general_inquiry, severity=critical, keywords_count=5, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task neg-001: Semantic analysis completed, intent=status_check, severity=major, keywords_count=5, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task neg-002: Semantic analysis completed, intent=defect_report, severity=major, keywords_count=5, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task neg-003: Semantic analysis completed, intent=defect_report, severity=normal, keywords_count=5, entities_count=0
+[2026-05-27 20:54:14] [semantic_analyzer] [INFO] Task neg-004: Semantic analysis completed, intent=general_inquiry, severity=normal, keywords_count=4, entities_count=0
+[2026-05-27 21:11:10] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 21:11:10] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 21:11:10] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 21:11:10] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 21:24:38] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 21:24:38] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 21:24:38] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 21:24:38] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized
+[2026-05-27 21:27:58] [semantic_analyzer] [INFO] SemanticAnalyzer module initialized
+[2026-05-27 21:27:58] [semantic_analyzer] [INFO] Initializing semantic engine, embedding_dim=768
+[2026-05-27 21:27:58] [semantic_analyzer] [INFO] Semantic engine initialized successfully
+[2026-05-27 21:27:58] [semantic_analyzer] [INFO] SemanticAnalyzer module fully initialized

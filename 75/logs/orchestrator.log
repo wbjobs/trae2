@@ -1,0 +1,33 @@
+[2026-05-27 20:43:35] [orchestrator] [INFO] Initializing Orchestrator and all sub-modules...
+[2026-05-27 20:43:37] [orchestrator] [INFO] Business service client initialized, base_url=http://localhost:8001
+[2026-05-27 20:43:38] [orchestrator] [INFO] Orchestrator initialization complete, all modules ready
+[2026-05-27 20:43:40] [orchestrator] [WARNING] Failed to notify business service (task_created): All connection attempts failed
+[2026-05-27 20:43:40] [orchestrator] [INFO] Pipeline started for task test-001
+[2026-05-27 20:43:40] [orchestrator] [INFO] Task test-001: Stage 1 (speech) completed in 0.006s
+[2026-05-27 20:43:41] [orchestrator] [INFO] Task test-001: Stage 2 (semantic) completed in 1.243s
+[2026-05-27 20:43:41] [orchestrator] [INFO] Task test-001: Stage 3 (defect) completed in 0.000s
+[2026-05-27 20:43:44] [orchestrator] [WARNING] Failed to notify business service (defect_found): All connection attempts failed
+[2026-05-27 20:43:44] [orchestrator] [INFO] Task test-001: Stage 4 (remediation) completed in 0.000s
+[2026-05-27 20:43:44] [orchestrator] [WARNING] Failed to notify business service (task_completed): Object of type datetime is not JSON serializable
+[2026-05-27 20:43:44] [orchestrator] [INFO] Task test-001: Pipeline completed in 1.249s, defect=True, severity=critical
+[2026-05-27 20:43:44] [orchestrator] [INFO] Orchestrator shutting down...
+[2026-05-27 20:43:44] [orchestrator] [INFO] Orchestrator shut down complete
+[2026-05-27 20:51:53] [orchestrator] [INFO] Initializing Orchestrator and all sub-modules...
+[2026-05-27 20:51:54] [orchestrator] [INFO] Business service client initialized, base_url=http://localhost:8001
+[2026-05-27 21:11:10] [orchestrator] [INFO] Initializing Orchestrator and all sub-modules...
+[2026-05-27 21:11:13] [orchestrator] [INFO] Business service client initialized, base_url=http://localhost:8001
+[2026-05-27 21:11:13] [orchestrator] [INFO] Resource monitor started
+[2026-05-27 21:11:13] [orchestrator] [INFO] Orchestrator initialization complete, all modules ready
+[2026-05-27 21:11:15] [orchestrator] [WARNING] Failed to notify business service (task_created): All connection attempts failed
+[2026-05-27 21:21:15] [orchestrator] [WARNING] Task INTEG-001: No speech detected
+[2026-05-27 21:21:15] [orchestrator] [INFO] Orchestrator shutting down...
+[2026-05-27 21:21:15] [orchestrator] [INFO] Orchestrator shut down complete
+[2026-05-27 21:24:38] [orchestrator] [INFO] Initializing Orchestrator and all sub-modules...
+[2026-05-27 21:24:41] [orchestrator] [INFO] Business service client initialized, base_url=http://localhost:8001
+[2026-05-27 21:24:41] [orchestrator] [INFO] Resource monitor started
+[2026-05-27 21:24:41] [orchestrator] [INFO] Orchestrator initialization complete, all modules ready
+[2026-05-27 21:27:58] [orchestrator] [INFO] Initializing Orchestrator and all sub-modules...
+[2026-05-27 21:28:00] [orchestrator] [INFO] Business service client initialized, base_url=http://localhost:8001
+[2026-05-27 21:28:00] [orchestrator] [INFO] Resource monitor started
+[2026-05-27 21:28:00] [orchestrator] [INFO] Orchestrator initialization complete, all modules ready
+[2026-05-27 21:28:02] [orchestrator] [WARNING] Failed to notify business service (task_created): All connection attempts failed

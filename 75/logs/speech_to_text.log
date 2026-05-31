@@ -1,0 +1,67 @@
+[2026-05-27 20:43:35] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=8
+[2026-05-27 20:43:35] [speech_to_text] [INFO] Loading ASR model from ./models/asr, language=zh-CN
+[2026-05-27 20:43:35] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 20:43:35] [speech_to_text] [INFO] ASR engine loaded successfully
+[2026-05-27 20:43:37] [speech_to_text] [INFO] SpeechToText module fully initialized
+[2026-05-27 20:43:40] [speech_to_text] [INFO] Task test-001: Starting transcription, audio_size=38, format=wav, sample_rate=16000
+[2026-05-27 20:43:40] [speech_to_text] [INFO] Task test-001: Transcription completed in 0.004s, text_length=19, confidence=0.75
+[2026-05-27 20:43:44] [speech_to_text] [INFO] SpeechToText module shutting down...
+[2026-05-27 20:43:44] [speech_to_text] [INFO] SpeechToText module shut down complete
+[2026-05-27 20:51:51] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=8, deadlock_threshold=300s
+[2026-05-27 20:51:51] [speech_to_text] [INFO] Loading Streaming ASR model, chunk_size=30s, max_retries=3
+[2026-05-27 20:51:51] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 20:51:51] [speech_to_text] [INFO] Streaming ASR engine loaded successfully
+[2026-05-27 20:51:51] [speech_to_text] [INFO] TaskTimeoutManager started, global_timeout=600s
+[2026-05-27 20:51:51] [speech_to_text] [INFO] SpeechToText module fully initialized
+[2026-05-27 20:51:51] [speech_to_text] [INFO] Task test-streaming-001: Starting streaming transcription, audio_size=9600000, format=wav
+[2026-05-27 20:51:51] [speech_to_text] [INFO] Task test-streaming-001: Streaming transcription completed: 10 chunks, 0 failed, text_len=109, avg_conf=0.950, time=0.0s
+[2026-05-27 20:51:51] [speech_to_text] [INFO] Task test-streaming-001: Transcription completed in 0.019s, text_length=109, confidence=0.95
+[2026-05-27 20:51:51] [speech_to_text] [INFO] SpeechToText module shutting down...
+[2026-05-27 20:51:51] [speech_to_text] [INFO] TaskTimeoutManager stopped
+[2026-05-27 20:51:51] [speech_to_text] [INFO] SpeechToText module shut down complete
+[2026-05-27 20:54:13] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=4, deadlock_threshold=300s
+[2026-05-27 20:54:13] [speech_to_text] [INFO] Loading Streaming ASR model, chunk_size=30s, max_retries=3
+[2026-05-27 20:54:13] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 20:54:13] [speech_to_text] [INFO] Streaming ASR engine loaded successfully
+[2026-05-27 20:54:13] [speech_to_text] [INFO] TaskTimeoutManager started, global_timeout=600s
+[2026-05-27 20:54:13] [speech_to_text] [INFO] SpeechToText module fully initialized
+[2026-05-27 20:54:13] [speech_to_text] [INFO] Task test-streaming-001: Starting streaming transcription, audio_size=9600000, format=wav
+[2026-05-27 20:54:13] [speech_to_text] [INFO] Task test-streaming-001: Streaming transcription completed: 10 chunks, 0 failed, text_len=106, avg_conf=0.950, time=0.0s
+[2026-05-27 20:54:13] [speech_to_text] [INFO] Task test-streaming-001: Transcription completed in 0.015s, text_length=106, confidence=0.95
+[2026-05-27 20:54:13] [speech_to_text] [INFO] SpeechToText module shutting down...
+[2026-05-27 20:54:13] [speech_to_text] [INFO] TaskTimeoutManager stopped
+[2026-05-27 20:54:13] [speech_to_text] [INFO] SpeechToText module shut down complete
+[2026-05-27 20:54:14] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=4, deadlock_threshold=300s
+[2026-05-27 20:54:14] [speech_to_text] [INFO] Loading Streaming ASR model, chunk_size=30s, max_retries=3
+[2026-05-27 20:54:14] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 20:54:14] [speech_to_text] [INFO] Streaming ASR engine loaded successfully
+[2026-05-27 20:54:14] [speech_to_text] [INFO] TaskTimeoutManager started, global_timeout=600s
+[2026-05-27 20:54:14] [speech_to_text] [INFO] SpeechToText module fully initialized
+[2026-05-27 21:11:10] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=8, deadlock_threshold=300s
+[2026-05-27 21:11:10] [speech_to_text] [INFO] Loading Streaming ASR model, chunk_size=30s, max_retries=3
+[2026-05-27 21:11:10] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 21:11:10] [speech_to_text] [INFO] Streaming ASR engine loaded successfully
+[2026-05-27 21:11:10] [speech_to_text] [INFO] TaskTimeoutManager started, global_timeout=600s
+[2026-05-27 21:11:10] [speech_to_text] [INFO] SpeechToText module fully initialized
+[2026-05-27 21:16:10] [speech_to_text] [CRITICAL] POSSIBLE DEADLOCK DETECTED! No progress in 300s
+[2026-05-27 21:16:10] [speech_to_text] [WARNING] Attempting deadlock recovery: cycling executor workers...
+[2026-05-27 21:16:10] [speech_to_text] [INFO] Executor cycling complete
+[2026-05-27 21:21:11] [speech_to_text] [CRITICAL] POSSIBLE DEADLOCK DETECTED! No progress in 300s
+[2026-05-27 21:21:11] [speech_to_text] [WARNING] Attempting deadlock recovery: cycling executor workers...
+[2026-05-27 21:21:11] [speech_to_text] [INFO] Executor cycling complete
+[2026-05-27 21:21:15] [speech_to_text] [ERROR] Task INTEG-001 timed out waiting in queue
+[2026-05-27 21:21:15] [speech_to_text] [INFO] SpeechToText module shutting down...
+[2026-05-27 21:21:15] [speech_to_text] [INFO] TaskTimeoutManager stopped
+[2026-05-27 21:21:15] [speech_to_text] [INFO] SpeechToText module shut down complete
+[2026-05-27 21:24:38] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=8, deadlock_threshold=300s
+[2026-05-27 21:24:38] [speech_to_text] [INFO] Loading Streaming ASR model, chunk_size=30s, max_retries=3
+[2026-05-27 21:24:38] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 21:24:38] [speech_to_text] [INFO] Streaming ASR engine loaded successfully
+[2026-05-27 21:24:38] [speech_to_text] [INFO] TaskTimeoutManager started, global_timeout=600s
+[2026-05-27 21:24:38] [speech_to_text] [INFO] SpeechToText module fully initialized
+[2026-05-27 21:27:58] [speech_to_text] [INFO] SpeechToText module initialized, max_concurrent=8, deadlock_threshold=600s
+[2026-05-27 21:27:58] [speech_to_text] [INFO] Loading Streaming ASR model, chunk_size=30s, max_retries=3
+[2026-05-27 21:27:58] [speech_to_text] [WARNING] ASR model directory not found: ./models/asr, using fallback mode
+[2026-05-27 21:27:58] [speech_to_text] [INFO] Streaming ASR engine loaded successfully
+[2026-05-27 21:27:58] [speech_to_text] [INFO] TaskTimeoutManager started, global_timeout=600s
+[2026-05-27 21:27:58] [speech_to_text] [INFO] SpeechToText module fully initialized
