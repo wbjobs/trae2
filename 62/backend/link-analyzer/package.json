@@ -1,0 +1,17 @@
+{
+  "name": "link-analyzer",
+  "version": "1.0.0",
+  "description": "地铁弱电系统链路质量分析服务",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.16.0",
+    "uuid": "^9.0.0",
+    "cors": "^2.8.5",
+    "node-cron": "^3.0.3"
+  }
+}

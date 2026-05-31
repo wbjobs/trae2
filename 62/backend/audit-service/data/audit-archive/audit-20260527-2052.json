@@ -1,0 +1,1142 @@
+[
+  {
+    "id": "304aea09-4fb6-47ac-aecd-eb3ce311647a",
+    "action": "login",
+    "entityType": "user",
+    "entityId": "user-001",
+    "operator": "admin",
+    "detail": "管理员登录系统",
+    "timestamp": 1779883975248,
+    "timestampStr": "2026-05-27T12:12:55.248Z"
+  },
+  {
+    "id": "5b4e1922-a073-4747-bdcb-d87d11478df7",
+    "action": "rule_add",
+    "entityType": "rule",
+    "entityId": "rule-001",
+    "operator": "admin",
+    "detail": "新增规则: 光纤延迟>100ms标记为严重",
+    "timestamp": 1779884035248,
+    "timestampStr": "2026-05-27T12:13:55.248Z"
+  },
+  {
+    "id": "e5c70cd8-9674-42c8-97b8-f628cefbd3c0",
+    "action": "rule_update",
+    "entityType": "rule",
+    "entityId": "rule-001",
+    "operator": "admin",
+    "detail": "更新规则阈值: 100ms→150ms",
+    "timestamp": 1779884095248,
+    "timestampStr": "2026-05-27T12:14:55.248Z"
+  },
+  {
+    "id": "df16645b-6770-4a0a-8a61-14dd50b4aa3f",
+    "action": "rule_toggle",
+    "entityType": "rule",
+    "entityId": "rule-002",
+    "operator": "operator",
+    "detail": "禁用规则: wireless-loss-warning",
+    "timestamp": 1779884155248,
+    "timestampStr": "2026-05-27T12:15:55.248Z"
+  },
+  {
+    "id": "1a56f32a-8da3-45ae-8c46-1b92f3d871d2",
+    "action": "node_register",
+    "entityType": "node",
+    "entityId": "node-001",
+    "operator": "system",
+    "detail": "注册车载终端: 列车-01",
+    "timestamp": 1779884215248,
+    "timestampStr": "2026-05-27T12:16:55.248Z"
+  },
+  {
+    "id": "b247c514-6495-411a-944b-db6b85767cb3",
+    "action": "node_heartbeat",
+    "entityType": "node",
+    "entityId": "node-002",
+    "operator": "system",
+    "detail": "车站节点心跳: 人民广场站",
+    "timestamp": 1779884275248,
+    "timestampStr": "2026-05-27T12:17:55.248Z"
+  },
+  {
+    "id": "9d9d97ef-659e-4ef9-bce1-bbbbc7ea940a",
+    "action": "link_reset",
+    "entityType": "link",
+    "entityId": "link-001",
+    "operator": "maintenance",
+    "detail": "重置链路: 人民广场-陆家嘴 主干链路",
+    "timestamp": 1779884335248,
+    "timestampStr": "2026-05-27T12:18:55.248Z"
+  },
+  {
+    "id": "dc1d9830-0b40-4bb1-8846-b5d27bfb204f",
+    "action": "sync_push",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "system",
+    "detail": "车载终端推送数据: 列车状态",
+    "timestamp": 1779884395248,
+    "timestampStr": "2026-05-27T12:19:55.248Z"
+  },
+  {
+    "id": "3ef2b008-3cfe-4c55-946a-ded5a91a33ec",
+    "action": "sync_pull",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "system",
+    "detail": "车站节点拉取增量数据: 15条变更",
+    "timestamp": 1779884455248,
+    "timestampStr": "2026-05-27T12:20:55.248Z"
+  },
+  {
+    "id": "4f826d70-bf42-416b-800e-733d5abbacc2",
+    "action": "sync_broadcast",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "运营中心广播: 全局调度指令",
+    "timestamp": 1779884515248,
+    "timestampStr": "2026-05-27T12:21:55.248Z"
+  },
+  {
+    "id": "b025e582-a1c2-47e3-9aca-7d6ba13af315",
+    "action": "signal_ack",
+    "entityType": "signal",
+    "entityId": "signal-001",
+    "operator": "system",
+    "detail": "信令确认: SIP-INVITE from 人民广场站",
+    "timestamp": 1779884575248,
+    "timestampStr": "2026-05-27T12:22:55.248Z"
+  },
+  {
+    "id": "91bb2a75-912c-4a81-937f-89fbf27277b9",
+    "action": "signal_retry",
+    "entityType": "signal",
+    "entityId": "signal-002",
+    "operator": "system",
+    "detail": "信令重传: 第2次重传, 类型=门禁",
+    "timestamp": 1779884635248,
+    "timestampStr": "2026-05-27T12:23:55.248Z"
+  },
+  {
+    "id": "354ac349-1a8a-4219-86a8-2ca87500ace5",
+    "action": "config_change",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "修改配置: 重传最大次数 3→5",
+    "timestamp": 1779884695248,
+    "timestampStr": "2026-05-27T12:24:55.248Z"
+  },
+  {
+    "id": "bb76a6f2-e252-4ed7-bd4d-6126b14079ac",
+    "action": "system_start",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "system",
+    "detail": "审计服务启动",
+    "timestamp": 1779884755248,
+    "timestampStr": "2026-05-27T12:25:55.248Z"
+  },
+  {
+    "id": "a84a2736-1a55-49cb-9f45-2e2145a82259",
+    "action": "logout",
+    "entityType": "user",
+    "entityId": "user-001",
+    "operator": "admin",
+    "detail": "管理员登出",
+    "timestamp": 1779884815248,
+    "timestampStr": "2026-05-27T12:26:55.248Z"
+  },
+  {
+    "id": "b2205968-2589-450a-86ee-2a7501a05c2e",
+    "action": "sync_pull",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779884890264,
+    "timestampStr": "2026-05-27T12:28:10.264Z"
+  },
+  {
+    "id": "d703040c-0f67-4db5-8cc7-09fcea9c1281",
+    "action": "login",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: login",
+    "timestamp": 1779884905299,
+    "timestampStr": "2026-05-27T12:28:25.299Z"
+  },
+  {
+    "id": "4cb7f1ac-2159-4975-8ccb-e72768269ab2",
+    "action": "signal_retry",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779884920302,
+    "timestampStr": "2026-05-27T12:28:40.302Z"
+  },
+  {
+    "id": "5172abb8-7e05-46cb-b006-de29ecf33f67",
+    "action": "rule_update",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779884935325,
+    "timestampStr": "2026-05-27T12:28:55.325Z"
+  },
+  {
+    "id": "2f819f50-e9b3-4c05-b547-3219b92af078",
+    "action": "login",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: login",
+    "timestamp": 1779884950330,
+    "timestampStr": "2026-05-27T12:29:10.330Z"
+  },
+  {
+    "id": "a108e6f0-62af-4f5a-8374-1d99b340d756",
+    "action": "sync_pull",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779884965342,
+    "timestampStr": "2026-05-27T12:29:25.342Z"
+  },
+  {
+    "id": "1735d329-d415-4c8d-8ec7-7fd5aa5f14a3",
+    "action": "link_reset",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: link_reset",
+    "timestamp": 1779884980343,
+    "timestampStr": "2026-05-27T12:29:40.343Z"
+  },
+  {
+    "id": "01b1f108-9308-462e-9d37-7cb6094ce581",
+    "action": "node_register",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: node_register",
+    "timestamp": 1779884995357,
+    "timestampStr": "2026-05-27T12:29:55.357Z"
+  },
+  {
+    "id": "4a589e3b-571c-4b8d-84db-b77502a6d8c0",
+    "action": "rule_delete",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: rule_delete",
+    "timestamp": 1779885010364,
+    "timestampStr": "2026-05-27T12:30:10.364Z"
+  },
+  {
+    "id": "9a9e3b22-8221-48fc-b07c-f56177a2dbb8",
+    "action": "link_reset",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: link_reset",
+    "timestamp": 1779885025372,
+    "timestampStr": "2026-05-27T12:30:25.372Z"
+  },
+  {
+    "id": "a4fb32ee-6770-48b2-950c-a96a1ff09537",
+    "action": "rule_update",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779885040376,
+    "timestampStr": "2026-05-27T12:30:40.376Z"
+  },
+  {
+    "id": "df3422e7-aaa0-4dbb-a00a-45ea246eafd3",
+    "action": "sync_broadcast",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: sync_broadcast",
+    "timestamp": 1779885055390,
+    "timestampStr": "2026-05-27T12:30:55.390Z"
+  },
+  {
+    "id": "02e21bea-3b4e-4467-94c3-8a138351888f",
+    "action": "rule_update",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779885070401,
+    "timestampStr": "2026-05-27T12:31:10.401Z"
+  },
+  {
+    "id": "2969798e-5172-4a15-9f1f-01cdcfe60ae4",
+    "action": "config_change",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: config_change",
+    "timestamp": 1779885085407,
+    "timestampStr": "2026-05-27T12:31:25.407Z"
+  },
+  {
+    "id": "4249458a-1bac-4f60-8282-f35b66d59108",
+    "action": "rule_toggle",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: rule_toggle",
+    "timestamp": 1779885100417,
+    "timestampStr": "2026-05-27T12:31:40.417Z"
+  },
+  {
+    "id": "86c6dfc8-529b-44a1-a427-421295be7b55",
+    "action": "node_register",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: node_register",
+    "timestamp": 1779885115431,
+    "timestampStr": "2026-05-27T12:31:55.431Z"
+  },
+  {
+    "id": "d7427b06-1437-44f3-b13f-24dce7cbd844",
+    "action": "rule_update",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779885130437,
+    "timestampStr": "2026-05-27T12:32:10.437Z"
+  },
+  {
+    "id": "43e67506-5156-4a51-874f-cb3e6d32d594",
+    "action": "sync_broadcast",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: sync_broadcast",
+    "timestamp": 1779885145440,
+    "timestampStr": "2026-05-27T12:32:25.440Z"
+  },
+  {
+    "id": "22966665-bbed-4e68-a580-2f896e0b3c77",
+    "action": "node_unregister",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: node_unregister",
+    "timestamp": 1779885160449,
+    "timestampStr": "2026-05-27T12:32:40.449Z"
+  },
+  {
+    "id": "29761895-696a-466d-802d-2e59a1615b18",
+    "action": "sync_push",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779885175457,
+    "timestampStr": "2026-05-27T12:32:55.457Z"
+  },
+  {
+    "id": "e8077895-f7c4-4015-9337-8eb1497cd7f0",
+    "action": "rule_delete",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: rule_delete",
+    "timestamp": 1779885190458,
+    "timestampStr": "2026-05-27T12:33:10.458Z"
+  },
+  {
+    "id": "d991f023-9fe2-4b6d-91e3-f7a743e6918b",
+    "action": "signal_ack",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779885205468,
+    "timestampStr": "2026-05-27T12:33:25.468Z"
+  },
+  {
+    "id": "b7977299-ccdd-4bde-bc63-cc759c64e398",
+    "action": "link_reset",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: link_reset",
+    "timestamp": 1779885220478,
+    "timestampStr": "2026-05-27T12:33:40.478Z"
+  },
+  {
+    "id": "52d66f23-16fe-4f95-bb7f-f81d6badefde",
+    "action": "system_stop",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779885235488,
+    "timestampStr": "2026-05-27T12:33:55.488Z"
+  },
+  {
+    "id": "b9b28ba2-b9ba-4ad8-9ce3-2d52c05bda32",
+    "action": "system_stop",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779885250496,
+    "timestampStr": "2026-05-27T12:34:10.496Z"
+  },
+  {
+    "id": "c6624a90-926a-488b-8437-c02b33c428b4",
+    "action": "system_stop",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779885265505,
+    "timestampStr": "2026-05-27T12:34:25.505Z"
+  },
+  {
+    "id": "0b78efdf-cb58-4e82-84ce-6273c20b96e3",
+    "action": "system_init",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: system_init",
+    "timestamp": 1779885280515,
+    "timestampStr": "2026-05-27T12:34:40.515Z"
+  },
+  {
+    "id": "eeff66a0-52ee-4045-80df-595fdb5c21e9",
+    "action": "sync_push",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779885295516,
+    "timestampStr": "2026-05-27T12:34:55.516Z"
+  },
+  {
+    "id": "06c9a776-5d9a-4229-8cb4-7a69bf875039",
+    "action": "node_register",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: node_register",
+    "timestamp": 1779885310521,
+    "timestampStr": "2026-05-27T12:35:10.521Z"
+  },
+  {
+    "id": "1afd6363-0280-4f91-9ae2-be986aa51d77",
+    "action": "signal_retry",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779885325526,
+    "timestampStr": "2026-05-27T12:35:25.526Z"
+  },
+  {
+    "id": "39ba74ec-8d9f-4763-b4ee-9b785908d93f",
+    "action": "signal_ack",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779885340535,
+    "timestampStr": "2026-05-27T12:35:40.535Z"
+  },
+  {
+    "id": "36a9e7b6-b469-408e-af83-25dd2f8ce313",
+    "action": "node_heartbeat",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: node_heartbeat",
+    "timestamp": 1779885355548,
+    "timestampStr": "2026-05-27T12:35:55.548Z"
+  },
+  {
+    "id": "9f2be927-ea6e-4343-abea-999e37016f6c",
+    "action": "login",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: login",
+    "timestamp": 1779885370552,
+    "timestampStr": "2026-05-27T12:36:10.552Z"
+  },
+  {
+    "id": "298a7f63-11ff-4ab6-bbfa-260f9c160aea",
+    "action": "login",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: login",
+    "timestamp": 1779885385585,
+    "timestampStr": "2026-05-27T12:36:25.585Z"
+  },
+  {
+    "id": "85fbc4bb-2436-405b-af3e-440dfb5e6414",
+    "action": "rule_update",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779885400586,
+    "timestampStr": "2026-05-27T12:36:40.586Z"
+  },
+  {
+    "id": "43446581-5301-45d1-84a6-f723f167bf59",
+    "action": "node_register",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: node_register",
+    "timestamp": 1779885415600,
+    "timestampStr": "2026-05-27T12:36:55.600Z"
+  },
+  {
+    "id": "c0369bf5-a748-486c-8b72-59566453e9e4",
+    "action": "rule_delete",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: rule_delete",
+    "timestamp": 1779885430611,
+    "timestampStr": "2026-05-27T12:37:10.611Z"
+  },
+  {
+    "id": "e21a4e9e-b889-4178-a19a-204ac3f858df",
+    "action": "sync_push",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779885445616,
+    "timestampStr": "2026-05-27T12:37:25.616Z"
+  },
+  {
+    "id": "5629ca5f-194a-430f-b5bd-2362b231e1f5",
+    "action": "node_unregister",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: node_unregister",
+    "timestamp": 1779885460623,
+    "timestampStr": "2026-05-27T12:37:40.623Z"
+  },
+  {
+    "id": "22e95862-f6ef-4a10-ae33-ed2073a094b1",
+    "action": "sync_pull",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779885475626,
+    "timestampStr": "2026-05-27T12:37:55.626Z"
+  },
+  {
+    "id": "1a38f368-5386-4c6b-91cb-832b57859bbd",
+    "action": "sync_push",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779885490652,
+    "timestampStr": "2026-05-27T12:38:10.652Z"
+  },
+  {
+    "id": "f3293d25-cb9c-4b4b-9c37-91a454664a7b",
+    "action": "node_unregister",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: node_unregister",
+    "timestamp": 1779885505654,
+    "timestampStr": "2026-05-27T12:38:25.654Z"
+  },
+  {
+    "id": "c3aa65cd-a14c-47ee-bcae-c919c24bce75",
+    "action": "logout",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: logout",
+    "timestamp": 1779885520663,
+    "timestampStr": "2026-05-27T12:38:40.663Z"
+  },
+  {
+    "id": "b9920d00-88eb-4c56-8122-6a3ac794221f",
+    "action": "rule_delete",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: rule_delete",
+    "timestamp": 1779885535674,
+    "timestampStr": "2026-05-27T12:38:55.674Z"
+  },
+  {
+    "id": "b491f0fd-3056-48ea-b378-8d7d8d497f5d",
+    "action": "sync_push",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779885550682,
+    "timestampStr": "2026-05-27T12:39:10.682Z"
+  },
+  {
+    "id": "e4911561-d33d-4c8c-996c-b405d0f8e660",
+    "action": "sync_push",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779885565688,
+    "timestampStr": "2026-05-27T12:39:25.688Z"
+  },
+  {
+    "id": "c3e708c0-608d-4767-a047-570a69d0f598",
+    "action": "node_unregister",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: node_unregister",
+    "timestamp": 1779885580692,
+    "timestampStr": "2026-05-27T12:39:40.692Z"
+  },
+  {
+    "id": "74887135-de1c-42ca-b701-5c3517563cfc",
+    "action": "system_init",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: system_init",
+    "timestamp": 1779885595702,
+    "timestampStr": "2026-05-27T12:39:55.702Z"
+  },
+  {
+    "id": "500e4913-4241-4c87-9887-ee59bb7a98db",
+    "action": "rule_add",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: rule_add",
+    "timestamp": 1779885610716,
+    "timestampStr": "2026-05-27T12:40:10.716Z"
+  },
+  {
+    "id": "aed39c78-4d81-4702-b317-68e32f48eb57",
+    "action": "signal_ack",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779885625717,
+    "timestampStr": "2026-05-27T12:40:25.717Z"
+  },
+  {
+    "id": "d172b7bd-e586-4bb2-8f05-e17e5b5cf057",
+    "action": "system_start",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: system_start",
+    "timestamp": 1779885640726,
+    "timestampStr": "2026-05-27T12:40:40.726Z"
+  },
+  {
+    "id": "221ced1c-2ddf-48d8-a59d-2525fd095bab",
+    "action": "signal_ack",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779885655726,
+    "timestampStr": "2026-05-27T12:40:55.726Z"
+  },
+  {
+    "id": "4c837ec8-e6cc-4a1a-b222-a9566dcc3671",
+    "action": "signal_retry",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779885670734,
+    "timestampStr": "2026-05-27T12:41:10.734Z"
+  },
+  {
+    "id": "3c523674-734c-4aae-939e-788bcb5a0625",
+    "action": "signal_retry",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779885685747,
+    "timestampStr": "2026-05-27T12:41:25.747Z"
+  },
+  {
+    "id": "b5936eea-bce1-462f-8cf8-0c6c5b7e6040",
+    "action": "system_init",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: system_init",
+    "timestamp": 1779885700750,
+    "timestampStr": "2026-05-27T12:41:40.750Z"
+  },
+  {
+    "id": "8f95687f-a9ef-4977-b639-d143753099b0",
+    "action": "signal_retry",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779885715830,
+    "timestampStr": "2026-05-27T12:41:55.831Z"
+  },
+  {
+    "id": "9f503083-56d1-4dd5-af5b-c3a98ff29e84",
+    "action": "node_heartbeat",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: node_heartbeat",
+    "timestamp": 1779885730832,
+    "timestampStr": "2026-05-27T12:42:10.832Z"
+  },
+  {
+    "id": "24dd1a7c-7c4a-45a1-8624-ede6fd82dc67",
+    "action": "login",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: login",
+    "timestamp": 1779885745837,
+    "timestampStr": "2026-05-27T12:42:25.837Z"
+  },
+  {
+    "id": "76fa38f8-2b25-412b-8cb7-050892344e6e",
+    "action": "config_change",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: config_change",
+    "timestamp": 1779885760852,
+    "timestampStr": "2026-05-27T12:42:40.852Z"
+  },
+  {
+    "id": "47bd22c3-5ef7-4fef-a4ad-541d999818df",
+    "action": "signal_retry",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779885775857,
+    "timestampStr": "2026-05-27T12:42:55.857Z"
+  },
+  {
+    "id": "585d305a-51eb-4fce-af4e-1ca2252e3a05",
+    "action": "sync_broadcast",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: sync_broadcast",
+    "timestamp": 1779885790858,
+    "timestampStr": "2026-05-27T12:43:10.858Z"
+  },
+  {
+    "id": "d6ecf380-8332-4441-8d81-1b82ffec9c5c",
+    "action": "system_stop",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779885805863,
+    "timestampStr": "2026-05-27T12:43:25.863Z"
+  },
+  {
+    "id": "6e73cde4-e865-4368-807d-3fe41497c5c0",
+    "action": "signal_ack",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779885820868,
+    "timestampStr": "2026-05-27T12:43:40.868Z"
+  },
+  {
+    "id": "af8e7ac2-8e3d-4832-87c5-9583073fe7c6",
+    "action": "node_unregister",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: node_unregister",
+    "timestamp": 1779885835879,
+    "timestampStr": "2026-05-27T12:43:55.879Z"
+  },
+  {
+    "id": "6bec9edc-8270-485f-be82-d66adeb5f173",
+    "action": "config_change",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: config_change",
+    "timestamp": 1779885850880,
+    "timestampStr": "2026-05-27T12:44:10.880Z"
+  },
+  {
+    "id": "1e921708-3257-41e0-ab31-c19eed303496",
+    "action": "system_start",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: system_start",
+    "timestamp": 1779885865886,
+    "timestampStr": "2026-05-27T12:44:25.886Z"
+  },
+  {
+    "id": "b5ca85d5-3208-42f8-a539-35ed92c06ae8",
+    "action": "sync_pull",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779885880901,
+    "timestampStr": "2026-05-27T12:44:40.901Z"
+  },
+  {
+    "id": "7b9658b0-a6f7-4006-9f7f-a70842114559",
+    "action": "system_stop",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779885895906,
+    "timestampStr": "2026-05-27T12:44:55.906Z"
+  },
+  {
+    "id": "a2a7782b-65b8-4463-96a5-9876712d6140",
+    "action": "config_change",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: config_change",
+    "timestamp": 1779885910913,
+    "timestampStr": "2026-05-27T12:45:10.913Z"
+  },
+  {
+    "id": "e1b6e5e7-b112-4e42-8ab1-edff82fd6c03",
+    "action": "rule_update",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779885925926,
+    "timestampStr": "2026-05-27T12:45:25.926Z"
+  },
+  {
+    "id": "9d88d750-d02b-4858-a4ac-6f6ac6c59359",
+    "action": "config_change",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: config_change",
+    "timestamp": 1779885940930,
+    "timestampStr": "2026-05-27T12:45:40.930Z"
+  },
+  {
+    "id": "1b43e300-b9d2-4476-8737-9efb17c1ed3a",
+    "action": "signal_retry",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: signal_retry",
+    "timestamp": 1779885955932,
+    "timestampStr": "2026-05-27T12:45:55.932Z"
+  },
+  {
+    "id": "3e199f49-b7f3-4c76-a3de-959be3b54c1e",
+    "action": "sync_pull",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779885970939,
+    "timestampStr": "2026-05-27T12:46:10.939Z"
+  },
+  {
+    "id": "d6c1361e-addb-4687-9893-3d33532e32d1",
+    "action": "sync_broadcast",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: sync_broadcast",
+    "timestamp": 1779885985941,
+    "timestampStr": "2026-05-27T12:46:25.941Z"
+  },
+  {
+    "id": "f7276997-716b-4e39-b702-a52f697bd652",
+    "action": "system_stop",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779886000949,
+    "timestampStr": "2026-05-27T12:46:40.949Z"
+  },
+  {
+    "id": "06881301-c2a0-4a32-becf-2de38a8fd2a7",
+    "action": "logout",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: logout",
+    "timestamp": 1779886015952,
+    "timestampStr": "2026-05-27T12:46:55.952Z"
+  },
+  {
+    "id": "e81060f0-62ac-4d3b-b77e-33c915ef57f9",
+    "action": "rule_update",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779886030967,
+    "timestampStr": "2026-05-27T12:47:10.967Z"
+  },
+  {
+    "id": "7b9ed288-a0e3-48ae-8510-81c38195a855",
+    "action": "link_reset",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: link_reset",
+    "timestamp": 1779886045973,
+    "timestampStr": "2026-05-27T12:47:25.973Z"
+  },
+  {
+    "id": "824f8bf2-d6ac-4ee7-a940-c2e015c70ae9",
+    "action": "rule_update",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779886060986,
+    "timestampStr": "2026-05-27T12:47:40.986Z"
+  },
+  {
+    "id": "6f8bb0c7-5a7c-466f-97a8-ec46c0f29052",
+    "action": "config_change",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: config_change",
+    "timestamp": 1779886075986,
+    "timestampStr": "2026-05-27T12:47:55.986Z"
+  },
+  {
+    "id": "eaefed44-a2c7-4e1a-be0e-532ee2219c9f",
+    "action": "sync_pull",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779886090995,
+    "timestampStr": "2026-05-27T12:48:10.995Z"
+  },
+  {
+    "id": "e573e315-8a8d-4516-9009-81de2d4c06be",
+    "action": "node_register",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: node_register",
+    "timestamp": 1779886106003,
+    "timestampStr": "2026-05-27T12:48:26.003Z"
+  },
+  {
+    "id": "012af94e-8fcd-4d6a-8ba9-ecdfdfe87b86",
+    "action": "system_stop",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: system_stop",
+    "timestamp": 1779886121017,
+    "timestampStr": "2026-05-27T12:48:41.017Z"
+  },
+  {
+    "id": "3118cad3-838b-4007-8154-c27e3fa741c1",
+    "action": "rule_update",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: rule_update",
+    "timestamp": 1779886136019,
+    "timestampStr": "2026-05-27T12:48:56.019Z"
+  },
+  {
+    "id": "35f7f5b1-f166-4ba4-9687-5347a0cb48ee",
+    "action": "sync_pull",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: sync_pull",
+    "timestamp": 1779886151031,
+    "timestampStr": "2026-05-27T12:49:11.031Z"
+  },
+  {
+    "id": "97515b75-4eb5-418d-89e1-9c214a73f858",
+    "action": "link_reset",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "occ-dispatcher",
+    "detail": "自动生成的操作日志: link_reset",
+    "timestamp": 1779886166037,
+    "timestampStr": "2026-05-27T12:49:26.037Z"
+  },
+  {
+    "id": "988d3469-dda6-4979-908e-77fa7f047300",
+    "action": "sync_push",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "system",
+    "detail": "自动生成的操作日志: sync_push",
+    "timestamp": 1779886181041,
+    "timestampStr": "2026-05-27T12:49:41.041Z"
+  },
+  {
+    "id": "db45d86e-733e-4f96-9d05-1f30625ab17d",
+    "action": "rule_delete",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: rule_delete",
+    "timestamp": 1779886196051,
+    "timestampStr": "2026-05-27T12:49:56.051Z"
+  },
+  {
+    "id": "fdfb2461-5816-43b7-948d-d6113231ca90",
+    "action": "rule_add",
+    "entityType": "node",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: rule_add",
+    "timestamp": 1779886211060,
+    "timestampStr": "2026-05-27T12:50:11.060Z"
+  },
+  {
+    "id": "0a8e3a62-9101-444b-9cde-154dc06e5037",
+    "action": "node_heartbeat",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: node_heartbeat",
+    "timestamp": 1779886226060,
+    "timestampStr": "2026-05-27T12:50:26.060Z"
+  },
+  {
+    "id": "5f10acb3-214c-4e15-92c0-70949935ada0",
+    "action": "node_heartbeat",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: node_heartbeat",
+    "timestamp": 1779886241069,
+    "timestampStr": "2026-05-27T12:50:41.069Z"
+  },
+  {
+    "id": "35fd7752-1c2f-4b44-a0f0-f098ab3f437e",
+    "action": "signal_ack",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779886256081,
+    "timestampStr": "2026-05-27T12:50:56.081Z"
+  },
+  {
+    "id": "91ca442d-e0cd-422b-989e-ce2bb353f705",
+    "action": "node_unregister",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: node_unregister",
+    "timestamp": 1779886271089,
+    "timestampStr": "2026-05-27T12:51:11.089Z"
+  },
+  {
+    "id": "df3d9280-6acb-4aaf-a736-a84cf8f52f0d",
+    "action": "signal_ack",
+    "entityType": "system",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779886286089,
+    "timestampStr": "2026-05-27T12:51:26.089Z"
+  },
+  {
+    "id": "42793f6f-e356-4f22-acf2-02a5eace318c",
+    "action": "login",
+    "entityType": "config",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: login",
+    "timestamp": 1779886301107,
+    "timestampStr": "2026-05-27T12:51:41.107Z"
+  },
+  {
+    "id": "3670f5bb-6df0-4d7f-8f85-a00cb41b8d58",
+    "action": "rule_toggle",
+    "entityType": "link",
+    "entityId": null,
+    "operator": "operator",
+    "detail": "自动生成的操作日志: rule_toggle",
+    "timestamp": 1779886316119,
+    "timestampStr": "2026-05-27T12:51:56.119Z"
+  },
+  {
+    "id": "b92a7411-c617-44cb-a1f4-bcf908b70db4",
+    "action": "signal_ack",
+    "entityType": "signal",
+    "entityId": null,
+    "operator": "station-staff",
+    "detail": "自动生成的操作日志: signal_ack",
+    "timestamp": 1779886331127,
+    "timestampStr": "2026-05-27T12:52:11.127Z"
+  },
+  {
+    "id": "b5a61de2-6911-45cd-8b8f-06fc28cb3232",
+    "action": "sync_broadcast",
+    "entityType": "user",
+    "entityId": null,
+    "operator": "admin",
+    "detail": "自动生成的操作日志: sync_broadcast",
+    "timestamp": 1779886346190,
+    "timestampStr": "2026-05-27T12:52:26.190Z"
+  },
+  {
+    "id": "15a1a34a-69b8-41f1-bfff-2ffed5ba4cd6",
+    "action": "node_heartbeat",
+    "entityType": "rule",
+    "entityId": null,
+    "operator": "maintenance",
+    "detail": "自动生成的操作日志: node_heartbeat",
+    "timestamp": 1779886361195,
+    "timestampStr": "2026-05-27T12:52:41.195Z"
+  }
+]

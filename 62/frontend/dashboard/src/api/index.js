@@ -1,0 +1,82 @@
+import axios from 'axios';
+
+const API_BASE = '';
+
+const api = {
+  signaling: {
+    list: (params) => axios.get(`${API_BASE}/api/signaling`, { params }),
+    get: (id) => axios.get(`${API_BASE}/api/signaling/${id}`),
+    stats: () => axios.get(`${API_BASE}/api/signaling/stats`),
+    ack: (id) => axios.post(`${API_BASE}/api/signaling/${id}/ack`),
+    ackStatus: (id) => axios.get(`${API_BASE}/api/signaling/${id}/ack-status`),
+    snifferStats: () => axios.get(`${API_BASE}/api/signaling/sniffer/stats`),
+  },
+  links: {
+    list: () => axios.get(`${API_BASE}/api/links`),
+    reset: (id) => axios.post(`${API_BASE}/api/links/${id}/reset`),
+  },
+  stations: {
+    list: () => axios.get(`${API_BASE}/api/stations`),
+    get: (id) => axios.get(`${API_BASE}/api/stations/${id}`),
+  },
+  analysis: {
+    links: () => axios.get(`${API_BASE}/api/analysis/links`),
+    linkDetail: (id) => axios.get(`${API_BASE}/api/analysis/links/${id}`),
+    abnormal: () => axios.get(`${API_BASE}/api/analysis/abnormal`),
+    overview: () => axios.get(`${API_BASE}/api/analysis/overview`),
+    rules: () => axios.get(`${API_BASE}/api/analysis/rules`),
+    addRule: (data) => axios.post(`${API_BASE}/api/analysis/rules`, data),
+    updateRule: (id, data) => axios.put(`${API_BASE}/api/analysis/rules/${id}`, data),
+    deleteRule: (id) => axios.delete(`${API_BASE}/api/analysis/rules/${id}`),
+    toggleRule: (id, enabled) => axios.post(`${API_BASE}/api/analysis/rules/${id}/toggle`, { enabled }),
+    ruleStats: () => axios.get(`${API_BASE}/api/analysis/rules/stats`),
+    ruleAudit: () => axios.get(`${API_BASE}/api/analysis/rules/audit`),
+    thresholds: (type) => axios.get(`${API_BASE}/api/analysis/thresholds/${type}`),
+    faultEvents: (params) => axios.get(`${API_BASE}/api/analysis/fault-events`, { params }),
+    faultTimeline: (params) => axios.get(`${API_BASE}/api/analysis/fault-events/timeline`, { params }),
+    faultExport: (params) => axios.get(`${API_BASE}/api/analysis/fault-events/export`, { params, responseType: 'blob' }),
+    faultDuration: (linkId) => axios.get(`${API_BASE}/api/analysis/fault-events/duration/${linkId}`),
+    createReplay: (data) => axios.post(`${API_BASE}/api/analysis/replay/create`, data),
+    replayControl: (sessionId, action, data) => axios.post(`${API_BASE}/api/analysis/replay/${sessionId}/${action}`, data),
+    replayStatus: (sessionId) => axios.get(`${API_BASE}/api/analysis/replay/${sessionId}/status`),
+    replaySessions: () => axios.get(`${API_BASE}/api/analysis/replay/sessions`),
+  },
+  nodes: {
+    list: (params) => axios.get(`${API_BASE}/api/nodes`, { params }),
+    get: (id) => axios.get(`${API_BASE}/api/nodes/${id}`),
+    register: (data) => axios.post(`${API_BASE}/api/nodes`, data),
+    heartbeat: (id) => axios.post(`${API_BASE}/api/nodes/${id}/heartbeat`),
+  },
+  sync: {
+    status: () => axios.get(`${API_BASE}/api/sync/status`),
+    push: (data) => axios.post(`${API_BASE}/api/sync/push`, data),
+    batchPush: (data) => axios.post(`${API_BASE}/api/sync/batch-push`, data),
+    pull: (data) => axios.post(`${API_BASE}/api/sync/pull`, data),
+    pullSnapshot: (data) => axios.post(`${API_BASE}/api/sync/pull-snapshot`, data),
+    incremental: (data) => axios.post(`${API_BASE}/api/sync/incremental`, data),
+    broadcast: (data) => axios.post(`${API_BASE}/api/sync/broadcast`, data),
+    changes: (params) => axios.get(`${API_BASE}/api/sync/changes`, { params }),
+    snapshots: () => axios.get(`${API_BASE}/api/sync/snapshots`),
+    quickPath: (data) => axios.post(`${API_BASE}/api/sync/quick-path`, data),
+  },
+  audit: {
+    logs: (params) => axios.get(`${API_BASE}/api/audit/logs`, { params }),
+    get: (id) => axios.get(`${API_BASE}/api/audit/logs/${id}`),
+    stats: () => axios.get(`${API_BASE}/api/audit/stats`),
+    export: (params) => axios.get(`${API_BASE}/api/audit/export`, { params, responseType: 'blob' }),
+    create: (data) => axios.post(`${API_BASE}/api/audit/logs`, data),
+    batchExport: (data) => axios.post(`${API_BASE}/api/audit/batch-export`, data),
+    batchExportStatus: (taskId) => axios.get(`${API_BASE}/api/audit/batch-export/${taskId}`),
+    batchExportDownload: (taskId) => axios.get(`${API_BASE}/api/audit/batch-export/${taskId}/download`, { responseType: 'blob' }),
+    batchExportList: (params) => axios.get(`${API_BASE}/api/audit/batch-export`, { params }),
+    anomalyLogs: (params) => axios.get(`${API_BASE}/api/audit/anomaly-logs`, { params }),
+    anomalyExport: (params) => axios.get(`${API_BASE}/api/audit/anomaly-export`, { params, responseType: 'blob' }),
+    archiveFiles: (params) => axios.get(`${API_BASE}/api/audit/archive/files`, { params }),
+    archiveFile: (filename) => axios.get(`${API_BASE}/api/audit/archive/${filename}`),
+    archiveMerge: (data) => axios.post(`${API_BASE}/api/audit/archive/merge`, data),
+    archiveCleanup: (data) => axios.post(`${API_BASE}/api/audit/archive/cleanup`, data),
+    streamExport: (params) => axios.get(`${API_BASE}/api/audit/stream-export`, { params, responseType: 'blob' }),
+  },
+};
+
+export default api;

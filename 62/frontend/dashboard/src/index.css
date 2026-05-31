@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.app-layout {
+  height: 100vh;
+}
+
+.app-header {
+  background: linear-gradient(90deg, #001529 0%, #003a8c 100%) !important;
+  padding: 0 24px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header h1 {
+  color: #fff;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.app-header .header-info {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+}
+
+.app-content {
+  background: #f0f2f5;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.stat-card {
+  text-align: center;
+  border-radius: 8px;
+}
+
+.stat-card .stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.stat-card .stat-label {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+}
+
+.stat-card.normal .stat-value { color: #52c41a; }
+.stat-card.warning .stat-value { color: #faad14; }
+.stat-card.critical .stat-value { color: #ff4d4f; }
+.stat-card.info .stat-value { color: #1677ff; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-title h3 {
+  margin: 0 8px 0 0;
+  font-size: 15px;
+}
+
+.section-title .subtitle {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+}
+
+.tag-online { background: #f6ffed; color: #52c41a; border-color: #b7eb8f; }
+.tag-offline { background: #fff1f0; color: #ff4d4f; border-color: #ffa39e; }
+.tag-warning { background: #fffbe6; color: #faad14; border-color: #ffe58f; }
+.tag-critical { background: #fff1f0; color: #ff4d4f; border-color: #ffa39e; }
+.tag-fatal { background: #fff1f0; color: #cf1322; border-color: #ff7875; font-weight: 600; }
+
+.link-row-normal { border-left: 3px solid #52c41a; }
+.link-row-warning { border-left: 3px solid #faad14; }
+.link-row-critical { border-left: 3px solid #ff4d4f; }
+.link-row-fatal { border-left: 3px solid #cf1322; }
+
+.signal-type-communication { color: #1677ff; }
+.signal-type-access { color: #722ed1; }
+.signal-type-broadcast { color: #13c2c2; }
+
+.rule-enabled { color: #52c41a; }
+.rule-disabled { color: rgba(0, 0, 0, 0.25); text-decoration: line-through; }

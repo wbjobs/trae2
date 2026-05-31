@@ -1,0 +1,25 @@
+{
+  "name": "station-sync",
+  "version": "1.0.0",
+  "description": "车站节点同步服务 - 车-站-中心跨服务数据交互",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "station-sync",
+    "node-sync",
+    "websocket",
+    "data-sync"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "uuid": "^9.0.1",
+    "ws": "^8.18.0"
+  }
+}
