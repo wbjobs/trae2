@@ -1,0 +1,68 @@
+fluid:
+  density: 1000.0
+  viscosity: 1.0e-3
+  temperature: 293.15
+
+particle:
+  diameter: 1.0e-3
+  density: 2500.0
+  young_modulus: 1.0e9
+  poisson_ratio: 0.3
+  restitution_coeff: 0.7
+  friction_coeff: 0.3
+  count: 500
+
+domain:
+  x_min: 0.0
+  x_max: 0.1
+  y_min: 0.0
+  y_max: 0.1
+  z_min: 0.0
+  z_max: 0.1
+  periodic_x: false
+  periodic_y: false
+  periodic_z: false
+
+simulation:
+  time_step: 1.0e-5
+  total_time: 0.01
+  save_interval: 10
+  gravity: [0.0, -9.81, 0.0]
+  solver_type: "CFD-DEM"
+  coupling_method: "Eulerian-Lagrangian"
+  subcycling_steps: 10
+
+boundary_conditions:
+  - type: "wall"
+    location: "bottom"
+    value: 0.0
+    condition_id: "wall_bottom"
+  - type: "wall"
+    location: "top"
+    value: 0.0
+    condition_id: "wall_top"
+
+parallel:
+  enable_parallel: true
+  num_processes: 4
+  use_mpi: false
+  thread_per_process: 1
+  chunk_size: 100
+
+output:
+  output_dir: "./results"
+  format: "hdf5"
+  save_particle_data: true
+  save_fluid_data: true
+  save_force_data: true
+  compression: true
+  compression_level: 4
+
+backend:
+  enable_backend: false
+  api_url: "http://localhost:8080/api"
+  api_key: ""
+  task_id: ""
+  status_update_interval: 10
+  node_id: "local-node-01"
+  distributed_mode: false

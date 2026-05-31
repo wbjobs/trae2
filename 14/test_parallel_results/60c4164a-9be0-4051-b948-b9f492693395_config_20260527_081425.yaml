@@ -1,0 +1,56 @@
+backend:
+  api_key: ''
+  api_url: http://localhost:8080/api
+  distributed_mode: false
+  enable_backend: false
+  node_id: local-node-01
+  status_update_interval: 10
+  task_id: ''
+boundary_conditions: []
+domain:
+  periodic_x: false
+  periodic_y: false
+  periodic_z: false
+  x_max: 0.1
+  x_min: 0.0
+  y_max: 0.1
+  y_min: 0.0
+  z_max: 0.1
+  z_min: 0.0
+fluid:
+  density: 1000.0
+  temperature: 293.15
+  viscosity: 0.001
+output:
+  compression: true
+  compression_level: 4
+  format: hdf5
+  output_dir: ./test_parallel_results
+  save_fluid_data: true
+  save_force_data: true
+  save_particle_data: true
+parallel:
+  chunk_size: 100
+  enable_parallel: true
+  num_processes: 4
+  thread_per_process: 1
+  use_mpi: false
+particle:
+  count: 15
+  density: 2500.0
+  diameter: 0.001
+  friction_coeff: 0.3
+  poisson_ratio: 0.3
+  restitution_coeff: 0.7
+  young_modulus: 1000000000.0
+simulation:
+  coupling_method: Eulerian-Lagrangian
+  gravity:
+  - 0.0
+  - -9.81
+  - 0.0
+  save_interval: 100
+  solver_type: CFD-DEM
+  subcycling_steps: 10
+  time_step: 1.0e-05
+  total_time: 0.0002
