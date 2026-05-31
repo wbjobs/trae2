@@ -1,0 +1,68 @@
+import type { MonitoringStation } from '../types/monitoring';
+
+export const stations: MonitoringStation[] = [
+  {
+    id: 'station-001',
+    name: '太湖梅梁湾',
+    location: { lat: 31.4237, lng: 120.1694 },
+    lakeArea: '太湖',
+    status: 'online',
+    lastUpdate: '2024-12-15T08:30:00Z',
+  },
+  {
+    id: 'station-002',
+    name: '太湖贡湖湾',
+    location: { lat: 31.3891, lng: 120.2847 },
+    lakeArea: '太湖',
+    status: 'online',
+    lastUpdate: '2024-12-15T09:00:00Z',
+  },
+  {
+    id: 'station-003',
+    name: '巢湖西半湖',
+    location: { lat: 31.6123, lng: 117.3556 },
+    lakeArea: '巢湖',
+    status: 'online',
+    lastUpdate: '2024-12-15T08:45:00Z',
+  },
+  {
+    id: 'station-004',
+    name: '巢湖东半湖',
+    location: { lat: 31.5789, lng: 117.4812 },
+    lakeArea: '巢湖',
+    status: 'maintenance',
+    lastUpdate: '2024-12-14T16:20:00Z',
+  },
+  {
+    id: 'station-005',
+    name: '滇池草海',
+    location: { lat: 24.9654, lng: 102.6483 },
+    lakeArea: '滇池',
+    status: 'online',
+    lastUpdate: '2024-12-15T09:15:00Z',
+  },
+  {
+    id: 'station-006',
+    name: '滇池外海',
+    location: { lat: 24.8912, lng: 102.7235 },
+    lakeArea: '滇池',
+    status: 'online',
+    lastUpdate: '2024-12-15T08:50:00Z',
+  },
+  {
+    id: 'station-007',
+    name: '鄱阳湖南矶山',
+    location: { lat: 28.8734, lng: 116.3412 },
+    lakeArea: '鄱阳湖',
+    status: 'offline',
+    lastUpdate: '2024-12-13T14:30:00Z',
+  },
+  {
+    id: 'station-008',
+    name: '洞庭湖鹿角',
+    location: { lat: 29.2345, lng: 112.9178 },
+    lakeArea: '洞庭湖',
+    status: 'online',
+    lastUpdate: '2024-12-15T09:30:00Z',
+  },
+];
