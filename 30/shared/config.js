@@ -1,0 +1,74 @@
+const CONFIG = {
+  WORLD: {
+    SIZE: 2000,
+    DEPTH: 500,
+    GRAVITY: 0.5,
+    WATER_RESISTANCE: 0.98,
+    BUOYANCY: 0.3
+  },
+
+  VEHICLE: {
+    MAX_SPEED: 8,
+    ACCELERATION: 0.3,
+    TURN_SPEED: 0.05,
+    PITCH_SPEED: 0.03,
+    SIZE: { x: 4, y: 2, z: 8 },
+    MASS: 500,
+    BUOYANCY_TANK_CAPACITY: 100,
+    ENERGY_MAX: 1000,
+    ENERGY_CONSUMPTION: 0.1
+  },
+
+  BIONIC: {
+    TAIL_FREQUENCY: 2,
+    TAIL_AMPLITUDE: 0.5,
+    FIN_TURN_ANGLE: 0.3,
+    PECTORAL_FIN_ANGLE: 0.4
+  },
+
+  SENSORS: {
+    SONAR_RANGE: 200,
+    SONAR_ANGLE: Math.PI / 3,
+    SONAR_RAYS: 16,
+    PRESSURE_SENSOR_ACCURACY: 0.98,
+    TEMPERATURE_SENSOR_ACCURACY: 0.95,
+    OXYGEN_SENSOR_ACCURACY: 0.92,
+    UPDATE_INTERVAL: 100
+  },
+
+  COLLISION: {
+    ENABLED: true,
+    BOUNDARY_PADDING: 10,
+    COLLISION_DAMAGE_FACTOR: 0.1,
+    MIN_COLLISION_SPEED: 2
+  },
+
+  NETWORK: {
+    PORT: 3000,
+    UPDATE_RATE: 30,
+    SYNC_INTERVAL: 33,
+    MAX_CLIENTS: 8,
+    PING_TIMEOUT: 5000
+  },
+
+  RENDERING: {
+    FOV: 75,
+    NEAR_PLANE: 0.1,
+    FAR_PLANE: 5000,
+    FOG_DENSITY: 0.002,
+    FOG_COLOR: 0x0a1a2a,
+    WATER_COLOR: 0x0066aa,
+    AMBIENT_LIGHT: 0x404060,
+    DIRECTIONAL_LIGHT: 0xffffff
+  },
+
+  MISSION: {
+    OBJECTIVE_RADIUS: 30,
+    DATA_COLLECTION_TIME: 3000,
+    MAX_MISSIONS: 5
+  }
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = CONFIG;
+}

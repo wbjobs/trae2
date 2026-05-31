@@ -1,0 +1,682 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background: #0a0a1a;
+    color: #ffffff;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10, 26, 42, 0.95) 0%, rgba(5, 15, 30, 0.98) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.menu-content {
+    max-width: 600px;
+    width: 90%;
+    padding: 40px;
+    background: rgba(0, 50, 80, 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    box-shadow: 0 0 50px rgba(0, 170, 255, 0.2);
+}
+
+.menu-content h1 {
+    font-size: 42px;
+    text-align: center;
+    color: #00aaff;
+    text-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #6688aa;
+    font-size: 16px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.menu-section h2 {
+    font-size: 20px;
+    color: #00ffaa;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 255, 170, 0.3);
+}
+
+.menu-section h3 {
+    font-size: 16px;
+    color: #aaddff;
+    margin-bottom: 12px;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00aaff, #0066cc);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 170, 255, 0.6);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #334455, #223344);
+    color: #aaddff;
+    border: 1px solid rgba(0, 170, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #445566, #334455);
+    border-color: rgba(0, 170, 255, 0.5);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #aaddff;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    background: rgba(0, 30, 50, 0.8);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #00aaff;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+.color-picker {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+}
+
+.color-option.selected {
+    border-color: white;
+    box-shadow: 0 0 15px currentColor;
+}
+
+.controls-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #aabbcc;
+}
+
+.key {
+    background: rgba(0, 50, 80, 0.8);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #00ffaa;
+    border: 1px solid rgba(0, 255, 170, 0.3);
+    min-width: 50px;
+    text-align: center;
+}
+
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.hud-panel {
+    background: rgba(0, 20, 40, 0.8);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+}
+
+.hud-title {
+    font-size: 14px;
+    color: #00ffaa;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hud-subtitle {
+    font-size: 12px;
+    color: #aaddff;
+    margin: 10px 0 5px;
+}
+
+.hud-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.hud-top .hud-panel {
+    flex: 1;
+    max-width: 400px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.status-label {
+    width: 60px;
+    font-size: 12px;
+    color: #aabbcc;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(50, 50, 50, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-fill.health {
+    background: linear-gradient(90deg, #ff4444, #ff8844);
+    width: 100%;
+}
+
+.progress-fill.energy {
+    background: linear-gradient(90deg, #44aaff, #44ffaa);
+    width: 100%;
+}
+
+.status-value {
+    width: 60px;
+    text-align: right;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.sensor-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.sensor-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    background: rgba(0, 40, 60, 0.5);
+    border-radius: 4px;
+}
+
+.sensor-label {
+    font-size: 12px;
+    color: #88aacc;
+}
+
+.sensor-value {
+    font-size: 12px;
+    color: #00ffaa;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.hud-left {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#sonarDisplay {
+    width: 230px;
+}
+
+#sonarCanvas {
+    background: radial-gradient(circle, #001122 0%, #000510 100%);
+    border-radius: 50%;
+    border: 2px solid rgba(0, 170, 255, 0.5);
+}
+
+.obstacle-list {
+    margin-top: 10px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.obstacle-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 8px;
+    font-size: 11px;
+    background: rgba(0, 40, 60, 0.5);
+    border-radius: 4px;
+    margin-bottom: 3px;
+}
+
+.obstacle-name {
+    color: #aabbcc;
+}
+
+.obstacle-dist {
+    color: #ff8844;
+    font-family: monospace;
+}
+
+.hud-right {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#missionPanel {
+    width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.close-btn {
+    float: right;
+    cursor: pointer;
+    color: #ff8888;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #ff4444;
+}
+
+.mission-list {
+    margin-bottom: 15px;
+}
+
+.mission-item {
+    background: rgba(0, 40, 60, 0.5);
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 3px solid #00aaff;
+}
+
+.mission-item.available {
+    border-left-color: #00ff88;
+}
+
+.mission-name {
+    font-size: 13px;
+    color: #00ffaa;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.mission-desc {
+    font-size: 11px;
+    color: #aabbcc;
+    margin-bottom: 6px;
+}
+
+.mission-progress {
+    height: 6px;
+    background: rgba(50, 50, 50, 0.5);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.mission-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00aaff, #00ffaa);
+    transition: width 0.3s;
+}
+
+.mission-reward {
+    font-size: 11px;
+    color: #ffcc00;
+}
+
+.mission-btn {
+    margin-top: 5px;
+    padding: 5px 12px;
+    font-size: 11px;
+    background: #00aaff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.mission-btn:hover {
+    background: #00ccff;
+}
+
+.hud-bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+}
+
+.dialogue-box {
+    background: rgba(0, 20, 40, 0.9);
+    border: 1px solid rgba(0, 170, 255, 0.5);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dialogue-speaker {
+    font-size: 14px;
+    color: #00ffaa;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.dialogue-text {
+    font-size: 13px;
+    color: #ddeeff;
+    line-height: 1.5;
+}
+
+.chat-box {
+    background: rgba(0, 20, 40, 0.9);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.chat-messages {
+    height: 150px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.chat-message {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #aabbcc;
+}
+
+.chat-message .chat-sender {
+    color: #00ffaa;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px 12px;
+    background: rgba(0, 30, 50, 0.8);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+}
+
+.chat-input button {
+    padding: 8px 15px;
+    background: #00aaff;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.minimap {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 20, 40, 0.8);
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#minimapCanvas {
+    display: block;
+    border-radius: 5px;
+}
+
+.mode-indicator {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 170, 255, 0.2);
+    border: 1px solid rgba(0, 170, 255, 0.5);
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 12px;
+    color: #00aaff;
+    letter-spacing: 1px;
+}
+
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.crosshair-h, .crosshair-v {
+    position: absolute;
+    background: rgba(0, 255, 170, 0.6);
+}
+
+.crosshair-h {
+    width: 20px;
+    height: 2px;
+    left: -10px;
+    top: -1px;
+}
+
+.crosshair-v {
+    width: 2px;
+    height: 20px;
+    left: -1px;
+    top: -10px;
+}
+
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 10, 20, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 170, 255, 0.3);
+    border-top-color: #00aaff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 10, 20, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(0, 30, 50, 0.8);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 100, 100, 0.3);
+}
+
+.overlay-content h2 {
+    color: #ff8888;
+    margin-bottom: 15px;
+}
+
+.overlay-content p {
+    color: #aabbcc;
+    margin-bottom: 25px;
+}
+
+.overlay-content .btn {
+    margin: 0 10px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 20, 40, 0.5);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 170, 255, 0.5);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 170, 255, 0.7);
+}

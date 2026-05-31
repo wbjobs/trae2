@@ -1,0 +1,17 @@
+{
+  "name": "deep-sea-exploration-simulator",
+  "version": "1.0.0",
+  "description": "深海探测设备仿生动作模拟仿真游戏",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "client": "start client/index.html"
+  },
+  "dependencies": {
+    "ws": "^8.14.0"
+  },
+  "keywords": ["deep-sea", "simulation", "bionics", "multiplayer"],
+  "author": "Deep Sea Simulator Team",
+  "license": "MIT"
+}
