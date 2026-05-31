@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  host: "0.0.0.0"
+
+collector:
+  interval: 5s
+  timeout: 3s
+
+dispatcher:
+  workers: 4
+  queue_size: 1024
+
+driver:
+  plc:
+    default_protocol: "modbus-tcp"
+    timeout: 3s
+    retry: 3
+  sensor:
+    default_protocol: "mqtt"
+    timeout: 2s
+    retry: 2
+  instrument:
+    default_protocol: "opc-ua"
+    timeout: 5s
+    retry: 3
+
+log:
+  level: "info"
+  format: "text"

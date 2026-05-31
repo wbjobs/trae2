@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/icons">
+        <file>icons/logo.png</file>
+        <file>icons/device.png</file>
+        <file>icons/sensor.png</file>
+        <file>icons/plc.png</file>
+    </qresource>
+</RCC>
