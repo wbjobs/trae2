@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: pv-mqtt-broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt/config:/mosquitto/config
+      - ./mqtt/data:/mosquitto/data
+      - ./mqtt/log:/mosquitto/log
+    restart: unless-stopped
+
+  gateway:
+    build: ./gateway
+    container_name: pv-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - MQTT_BROKER=mqtt-broker
+      - MQTT_PORT=1883
+      - DATABASE_URL=sqlite:///./data/pv_gateway.db
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./gateway:/app
+      - ./shared:/app/shared
+    restart: unless-stopped
+
+  analysis:
+    build: ./analysis
+    container_name: pv-analysis
+    ports:
+      - "8001:8001"
+    environment:
+      - GATEWAY_URL=http://gateway:8000
+      - DATABASE_URL=sqlite:///./data/pv_analysis.db
+    depends_on:
+      - gateway
+    volumes:
+      - ./analysis:/app
+      - ./shared:/app/shared
+    restart: unless-stopped
+
+  command:
+    build: ./command
+    container_name: pv-command
+    ports:
+      - "8002:8002"
+    environment:
+      - MQTT_BROKER=mqtt-broker
+      - MQTT_PORT=1883
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./command:/app
+      - ./shared:/app/shared
+    restart: unless-stopped
+
+  alert:
+    build: ./alert
+    container_name: pv-alert
+    ports:
+      - "8003:8003"
+    environment:
+      - ANALYSIS_URL=http://analysis:8001
+    depends_on:
+      - analysis
+    volumes:
+      - ./alert:/app
+      - ./shared:/app/shared
+    restart: unless-stopped
+
+  workorder:
+    build: ./workorder
+    container_name: pv-workorder
+    ports:
+      - "8004:8004"
+    environment:
+      - DATABASE_URL=sqlite:///./data/pv_workorder.db
+    depends_on:
+      - gateway
+    volumes:
+      - ./workorder:/app
+      - ./shared:/app/shared
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: pv-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_GATEWAY=http://localhost:8000
+      - REACT_APP_ALERT_WS=ws://localhost:8003/ws
+    depends_on:
+      - gateway
+      - alert
+    restart: unless-stopped
+
+volumes:
+  mqtt-data:
