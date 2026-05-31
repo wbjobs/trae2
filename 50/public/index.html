@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>野外无人值守科考设备运维模拟系统</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div id="server-select-modal" class="server-select-modal">
+    <div class="server-select-content">
+      <div class="server-select-header">
+        <h1>🛰️ 野外科考设备运维模拟</h1>
+        <p>选择服务器开始游戏</p>
+      </div>
+      <div class="server-select-body">
+        <div class="server-list-header">
+          <span>服务器列表</span>
+          <button id="refresh-servers" class="btn-refresh">🔄 刷新</button>
+        </div>
+        <div id="server-list" class="server-list">
+          <div class="server-loading">
+            <div class="loading-spinner"></div>
+            <span>正在搜索局域网服务器...</span>
+          </div>
+        </div>
+        <div class="manual-connect">
+          <h4>手动连接</h4>
+          <div class="manual-inputs">
+            <input type="text" id="manual-ip" placeholder="服务器IP地址">
+            <input type="number" id="manual-port" placeholder="端口" value="3000">
+            <button id="manual-connect-btn" class="btn-connect">连接</button>
+          </div>
+        </div>
+      </div>
+      <div class="server-select-footer">
+        <p>提示: 请确保与服务器在同一局域网内</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="game-container" style="display: none;">
+    <canvas id="render-canvas"></canvas>
+    
+    <div id="ui-overlay">
+      <header id="top-bar">
+        <div class="logo">
+          <h1>🛰️ 野外科考设备运维模拟</h1>
+        </div>
+        <div class="game-stats">
+          <div class="stat-item">
+            <span class="label">游戏时间:</span>
+            <span id="game-time" class="value">00:00</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">在线玩家:</span>
+            <span id="player-count" class="value">1</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">总分:</span>
+            <span id="total-score" class="value">0</span>
+          </div>
+        </div>
+      </header>
+
+      <aside id="environment-panel" class="panel">
+        <h2>🌤️ 环境监测</h2>
+        <div class="env-grid">
+          <div class="env-item">
+            <span class="icon">🌡️</span>
+            <div class="info">
+              <span class="label">温度</span>
+              <span id="env-temperature" class="value">--</span>
+            </div>
+          </div>
+          <div class="env-item">
+            <span class="icon">💧</span>
+            <div class="info">
+              <span class="label">湿度</span>
+              <span id="env-humidity" class="value">--</span>
+            </div>
+          </div>
+          <div class="env-item">
+            <span class="icon">💨</span>
+            <div class="info">
+              <span class="label">风速</span>
+              <span id="env-wind" class="value">--</span>
+            </div>
+          </div>
+          <div class="env-item">
+            <span class="icon">🌧️</span>
+            <div class="info">
+              <span class="label">降雨</span>
+              <span id="env-rain" class="value">--</span>
+            </div>
+          </div>
+        </div>
+        <div id="weather-status" class="weather-indicator">
+          <span id="weather-level">天气等级: 正常</span>
+          <span id="time-of-day">☀️ 白天</span>
+        </div>
+      </aside>
+
+      <aside id="equipment-panel" class="panel">
+        <h2>📡 设备状态</h2>
+        <div id="equipment-list" class="equipment-list">
+        </div>
+      </aside>
+
+      <aside id="task-panel" class="panel">
+        <h2>📋 任务列表</h2>
+        <div class="task-stats">
+          <span>待处理: <strong id="pending-tasks">0</strong></span>
+          <span>已完成: <strong id="completed-tasks">0</strong></span>
+        </div>
+        <div id="task-list" class="task-list">
+        </div>
+      </aside>
+
+      <aside id="players-panel" class="panel">
+        <h2>👥 玩家排名</h2>
+        <div id="players-list" class="players-list">
+        </div>
+      </aside>
+
+      <div id="chat-panel" class="panel">
+        <h2>💬 团队通讯</h2>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+          <input type="text" id="chat-input" placeholder="输入消息..." maxlength="100">
+          <button id="chat-send">发送</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="diagnostic-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">设备诊断</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="diagnostic-content">
+            <div class="equipment-info">
+              <h3 id="diagnostic-equipment-name"></h3>
+              <div class="health-bar">
+                <div class="health-label">设备健康度</div>
+                <div class="health-track">
+                  <div id="health-fill" class="health-fill"></div>
+                </div>
+                <span id="health-value">100%</span>
+              </div>
+              <div class="health-bar" style="margin-top: 10px;">
+                <div class="health-label" style="color: #9c27b0;">设备耐久度</div>
+                <div class="health-track">
+                  <div id="durability-fill" class="health-fill" style="background: linear-gradient(90deg, #9c27b0, #e91e63);"></div>
+                </div>
+                <span id="durability-value" style="color: #e91e63;">100%</span>
+              </div>
+            </div>
+            <div class="faults-section">
+              <h4>🔍 检测到的故障:</h4>
+              <div id="faults-list"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="close-modal-btn" class="btn-secondary">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="connection-status" class="connection-indicator">
+      <span id="conn-status-text">连接中...</span>
+    </div>
+
+    <button id="settings-btn" class="settings-btn" title="图形设置">⚙️</button>
+
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-header">
+          <h2>⚙️ 图形设置</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-item">
+            <label>渲染质量</label>
+            <select id="quality-select">
+              <option value="low">低 - 低配设备推荐</option>
+              <option value="medium">中 - 平衡模式</option>
+              <option value="high">高 - 高质量</option>
+              <option value="ultra">极致 - 高端设备</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label>当前质量: <span id="current-quality">-</span></label>
+          </div>
+          <div class="setting-item">
+            <label>性能检测</label>
+            <button id="detect-performance" class="btn-secondary">自动检测</button>
+          </div>
+          <div class="setting-info">
+            <p>💡 提示: 如果游戏运行不流畅，请降低渲染质量</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="apply-settings" class="btn-connect">应用设置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/renderer/RenderConfig.js"></script>
+  <script src="js/renderer/EquipmentModels.js"></script>
+  <script src="js/renderer/WeatherEffects.js"></script>
+  <script src="js/renderer/SceneController.js"></script>
+  <script src="js/NetworkClient.js"></script>
+  <script src="js/EquipmentRenderer.js"></script>
+  <script src="js/UIController.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
