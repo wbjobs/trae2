@@ -1,0 +1,13 @@
+# Example device list
+# Format: connection [name]
+# Serial devices: /dev/ttyUSB* or COM* (Windows)
+# Network devices: IP:PORT
+
+/dev/ttyUSB0 Main_Controller
+/dev/ttyUSB1 Sensor_Node_1
+/dev/ttyUSB2 Sensor_Node_2
+
+# Network devices
+192.168.1.100:8080 Network_Device_A
+192.168.1.101:8080 Network_Device_B
+192.168.1.102:8080 Network_Device_C

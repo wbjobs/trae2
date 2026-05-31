@@ -1,0 +1,25 @@
+devices:
+  - connection: /dev/ttyUSB0
+    name: "Main Controller"
+    baudrate: 115200
+    type: serial
+
+  - connection: /dev/ttyUSB1
+    name: "Sensor Node 1"
+    baudrate: 921600
+    type: serial
+
+  - connection: /dev/ttyUSB2
+    name: "Sensor Node 2"
+    baudrate: 115200
+    type: serial
+
+  - connection: 192.168.1.100
+    port: 8080
+    name: "Network Device A"
+    type: network
+
+  - connection: 192.168.1.101
+    port: 8080
+    name: "Network Device B"
+    type: network

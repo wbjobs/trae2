@@ -1,0 +1,24 @@
+{
+  "description": "Example device list for firmware manager",
+  "version": "1.0",
+  "devices": [
+    {
+      "connection": "/dev/ttyUSB0",
+      "name": "Main Controller",
+      "baudrate": 115200,
+      "type": "serial"
+    },
+    {
+      "connection": "192.168.1.100",
+      "port": 8080,
+      "name": "Network Device A",
+      "type": "network"
+    },
+    {
+      "connection": "192.168.1.101",
+      "port": 8080,
+      "name": "Network Device B",
+      "type": "network"
+    }
+  ]
+}
