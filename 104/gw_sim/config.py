@@ -1,0 +1,32 @@
+import os
+
+BROKER_URL = os.getenv("BROKER_URL", "redis://localhost:6379/0")
+RESULT_BACKEND = os.getenv("RESULT_BACKEND", "redis://localhost:6379/1")
+
+INFLUXDB_URL = os.getenv("INFLUXDB_URL", "http://localhost:8086")
+INFLUXDB_TOKEN = os.getenv("INFLUXDB_TOKEN", "gw-sim-token-change-me")
+INFLUXDB_ORG = os.getenv("INFLUXDB_ORG", "gw_sim")
+INFLUXDB_BUCKET = os.getenv("INFLUXDB_BUCKET", "hydrology")
+
+MATLAB_ENGINE_TIMEOUT = int(os.getenv("MATLAB_ENGINE_TIMEOUT", "300"))
+
+CELERY_BROKER_URL = BROKER_URL
+CELERY_RESULT_BACKEND = RESULT_BACKEND
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TIMEZONE = "Asia/Shanghai"
+CELERY_ENABLE_UTC = True
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 3600
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 50
+
+LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+
+MONITOR_HEARTBEAT_INTERVAL = 10
+MONITOR_METRICS_INTERVAL = 30
+
+NORMALIZATION_METHODS = ["minmax", "zscore", "decimal", "robust"]
+DEFAULT_NORMALIZATION = "minmax"

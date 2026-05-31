@@ -1,0 +1,81 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+
+  influxdb:
+    image: influxdb:2.7-alpine
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: gw-sim-admin-2024
+      DOCKER_INFLUXDB_INIT_ORG: gw_sim
+      DOCKER_INFLUXDB_INIT_BUCKET: hydrology
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: gw-sim-token-change-me
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    restart: always
+
+  celery-worker-default:
+    build: .
+    command: celery -A task_scheduler.celery_app worker -Q default -n worker-default@%%h --loglevel=info -c 2
+    depends_on:
+      - redis
+      - influxdb
+    environment:
+      BROKER_URL: redis://redis:6379/0
+      RESULT_BACKEND: redis://redis:6379/1
+      INFLUXDB_URL: http://influxdb:8086
+    volumes:
+      - .:/app
+
+  celery-worker-seepage:
+    build: .
+    command: celery -A task_scheduler.celery_app worker -Q seepage -n worker-seepage@%%h --loglevel=info -c 1
+    depends_on:
+      - redis
+      - influxdb
+    environment:
+      BROKER_URL: redis://redis:6379/0
+      RESULT_BACKEND: redis://redis:6379/1
+      INFLUXDB_URL: http://influxdb:8086
+    volumes:
+      - .:/app
+
+  celery-flower:
+    build: .
+    command: celery -A task_scheduler.celery_app flower --port=5555
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    environment:
+      BROKER_URL: redis://redis:6379/0
+      RESULT_BACKEND: redis://redis:6379/1
+
+  flask-api:
+    build: .
+    command: python main.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+      - influxdb
+    environment:
+      BROKER_URL: redis://redis:6379/0
+      RESULT_BACKEND: redis://redis:6379/1
+      INFLUXDB_URL: http://influxdb:8086
+    volumes:
+      - .:/app
+
+volumes:
+  redis_data:
+  influxdb_data:

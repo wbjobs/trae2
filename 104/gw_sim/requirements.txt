@@ -1,0 +1,18 @@
+celery>=5.3.0
+redis>=5.0.0
+influxdb-client>=1.38.0
+pandas>=2.1.0
+numpy>=1.24.0
+scipy>=1.11.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.18.0
+matlabengine>=2023b
+openpyxl>=3.1.0
+pyyaml>=6.0
+flask>=3.0.0
+flask-cors>=4.0.0
+psutil>=5.9.0
+gevent>=23.9.0
+wmi>=1.5.1; sys_platform == 'win32'
+pywin32>=306; sys_platform == 'win32'
