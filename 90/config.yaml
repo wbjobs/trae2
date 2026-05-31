@@ -1,0 +1,42 @@
+servers:
+  - name: web-01
+    host: 192.168.1.101
+    port: 22
+    user: root
+    password: your_password_here
+    group: web
+
+  - name: web-02
+    host: 192.168.1.102
+    port: 22
+    user: root
+    keyfile: ~/.ssh/id_rsa
+    group: web
+
+  - name: db-01
+    host: 192.168.1.201
+    port: 22
+    user: root
+    password: your_password_here
+    group: db
+
+  - name: cache-01
+    host: 192.168.1.301
+    port: 22
+    user: admin
+    password: your_password_here
+    group: cache
+
+alerts:
+  cpu_threshold: 80
+  memory_threshold: 85
+  disk_threshold: 90
+  webhook_url: https://your-webhook.com/api/alert
+  email:
+    smtp: smtp.163.com
+    port: 465
+    user: your_email@163.com
+    password: your_email_password
+    to:
+      - admin@example.com
+      - ops@example.com
