@@ -1,0 +1,70 @@
+{
+  "title": "地质剖面应力场有限元分析报告",
+  "generated_at": "2026-05-27T12:51:08.661123",
+  "project": "geological_stress_simulation",
+  "converged": true,
+  "summary": {
+    "max_von_mises_mpa": 26.600941746751136,
+    "min_von_mises_mpa": 4.854603960720194,
+    "mean_von_mises_mpa": 13.30472578408855,
+    "max_displacement_mm": 381.61910460324214,
+    "solve_time_s": 10.841370105743408,
+    "node_count": 1326,
+    "element_count": 2500
+  },
+  "geometry": {
+    "width": 1000.0,
+    "height": 500.0,
+    "layer_count": 3
+  },
+  "layer_statistics": {
+    "上覆岩层": {
+      "element_count": 750,
+      "max_von_mises": 18796468.992587462,
+      "min_von_mises": 8993759.165866405,
+      "mean_von_mises": 10819777.353920162,
+      "max_sigma_xx": -3377475.3748125588,
+      "min_sigma_xx": -6813152.697832253,
+      "mean_sigma_xx": -4089340.5603920366,
+      "max_sigma_yy": -10194800.369998442,
+      "min_sigma_yy": -21248215.49194786,
+      "mean_sigma_yy": -12268021.681176107
+    },
+    "目标层": {
+      "element_count": 1000,
+      "max_von_mises": 14657783.646143226,
+      "min_von_mises": 4854603.9607201945,
+      "mean_von_mises": 12344290.324762058,
+      "max_sigma_xx": -2390096.3320878106,
+      "min_sigma_xx": -7545076.174729833,
+      "mean_sigma_xx": -6087630.509312717,
+      "max_sigma_yy": -5539612.7812085245,
+      "min_sigma_yy": -16826215.144285932,
+      "mean_sigma_yy": -14204471.18839634
+    },
+    "基底岩层": {
+      "element_count": 750,
+      "max_von_mises": 26600941.746751137,
+      "min_von_mises": 13279135.80793034,
+      "mean_von_mises": 17070254.826692265,
+      "max_sigma_xx": -3464809.2304878114,
+      "min_sigma_xx": -7835729.981674841,
+      "mean_sigma_xx": -5391095.694288434,
+      "max_sigma_yy": -14257506.56310379,
+      "min_sigma_yy": -29628754.34841145,
+      "mean_sigma_yy": -19113884.73429536
+    }
+  },
+  "visual_files": [
+    "E:\\trae2\\28\\test_enhanced_results\\mesh_model.png",
+    "E:\\trae2\\28\\test_enhanced_results\\displacement.png",
+    "E:\\trae2\\28\\test_enhanced_results\\stress_xx.png",
+    "E:\\trae2\\28\\test_enhanced_results\\stress_yy.png",
+    "E:\\trae2\\28\\test_enhanced_results\\stress_xy.png",
+    "E:\\trae2\\28\\test_enhanced_results\\von_mises.png",
+    "E:\\trae2\\28\\test_enhanced_results\\layer_stress_distribution.png",
+    "E:\\trae2\\28\\test_enhanced_results\\stress_profile.png"
+  ],
+  "errors": [],
+  "warnings": []
+}

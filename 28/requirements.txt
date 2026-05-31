@@ -1,0 +1,17 @@
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+meshpy>=2022.1.3
+fenics>=2019.1.0
+dolfin>=2019.1.0
+pyyaml>=6.0
+pandas>=2.0.0
+seaborn>=0.12.0
+plotly>=5.15.0
+mpi4py>=3.1.0
+h5py>=3.8.0
+pillow>=9.5.0
+reportlab>=4.0.0
+jinja2>=3.1.0
+psutil>=5.9.0
+requests>=2.31.0

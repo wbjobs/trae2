@@ -1,0 +1,93 @@
+project:
+  name: "geological_stress_simulation"
+  version: "1.0.0"
+  description: "地质剖面应力场有限元模拟计算工具"
+
+geometry:
+  profile_width: 1000.0
+  profile_height: 500.0
+  layer_count: 3
+  layers:
+    - name: "上覆岩层"
+      thickness: 150.0
+      material_id: 1
+    - name: "目标层"
+      thickness: 200.0
+      material_id: 2
+    - name: "基底岩层"
+      thickness: 150.0
+      material_id: 3
+
+material:
+  materials:
+    - id: 1
+      name: "砂岩"
+      youngs_modulus: 25.0e9
+      poissons_ratio: 0.25
+      density: 2500.0
+    - id: 2
+      name: "煤层"
+      youngs_modulus: 8.0e9
+      poissons_ratio: 0.30
+      density: 1400.0
+    - id: 3
+      name: "灰岩"
+      youngs_modulus: 45.0e9
+      poissons_ratio: 0.22
+      density: 2700.0
+
+boundary_conditions:
+  left:
+    type: "roller"
+    displacement_x: 0.0
+  right:
+    type: "roller"
+    displacement_x: 0.0
+  bottom:
+    type: "fixed"
+    displacement_x: 0.0
+    displacement_y: 0.0
+  top:
+    type: "stress"
+    stress_yy: -10.0e6
+
+initial_conditions:
+  gravity: 9.81
+  horizontal_stress_ratio: 1.2
+
+mesh:
+  element_type: "triangle"
+  element_order: 1
+  refinement_level: 2
+  max_element_size: 20.0
+  min_element_size: 5.0
+
+solver:
+  type: "linear_elasticity"
+  method: "newton"
+  tolerance: 1.0e-8
+  max_iterations: 50
+  linear_solver: "mumps"
+
+post_processing:
+  output_fields:
+    - "displacement"
+    - "stress"
+    - "strain"
+    - "von_mises"
+  visualization:
+    colormap: "viridis"
+    dpi: 300
+    figure_size: [12, 8]
+
+computation:
+  mode: "local"
+  workers: 1
+  monitoring_url: "http://localhost:8080/api"
+  enable_monitoring: true
+
+report:
+  format: "pdf"
+  include_visuals: true
+  include_raw_data: false
+  template: "standard"
