@@ -1,0 +1,89 @@
+global:
+  log_level: INFO
+  output_format: table
+  parallel: true
+  max_workers: 10
+  timeout: 30
+  encoding: utf-8
+
+ssh:
+  port: 22
+  username: root
+  private_key_path: ~/.ssh/id_rsa
+  timeout: 15
+  banner_timeout: 10
+  auth_timeout: 10
+  channel_timeout: 30
+  max_retries: 3
+  retry_delay: 2.0
+  tcp_keepalive: true
+  tcp_keepalive_interval: 30
+  encoding: utf-8
+
+kubernetes:
+  kubeconfig: ~/.kube/config
+  context: default
+  request_timeout: 30
+
+resource_thresholds:
+  cpu_warning: 70
+  cpu_critical: 90
+  memory_warning: 75
+  memory_critical: 90
+  disk_warning: 80
+  disk_critical: 95
+  pod_restart_warning: 3
+  pod_restart_critical: 10
+  high_load_consecutive: 3
+
+scheduler:
+  enabled: true
+  max_workers: 5
+  stop_on_error: false
+  state_file: ./inspection_logs/scheduler_state.json
+  default_max_retries: 0
+  default_retry_delay: 30
+
+polling:
+  adaptive: true
+  high_load_priority: true
+  auto_batch: true
+  min_batch_size: 10
+  max_batch_size: 50
+  history_max_items: 10
+
+scheduled_tasks:
+  - name: 每小时快速巡检
+    type: interval
+    interval: 3600
+    enabled: true
+    max_retries: 2
+  - name: 每日深度巡检
+    type: cron
+    cron: "0 2 * * *"
+    enabled: true
+    max_retries: 3
+
+nodes:
+  - name: master-01
+    address: 192.168.1.10
+    role: master
+  - name: worker-01
+    address: 192.168.1.21
+    role: worker
+  - name: worker-02
+    address: 192.168.1.22
+    role: worker
+  - name: worker-03
+    address: 192.168.1.23
+    role: worker
+
+namespaces:
+  - default
+  - kube-system
+  - monitoring
+
+disk_paths:
+  - /
+  - /var/lib/docker
+  - /var/lib/kubelet

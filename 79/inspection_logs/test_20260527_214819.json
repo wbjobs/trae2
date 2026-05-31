@@ -1,0 +1,60 @@
+{
+  "nodes": [
+    {
+      "node": "192.168.1.10",
+      "node_name": "master-01",
+      "role": "master",
+      "cpu": {
+        "cpu_usage": 45.2,
+        "status": "NORMAL"
+      },
+      "memory": {
+        "memory_usage": 62.5,
+        "status": "NORMAL"
+      },
+      "disk": {
+        "disks": [
+          {
+            "mount_point": "/",
+            "usage": 45.0,
+            "total": "100G",
+            "used": "45G",
+            "status": "NORMAL"
+          },
+          {
+            "mount_point": "/var/lib/docker",
+            "usage": 85.0,
+            "total": "500G",
+            "used": "425G",
+            "status": "WARNING"
+          }
+        ]
+      }
+    },
+    {
+      "node": "192.168.1.21",
+      "node_name": "worker-01",
+      "role": "worker",
+      "cpu": {
+        "cpu_usage": 95.5,
+        "status": "CRITICAL"
+      },
+      "memory": {
+        "memory_usage": 88.0,
+        "status": "WARNING"
+      },
+      "disk": {
+        "disks": [
+          {
+            "mount_point": "/",
+            "usage": 35.0,
+            "total": "100G",
+            "used": "35G",
+            "status": "NORMAL"
+          }
+        ]
+      }
+    }
+  ],
+  "timestamp": "2026-05-27 10:00:00"
+}
