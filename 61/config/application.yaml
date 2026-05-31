@@ -1,0 +1,82 @@
+mqtt:
+  broker:
+    host: localhost
+    port: 1883
+    keepalive: 60
+  topics:
+    sensor_data: "sensor/data"
+    control_cmd: "control/cmd"
+    alert: "alert/notify"
+    device_status: "device/status"
+
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+
+database:
+  type: sqlite
+  path: data/power_room.db
+
+sensor:
+  thresholds:
+    temperature:
+      warning: 40.0
+      critical: 50.0
+      unit: "°C"
+    humidity:
+      warning: 70.0
+      critical: 85.0
+      unit: "%"
+    current:
+      warning: 80.0
+      critical: 100.0
+      unit: "A"
+    voltage:
+      warning_min: 198.0
+      warning_max: 242.0
+      critical_min: 187.0
+      critical_max: 253.0
+      unit: "V"
+    arc:
+      warning: 1
+      critical: 3
+      unit: "次"
+    smoke:
+      warning: 50.0
+      critical: 100.0
+      unit: "ppm"
+
+gateway:
+  scan_interval: 1000
+  data_retention_hours: 72
+  edge_sync_interval: 30
+
+control:
+  trip_delay_seconds: 5
+  auto_recovery: false
+  max_retry_attempts: 3
+
+alert:
+  channels:
+    - email
+    - sms
+    - webhook
+  email:
+    smtp_server: smtp.example.com
+    smtp_port: 587
+    username: alert@example.com
+  webhook:
+    url: "http://localhost:3000/api/alerts/webhook"
+
+rooms:
+  - id: "room_001"
+    name: "1号配电房"
+    location: "A栋1层"
+  - id: "room_002"
+    name: "2号配电房"
+    location: "B栋2层"
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

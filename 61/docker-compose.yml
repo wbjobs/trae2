@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./data/mosquitto/config:/mosquitto/config
+      - ./data/mosquitto/data:/mosquitto/data
+      - ./data/mosquitto/log:/mosquitto/log
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+    restart: unless-stopped
+
+  gateway-service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.gateway
+    ports:
+      - "5000:5000"
+    environment:
+      - ENV=docker
+      - MQTT_HOST=mqtt-broker
+      - REDIS_HOST=redis
+    depends_on:
+      - mqtt-broker
+      - redis
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+
+  analysis-service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.analysis
+    ports:
+      - "5001:5001"
+    environment:
+      - ENV=docker
+      - MQTT_HOST=mqtt-broker
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+
+  control-service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.control
+    ports:
+      - "5002:5002"
+    environment:
+      - ENV=docker
+      - MQTT_HOST=mqtt-broker
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+
+  alert-service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.alert
+    ports:
+      - "5003:5003"
+    environment:
+      - ENV=docker
+      - MQTT_HOST=mqtt-broker
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend-monitoring-panel
+      dockerfile: ../docker/Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - gateway-service
+      - analysis-service
+      - control-service
+      - alert-service
+    restart: unless-stopped
+
+volumes:
+  mosquitto-data:
+  redis-data:

@@ -1,0 +1,24 @@
+mqtt:
+  broker:
+    host: 192.168.1.100
+    port: 1883
+
+redis:
+  host: 192.168.1.100
+  port: 6379
+
+database:
+  type: sqlite
+  path: /var/data/power_room.db
+
+gateway:
+  scan_interval: 500
+  data_retention_hours: 24
+  edge_sync_interval: 60
+  serial_ports:
+    - /dev/ttyUSB0
+    - /dev/ttyUSB1
+
+logging:
+  level: DEBUG
+  file: /var/log/gateway.log

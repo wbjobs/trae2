@@ -1,0 +1,32 @@
+mqtt:
+  broker:
+    host: mqtt-broker.cloud.com
+    port: 8883
+    use_tls: true
+
+redis:
+  host: redis.cloud.com
+  port: 6379
+  password: ${REDIS_PASSWORD}
+
+database:
+  type: postgresql
+  host: postgres.cloud.com
+  port: 5432
+  database: power_room
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}
+
+gateway:
+  data_retention_hours: 8760
+
+alert:
+  channels:
+    - email
+    - sms
+    - webhook
+    - wechat
+  email:
+    smtp_server: smtp.cloud.com
+    smtp_port: 465
+    use_ssl: true
