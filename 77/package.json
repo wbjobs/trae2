@@ -1,0 +1,22 @@
+{
+  "name": "bridge-inspection-3d-platform",
+  "version": "1.0.0",
+  "description": "高速公路桥梁附属设施三维巡检与病害标注3D平台",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "three": "^0.160.0",
+    "axios": "^1.6.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
