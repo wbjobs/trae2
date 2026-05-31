@@ -1,0 +1,32 @@
+system:
+  max_workers: 8
+  memory_limit_gb: 16
+  log_level: INFO
+
+parallel:
+  backend: concurrent
+  chunk_size: 1000
+  use_dask: false
+
+interpolation:
+  spatial_method: kriging
+  temporal_method: linear
+  noise_reduction: wavelet
+  grid_resolution: 0.1
+  search_radius: 5.0
+
+cluster:
+  host: "hpc.example.com"
+  port: 22
+  username: "user"
+  remote_workdir: "/home/user/turbulence_jobs"
+  scheduler: "slurm"
+  partition: "compute"
+  nodes: 1
+  tasks_per_node: 16
+
+output:
+  format: netcdf
+  compression: true
+  compression_level: 4
+  include_metadata: true
