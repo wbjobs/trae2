@@ -1,0 +1,23 @@
+{
+  "name": "log-trace-platform",
+  "version": "1.0.0",
+  "description": "分布式异构终端日志溯源链路分析系统",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "gateway",
+    "collector",
+    "storage"
+  ],
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:gateway": "cd gateway && npm run dev",
+    "dev:collector": "cd collector && npm run dev",
+    "dev:storage": "cd storage && npm run dev",
+    "build": "npm run build:frontend && npm run build:gateway",
+    "start": "concurrently \"npm run dev:gateway\" \"npm run dev:collector\" \"npm run dev:storage\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
