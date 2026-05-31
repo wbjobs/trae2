@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>IndustrialSimulation.Server</RootNamespace>
+    <AssemblyName>IndustrialSimulation.Server</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\Models\*.cs" Link="Shared\Models\%(Filename).cs" />
+    <Compile Include="..\Shared\Protocols\*.cs" Link="Shared\Protocols\%(Filename).cs" />
+    <Compile Include="..\Shared\Utils\*.cs" Link="Shared\Utils\%(Filename).cs" />
+  </ItemGroup>
+
+</Project>
