@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: document-collab-backend
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: doccollab
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 2000
+
+minio:
+  endpoint: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: documents
+
+jwt:
+  secret: your-jwt-secret-key-keep-it-safe-in-production
+  expiration: 86400000
+  header: Authorization
+  prefix: Bearer
