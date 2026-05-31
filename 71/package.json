@@ -1,0 +1,27 @@
+{
+  "name": "spectrum-analyzer-calibration",
+  "version": "1.0.0",
+  "description": "光谱分析仪参数标定离线仿真桌面客户端 - Spectrum Analyzer Calibration Offline Simulation Desktop Client",
+  "private": true,
+  "scripts": {
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && pip install -r requirements.txt",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "start:backend": "cd backend && python api.py",
+    "start:frontend": "cd frontend && npm start",
+    "start": "npm run start:backend & npm run start:frontend",
+    "dev": "cd frontend && npm run dev",
+    "build:win": "cd frontend && npm run build:win",
+    "build:mac": "cd frontend && npm run build:mac"
+  },
+  "keywords": [
+    "spectrum",
+    "analyzer",
+    "calibration",
+    "simulation",
+    "optical",
+    "photonics"
+  ],
+  "author": "Photonics Corp",
+  "license": "MIT"
+}

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光谱分析仪参数标定仿真系统</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea"/>
+                                <stop offset="100%" style="stop-color:#764ba2"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="16" cy="16" r="14" fill="url(#logoGrad)"/>
+                        <path d="M16 8 L16 24 M8 16 L24 16" stroke="white" stroke-width="2"/>
+                        <circle cx="16" cy="16" r="4" fill="white"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>光谱分析仪参数标定仿真系统</h1>
+                    <span class="subtitle">Spectrum Analyzer Calibration Simulator v1.0</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div id="backend-status" class="status-badge status-connecting">
+                    <span class="status-dot"></span>
+                    <span class="status-text">连接中...</span>
+                </div>
+                <button class="btn btn-ghost" id="btn-restart-backend" title="重启后端服务">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="parameters">参数导入</button>
+            <button class="tab-btn" data-tab="simulation">仿真控制</button>
+            <button class="tab-btn" data-tab="spectrum">光谱图谱</button>
+            <button class="tab-btn" data-tab="calibration">标定分析</button>
+            <button class="tab-btn" data-tab="batch">批量方案</button>
+            <button class="tab-btn" data-tab="recording">录制回放</button>
+            <button class="tab-btn" data-tab="report">报告输出</button>
+        </nav>
+
+        <main class="main-content">
+            <!-- 参数导入面板 -->
+            <section class="tab-panel active" id="panel-parameters">
+                <div class="panel-grid">
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>设备参数</h2>
+                            <div class="card-actions">
+                                <select id="device-preset" class="select-sm">
+                                    <option value="">选择预设...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>设备ID</label>
+                                    <input type="text" id="dev-id" value="SA-2026-001">
+                                </div>
+                                <div class="form-group">
+                                    <label>设备名称</label>
+                                    <input type="text" id="dev-name" value="Spectrum Analyzer Pro">
+                                </div>
+                                <div class="form-group">
+                                    <label>波长范围 (nm)</label>
+                                    <div class="input-group">
+                                        <input type="number" id="dev-wl-start" value="400" step="0.1">
+                                        <span>~</span>
+                                        <input type="number" id="dev-wl-end" value="1100" step="0.1">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>分辨率 (nm)</label>
+                                    <input type="number" id="dev-res" value="0.5" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>采样率 (Hz)</label>
+                                    <input type="number" id="dev-sr" value="1000" step="100">
+                                </div>
+                                <div class="form-group">
+                                    <label>积分时间 (ms)</label>
+                                    <input type="number" id="dev-it" value="10" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>探测器类型</label>
+                                    <select id="dev-detector">
+                                        <option value="CCD">CCD</option>
+                                        <option value="CMOS">CMOS</option>
+                                        <option value="PD">Photodiode</option>
+                                        <option value="PMT">Photomultiplier</option>
+                                        <option value="InGaAs">InGaAs</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>像素数量</label>
+                                    <input type="number" id="dev-pixels" value="2048" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>温度 (°C)</label>
+                                    <input type="number" id="dev-temp" value="25" step="0.5">
+                                </div>
+                                <div class="form-group">
+                                    <label>湿度 (%)</label>
+                                    <input type="number" id="dev-hum" value="45" step="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>光学参数</h2>
+                            <div class="card-actions">
+                                <select id="optical-preset" class="select-sm">
+                                    <option value="">选择预设...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>光源类型</label>
+                                    <select id="opt-source">
+                                        <option value="White_LED">白光LED</option>
+                                        <option value="Laser">激光</option>
+                                        <option value="Halogen">卤素灯</option>
+                                        <option value="Deuterium">氘灯</option>
+                                        <option value="Xenon">氙灯</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>光源功率 (mW)</label>
+                                    <input type="number" id="opt-power" value="5" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>焦距 (mm)</label>
+                                    <input type="number" id="opt-focal" value="75" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>光栅密度 (l/mm)</label>
+                                    <input type="number" id="opt-grating" value="600" step="10">
+                                </div>
+                                <div class="form-group">
+                                    <label>狭缝宽度 (μm)</label>
+                                    <input type="number" id="opt-slit" value="50" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>镜面反射率</label>
+                                    <input type="number" id="opt-mirror" value="0.95" step="0.01" min="0" max="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>光纤纤芯 (μm)</label>
+                                    <input type="number" id="opt-fiber-core" value="200" step="10">
+                                </div>
+                                <div class="form-group">
+                                    <label>光纤 NA</label>
+                                    <input type="number" id="opt-fiber-na" value="0.22" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>标定波长 (nm)</label>
+                                    <input type="number" id="opt-cal-wl" value="632.8" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label>标定功率 (mW)</label>
+                                    <input type="number" id="opt-cal-power" value="1" step="0.1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>标定目标</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>目标波长 (nm) - 逗号分隔</label>
+                                    <input type="text" id="cal-wavelengths" value="450,520,632.8,700,850">
+                                </div>
+                                <div class="form-group">
+                                    <label>目标强度 - 逗号分隔</label>
+                                    <input type="text" id="cal-intensities" value="0.8,0.9,1.0,0.85,0.7">
+                                </div>
+                                <div class="form-group">
+                                    <label>容差 (%)</label>
+                                    <input type="number" id="cal-tolerance" value="2" step="0.5" min="0.1" max="20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>参数操作</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="action-bar">
+                                <button class="btn btn-primary" id="btn-import-file">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/>
+                                    </svg>
+                                    导入参数文件
+                                </button>
+                                <button class="btn btn-success" id="btn-export-file">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                                    </svg>
+                                    导出参数文件
+                                </button>
+                                <button class="btn btn-warning" id="btn-validate">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                    验证参数
+                                </button>
+                                <button class="btn btn-ghost" id="btn-reset-params">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                    </svg>
+                                    重置参数
+                                </button>
+                            </div>
+                            <div id="param-validation-result" class="validation-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 仿真控制面板 -->
+            <section class="tab-panel" id="panel-simulation">
+                <div class="panel-grid">
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>仿真设置</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>光源类型</label>
+                                    <select id="sim-source">
+                                        <option value="White_LED">白光LED</option>
+                                        <option value="Laser">激光</option>
+                                        <option value="LED">单色LED</option>
+                                        <option value="Halogen">卤素灯</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>添加发射谱线</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="sim-add-lines" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>随机种子</label>
+                                    <input type="number" id="sim-seed" value="42" step="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>光路仿真</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="sim-optical" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="action-bar">
+                                <button class="btn btn-primary btn-large" id="btn-run-simulation">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                    运行光谱仿真
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>光路状态</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="status-grid" id="optical-status">
+                                <div class="status-item">
+                                    <span class="label">光栅衍射角</span>
+                                    <span class="value" id="st-grating-angle">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">光栅效率</span>
+                                    <span class="value" id="st-grating-eff">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">光纤透射</span>
+                                    <span class="value" id="st-fiber">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">镜面反射</span>
+                                    <span class="value" id="st-mirror">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">狭缝透射</span>
+                                    <span class="value" id="st-slit">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">探测器响应</span>
+                                    <span class="value" id="st-detector">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">总透射率</span>
+                                    <span class="value highlight" id="st-total">--</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="label">温度偏移</span>
+                                    <span class="value" id="st-temp-shift">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>仿真结果</h2>
+                            <div class="card-actions">
+                                <span id="sim-computation-time" class="computation-time"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="simulation-metrics" id="sim-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-label">数据点数</div>
+                                    <div class="metric-value" id="metric-pixels">--</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-label">检测峰值</div>
+                                    <div class="metric-value" id="metric-peaks">--</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-label">最大强度</div>
+                                    <div class="metric-value" id="metric-max-intensity">--</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-label">平均强度</div>
+                                    <div class="metric-value" id="metric-avg-intensity">--</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 光谱图谱面板 -->
+            <section class="tab-panel" id="panel-spectrum">
+                <div class="panel-grid">
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>光谱图谱</h2>
+                            <div class="card-actions">
+                                <div class="chart-controls">
+                                    <button class="btn btn-sm" id="btn-chart-zoom-in">放大</button>
+                                    <button class="btn btn-sm" id="btn-chart-zoom-out">缩小</button>
+                                    <button class="btn btn-sm" id="btn-chart-reset">重置</button>
+                                    <button class="btn btn-sm" id="btn-chart-export">导出数据</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container" id="spectrum-chart-container">
+                                <canvas id="spectrum-chart"></canvas>
+                                <div class="chart-placeholder" id="chart-placeholder">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="#667eea">
+                                        <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                                    </svg>
+                                    <p>请先运行光谱仿真以生成图谱</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>峰值列表</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="peak-list" id="peak-list">
+                                <div class="empty-state">暂无峰值数据</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>图谱信息</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-list" id="spectrum-info">
+                                <div class="info-item">
+                                    <span class="label">波长范围</span>
+                                    <span class="value" id="info-wl-range">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">数据点数</span>
+                                    <span class="value" id="info-pixels">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">波长分辨率</span>
+                                    <span class="value" id="info-resolution">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">光源类型</span>
+                                    <span class="value" id="info-source">--</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">噪声水平</span>
+                                    <span class="value" id="info-noise">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 标定分析面板 -->
+            <section class="tab-panel" id="panel-calibration">
+                <div class="panel-grid">
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>波长标定</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="action-bar">
+                                <button class="btn btn-primary" id="btn-cal-wavelength">
+                                    执行波长标定
+                                </button>
+                            </div>
+                            <div class="calibration-result" id="wl-cal-result">
+                                <div class="empty-state">尚未执行波长标定</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>强度标定</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="action-bar">
+                                <button class="btn btn-primary" id="btn-cal-intensity">
+                                    执行强度标定
+                                </button>
+                            </div>
+                            <div class="calibration-result" id="int-cal-result">
+                                <div class="empty-state">尚未执行强度标定</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>完整标定与验证</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="action-bar">
+                                <button class="btn btn-success btn-large" id="btn-cal-full">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    执行完整标定
+                                </button>
+                                <button class="btn btn-warning" id="btn-cal-validate">
+                                    验证标定结果
+                                </button>
+                            </div>
+                            <div class="metrics-grid" id="calibration-metrics">
+                                <div class="metric-card">
+                                    <div class="metric-label">波长精度</div>
+                                    <div class="metric-value" id="cal-wl-accuracy">--</div>
+                                    <div class="metric-unit">nm</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">波长精度 (RMS)</div>
+                                    <div class="metric-value" id="cal-wl-rmse">--</div>
+                                    <div class="metric-unit">nm</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">强度精度</div>
+                                    <div class="metric-value" id="cal-int-accuracy">--</div>
+                                    <div class="metric-unit">%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">线性度 R²</div>
+                                    <div class="metric-value" id="cal-r2">--</div>
+                                    <div class="metric-unit"></div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">信噪比</div>
+                                    <div class="metric-value" id="cal-snr">--</div>
+                                    <div class="metric-unit">dB</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-label">标定状态</div>
+                                    <div class="metric-value" id="cal-status">--</div>
+                                    <div class="metric-unit"></div>
+                                </div>
+                            </div>
+                            <div class="calibration-details" id="calibration-details"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 批量方案面板 -->
+            <section class="tab-panel" id="panel-batch">
+                <div class="panel-grid">
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>方案管理</h2>
+                            <div class="card-actions">
+                                <button class="btn btn-primary btn-sm" id="btn-create-scenario">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                    </svg>
+                                    新建方案
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="scenario-list" id="scenario-list">
+                                <div class="empty-state">暂无标定方案</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>方案详情</h2>
+                            <div class="card-actions" id="scenario-detail-actions">
+                                <button class="btn btn-sm" id="btn-edit-scenario" disabled>编辑</button>
+                                <button class="btn btn-success btn-sm" id="btn-run-scenario" disabled>执行</button>
+                                <button class="btn btn-sm" id="btn-duplicate-scenario" disabled>复制</button>
+                                <button class="btn btn-danger btn-sm" id="btn-delete-scenario" disabled>删除</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="scenario-detail" class="scenario-detail">
+                                <div class="empty-state">请选择一个方案查看详情</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>批量执行与比对</h2>
+                            <div class="card-actions">
+                                <button class="btn btn-success btn-sm" id="btn-batch-run">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                    批量执行
+                                </button>
+                                <button class="btn btn-primary btn-sm" id="btn-compare-scenarios" disabled>
+                                    比对结果
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="batch-controls">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="batch-stop-on-error"> 出错时停止
+                                </label>
+                            </div>
+                            <div class="comparison-results" id="comparison-results">
+                                <div class="empty-state">选择多个方案后执行比对</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 录制回放面板 -->
+            <section class="tab-panel" id="panel-recording">
+                <div class="panel-grid">
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>录制控制</h2>
+                            <div class="card-actions">
+                                <div id="recording-status-badge" class="status-badge status-idle">
+                                    <span class="status-dot"></span>
+                                    <span class="status-text">空闲</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>录制名称</label>
+                                    <input type="text" id="rec-name" placeholder="输入录制名称">
+                                </div>
+                                <div class="form-group">
+                                    <label>帧率 (FPS)</label>
+                                    <input type="number" id="rec-fps" value="30" min="1" max="60">
+                                </div>
+                                <div class="form-group">
+                                    <label>描述</label>
+                                    <input type="text" id="rec-description" placeholder="可选描述">
+                                </div>
+                            </div>
+                            <div class="action-bar">
+                                <button class="btn btn-success btn-large" id="btn-start-recording">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                    开始录制
+                                </button>
+                                <button class="btn btn-warning" id="btn-pause-recording" disabled>暂停</button>
+                                <button class="btn btn-danger" id="btn-stop-recording" disabled>停止</button>
+                            </div>
+                            <div class="recording-stats" id="recording-stats">
+                                <div class="stat-item">
+                                    <span class="label">已录制帧数</span>
+                                    <span class="value" id="rec-frame-count">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="label">录制时长</span>
+                                    <span class="value" id="rec-duration">0s</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>录制列表</h2>
+                            <div class="card-actions">
+                                <button class="btn btn-sm" id="btn-refresh-recordings">刷新</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="recording-list" id="recording-list">
+                                <div class="empty-state">暂无录制</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>回放控制</h2>
+                            <div class="card-actions">
+                                <button class="btn btn-sm" id="btn-play-recording" disabled>播放</button>
+                                <button class="btn btn-sm" id="btn-pause-playback" disabled>暂停</button>
+                                <button class="btn btn-sm" id="btn-stop-playback" disabled>停止</button>
+                                <div class="speed-control">
+                                    <label>速度:</label>
+                                    <select id="playback-speed">
+                                        <option value="0.25">0.25x</option>
+                                        <option value="0.5">0.5x</option>
+                                        <option value="1" selected>1x</option>
+                                        <option value="2">2x</option>
+                                        <option value="4">4x</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="playback-container">
+                                <div class="playback-timeline">
+                                    <input type="range" id="playback-slider" min="0" max="100" value="0" disabled>
+                                    <span id="playback-time">0 / 0</span>
+                                </div>
+                                <div class="playback-chart" id="playback-chart">
+                                    <canvas id="playback-canvas"></canvas>
+                                    <div class="chart-placeholder">选择录制后可回放</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 报告输出面板 -->
+            <section class="tab-panel" id="panel-report">
+                <div class="panel-grid">
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>报告设置</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>报告格式</label>
+                                    <select id="report-format">
+                                        <option value="json">JSON</option>
+                                        <option value="html">HTML</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>包含数据</label>
+                                    <div class="checkbox-group">
+                                        <label><input type="checkbox" id="report-include-spectrum" checked> 光谱数据</label>
+                                        <label><input type="checkbox" id="report-include-calibration" checked> 标定结果</label>
+                                        <label><input type="checkbox" id="report-include-metrics" checked> 性能指标</label>
+                                        <label><input type="checkbox" id="report-include-recommendations" checked> 建议</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h2>操作</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="action-bar">
+                                <button class="btn btn-success btn-large" id="btn-generate-report">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                                    </svg>
+                                    生成标定报告
+                                </button>
+                                <button class="btn btn-primary" id="btn-preview-report">
+                                    预览报告
+                                </button>
+                                <button class="btn btn-ghost" id="btn-export-report">
+                                    导出报告
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-card full-width">
+                        <div class="card-header">
+                            <h2>报告预览</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="report-preview" id="report-preview">
+                                <div class="empty-state">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="#ccc">
+                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                                    </svg>
+                                    <p>点击"生成标定报告"以创建报告</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="toast-container" class="toast-container"></div>
+
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loading-text">处理中...</div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="services/api-service.js"></script>
+    <script src="components/parameter-import.js"></script>
+    <script src="components/simulation-control.js"></script>
+    <script src="components/spectrum-viewer.js"></script>
+    <script src="components/report-output.js"></script>
+    <script src="components/batch-scenarios.js"></script>
+    <script src="components/recording-playback.js"></script>
+    <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+    "device": {
+        "device_id": "SA-DEMO-001",
+        "device_name": "Spectrum Analyzer Demo",
+        "wavelength_range_nm": [400.0, 1100.0],
+        "resolution_nm": 0.5,
+        "sampling_rate_hz": 1000.0,
+        "integration_time_ms": 10.0,
+        "detector_type": "CCD",
+        "pixel_count": 2048,
+        "temperature_c": 25.0,
+        "humidity_pct": 45.0
+    },
+    "optical": {
+        "light_source_type": "White_LED",
+        "source_power_mw": 5.0,
+        "focal_length_mm": 75.0,
+        "grating_density_lpm": 600.0,
+        "slit_width_um": 50.0,
+        "mirror_reflectivity": 0.95,
+        "fiber_core_um": 200.0,
+        "fiber_na": 0.22,
+        "calibration_source_wl_nm": 632.8,
+        "calibration_source_power_mw": 1.0
+    },
+    "calibration": {
+        "target_wavelengths_nm": [450.0, 520.0, 546.1, 589.0, 632.8, 700.0, 850.0],
+        "target_intensities": [0.7, 0.8, 0.85, 0.9, 1.0, 0.85, 0.6],
+        "tolerance_pct": 2.0
+    }
+}
