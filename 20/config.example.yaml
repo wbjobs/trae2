@@ -1,0 +1,65 @@
+servers:
+  - name: web1
+    host: 192.168.1.10
+    port: 22
+    username: root
+    private_key: ~/.ssh/id_rsa
+    tags:
+      - web
+      - production
+
+  - name: web2
+    host: 192.168.1.11
+    port: 22
+    username: root
+    private_key: ~/.ssh/id_rsa
+    tags:
+      - web
+      - production
+
+  - name: db1
+    host: 192.168.1.20
+    port: 22
+    username: admin
+    password: your_password_here
+    tags:
+      - db
+      - production
+
+  - name: cache1
+    host: 192.168.1.30
+    port: 22
+    username: root
+    private_key: ~/.ssh/id_ed25519
+    private_key_passphrase: your_key_passphrase
+    tags:
+      - cache
+
+ssh:
+  timeout: 30
+  max_retries: 3
+  retry_delay: 2
+  pool_size: 10
+  allow_agent: true
+  look_for_keys: true
+
+logging:
+  log_dir: ~/.cluster_ops/logs
+  log_level: INFO
+  log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  max_bytes: 10485760
+  backup_count: 5
+
+default_parallel: 5
+
+security:
+  enabled: true
+  whitelist: []
+  blacklist:
+    - "rm -rf /"
+    - "mkfs"
+    - "dd if=/dev"
+    - "shutdown"
+    - "reboot"
+    - "regex:^rm\\s+-rf\\s+/"
+  default_action: allow
