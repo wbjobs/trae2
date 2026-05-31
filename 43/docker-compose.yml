@@ -1,0 +1,102 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: cp-redis
+    restart: always
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  influxdb:
+    image: influxdb:2.7-alpine
+    container_name: cp-influxdb
+    restart: always
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: cp-monitor-pass
+      DOCKER_INFLUXDB_INIT_ORG: cp-org
+      DOCKER_INFLUXDB_INIT_BUCKET: cp-monitor
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: cp-monitor-token
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+
+  api-node-1:
+    build: .
+    container_name: cp-api-node-1
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ID=node-1
+      - REDIS_URL=redis://redis:6379/0
+      - MQ_BROKER_URL=redis://redis:6379/1
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=cp-monitor-token
+      - WEBHOOK_URL=http://webhook-handler:9000/api/alarm
+    depends_on:
+      - redis
+      - influxdb
+    volumes:
+      - ./logs:/app/logs
+
+  api-node-2:
+    build: .
+    container_name: cp-api-node-2
+    restart: always
+    ports:
+      - "8001:8000"
+    environment:
+      - NODE_ID=node-2
+      - REDIS_URL=redis://redis:6379/0
+      - MQ_BROKER_URL=redis://redis:6379/1
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=cp-monitor-token
+      - WEBHOOK_URL=http://webhook-handler:9000/api/alarm
+    depends_on:
+      - redis
+      - influxdb
+    volumes:
+      - ./logs:/app/logs
+
+  api-node-3:
+    build: .
+    container_name: cp-api-node-3
+    restart: always
+    ports:
+      - "8002:8000"
+    environment:
+      - NODE_ID=node-3
+      - REDIS_URL=redis://redis:6379/0
+      - MQ_BROKER_URL=redis://redis:6379/1
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=cp-monitor-token
+      - WEBHOOK_URL=http://webhook-handler:9000/api/alarm
+    depends_on:
+      - redis
+      - influxdb
+    volumes:
+      - ./logs:/app/logs
+
+  nginx-lb:
+    image: nginx:alpine
+    container_name: cp-nginx-lb
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-node-1
+      - api-node-2
+      - api-node-3
+
+volumes:
+  redis_data:
+  influxdb_data:

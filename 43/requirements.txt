@@ -1,0 +1,11 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+redis>=5.0.0
+redis[hiredis]>=5.0.0
+influxdb-client-async>=0.1.0
+httpx>=0.25.0
+APScheduler>=3.10.4
+psutil>=5.9.0
+python-dotenv>=1.0.0
