@@ -1,0 +1,53 @@
+<UserControl x:Class="StudioAudioMatrix.Views.TemplateBrowser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="280">
+    <GroupBox Header="布局模板库">
+        <DockPanel DataContext="{Binding}">
+            <ToolBar DockPanel.Dock="Top">
+                <Button Content="应用" Command="{Binding ApplyTemplateCommand}" Width="50" Style="{StaticResource ToolButton}"/>
+                <Button Content="保存当前" Command="{Binding SaveAsTemplateCommand}" Width="60" Style="{StaticResource ToolButton}"/>
+                <Button Content="删除" Command="{Binding DeleteTemplateCommand}" Width="40" Style="{StaticResource ToolButton}"/>
+            </ToolBar>
+            <TabControl>
+                <TabItem Header="预置">
+                    <ListBox ItemsSource="{Binding BuiltInTemplates}" SelectedItem="{Binding SelectedTemplate}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="4">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="12"/>
+                                    <TextBlock Text="{Binding Description}" FontSize="10" Foreground="{StaticResource SubtleText}" TextWrapping="Wrap"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                        <TextBlock Text="{Binding Category}" FontSize="9" Foreground="{StaticResource AccentBrush}" Margin="0,0,8,0"/>
+                                        <TextBlock Text="{Binding DeviceCount, StringFormat={}{} 台设备}" FontSize="9" Foreground="{StaticResource SubtleText}"/>
+                                        <TextBlock FontSize="9" Foreground="{StaticResource SubtleText}" Margin="4,0,0,0">
+                                            <Run Text="{Binding StudioWidth, StringFormat={}{0:F0}}"/>
+                                            <Run Text="x"/>
+                                            <Run Text="{Binding StudioDepth, StringFormat={}{0:F0}}"/>
+                                            <Run Text="m"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="自定义">
+                    <ListBox ItemsSource="{Binding UserTemplates}" SelectedItem="{Binding SelectedTemplate}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="4">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="12"/>
+                                    <TextBlock Text="{Binding Description}" FontSize="10" Foreground="{StaticResource SubtleText}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </GroupBox>
+</UserControl>

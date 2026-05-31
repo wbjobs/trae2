@@ -1,0 +1,75 @@
+<UserControl x:Class="StudioAudioMatrix.Views.MatrixLayoutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:StudioAudioMatrix.Models;assembly=StudioAudioMatrix"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0" Background="{StaticResource ToolbarBackground}">
+            <Button Content="添加设备" Command="{Binding AddDeviceCommand}" Style="{StaticResource ToolButton}"/>
+            <Button Content="删除设备" Command="{Binding RemoveDeviceCommand}" Style="{StaticResource ToolButton}"/>
+            <Separator/>
+            <Button Content="计算声场" Command="{Binding ComputeSoundFieldCommand}" Style="{StaticResource ToolButton}"/>
+            <TextBlock Text="覆盖率:" Margin="10,0,5,0" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding SoundFieldCoverage, StringFormat={}{0:P1}}" Width="60" VerticalAlignment="Center"/>
+            <TextBlock Text="耗时:" Margin="10,0,5,0" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding LastComputationMs, StringFormat={}{0:F1}ms}" Width="60" VerticalAlignment="Center"/>
+        </ToolBar>
+        <Canvas x:Name="LayoutCanvas" Grid.Row="1" Background="{StaticResource CanvasBackground}"
+                SizeChanged="LayoutCanvas_SizeChanged">
+            <ItemsControl ItemsSource="{Binding CurrentProject.Devices}" x:Name="DevicesItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource DevicePositionConverter}">
+                                    <Binding Path="X"/>
+                                    <Binding Path="DataContext.CurrentProject.StudioWidth" RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                                    <Binding Path="ActualWidth" ElementName="LayoutCanvas"/>
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Canvas.Top">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource DevicePositionConverter}">
+                                    <Binding Path="Z"/>
+                                    <Binding Path="DataContext.CurrentProject.StudioDepth" RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                                    <Binding Path="ActualHeight" ElementName="LayoutCanvas"/>
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:AudioDevice}">
+                        <Grid Width="36" Height="36"
+                              MouseLeftButtonDown="DeviceIcon_MouseLeftButtonDown"
+                              MouseMove="DeviceIcon_MouseMove"
+                              MouseLeftButtonUp="DeviceIcon_MouseLeftButtonUp"
+                              Cursor="Hand">
+                            <Ellipse x:Name="DeviceCircle" Fill="{StaticResource DeviceFill}" Stroke="{StaticResource DeviceStroke}" StrokeThickness="1.5"/>
+                            <TextBlock Text="{Binding Name, StringFormat={}{0}}"
+                                       TextTrimming="CharacterEllipsis"
+                                       FontSize="10" Foreground="White"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
+    </Grid>
+</UserControl>

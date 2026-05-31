@@ -1,0 +1,55 @@
+<UserControl x:Class="StudioAudioMatrix.Views.ZoneEditorPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:StudioAudioMatrix.Models;assembly=StudioAudioMatrix"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="280">
+    <GroupBox Header="声场区域标注" DataContext="{Binding}">
+        <DockPanel>
+            <ToolBar DockPanel.Dock="Top">
+                <Button Content="+" Command="{Binding AddZoneCommand}" Width="28"/>
+                <Button Content="-" Command="{Binding RemoveZoneCommand}" Width="28"/>
+            </ToolBar>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" ItemsSource="{Binding CurrentProject.Zones}" SelectedItem="{Binding SelectedZone}"
+                         DisplayMemberPath="Name" Margin="0,0,0,4"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                              DataContext="{Binding SelectedZone}">
+                    <StackPanel Margin="4">
+                        <TextBlock Text="名称:" Margin="0,4"/>
+                        <TextBox Text="{Binding Name}" Margin="0,2"/>
+                        <TextBlock Text="区域类型:" Margin="0,4"/>
+                        <ComboBox SelectedValue="{Binding Type}" SelectedValuePath="Tag" Margin="0,2">
+                            <ComboBoxItem Content="观众区" Tag="{x:Static models:ZoneType.Audience}"/>
+                            <ComboBoxItem Content="舞台区" Tag="{x:Static models:ZoneType.Stage}"/>
+                            <ComboBoxItem Content="VIP 区" Tag="{x:Static models:ZoneType.VIP}"/>
+                            <ComboBoxItem Content="控制室" Tag="{x:Static models:ZoneType.ControlRoom}"/>
+                            <ComboBoxItem Content="排练区" Tag="{x:Static models:ZoneType.Rehearsal}"/>
+                            <ComboBoxItem Content="自定义" Tag="{x:Static models:ZoneType.Custom}"/>
+                        </ComboBox>
+                        <TextBlock Text="位置 X (m):" Margin="0,4"/>
+                        <TextBox Text="{Binding X}" Margin="0,2"/>
+                        <TextBlock Text="位置 Z (m):" Margin="0,4"/>
+                        <TextBox Text="{Binding Z}" Margin="0,2"/>
+                        <TextBlock Text="宽度 (m):" Margin="0,4"/>
+                        <TextBox Text="{Binding Width}" Margin="0,2"/>
+                        <TextBlock Text="深度 (m):" Margin="0,4"/>
+                        <TextBox Text="{Binding Depth}" Margin="0,2"/>
+                        <TextBlock Text="目标 SPL (dB):" Margin="0,4"/>
+                        <Slider Minimum="60" Maximum="120" Value="{Binding TargetSPL}" Margin="0,2"/>
+                        <TextBlock Text="{Binding TargetSPL, StringFormat={}{0:F1} dB}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="颜色:" Margin="0,4"/>
+                        <TextBox Text="{Binding ColorHex}" Margin="0,2"/>
+                        <CheckBox Content="可见" IsChecked="{Binding IsVisible}" Margin="0,8"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
+    </GroupBox>
+</UserControl>
