@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剧场音响阵列布局与音效预演系统 v2.0</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="top-toolbar">
+            <div class="toolbar-left">
+                <h1>🎭 剧场音响阵列系统 v2.0</h1>
+            </div>
+            <div class="toolbar-center">
+                <button id="btn-new" class="toolbar-btn">新建</button>
+                <button id="btn-open" class="toolbar-btn">打开</button>
+                <button id="btn-save" class="toolbar-btn">保存</button>
+                <button id="btn-save-as" class="toolbar-btn">另存为</button>
+                <div class="separator"></div>
+                <button id="btn-calculate" class="toolbar-btn primary">计算声场</button>
+                <button id="btn-simulate" class="toolbar-btn success">音效预演</button>
+            </div>
+            <div class="toolbar-right">
+                <span id="project-name">未命名工程</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="left-panel">
+                <div class="panel-section">
+                    <h3>📦 音响库</h3>
+                    <div id="speaker-library" class="speaker-library">
+                        <div class="speaker-item" data-type="line-array">
+                            <div class="speaker-icon">🔊</div>
+                            <div class="speaker-info">
+                                <div class="speaker-name">线阵列音箱</div>
+                                <div class="speaker-desc">Line Array</div>
+                            </div>
+                        </div>
+                        <div class="speaker-item" data-type="point-source">
+                            <div class="speaker-icon">🔉</div>
+                            <div class="speaker-info">
+                                <div class="speaker-name">点声源</div>
+                                <div class="speaker-desc">Point Source</div>
+                            </div>
+                        </div>
+                        <div class="speaker-item" data-type="subwoofer">
+                            <div class="speaker-icon">🔈</div>
+                            <div class="speaker-info">
+                                <div class="speaker-name">超低音</div>
+                                <div class="speaker-desc">Subwoofer</div>
+                            </div>
+                        </div>
+                        <div class="speaker-item" data-type="fill">
+                            <div class="speaker-icon">🎵</div>
+                            <div class="speaker-info">
+                                <div class="speaker-name">补声音箱</div>
+                                <div class="speaker-desc">Fill Speaker</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>📋 布局模板</h3>
+                    <div class="template-actions">
+                        <button id="btn-create-template" class="toolbar-btn small">保存为模板</button>
+                    </div>
+                    <div id="template-list" class="template-list">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>⚙️ 音响属性</h3>
+                    <div id="speaker-properties" class="properties-panel">
+                        <p class="no-selection">请选择一个音响查看属性</p>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>🎛️ 声场参数</h3>
+                    <div class="param-group">
+                        <label>频率 (Hz)</label>
+                        <input type="number" id="param-frequency" value="1000" min="20" max="20000">
+                    </div>
+                    <div class="param-group">
+                        <label>温度 (°C)</label>
+                        <input type="number" id="param-temperature" value="20" min="-10" max="50">
+                    </div>
+                    <div class="param-group">
+                        <label>湿度 (%)</label>
+                        <input type="number" id="param-humidity" value="50" min="0" max="100">
+                    </div>
+                </div>
+            </aside>
+
+            <main class="center-panel">
+                <div class="canvas-container">
+                    <canvas id="layout-canvas"></canvas>
+                    <div class="canvas-overlay">
+                        <span id="canvas-info">舞台区域 - 点击音响库添加设备，拖拽调整位置 | 双击旋转音响</span>
+                    </div>
+                </div>
+
+                <div class="timeline-panel">
+                    <div class="timeline-toolbar">
+                        <button id="btn-play" class="timeline-btn">▶️ 播放</button>
+                        <button id="btn-pause" class="timeline-btn">⏸️ 暂停</button>
+                        <button id="btn-stop" class="timeline-btn">⏹️ 停止</button>
+                        <div class="time-display">
+                            <span id="current-time">00:00.000</span>
+                            <span>/</span>
+                            <span id="total-time">00:10.000</span>
+                        </div>
+                    </div>
+                    <div class="timeline-track">
+                        <div id="timeline-cursor" class="timeline-cursor"></div>
+                        <div id="timeline-grid" class="timeline-grid"></div>
+                        <div id="audio-clips" class="audio-clips"></div>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="right-panel">
+                <div class="panel-section">
+                    <h3>🎯 区域标记</h3>
+                    <div class="region-buttons">
+                        <button class="region-type-btn" data-type="stage" style="background: rgba(0, 212, 255, 0.3);">舞台</button>
+                        <button class="region-type-btn" data-type="audience" style="background: rgba(16, 185, 129, 0.2);">观众区</button>
+                        <button class="region-type-btn" data-type="vip" style="background: rgba(245, 158, 11, 0.3);">VIP</button>
+                        <button class="region-type-btn" data-type="backstage" style="background: rgba(139, 92, 246, 0.3);">后台</button>
+                        <button class="region-type-btn" data-type="custom" style="background: rgba(236, 72, 153, 0.3);">自定义</button>
+                    </div>
+                    <div id="region-properties" class="properties-panel">
+                        <p class="no-selection">点击添加区域，或选择区域编辑</p>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>📊 声场分析</h3>
+                    <div class="analysis-results">
+                        <div class="result-item">
+                            <span class="result-label">最大声压级</span>
+                            <span class="result-value" id="result-max-spl">-- dB</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">最小声压级</span>
+                            <span class="result-value" id="result-min-spl">-- dB</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">声压级均匀度</span>
+                            <span class="result-value" id="result-uniformity">-- dB</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">覆盖区域</span>
+                            <span class="result-value" id="result-coverage">-- %</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>🎨 显示选项</h3>
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-heatmap" checked> 显示声场热力图</label>
+                    </div>
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-grid" checked> 显示网格</label>
+                    </div>
+                    <div class="option-group">
+                        <label><input type="checkbox" id="show-labels" checked> 显示标签</label>
+                    </div>
+                    <div class="option-group">
+                        <label>热力图透明度</label>
+                        <input type="range" id="heatmap-opacity" min="0" max="100" value="60">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>🔌 外置模拟器</h3>
+                    <div class="simulator-status">
+                        <span id="simulator-status" class="status-indicator disconnected"></span>
+                        <span id="simulator-status-text">未连接</span>
+                    </div>
+                    <button id="btn-connect-sim" class="toolbar-btn full-width">连接模拟器</button>
+                    <button id="btn-send-to-sim" class="toolbar-btn full-width" disabled>发送到模拟器</button>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="status-bar">
+            <div class="status-left">
+                <span id="status-text">就绪</span>
+            </div>
+            <div class="status-center">
+                <span>音响数量: <span id="speaker-count">0</span>
+            </div>
+            <div class="status-right">
+                <span id="zoom-level">100%</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="dist/renderer.js"></script>
+</body>
+</html>
