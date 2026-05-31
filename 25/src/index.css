@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Noto Sans SC', 'Noto Serif SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f5f0e6;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(26, 46, 42, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(26, 46, 42, 0.02) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  color: #1a2e2a;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(26, 46, 42, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 46, 42, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 46, 42, 0.5);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.rice-paper {
+  background-color: #f5f0e6;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(212, 197, 160, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(26, 46, 42, 0.05) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.ink-border {
+  border: 2px solid #1a2e2a;
+  box-shadow: 3px 3px 0 rgba(26, 46, 42, 0.15);
+}
+
+.cinnabar-border {
+  border: 2px solid #c44536;
+  box-shadow: 2px 2px 0 rgba(196, 69, 54, 0.2);
+}
+
+.bronze-border {
+  border: 2px solid #7a9e7e;
+  box-shadow: 2px 2px 0 rgba(122, 158, 126, 0.2);
+}
+
+.btn-ink {
+  @apply px-4 py-2 bg-ink text-rice rounded transition-all duration-200;
+  @apply hover:bg-ink-700 active:scale-95;
+}
+
+.btn-cinnabar {
+  @apply px-4 py-2 bg-cinnabar text-rice rounded transition-all duration-200;
+  @apply hover:bg-cinnabar-500 active:scale-95;
+}
+
+.btn-bronze {
+  @apply px-4 py-2 bg-bronze text-rice rounded transition-all duration-200;
+  @apply hover:bg-bronze-500 active:scale-95;
+}
+
+.btn-outline-ink {
+  @apply px-4 py-2 border-2 border-ink text-ink bg-transparent rounded transition-all duration-200;
+  @apply hover:bg-ink hover:text-rice;
+}
+
+.btn-outline-cinnabar {
+  @apply px-4 py-2 border-2 border-cinnabar text-cinnabar bg-transparent rounded transition-all duration-200;
+  @apply hover:bg-cinnabar hover:text-rice;
+}
+
+.input-ink {
+  @apply w-full px-4 py-2.5 bg-rice border-2 border-ink-200 rounded;
+  @apply focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink-100;
+  @apply transition-all duration-200 placeholder-ink-300 text-ink;
+}
+
+.card-rice {
+  @apply bg-rice rounded-lg shadow-md border border-ink-100;
+  @apply hover:shadow-lg transition-shadow duration-200;
+}
+
+.chinese-title {
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.05em;
+}
+
+.seal-stamp {
+  @apply inline-flex items-center justify-center px-2 py-1;
+  @apply bg-cinnabar text-rice text-sm font-medium rounded;
+  font-family: 'Noto Serif SC', serif;
+  box-shadow: 1px 1px 0 rgba(196, 69, 54, 0.3);
+}
+
+.annotation-rect {
+  position: absolute;
+  border: 2px solid #c44536;
+  background: rgba(196, 69, 54, 0.08);
+  border-radius: 2px;
+  cursor: move;
+  transition: box-shadow 0.15s ease;
+}
+
+.annotation-rect:hover {
+  box-shadow: 0 0 0 2px rgba(196, 69, 54, 0.3);
+}
+
+.annotation-rect.selected {
+  border-color: #c44536;
+  background: rgba(196, 69, 54, 0.15);
+  box-shadow: 0 0 0 2px rgba(196, 69, 54, 0.4);
+}
+
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #c44536;
+  border-radius: 50%;
+  border: 2px solid #f5f0e6;
+}
+
+.resize-handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
+.resize-handle.ne { top: -6px; right: -6px; cursor: ne-resize; }
+.resize-handle.sw { bottom: -6px; left: -6px; cursor: sw-resize; }
+.resize-handle.se { bottom: -6px; right: -6px; cursor: se-resize; }
+
+canvas {
+  touch-action: none;
+}
+
+.select-none-all,
+.select-none-all * {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.drawer-overlay {
+  @apply fixed inset-0 bg-ink-700/50 z-40;
+  @apply animate-fade-in;
+}
+
+.drawer-panel {
+  @apply fixed right-0 top-0 h-full w-full max-w-xl bg-rice z-50;
+  @apply shadow-2xl animate-slide-in;
+}
+
+.tool-btn {
+  @apply flex items-center justify-center w-9 h-9 rounded transition-all duration-150;
+  @apply hover:bg-ink-100 text-ink-600;
+}
+
+.tool-btn.active {
+  @apply bg-ink text-rice hover:bg-ink-700;
+}
+
+.color-swatch {
+  @apply w-7 h-7 rounded-full cursor-pointer transition-transform duration-150;
+  @apply hover:scale-110;
+}
+
+.color-swatch.selected {
+  @apply ring-2 ring-offset-2 ring-ink;
+}
