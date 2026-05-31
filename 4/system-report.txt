@@ -1,0 +1,176 @@
+
+═══════════════════════════════════════════════════════════════
+                    系统检测报告
+═══════════════════════════════════════════════════════════════
+生成时间: 2026/5/26 09:26:00
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【系统信息】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  操作系统: Windows_NT 10.0.22631
+  平台架构: win32 / x64
+  主机名:   Iris
+  运行时间: 1天 1小时 31分钟 21秒
+  CPU:      AMD Ryzen 5 5600H with Radeon Graphics          (12 核)
+  内存:     13.04 GB / 13.87 GB (94.02%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【依赖检测】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [✓] Node.js      22.17.0
+  [✓] npm          10.9.2
+  [✓] yarn         未知版本
+  [✓] Git          2.26.2
+  [✓] Python       3.12.10
+  [✓] Java         未知版本
+  [✓] Docker       未知版本
+  [✓] Go           未知版本
+  [✓] PHP          未知版本
+  [✓] Ruby         未知版本
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【磁盘空间】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【端口扫描】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  21       FTP             ✗ 关闭
+  22       SSH             ✗ 关闭
+  23       Telnet          ✗ 关闭
+  25       SMTP            ✗ 关闭
+  53       DNS             ✗ 关闭
+  80       HTTP            ✗ 关闭
+  110      POP3            ✗ 关闭
+  135      RPC             ✓ 开放
+  139      NetBIOS         ✗ 关闭
+  143      IMAP            ✗ 关闭
+  443      HTTPS           ✗ 关闭
+  445      SMB             ✓ 开放
+  3306     MySQL           ✗ 关闭
+  3389     RDP             ✗ 关闭
+  5432     PostgreSQL      ✗ 关闭
+  5900     VNC             ✗ 关闭
+  6379     Redis           ✓ 开放
+  8080     HTTP-Proxy      ✗ 关闭
+  8443     HTTPS-Alt       ✗ 关闭
+  27017    MongoDB         ✗ 关闭
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【端口进程】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  135      TCP      PID: 1584       LISTENING
+  139      TCP      PID: 4          LISTENING
+  445      TCP      PID: 4          LISTENING
+  5040     TCP      PID: 6096       LISTENING
+  5283     TCP      PID: 11796      LISTENING
+  6379     TCP      PID: 4376       LISTENING
+  7890     TCP      PID: 16744      LISTENING
+  14013    TCP      PID: 18308      LISTENING
+  14016    TCP      PID: 18308      LISTENING
+  14019    TCP      PID: 18308      LISTENING
+  14022    TCP      PID: 18308      LISTENING
+  14023    TCP      PID: 18308      LISTENING
+  17788    TCP      PID: 18676      LISTENING
+  27015    TCP      PID: 1504       LISTENING
+  49266    TCP      PID: 0          TIME_WAIT
+  49612    TCP      PID: 10328      ESTABLISHED
+  49664    TCP      PID: 1316       LISTENING
+  49665    TCP      PID: 1208       LISTENING
+  49666    TCP      PID: 2680       LISTENING
+  49667    TCP      PID: 2912       LISTENING
+  49668    TCP      PID: 3840       LISTENING
+  49671    TCP      PID: 1284       LISTENING
+  49724    TCP      PID: 10872      ESTABLISHED
+  49728    TCP      PID: 10340      ESTABLISHED
+  49735    TCP      PID: 10340      ESTABLISHED
+  49827    TCP      PID: 14640      LISTENING
+  49829    TCP      PID: 16744      LISTENING
+  50056    TCP      PID: 10100      ESTABLISHED
+  51000    TCP      PID: 16824      LISTENING
+  51021    TCP      PID: 16144      ESTABLISHED
+  51041    TCP      PID: 0          TIME_WAIT
+  51042    TCP      PID: 0          TIME_WAIT
+  51478    TCP      PID: 19364      ESTABLISHED
+  51479    TCP      PID: 15788      ESTABLISHED
+  51492    TCP      PID: 0          TIME_WAIT
+  51732    TCP      PID: 0          TIME_WAIT
+  52135    TCP      PID: 16824      ESTABLISHED
+  52142    TCP      PID: 10352      ESTABLISHED
+  52145    TCP      PID: 25048      ESTABLISHED
+  52311    TCP      PID: 10100      ESTABLISHED
+  52469    TCP      PID: 19364      ESTABLISHED
+  52471    TCP      PID: 16144      ESTABLISHED
+  52689    TCP      PID: 19020      ESTABLISHED
+  52710    TCP      PID: 10100      ESTABLISHED
+  53025    TCP      PID: 16144      ESTABLISHED
+  53027    TCP      PID: 16144      ESTABLISHED
+  53044    TCP      PID: 10100      ESTABLISHED
+  53097    TCP      PID: 10100      ESTABLISHED
+  53236    TCP      PID: 22520      ESTABLISHED
+  53796    TCP      PID: 10100      ESTABLISHED
+  53878    TCP      PID: 0          TIME_WAIT
+  53905    TCP      PID: 0          TIME_WAIT
+  54629    TCP      PID: 19364      ESTABLISHED
+  54755    TCP      PID: 0          TIME_WAIT
+  55257    TCP      PID: 19364      ESTABLISHED
+  55358    TCP      PID: 10352      ESTABLISHED
+  55540    TCP      PID: 10100      SYN_SENT
+  55863    TCP      PID: 10100      ESTABLISHED
+  56081    TCP      PID: 0          TIME_WAIT
+  56899    TCP      PID: 19020      ESTABLISHED
+  57023    TCP      PID: 10100      ESTABLISHED
+  57594    TCP      PID: 0          TIME_WAIT
+  57806    TCP      PID: 0          TIME_WAIT
+  57902    TCP      PID: 19364      ESTABLISHED
+  57905    TCP      PID: 0          TIME_WAIT
+  57908    TCP      PID: 0          TIME_WAIT
+  57911    TCP      PID: 0          TIME_WAIT
+  57915    TCP      PID: 0          TIME_WAIT
+  57918    TCP      PID: 0          TIME_WAIT
+  57921    TCP      PID: 0          TIME_WAIT
+  58149    TCP      PID: 0          TIME_WAIT
+  58462    TCP      PID: 25048      ESTABLISHED
+  59031    TCP      PID: 0          TIME_WAIT
+  59207    TCP      PID: 0          TIME_WAIT
+  59210    TCP      PID: 0          TIME_WAIT
+  59572    TCP      PID: 16144      ESTABLISHED
+  59574    TCP      PID: 18308      ESTABLISHED
+  59609    TCP      PID: 0          TIME_WAIT
+  59615    TCP      PID: 16824      ESTABLISHED
+  59617    TCP      PID: 16824      ESTABLISHED
+  59683    TCP      PID: 10100      ESTABLISHED
+  59686    TCP      PID: 0          TIME_WAIT
+  59699    TCP      PID: 13752      ESTABLISHED
+  59700    TCP      PID: 4348       ESTABLISHED
+  60641    TCP      PID: 0          TIME_WAIT
+  60755    TCP      PID: 19364      ESTABLISHED
+  60974    TCP      PID: 10100      SYN_SENT
+  60982    TCP      PID: 0          TIME_WAIT
+  60991    TCP      PID: 0          TIME_WAIT
+  61004    TCP      PID: 0          TIME_WAIT
+  61013    TCP      PID: 0          TIME_WAIT
+  61042    TCP      PID: 0          TIME_WAIT
+  61461    TCP      PID: 19364      ESTABLISHED
+  61944    TCP      PID: 10352      ESTABLISHED
+  62062    TCP      PID: 17196      ESTABLISHED
+  62080    TCP      PID: 10100      ESTABLISHED
+  62269    TCP      PID: 0          TIME_WAIT
+  62270    TCP      PID: 0          TIME_WAIT
+  62338    TCP      PID: 10100      ESTABLISHED
+  63179    TCP      PID: 0          TIME_WAIT
+  63211    TCP      PID: 0          TIME_WAIT
+  63996    TCP      PID: 17196      ESTABLISHED
+  64242    TCP      PID: 22520      ESTABLISHED
+  64355    TCP      PID: 17196      ESTABLISHED
+  64377    TCP      PID: 10352      ESTABLISHED
+  64636    TCP      PID: 19020      ESTABLISHED
+  64990    TCP      PID: 19364      ESTABLISHED
+  64991    TCP      PID: 0          TIME_WAIT
+  65099    TCP      PID: 0          TIME_WAIT
+  65134    TCP      PID: 18712      CLOSE_WAIT
+  65332    TCP      PID: 19364      ESTABLISHED
+  65334    TCP      PID: 0          TIME_WAIT
+
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,1260 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统检测报告 - 2026/5/26 09:26:00</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.9;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .status-open {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .status-closed {
+            color: #dc3545;
+        }
+        .status-installed {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .status-missing {
+            color: #dc3545;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .info-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .info-item .label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .info-item .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        .progress-bar {
+            background: #e9ecef;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 系统检测报告</h1>
+            <p>生成时间: 2026/5/26 09:26:00</p>
+        </div>
+
+        <div class="section">
+            <h2>💻 系统信息</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="label">操作系统</div>
+                    <div class="value">Windows_NT 10.0.22631</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">平台/架构</div>
+                    <div class="value">win32 / x64</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">主机名</div>
+                    <div class="value">Iris</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">运行时间</div>
+                    <div class="value">1天 1小时 31分钟 21秒</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">CPU</div>
+                    <div class="value">AMD Ryzen 5 5600H with Radeon Graphics         </div>
+                </div>
+                <div class="info-item">
+                    <div class="label">CPU 核心数</div>
+                    <div class="value">12 核</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">总内存</div>
+                    <div class="value">13.87 GB</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">内存使用率</div>
+                    <div class="value">94.02%</div>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <div style="margin-bottom: 8px; font-size: 14px;">内存使用: 13.04 GB / 13.87 GB</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 94.02%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📦 依赖检测</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>依赖名称</th>
+                        <th>状态</th>
+                        <th>版本</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>Node.js</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>22.17.0</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>npm</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>10.9.2</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>yarn</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>未知版本</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Git</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>2.26.2</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Python</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>3.12.10</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Java</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>未知版本</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Docker</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>未知版本</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Go</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>未知版本</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>PHP</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>未知版本</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Ruby</td>
+                        <td class="status-installed">
+                            ✓ 已安装
+                        </td>
+                        <td>未知版本</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💾 磁盘空间</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>驱动器</th>
+                        <th>总容量</th>
+                        <th>已使用</th>
+                        <th>可用</th>
+                        <th>使用率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🔌 端口扫描</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>端口号</th>
+                        <th>服务名称</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>21</td>
+                        <td>FTP</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>22</td>
+                        <td>SSH</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>23</td>
+                        <td>Telnet</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>25</td>
+                        <td>SMTP</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53</td>
+                        <td>DNS</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>80</td>
+                        <td>HTTP</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>110</td>
+                        <td>POP3</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>135</td>
+                        <td>RPC</td>
+                        <td class="status-open">
+                            ✓ 开放
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>139</td>
+                        <td>NetBIOS</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>143</td>
+                        <td>IMAP</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>443</td>
+                        <td>HTTPS</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>445</td>
+                        <td>SMB</td>
+                        <td class="status-open">
+                            ✓ 开放
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>3306</td>
+                        <td>MySQL</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>3389</td>
+                        <td>RDP</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>5432</td>
+                        <td>PostgreSQL</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>5900</td>
+                        <td>VNC</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>6379</td>
+                        <td>Redis</td>
+                        <td class="status-open">
+                            ✓ 开放
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>8080</td>
+                        <td>HTTP-Proxy</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>8443</td>
+                        <td>HTTPS-Alt</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>27017</td>
+                        <td>MongoDB</td>
+                        <td class="status-closed">
+                            ✗ 关闭
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🔧 端口进程</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>端口号</th>
+                        <th>协议</th>
+                        <th>PID</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>135</td>
+                        <td>TCP</td>
+                        <td>1584</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>139</td>
+                        <td>TCP</td>
+                        <td>4</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>445</td>
+                        <td>TCP</td>
+                        <td>4</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>5040</td>
+                        <td>TCP</td>
+                        <td>6096</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>5283</td>
+                        <td>TCP</td>
+                        <td>11796</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>6379</td>
+                        <td>TCP</td>
+                        <td>4376</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>7890</td>
+                        <td>TCP</td>
+                        <td>16744</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>14013</td>
+                        <td>TCP</td>
+                        <td>18308</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>14016</td>
+                        <td>TCP</td>
+                        <td>18308</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>14019</td>
+                        <td>TCP</td>
+                        <td>18308</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>14022</td>
+                        <td>TCP</td>
+                        <td>18308</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>14023</td>
+                        <td>TCP</td>
+                        <td>18308</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>17788</td>
+                        <td>TCP</td>
+                        <td>18676</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>27015</td>
+                        <td>TCP</td>
+                        <td>1504</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49266</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49612</td>
+                        <td>TCP</td>
+                        <td>10328</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49664</td>
+                        <td>TCP</td>
+                        <td>1316</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49665</td>
+                        <td>TCP</td>
+                        <td>1208</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49666</td>
+                        <td>TCP</td>
+                        <td>2680</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49667</td>
+                        <td>TCP</td>
+                        <td>2912</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49668</td>
+                        <td>TCP</td>
+                        <td>3840</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49671</td>
+                        <td>TCP</td>
+                        <td>1284</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49724</td>
+                        <td>TCP</td>
+                        <td>10872</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49728</td>
+                        <td>TCP</td>
+                        <td>10340</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49735</td>
+                        <td>TCP</td>
+                        <td>10340</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49827</td>
+                        <td>TCP</td>
+                        <td>14640</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>49829</td>
+                        <td>TCP</td>
+                        <td>16744</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>50056</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51000</td>
+                        <td>TCP</td>
+                        <td>16824</td>
+                        <td>LISTENING</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51021</td>
+                        <td>TCP</td>
+                        <td>16144</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51041</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51042</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51478</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51479</td>
+                        <td>TCP</td>
+                        <td>15788</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51492</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>51732</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52135</td>
+                        <td>TCP</td>
+                        <td>16824</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52142</td>
+                        <td>TCP</td>
+                        <td>10352</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52145</td>
+                        <td>TCP</td>
+                        <td>25048</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52311</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52469</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52471</td>
+                        <td>TCP</td>
+                        <td>16144</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52689</td>
+                        <td>TCP</td>
+                        <td>19020</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>52710</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53025</td>
+                        <td>TCP</td>
+                        <td>16144</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53027</td>
+                        <td>TCP</td>
+                        <td>16144</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53044</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53097</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53236</td>
+                        <td>TCP</td>
+                        <td>22520</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53796</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53878</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>53905</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>54629</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>54755</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>55257</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>55358</td>
+                        <td>TCP</td>
+                        <td>10352</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>55540</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>SYN_SENT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>55863</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>56081</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>56899</td>
+                        <td>TCP</td>
+                        <td>19020</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57023</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57594</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57806</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57902</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57905</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57908</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57911</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57915</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57918</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>57921</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>58149</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>58462</td>
+                        <td>TCP</td>
+                        <td>25048</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59031</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59207</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59210</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59572</td>
+                        <td>TCP</td>
+                        <td>16144</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59574</td>
+                        <td>TCP</td>
+                        <td>18308</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59609</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59615</td>
+                        <td>TCP</td>
+                        <td>16824</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59617</td>
+                        <td>TCP</td>
+                        <td>16824</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59683</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59686</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59699</td>
+                        <td>TCP</td>
+                        <td>13752</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>59700</td>
+                        <td>TCP</td>
+                        <td>4348</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>60641</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>60755</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>60974</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>SYN_SENT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>60982</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>60991</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>61004</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>61013</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>61042</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>61461</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>61944</td>
+                        <td>TCP</td>
+                        <td>10352</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>62062</td>
+                        <td>TCP</td>
+                        <td>17196</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>62080</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>62269</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>62270</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>62338</td>
+                        <td>TCP</td>
+                        <td>10100</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>63179</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>63211</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>63996</td>
+                        <td>TCP</td>
+                        <td>17196</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>64242</td>
+                        <td>TCP</td>
+                        <td>22520</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>64355</td>
+                        <td>TCP</td>
+                        <td>17196</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>64377</td>
+                        <td>TCP</td>
+                        <td>10352</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>64636</td>
+                        <td>TCP</td>
+                        <td>19020</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>64990</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>64991</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>65099</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>65134</td>
+                        <td>TCP</td>
+                        <td>18712</td>
+                        <td>CLOSE_WAIT</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>65332</td>
+                        <td>TCP</td>
+                        <td>19364</td>
+                        <td>ESTABLISHED</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>65334</td>
+                        <td>TCP</td>
+                        <td>0</td>
+                        <td>TIME_WAIT</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+  

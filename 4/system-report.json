@@ -1,0 +1,862 @@
+{
+  "timestamp": "2026/5/26 09:26:00",
+  "systemInfo": {
+    "platform": "win32",
+    "arch": "x64",
+    "hostname": "Iris",
+    "release": "10.0.22631",
+    "type": "Windows_NT",
+    "uptime": "1天 1小时 31分钟 21秒",
+    "cpu": {
+      "model": "AMD Ryzen 5 5600H with Radeon Graphics         ",
+      "cores": 12,
+      "speed": "3294 MHz"
+    },
+    "memory": {
+      "total": "13.87 GB",
+      "free": "848.38 MB",
+      "used": "13.04 GB",
+      "usagePercent": "94.02%"
+    },
+    "network": [
+      {
+        "name": "WLAN",
+        "address": "192.168.0.108",
+        "netmask": "255.255.255.0",
+        "mac": "4c:d5:77:e3:5c:81"
+      }
+    ],
+    "userInfo": "gengq",
+    "homedir": "C:\\Users\\gengq",
+    "tmpdir": "C:\\Users\\gengq\\AppData\\Local\\Temp"
+  },
+  "dependencies": [
+    {
+      "name": "Node.js",
+      "installed": true,
+      "version": "22.17.0"
+    },
+    {
+      "name": "npm",
+      "installed": true,
+      "version": "10.9.2"
+    },
+    {
+      "name": "yarn",
+      "installed": true,
+      "version": "未知版本"
+    },
+    {
+      "name": "Git",
+      "installed": true,
+      "version": "2.26.2"
+    },
+    {
+      "name": "Python",
+      "installed": true,
+      "version": "3.12.10"
+    },
+    {
+      "name": "Java",
+      "installed": true,
+      "version": "未知版本"
+    },
+    {
+      "name": "Docker",
+      "installed": true,
+      "version": "未知版本"
+    },
+    {
+      "name": "Go",
+      "installed": true,
+      "version": "未知版本"
+    },
+    {
+      "name": "PHP",
+      "installed": true,
+      "version": "未知版本"
+    },
+    {
+      "name": "Ruby",
+      "installed": true,
+      "version": "未知版本"
+    }
+  ],
+  "diskSpace": [],
+  "portScan": [
+    {
+      "port": 21,
+      "status": "closed",
+      "name": "FTP"
+    },
+    {
+      "port": 22,
+      "status": "closed",
+      "name": "SSH"
+    },
+    {
+      "port": 23,
+      "status": "closed",
+      "name": "Telnet"
+    },
+    {
+      "port": 25,
+      "status": "closed",
+      "name": "SMTP"
+    },
+    {
+      "port": 53,
+      "status": "closed",
+      "name": "DNS"
+    },
+    {
+      "port": 80,
+      "status": "closed",
+      "name": "HTTP"
+    },
+    {
+      "port": 110,
+      "status": "closed",
+      "name": "POP3"
+    },
+    {
+      "port": 135,
+      "status": "open",
+      "name": "RPC"
+    },
+    {
+      "port": 139,
+      "status": "closed",
+      "name": "NetBIOS"
+    },
+    {
+      "port": 143,
+      "status": "closed",
+      "name": "IMAP"
+    },
+    {
+      "port": 443,
+      "status": "closed",
+      "name": "HTTPS"
+    },
+    {
+      "port": 445,
+      "status": "open",
+      "name": "SMB"
+    },
+    {
+      "port": 3306,
+      "status": "closed",
+      "name": "MySQL"
+    },
+    {
+      "port": 3389,
+      "status": "closed",
+      "name": "RDP"
+    },
+    {
+      "port": 5432,
+      "status": "closed",
+      "name": "PostgreSQL"
+    },
+    {
+      "port": 5900,
+      "status": "closed",
+      "name": "VNC"
+    },
+    {
+      "port": 6379,
+      "status": "open",
+      "name": "Redis"
+    },
+    {
+      "port": 8080,
+      "status": "closed",
+      "name": "HTTP-Proxy"
+    },
+    {
+      "port": 8443,
+      "status": "closed",
+      "name": "HTTPS-Alt"
+    },
+    {
+      "port": 27017,
+      "status": "closed",
+      "name": "MongoDB"
+    }
+  ],
+  "portProcesses": [
+    {
+      "port": 135,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "1584"
+    },
+    {
+      "port": 139,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "4"
+    },
+    {
+      "port": 445,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "4"
+    },
+    {
+      "port": 5040,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "6096"
+    },
+    {
+      "port": 5283,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "11796"
+    },
+    {
+      "port": 6379,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "4376"
+    },
+    {
+      "port": 7890,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "16744"
+    },
+    {
+      "port": 14013,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "18308"
+    },
+    {
+      "port": 14016,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "18308"
+    },
+    {
+      "port": 14019,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "18308"
+    },
+    {
+      "port": 14022,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "18308"
+    },
+    {
+      "port": 14023,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "18308"
+    },
+    {
+      "port": 17788,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "18676"
+    },
+    {
+      "port": 27015,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "1504"
+    },
+    {
+      "port": 49266,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 49612,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10328"
+    },
+    {
+      "port": 49664,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "1316"
+    },
+    {
+      "port": 49665,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "1208"
+    },
+    {
+      "port": 49666,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "2680"
+    },
+    {
+      "port": 49667,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "2912"
+    },
+    {
+      "port": 49668,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "3840"
+    },
+    {
+      "port": 49671,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "1284"
+    },
+    {
+      "port": 49724,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10872"
+    },
+    {
+      "port": 49728,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10340"
+    },
+    {
+      "port": 49735,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10340"
+    },
+    {
+      "port": 49827,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "14640"
+    },
+    {
+      "port": 49829,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "16744"
+    },
+    {
+      "port": 50056,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 51000,
+      "proto": "TCP",
+      "state": "LISTENING",
+      "pid": "16824"
+    },
+    {
+      "port": 51021,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16144"
+    },
+    {
+      "port": 51041,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 51042,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 51478,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 51479,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "15788"
+    },
+    {
+      "port": 51492,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 51732,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 52135,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16824"
+    },
+    {
+      "port": 52142,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10352"
+    },
+    {
+      "port": 52145,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "25048"
+    },
+    {
+      "port": 52311,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 52469,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 52471,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16144"
+    },
+    {
+      "port": 52689,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19020"
+    },
+    {
+      "port": 52710,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 53025,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16144"
+    },
+    {
+      "port": 53027,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16144"
+    },
+    {
+      "port": 53044,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 53097,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 53236,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "22520"
+    },
+    {
+      "port": 53796,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 53878,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 53905,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 54629,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 54755,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 55257,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 55358,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10352"
+    },
+    {
+      "port": 55540,
+      "proto": "TCP",
+      "state": "SYN_SENT",
+      "pid": "10100"
+    },
+    {
+      "port": 55863,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 56081,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 56899,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19020"
+    },
+    {
+      "port": 57023,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 57594,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57806,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57902,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 57905,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57908,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57911,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57915,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57918,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 57921,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 58149,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 58462,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "25048"
+    },
+    {
+      "port": 59031,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 59207,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 59210,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 59572,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16144"
+    },
+    {
+      "port": 59574,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "18308"
+    },
+    {
+      "port": 59609,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 59615,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16824"
+    },
+    {
+      "port": 59617,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "16824"
+    },
+    {
+      "port": 59683,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 59686,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 59699,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "13752"
+    },
+    {
+      "port": 59700,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "4348"
+    },
+    {
+      "port": 60641,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 60755,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 60974,
+      "proto": "TCP",
+      "state": "SYN_SENT",
+      "pid": "10100"
+    },
+    {
+      "port": 60982,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 60991,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 61004,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 61013,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 61042,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 61461,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 61944,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10352"
+    },
+    {
+      "port": 62062,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "17196"
+    },
+    {
+      "port": 62080,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 62269,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 62270,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 62338,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10100"
+    },
+    {
+      "port": 63179,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 63211,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 63996,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "17196"
+    },
+    {
+      "port": 64242,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "22520"
+    },
+    {
+      "port": 64355,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "17196"
+    },
+    {
+      "port": 64377,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "10352"
+    },
+    {
+      "port": 64636,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19020"
+    },
+    {
+      "port": 64990,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 64991,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 65099,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    },
+    {
+      "port": 65134,
+      "proto": "TCP",
+      "state": "CLOSE_WAIT",
+      "pid": "18712"
+    },
+    {
+      "port": 65332,
+      "proto": "TCP",
+      "state": "ESTABLISHED",
+      "pid": "19364"
+    },
+    {
+      "port": 65334,
+      "proto": "TCP",
+      "state": "TIME_WAIT",
+      "pid": "0"
+    }
+  ]
+}

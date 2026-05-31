@@ -1,0 +1,1961 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统检测报告 - 2026/5/26 09:52:41</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            padding: 20px;
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .header .export-btn {
+            margin-top: 20px;
+            display: inline-flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-card .label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .info-item {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .info-item .label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-item .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            word-break: break-all;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+            position: sticky;
+            top: 0;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-success {
+            background: #d4edda;
+            color: var(--success);
+        }
+        .badge-danger {
+            background: #f8d7da;
+            color: var(--danger);
+        }
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .progress-container {
+            margin-top: 20px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        .progress-bar {
+            background: #e9ecef;
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .progress-fill.warning {
+            background: linear-gradient(90deg, #ffc107, #ff9800);
+        }
+        .progress-fill.danger {
+            background: linear-gradient(90deg, #dc3545, #c82333);
+        }
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .chart-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .chart-box h4 {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .pie-chart {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+        }
+        .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .pie-center .number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .pie-center .label {
+            font-size: 12px;
+            color: #666;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f0f3ff;
+        }
+        .search-box {
+            margin-left: auto;
+            position: relative;
+        }
+        .search-box input {
+            padding: 8px 16px 8px 36px;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .btn, .filter-bar, .search-box {
+                display: none;
+            }
+            .section, .header, .stat-card {
+                box-shadow: none;
+                border: 1px solid #eee;
+            }
+        }
+        .collapsible {
+            cursor: pointer;
+            user-select: none;
+        }
+        .collapsible::after {
+            content: '▼';
+            float: right;
+            transition: transform 0.3s ease;
+        }
+        .collapsible.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 系统检测报告</h1>
+            <p>生成时间: 2026/5/26 09:52:41</p>
+            <div class="export-btn">
+                <button class="btn btn-primary" onclick="window.print()">📄 打印报告</button>
+                <button class="btn btn-success" onclick="exportAsJSON()">💾 导出 JSON</button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon">💻</div>
+                <div class="value">12</div>
+                <div class="label">CPU 核心数</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">🧠</div>
+                <div class="value">13.87 GB</div>
+                <div class="label">总内存</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">📦</div>
+                <div class="value">10/10</div>
+                <div class="label">已安装依赖</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">🔌</div>
+                <div class="value">4</div>
+                <div class="label">开放端口</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="collapsible" onclick="toggleSection(this)">💻 系统信息</h2>
+            <div class="collapsible-content">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="label">操作系统</div>
+                        <div class="value">Windows_NT 10.0.22631</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">平台/架构</div>
+                        <div class="value">win32 / x64</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">主机名</div>
+                        <div class="value">Iris</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">运行时间</div>
+                        <div class="value">1天 1小时 58分钟 1秒</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">CPU 型号</div>
+                        <div class="value">AMD Ryzen 5 5600H with Radeon Graphics         </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">CPU 频率</div>
+                        <div class="value">3294 MHz</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">当前用户</div>
+                        <div class="value">gengq</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">主目录</div>
+                        <div class="value">C:\Users\gengq</div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>内存使用</span>
+                        <span>13.04 GB / 13.87 GB</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill danger" style="width: 94.07%">
+                            94.07%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="collapsible" onclick="toggleSection(this)">📦 依赖检测</h2>
+            <div class="collapsible-content">
+                <div class="chart-container">
+                    <div class="chart-box">
+                        <h4>依赖安装情况</h4>
+                        <div class="pie-chart" style="background: conic-gradient(#28a745 0% 100%, #dc3545 100% 100%)">
+                            <div class="pie-center">
+                                <div class="number">10</div>
+                                <div class="label">已安装</div>
+                            </div>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #28a745"></span>
+                                <span>已安装 (10)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #dc3545"></span>
+                                <span>未安装 (0)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterDeps('all')">全部</button>
+                    <button class="filter-btn" onclick="filterDeps('installed')">已安装</button>
+                    <button class="filter-btn" onclick="filterDeps('missing')">未安装</button>
+                    <div class="search-box">
+                        <input type="text" id="depSearch" placeholder="搜索依赖..." oninput="searchDeps()">
+                    </div>
+                </div>
+                <table id="depsTable">
+                    <thead>
+                        <tr>
+                            <th>依赖名称</th>
+                            <th>状态</th>
+                            <th>版本</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="node.js" data-index="0">
+                            <td>Node.js</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>未知版本</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="npm" data-index="1">
+                            <td>npm</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>未知版本</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="yarn" data-index="2">
+                            <td>yarn</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="git" data-index="3">
+                            <td>Git</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="python" data-index="4">
+                            <td>Python</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="java" data-index="5">
+                            <td>Java</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="docker" data-index="6">
+                            <td>Docker</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="go" data-index="7">
+                            <td>Go</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="php" data-index="8">
+                            <td>PHP</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                        <tr class="dep-row" data-status="installed" data-name="ruby" data-index="9">
+                            <td>Ruby</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 已安装
+                                </span>
+                            </td>
+                            <td>undefined</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="collapsible" onclick="toggleSection(this)">💾 磁盘空间</h2>
+            <div class="collapsible-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>驱动器</th>
+                            <th>总容量</th>
+                            <th>已使用</th>
+                            <th>可用</th>
+                            <th>使用率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td><strong>C:</strong></td>
+                            <td>100 GB</td>
+                            <td>97.66 GB</td>
+                            <td>2.34 GB</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; max-width: 150px;">
+                                        <div class="progress-bar" style="height: 12px;">
+                                            <div class="progress-fill danger" style="width: 97.66%"></div>
+                                        </div>
+                                    </div>
+                                    <span>97.66%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>D:</strong></td>
+                            <td>100 GB</td>
+                            <td>63.86 GB</td>
+                            <td>36.14 GB</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; max-width: 150px;">
+                                        <div class="progress-bar" style="height: 12px;">
+                                            <div class="progress-fill warning" style="width: 63.86%"></div>
+                                        </div>
+                                    </div>
+                                    <span>63.86%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>E:</strong></td>
+                            <td>100 GB</td>
+                            <td>44.96 GB</td>
+                            <td>55.04 GB</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; max-width: 150px;">
+                                        <div class="progress-bar" style="height: 12px;">
+                                            <div class="progress-fill " style="width: 44.96%"></div>
+                                        </div>
+                                    </div>
+                                    <span>44.96%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>F:</strong></td>
+                            <td>174.71 GB</td>
+                            <td>54.99 GB</td>
+                            <td>119.72 GB</td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; max-width: 150px;">
+                                        <div class="progress-bar" style="height: 12px;">
+                                            <div class="progress-fill " style="width: 31.47%"></div>
+                                        </div>
+                                    </div>
+                                    <span>31.47%</span>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="collapsible" onclick="toggleSection(this)">🔌 端口扫描</h2>
+            <div class="collapsible-content">
+                <div class="chart-container">
+                    <div class="chart-box">
+                        <h4>端口状态统计</h4>
+                        <div class="pie-chart" style="background: conic-gradient(#28a745 0% 20%, #6c757d 20% 100%)">
+                            <div class="pie-center">
+                                <div class="number">4</div>
+                                <div class="label">开放</div>
+                            </div>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #28a745"></span>
+                                <span>开放 (4)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #6c757d"></span>
+                                <span>关闭 (16)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterPorts('all')">全部</button>
+                    <button class="filter-btn" onclick="filterPorts('open')">开放</button>
+                    <button class="filter-btn" onclick="filterPorts('closed')">关闭</button>
+                    <div class="search-box">
+                        <input type="text" id="portSearch" placeholder="搜索端口..." oninput="searchPorts()">
+                    </div>
+                </div>
+                <table id="portsTable">
+                    <thead>
+                        <tr>
+                            <th>端口号</th>
+                            <th>服务名称</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr class="port-row" data-status="closed" data-name="ftp 21" data-index="0">
+                            <td><strong>21</strong></td>
+                            <td>FTP</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="ssh 22" data-index="1">
+                            <td><strong>22</strong></td>
+                            <td>SSH</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="telnet 23" data-index="2">
+                            <td><strong>23</strong></td>
+                            <td>Telnet</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="smtp 25" data-index="3">
+                            <td><strong>25</strong></td>
+                            <td>SMTP</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="dns 53" data-index="4">
+                            <td><strong>53</strong></td>
+                            <td>DNS</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="http 80" data-index="5">
+                            <td><strong>80</strong></td>
+                            <td>HTTP</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="pop3 110" data-index="6">
+                            <td><strong>110</strong></td>
+                            <td>POP3</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="open" data-name="rpc 135" data-index="7">
+                            <td><strong>135</strong></td>
+                            <td>RPC</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 开放
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="open" data-name="netbios 139" data-index="8">
+                            <td><strong>139</strong></td>
+                            <td>NetBIOS</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 开放
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="imap 143" data-index="9">
+                            <td><strong>143</strong></td>
+                            <td>IMAP</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="https 443" data-index="10">
+                            <td><strong>443</strong></td>
+                            <td>HTTPS</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="open" data-name="smb 445" data-index="11">
+                            <td><strong>445</strong></td>
+                            <td>SMB</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 开放
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="mysql 3306" data-index="12">
+                            <td><strong>3306</strong></td>
+                            <td>MySQL</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="rdp 3389" data-index="13">
+                            <td><strong>3389</strong></td>
+                            <td>RDP</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="postgresql 5432" data-index="14">
+                            <td><strong>5432</strong></td>
+                            <td>PostgreSQL</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="vnc 5900" data-index="15">
+                            <td><strong>5900</strong></td>
+                            <td>VNC</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="open" data-name="redis 6379" data-index="16">
+                            <td><strong>6379</strong></td>
+                            <td>Redis</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    ✓ 开放
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="http-proxy 8080" data-index="17">
+                            <td><strong>8080</strong></td>
+                            <td>HTTP-Proxy</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="https-alt 8443" data-index="18">
+                            <td><strong>8443</strong></td>
+                            <td>HTTPS-Alt</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr class="port-row" data-status="closed" data-name="mongodb 27017" data-index="19">
+                            <td><strong>27017</strong></td>
+                            <td>MongoDB</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    ✗ 关闭
+                                </span>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="collapsible" onclick="toggleSection(this)">🔧 端口进程详情</h2>
+            <div class="collapsible-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>端口号</th>
+                            <th>协议</th>
+                            <th>PID</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td><strong>135</strong></td>
+                            <td>TCP</td>
+                            <td>1584</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>139</strong></td>
+                            <td>TCP</td>
+                            <td>4</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>445</strong></td>
+                            <td>TCP</td>
+                            <td>4</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>5040</strong></td>
+                            <td>TCP</td>
+                            <td>6096</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>5283</strong></td>
+                            <td>TCP</td>
+                            <td>11796</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>6379</strong></td>
+                            <td>TCP</td>
+                            <td>4376</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>7890</strong></td>
+                            <td>TCP</td>
+                            <td>16744</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>14013</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>14016</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>14019</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>14022</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>14023</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>17788</strong></td>
+                            <td>TCP</td>
+                            <td>18676</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>27015</strong></td>
+                            <td>TCP</td>
+                            <td>1504</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49612</strong></td>
+                            <td>TCP</td>
+                            <td>10328</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49621</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49664</strong></td>
+                            <td>TCP</td>
+                            <td>1316</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49665</strong></td>
+                            <td>TCP</td>
+                            <td>1208</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49666</strong></td>
+                            <td>TCP</td>
+                            <td>2680</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49667</strong></td>
+                            <td>TCP</td>
+                            <td>2912</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49668</strong></td>
+                            <td>TCP</td>
+                            <td>3840</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49671</strong></td>
+                            <td>TCP</td>
+                            <td>1284</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49724</strong></td>
+                            <td>TCP</td>
+                            <td>10872</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49728</strong></td>
+                            <td>TCP</td>
+                            <td>10340</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49735</strong></td>
+                            <td>TCP</td>
+                            <td>10340</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49827</strong></td>
+                            <td>TCP</td>
+                            <td>14640</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49829</strong></td>
+                            <td>TCP</td>
+                            <td>16744</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>49859</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50272</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50498</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50638</strong></td>
+                            <td>TCP</td>
+                            <td>16824</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50639</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50640</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50655</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50677</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50851</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50859</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50863</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>50879</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>51000</strong></td>
+                            <td>TCP</td>
+                            <td>16824</td>
+                            <td>LISTENING</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>51483</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>51769</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52098</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52142</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52145</strong></td>
+                            <td>TCP</td>
+                            <td>25048</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52274</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52311</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52357</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52399</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>52901</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53025</strong></td>
+                            <td>TCP</td>
+                            <td>16144</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53027</strong></td>
+                            <td>TCP</td>
+                            <td>16144</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53236</strong></td>
+                            <td>TCP</td>
+                            <td>22520</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53453</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53468</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53527</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53753</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53823</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>53919</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>54052</strong></td>
+                            <td>TCP</td>
+                            <td>19364</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>54338</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>54484</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>54505</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>54629</strong></td>
+                            <td>TCP</td>
+                            <td>19364</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55358</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55376</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55412</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55426</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55427</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55429</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>55832</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>56899</strong></td>
+                            <td>TCP</td>
+                            <td>19020</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57146</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57418</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57431</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57441</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57491</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57704</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>57928</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>58355</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>58462</strong></td>
+                            <td>TCP</td>
+                            <td>25048</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>58866</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>58894</strong></td>
+                            <td>TCP</td>
+                            <td>16824</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59211</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59487</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59572</strong></td>
+                            <td>TCP</td>
+                            <td>16144</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59574</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59602</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59646</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59647</strong></td>
+                            <td>TCP</td>
+                            <td>15788</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59712</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>59874</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>60079</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>60208</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>60735</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61151</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61461</strong></td>
+                            <td>TCP</td>
+                            <td>19364</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61482</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61587</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61614</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61690</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61771</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61772</strong></td>
+                            <td>TCP</td>
+                            <td>19364</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>61944</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62231</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62281</strong></td>
+                            <td>TCP</td>
+                            <td>19364</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62338</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62343</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62351</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62541</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62631</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62807</strong></td>
+                            <td>TCP</td>
+                            <td>19020</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62809</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62811</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>62915</strong></td>
+                            <td>TCP</td>
+                            <td>4672</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>63094</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>63334</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>63615</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>63616</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>63760</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>SYN_SENT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64112</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64242</strong></td>
+                            <td>TCP</td>
+                            <td>22520</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64254</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64340</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64377</strong></td>
+                            <td>TCP</td>
+                            <td>10352</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64636</strong></td>
+                            <td>TCP</td>
+                            <td>19020</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>64861</strong></td>
+                            <td>TCP</td>
+                            <td>18308</td>
+                            <td>LAST_ACK</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>65004</strong></td>
+                            <td>TCP</td>
+                            <td>10100</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>65134</strong></td>
+                            <td>TCP</td>
+                            <td>18712</td>
+                            <td>CLOSE_WAIT</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>65218</strong></td>
+                            <td>TCP</td>
+                            <td>16824</td>
+                            <td>ESTABLISHED</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>65424</strong></td>
+                            <td>TCP</td>
+                            <td>0</td>
+                            <td>TIME_WAIT</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>生成者: sys-tool | 报告生成于 2026/5/26 09:52:41</p>
+    </div>
+
+    <script>
+        const reportData = {"timestamp":"2026/5/26 09:52:41","systemInfo":{"platform":"win32","arch":"x64","hostname":"Iris","release":"10.0.22631","type":"Windows_NT","uptime":"1天 1小时 58分钟 1秒","cpu":{"model":"AMD Ryzen 5 5600H with Radeon Graphics         ","cores":12,"speed":"3294 MHz"},"memory":{"total":"13.87 GB","free":"841.34 MB","used":"13.04 GB","usagePercent":"94.07%"},"network":[{"name":"WLAN","address":"192.168.0.108","netmask":"255.255.255.0","mac":"4c:d5:77:e3:5c:81"}],"userInfo":"gengq","homedir":"C:\\Users\\gengq","tmpdir":"C:\\Users\\gengq\\AppData\\Local\\Temp"},"dependencies":[{"name":"Node.js","installed":true,"version":"未知版本"},{"name":"npm","installed":true,"version":"未知版本"},{"name":"yarn","installed":true},{"name":"Git","installed":true},{"name":"Python","installed":true},{"name":"Java","installed":true},{"name":"Docker","installed":true},{"name":"Go","installed":true},{"name":"PHP","installed":true},{"name":"Ruby","installed":true}],"diskSpace":[{"name":"C:","total":"100 GB","free":"2.34 GB","used":"97.66 GB","usagePercent":"97.66%"},{"name":"D:","total":"100 GB","free":"36.14 GB","used":"63.86 GB","usagePercent":"63.86%"},{"name":"E:","total":"100 GB","free":"55.04 GB","used":"44.96 GB","usagePercent":"44.96%"},{"name":"F:","total":"174.71 GB","free":"119.72 GB","used":"54.99 GB","usagePercent":"31.47%"}],"portScan":[{"port":21,"status":"closed","name":"FTP"},{"port":22,"status":"closed","name":"SSH"},{"port":23,"status":"closed","name":"Telnet"},{"port":25,"status":"closed","name":"SMTP"},{"port":53,"status":"closed","name":"DNS"},{"port":80,"status":"closed","name":"HTTP"},{"port":110,"status":"closed","name":"POP3"},{"port":135,"status":"open","name":"RPC"},{"port":139,"status":"open","name":"NetBIOS"},{"port":143,"status":"closed","name":"IMAP"},{"port":443,"status":"closed","name":"HTTPS"},{"port":445,"status":"open","name":"SMB"},{"port":3306,"status":"closed","name":"MySQL"},{"port":3389,"status":"closed","name":"RDP"},{"port":5432,"status":"closed","name":"PostgreSQL"},{"port":5900,"status":"closed","name":"VNC"},{"port":6379,"status":"open","name":"Redis"},{"port":8080,"status":"closed","name":"HTTP-Proxy"},{"port":8443,"status":"closed","name":"HTTPS-Alt"},{"port":27017,"status":"closed","name":"MongoDB"}],"portProcesses":[{"port":135,"proto":"TCP","state":"LISTENING","pid":"1584"},{"port":139,"proto":"TCP","state":"LISTENING","pid":"4"},{"port":445,"proto":"TCP","state":"LISTENING","pid":"4"},{"port":5040,"proto":"TCP","state":"LISTENING","pid":"6096"},{"port":5283,"proto":"TCP","state":"LISTENING","pid":"11796"},{"port":6379,"proto":"TCP","state":"LISTENING","pid":"4376"},{"port":7890,"proto":"TCP","state":"LISTENING","pid":"16744"},{"port":14013,"proto":"TCP","state":"LISTENING","pid":"18308"},{"port":14016,"proto":"TCP","state":"LISTENING","pid":"18308"},{"port":14019,"proto":"TCP","state":"LISTENING","pid":"18308"},{"port":14022,"proto":"TCP","state":"LISTENING","pid":"18308"},{"port":14023,"proto":"TCP","state":"LISTENING","pid":"18308"},{"port":17788,"proto":"TCP","state":"LISTENING","pid":"18676"},{"port":27015,"proto":"TCP","state":"LISTENING","pid":"1504"},{"port":49612,"proto":"TCP","state":"ESTABLISHED","pid":"10328"},{"port":49621,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":49664,"proto":"TCP","state":"LISTENING","pid":"1316"},{"port":49665,"proto":"TCP","state":"LISTENING","pid":"1208"},{"port":49666,"proto":"TCP","state":"LISTENING","pid":"2680"},{"port":49667,"proto":"TCP","state":"LISTENING","pid":"2912"},{"port":49668,"proto":"TCP","state":"LISTENING","pid":"3840"},{"port":49671,"proto":"TCP","state":"LISTENING","pid":"1284"},{"port":49724,"proto":"TCP","state":"ESTABLISHED","pid":"10872"},{"port":49728,"proto":"TCP","state":"ESTABLISHED","pid":"10340"},{"port":49735,"proto":"TCP","state":"ESTABLISHED","pid":"10340"},{"port":49827,"proto":"TCP","state":"LISTENING","pid":"14640"},{"port":49829,"proto":"TCP","state":"LISTENING","pid":"16744"},{"port":49859,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":50272,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":50498,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":50638,"proto":"TCP","state":"ESTABLISHED","pid":"16824"},{"port":50639,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":50640,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":50655,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":50677,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":50851,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":50859,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":50863,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":50879,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":51000,"proto":"TCP","state":"LISTENING","pid":"16824"},{"port":51483,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":51769,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":52098,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":52142,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":52145,"proto":"TCP","state":"ESTABLISHED","pid":"25048"},{"port":52274,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":52311,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":52357,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":52399,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":52901,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":53025,"proto":"TCP","state":"ESTABLISHED","pid":"16144"},{"port":53027,"proto":"TCP","state":"ESTABLISHED","pid":"16144"},{"port":53236,"proto":"TCP","state":"ESTABLISHED","pid":"22520"},{"port":53453,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":53468,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":53527,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":53753,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":53823,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":53919,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":54052,"proto":"TCP","state":"ESTABLISHED","pid":"19364"},{"port":54338,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":54484,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":54505,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":54629,"proto":"TCP","state":"ESTABLISHED","pid":"19364"},{"port":55358,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":55376,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":55412,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":55426,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":55427,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":55429,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":55832,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":56899,"proto":"TCP","state":"ESTABLISHED","pid":"19020"},{"port":57146,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":57418,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":57431,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":57441,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":57491,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":57704,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":57928,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":58355,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":58462,"proto":"TCP","state":"ESTABLISHED","pid":"25048"},{"port":58866,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":58894,"proto":"TCP","state":"ESTABLISHED","pid":"16824"},{"port":59211,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":59487,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":59572,"proto":"TCP","state":"ESTABLISHED","pid":"16144"},{"port":59574,"proto":"TCP","state":"ESTABLISHED","pid":"18308"},{"port":59602,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":59646,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":59647,"proto":"TCP","state":"ESTABLISHED","pid":"15788"},{"port":59712,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":59874,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":60079,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":60208,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":60735,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":61151,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":61461,"proto":"TCP","state":"ESTABLISHED","pid":"19364"},{"port":61482,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":61587,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":61614,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":61690,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":61771,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":61772,"proto":"TCP","state":"ESTABLISHED","pid":"19364"},{"port":61944,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":62231,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":62281,"proto":"TCP","state":"ESTABLISHED","pid":"19364"},{"port":62338,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":62343,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":62351,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":62541,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":62631,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":62807,"proto":"TCP","state":"ESTABLISHED","pid":"19020"},{"port":62809,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":62811,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":62915,"proto":"TCP","state":"ESTABLISHED","pid":"4672"},{"port":63094,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":63334,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":63615,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":63616,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":63760,"proto":"TCP","state":"SYN_SENT","pid":"10100"},{"port":64112,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":64242,"proto":"TCP","state":"ESTABLISHED","pid":"22520"},{"port":64254,"proto":"TCP","state":"TIME_WAIT","pid":"0"},{"port":64340,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":64377,"proto":"TCP","state":"ESTABLISHED","pid":"10352"},{"port":64636,"proto":"TCP","state":"ESTABLISHED","pid":"19020"},{"port":64861,"proto":"TCP","state":"LAST_ACK","pid":"18308"},{"port":65004,"proto":"TCP","state":"ESTABLISHED","pid":"10100"},{"port":65134,"proto":"TCP","state":"CLOSE_WAIT","pid":"18712"},{"port":65218,"proto":"TCP","state":"ESTABLISHED","pid":"16824"},{"port":65424,"proto":"TCP","state":"TIME_WAIT","pid":"0"}],"config":{"dependencies":[{"name":"Node.js","command":"node --version","regex":{}},{"name":"npm","command":"npm --version","regex":{}},{"name":"yarn","command":"yarn --version","regex":{}},{"name":"Git","command":"git --version","regex":{}},{"name":"Python","command":"python --version || python3 --version","regex":{}},{"name":"Java","command":"java -version","regex":{}},{"name":"Docker","command":"docker --version","regex":{}},{"name":"Go","command":"go version","regex":{}},{"name":"PHP","command":"php --version","regex":{}},{"name":"Ruby","command":"ruby --version","regex":{}}],"ports":[{"port":21,"name":"FTP"},{"port":22,"name":"SSH"},{"port":23,"name":"Telnet"},{"port":25,"name":"SMTP"},{"port":53,"name":"DNS"},{"port":80,"name":"HTTP"},{"port":110,"name":"POP3"},{"port":135,"name":"RPC"},{"port":139,"name":"NetBIOS"},{"port":143,"name":"IMAP"},{"port":443,"name":"HTTPS"},{"port":445,"name":"SMB"},{"port":3306,"name":"MySQL"},{"port":3389,"name":"RDP"},{"port":5432,"name":"PostgreSQL"},{"port":5900,"name":"VNC"},{"port":6379,"name":"Redis"},{"port":8080,"name":"HTTP-Proxy"},{"port":8443,"name":"HTTPS-Alt"},{"port":27017,"name":"MongoDB"}],"report":{"outputDir":".","filename":"system-report","formats":["html"]},"scan":{"timeout":2000,"batchSize":10}}};
+        
+        function toggleSection(element) {
+            element.classList.toggle('collapsed');
+            const content = element.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+        
+        function filterDeps(status) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.dep-row').forEach(row => {
+                if (status === 'all' || row.dataset.status === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        function searchDeps() {
+            const query = document.getElementById('depSearch').value.toLowerCase();
+            document.querySelectorAll('.dep-row').forEach(row => {
+                if (row.dataset.name.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        function filterPorts(status) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.port-row').forEach(row => {
+                if (status === 'all' || row.dataset.status === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        function searchPorts() {
+            const query = document.getElementById('portSearch').value.toLowerCase();
+            document.querySelectorAll('.port-row').forEach(row => {
+                if (row.dataset.name.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        function exportAsJSON() {
+            const dataStr = JSON.stringify(reportData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'system-report.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        document.querySelectorAll('.collapsible-content').forEach(content => {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        });
+    </script>
+</body>
+</html>
+  

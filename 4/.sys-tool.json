@@ -1,0 +1,147 @@
+{
+  "dependencies": [
+    {
+      "name": "Node.js",
+      "command": "node --version",
+      "regex": "v(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "npm",
+      "command": "npm --version",
+      "regex": "(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "yarn",
+      "command": "yarn --version",
+      "regex": "(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "Git",
+      "command": "git --version",
+      "regex": "(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "Python",
+      "command": "python --version || python3 --version",
+      "regex": "(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "Java",
+      "command": "java -version",
+      "regex": "version \"(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "Docker",
+      "command": "docker --version",
+      "regex": "(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "Go",
+      "command": "go version",
+      "regex": "go(\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "PHP",
+      "command": "php --version",
+      "regex": "PHP (\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "name": "Ruby",
+      "command": "ruby --version",
+      "regex": "ruby (\\d+\\.\\d+\\.\\d+)"
+    }
+  ],
+  "ports": [
+    {
+      "port": 21,
+      "name": "FTP"
+    },
+    {
+      "port": 22,
+      "name": "SSH"
+    },
+    {
+      "port": 23,
+      "name": "Telnet"
+    },
+    {
+      "port": 25,
+      "name": "SMTP"
+    },
+    {
+      "port": 53,
+      "name": "DNS"
+    },
+    {
+      "port": 80,
+      "name": "HTTP"
+    },
+    {
+      "port": 110,
+      "name": "POP3"
+    },
+    {
+      "port": 135,
+      "name": "RPC"
+    },
+    {
+      "port": 139,
+      "name": "NetBIOS"
+    },
+    {
+      "port": 143,
+      "name": "IMAP"
+    },
+    {
+      "port": 443,
+      "name": "HTTPS"
+    },
+    {
+      "port": 445,
+      "name": "SMB"
+    },
+    {
+      "port": 3306,
+      "name": "MySQL"
+    },
+    {
+      "port": 3389,
+      "name": "RDP"
+    },
+    {
+      "port": 5432,
+      "name": "PostgreSQL"
+    },
+    {
+      "port": 5900,
+      "name": "VNC"
+    },
+    {
+      "port": 6379,
+      "name": "Redis"
+    },
+    {
+      "port": 8080,
+      "name": "HTTP-Proxy"
+    },
+    {
+      "port": 8443,
+      "name": "HTTPS-Alt"
+    },
+    {
+      "port": 27017,
+      "name": "MongoDB"
+    }
+  ],
+  "report": {
+    "outputDir": ".",
+    "filename": "system-report",
+    "formats": [
+      "html"
+    ]
+  },
+  "scan": {
+    "timeout": 2000,
+    "batchSize": 10
+  }
+}

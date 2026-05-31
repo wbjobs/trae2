@@ -1,0 +1,20 @@
+{
+  "name": "sys-tool",
+  "version": "1.0.0",
+  "description": "跨平台系统信息采集命令行工具",
+  "main": "index.js",
+  "bin": {
+    "sys-tool": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["system", "cli", "cross-platform"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.3"
+  }
+}
