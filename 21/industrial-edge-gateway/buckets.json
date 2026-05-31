@@ -1,0 +1,9 @@
+{
+  "test_bucket": {
+    "name": "test_bucket",
+    "description": "测试分桶",
+    "retention_days": 365,
+    "created_at": "2026-05-27T02:57:09.623398",
+    "measurements": {}
+  }
+}

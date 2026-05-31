@@ -1,0 +1,46 @@
+{
+  "gateway": {
+    "id": "cloud-gateway-001",
+    "name": "Cloud Gateway Service",
+    "environment": "cloud",
+    "log_level": "INFO"
+  },
+  "services": {
+    "protocol_parser": {
+      "host": "0.0.0.0",
+      "port": 8001,
+      "protocols": ["mqtt", "http", "opc_ua"]
+    },
+    "dataflow_router": {
+      "host": "0.0.0.0",
+      "port": 8002,
+      "rules_file": "dataflow_rules_cloud.json"
+    },
+    "device_gateway": {
+      "host": "0.0.0.0",
+      "port": 8003,
+      "max_connections": 1000
+    },
+    "data_storage": {
+      "host": "0.0.0.0",
+      "port": 8004,
+      "storage_type": "timescaledb",
+      "database_url": "postgresql://postgres:password@timescaledb:5432/industrial_cloud_db",
+      "retention_days": 3650
+    },
+    "cross_node": {
+      "host": "0.0.0.0",
+      "port": 8005,
+      "mqtt_broker": "mqtt://mqtt-broker:1883",
+      "cloud_endpoint": "",
+      "heartbeat_interval": 60
+    },
+    "orchestration": {
+      "host": "0.0.0.0",
+      "port": 8006,
+      "frontend_dir": "frontend-orchestration"
+    }
+  },
+  "device_configs": [],
+  "dataflow_rules": []
+}

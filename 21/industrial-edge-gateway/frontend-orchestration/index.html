@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业边缘网关 - 数据流编排画布</title>
+    <link rel="stylesheet" href="css/canvas.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div id="app">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">⚙️</span>
+                    <span class="logo-text">工业边缘网关</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link active" data-view="canvas">编排画布</a>
+                    <a href="#" class="nav-link" data-view="devices">设备管理</a>
+                    <a href="#" class="nav-link" data-view="rules">规则列表</a>
+                    <a href="#" class="nav-link" data-view="monitor">实时监控</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <span class="status-dot" id="connectionStatus"></span>
+                    <span class="status-text" id="connectionText">未连接</span>
+                </div>
+                <button class="btn btn-primary" id="saveBtn">💾 保存</button>
+                <button class="btn btn-success" id="deployBtn">🚀 部署</button>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <aside class="sidebar-left">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">设备节点</h3>
+                    <div class="device-list" id="deviceList">
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">数据节点</h3>
+                    <div class="data-points-list" id="dataPointsList">
+                    </div>
+                </div>
+            </aside>
+
+            <section class="canvas-container" id="canvasContainer">
+                <div class="canvas-toolbar">
+                    <div class="toolbar-left">
+                        <button class="toolbar-btn" id="selectTool" title="选择">
+                            <span>🖱️</span>
+                        </button>
+                        <button class="toolbar-btn" id="connectTool" title="连接">
+                            <span>🔗</span>
+                        </button>
+                        <button class="toolbar-btn" id="transformTool" title="变换">
+                            <span>📐</span>
+                        </button>
+                        <div class="toolbar-divider"></div>
+                        <button class="toolbar-btn" id="zoomInBtn" title="放大">
+                            <span>🔍+</span>
+                        </button>
+                        <button class="toolbar-btn" id="zoomOutBtn" title="缩小">
+                            <span>🔍-</span>
+                        </button>
+                        <button class="toolbar-btn" id="fitBtn" title="适应">
+                            <span>📏</span>
+                        </button>
+                    </div>
+                    <div class="toolbar-center">
+                        <span class="canvas-title">数据流编排画布</span>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="toolbar-btn" id="clearBtn" title="清空">
+                            <span>🗑️</span>
+                        </button>
+                        <button class="toolbar-btn" id="exportBtn" title="导出">
+                            <span>📤</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="canvas-wrapper" id="canvasWrapper">
+                    <svg class="canvas-svg" id="canvasSvg">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                                    refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#4A90D9"/>
+                            </marker>
+                            <filter id="shadow">
+                                <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                            </filter>
+                        </defs>
+                        <g id="connectionsLayer"></g>
+                        <g id="nodesLayer"></g>
+                    </svg>
+                </div>
+                <div class="canvas-overlay" id="canvasOverlay"></div>
+            </section>
+
+            <aside class="sidebar-right">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">属性面板</h3>
+                    <div class="properties-panel" id="propertiesPanel">
+                        <p class="no-selection">请选择一个节点查看属性</p>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">转换表达式</h3>
+                    <div class="transform-panel" id="transformPanel">
+                        <textarea id="transformExpression" placeholder="例如: value * 1.8 + 32"></textarea>
+                        <div class="transform-help">
+                            <p>可用变量:</p>
+                            <code>value - 当前值</code>
+                            <code>source_value - 源值</code>
+                            <p>可用函数:</p>
+                            <code>abs, round, floor, ceil, sqrt, min, max, sin, cos, log</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">触发条件</h3>
+                    <div class="condition-panel" id="conditionPanel">
+                        <textarea id="triggerCondition" placeholder="例如: value > 100"></textarea>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-left">
+                <span id="zoomLevel">缩放: 100%</span>
+                <span id="nodeCount">节点: 0</span>
+                <span id="connectionCount">连接: 0</span>
+            </div>
+            <div class="footer-right">
+                <span>工业边缘网关 v1.0.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal" id="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">提示</h3>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">取消</button>
+                <button class="btn btn-primary" id="modalConfirm">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/nodes.js"></script>
+    <script src="js/connections.js"></script>
+    <script src="js/properties.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

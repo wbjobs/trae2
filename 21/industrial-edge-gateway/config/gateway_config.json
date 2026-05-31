@@ -1,0 +1,141 @@
+{
+  "gateway": {
+    "id": "edge-gateway-001",
+    "name": "Industrial Edge Gateway",
+    "environment": "edge",
+    "log_level": "INFO"
+  },
+  "services": {
+    "protocol_parser": {
+      "host": "0.0.0.0",
+      "port": 8001,
+      "protocols": ["modbus_tcp", "modbus_rtu", "profinet", "opc_ua"]
+    },
+    "dataflow_router": {
+      "host": "0.0.0.0",
+      "port": 8002,
+      "rules_file": "dataflow_rules.json"
+    },
+    "device_gateway": {
+      "host": "0.0.0.0",
+      "port": 8003,
+      "max_connections": 100
+    },
+    "data_storage": {
+      "host": "0.0.0.0",
+      "port": 8004,
+      "storage_type": "sqlite",
+      "database_url": "postgresql://postgres:postgres@localhost:5432/industrial_db",
+      "retention_days": 365
+    },
+    "cross_node": {
+      "host": "0.0.0.0",
+      "port": 8005,
+      "mqtt_broker": "mqtt://localhost:1883",
+      "cloud_endpoint": "https://cloud.example.com",
+      "heartbeat_interval": 30
+    },
+    "orchestration": {
+      "host": "0.0.0.0",
+      "port": 8006,
+      "frontend_dir": "frontend-orchestration"
+    }
+  },
+  "device_configs": [
+    {
+      "device_id": "plc-001",
+      "device_name": "PLC控制器",
+      "device_type": "plc",
+      "protocol": "modbus_tcp",
+      "ip_address": "192.168.1.100",
+      "port": 502,
+      "slave_id": 1,
+      "data_points": [
+        {
+          "point_name": "温度",
+          "address": "0",
+          "data_type": "float32",
+          "unit": "°C"
+        },
+        {
+          "point_name": "压力",
+          "address": "2",
+          "data_type": "float32",
+          "unit": "kPa"
+        },
+        {
+          "point_name": "流量",
+          "address": "4",
+          "data_type": "float32",
+          "unit": "L/s"
+        }
+      ]
+    },
+    {
+      "device_id": "sensor-001",
+      "device_name": "温度传感器",
+      "device_type": "sensor",
+      "protocol": "modbus_rtu",
+      "serial_port": "/dev/ttyS0",
+      "baudrate": 9600,
+      "slave_id": 2,
+      "data_points": [
+        {
+          "point_name": "环境温度",
+          "address": "0",
+          "data_type": "float32",
+          "unit": "°C"
+        }
+      ]
+    },
+    {
+      "device_id": "drive-001",
+      "device_name": "变频器",
+      "device_type": "drive",
+      "protocol": "profinet",
+      "ip_address": "192.168.1.101",
+      "rack": 0,
+      "slot": 1,
+      "data_points": [
+        {
+          "point_name": "输出频率",
+          "address": "100",
+          "data_type": "float32",
+          "unit": "Hz"
+        },
+        {
+          "point_name": "运行状态",
+          "address": "101",
+          "data_type": "bool",
+          "unit": ""
+        }
+      ]
+    }
+  ],
+  "dataflow_rules": [
+    {
+      "rule_name": "PLC温度上传云端",
+      "source_device": "plc-001",
+      "source_point": "0",
+      "target_device": "cloud",
+      "target_point": "temperature",
+      "transform_expression": "value * 1.0",
+      "trigger_condition": "",
+      "direction": "edge_to_cloud",
+      "priority": 5,
+      "enabled": true
+    },
+    {
+      "rule_name": "压力告警转换",
+      "source_device": "plc-001",
+      "source_point": "2",
+      "target_device": "cloud",
+      "target_point": "pressure_alarm",
+      "transform_expression": "value > 1000",
+      "trigger_condition": "value > 1000",
+      "direction": "edge_to_cloud",
+      "priority": 3,
+      "enabled": true
+    }
+  ]
+}
