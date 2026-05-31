@@ -1,0 +1,16 @@
+{
+  "name": "steam-mech-assembly-desktop",
+  "version": "1.0.0",
+  "description": "蒸汽机械联动结构拆装模拟 - 桌面端",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging"
+  },
+  "keywords": ["steam", "mechanical", "assembly", "game"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  }
+}

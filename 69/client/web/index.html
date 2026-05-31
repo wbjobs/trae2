@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蒸汽机械联动结构拆装模拟</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div id="connect-modal" class="modal">
+    <div class="modal-content">
+      <h1>⚙️ 蒸汽机械联动结构拆装模拟</h1>
+      <p class="subtitle">多人联机协作拆装机械结构</p>
+      <div class="form-group">
+        <label for="player-name-input">玩家名称</label>
+        <input type="text" id="player-name-input" placeholder="输入你的名字" maxlength="20">
+      </div>
+      <button id="connect-btn" class="btn btn-primary btn-large">
+        🚀 进入游戏
+      </button>
+      <div class="instructions">
+        <h3>操作说明</h3>
+        <ul>
+          <li><strong>鼠标左键</strong> - 选择零件</li>
+          <li><strong>G键</strong> - 抓取/释放零件</li>
+          <li><strong>鼠标拖动</strong> - 移动抓取的零件</li>
+          <li><strong>滚轮</strong> - 调整高度或旋转</li>
+          <li><strong>R键</strong> - 切换移动/旋转模式</li>
+          <li><strong>空格键</strong> - 装配零件</li>
+          <li><strong>鼠标右键</strong> - 旋转视角</li>
+          <li><strong>滚轮</strong> - 缩放视角</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="game-container" class="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <div class="hud">
+      <div class="hud-top">
+        <div id="status-bar" class="status-bar">准备就绪</div>
+        <div class="hud-actions">
+          <button id="btn-grab" class="btn btn-action">抓取</button>
+          <button id="btn-assemble" class="btn btn-action">装配</button>
+          <button id="btn-disassemble" class="btn btn-action">拆解</button>
+          <button id="btn-editor" class="btn btn-action">编辑器</button>
+          <button id="btn-rotate-mode" class="btn btn-action">
+            <span id="rotation-mode" class="badge badge-info">[移动模式]</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hud-left">
+        <div class="panel">
+          <h3>关卡选择</h3>
+          <select id="level-select" class="form-control"></select>
+          <button id="load-level-btn" class="btn btn-primary btn-block">加载关卡</button>
+        </div>
+
+        <div class="panel">
+          <h3>零件信息</h3>
+          <div id="selected-part-info" class="info-text">
+            <span class="text-muted">点击零件进行选择</span>
+          </div>
+          <div id="part-info"></div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="panel">
+          <h3>装配进度</h3>
+          <div class="progress-container">
+            <div id="progress-bar" class="progress-bar">0/0 (0%)</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>玩家列表</h3>
+          <div id="player-list" class="player-list"></div>
+        </div>
+
+        <div class="panel">
+          <h3>存档管理</h3>
+          <button id="new-save-btn" class="btn btn-secondary btn-block">新建存档</button>
+          <div id="save-list" class="save-list"></div>
+        </div>
+      </div>
+
+      <div class="hud-bottom">
+        <div class="chat-container">
+          <div id="chat-messages" class="chat-messages"></div>
+          <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="输入聊天消息..." maxlength="200">
+            <button id="chat-send-btn" class="btn btn-primary">发送</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+  </div>
+
+  <script src="../shared/protocol.js"></script>
+  <script src="../shared/compressor.js"></script>
+  <script src="src/particles.js"></script>
+  <script src="src/animation.js"></script>
+  <script src="src/prediction.js"></script>
+  <script src="src/network.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/input.js"></script>
+  <script src="src/storage.js"></script>
+  <script src="src/editor.js"></script>
+  <script src="src/game.js"></script>
+</body>
+</html>
