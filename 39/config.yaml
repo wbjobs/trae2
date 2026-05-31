@@ -1,0 +1,99 @@
+# ==============================================
+# 分布式存储节点健康巡检 - 配置文件
+# ==============================================
+
+# 全局配置
+global:
+  ssh_timeout: 30          # SSH 命令执行超时（秒）
+  ssh_connect_timeout: 15  # SSH 连接超时（秒）
+  max_parallel: 50         # 最大并行连接数（大规模巡检建议 50-200）
+  log_dir: "./logs"        # 日志输出目录
+
+# 调度与批处理配置
+scheduling:
+  initial_batch_size: 20   # 初始批次大小
+  max_batch_size: 200      # 最大批次大小
+  min_batch_size: 1        # 最小批次大小
+  state_dir: "./data"      # 状态文件保存目录
+  auto_save_interval: 60   # 自动保存间隔（秒）
+  enable_auto_blacklist: true  # 启用自动黑名单
+  blacklist_threshold: 5   # 连续失败阈值（自动加入黑名单）
+  blacklist_duration: 3600 # 黑名单时长（秒，0 表示永久）
+
+# 连接重试配置
+retry:
+  max_retries: 2           # 最大重试次数（大规模巡检建议减少重试）
+  retry_delay: 1.0         # 首次重试延迟（秒）
+  backoff_factor: 1.5      # 重试延迟递增系数
+
+# 字符编码配置
+encoding:
+  ssh_encoding: "utf-8"    # SSH 输出编码（支持 utf-8, gbk, gb2312）
+  file_encoding: "utf-8"   # 报告文件编码
+  output_encoding: "utf-8" # 控制台输出编码
+  strict_mode: false       # 严格模式：true=编码错误时抛出异常, false=用替换字符
+
+# 磁盘检测阈值
+disk_threshold:
+  usage_percent: 85        # 磁盘使用率告警阈值（%）
+  inode_percent: 85        # Inode 使用率告警阈值（%）
+  smart_warning: true      # 是否启用 SMART 关键属性告警
+  bad_sectors: 0           # 坏扇区阈值
+  include_virtual_fs: false # 是否包含虚拟文件系统（tmpfs等）
+
+# 节点列表
+nodes:
+  - host: "192.168.1.10"
+    port: 22
+    username: "root"
+    password: "your_password"        # 或使用 key_file
+    role: "storage"                  # 节点角色: storage / monitor / admin / compute
+    tags: ["ceph", "osd"]            # 自定义标签，用于过滤
+
+  - host: "192.168.1.11"
+    port: 22
+    username: "root"
+    key_file: "~/.ssh/id_rsa"        # SSH 私钥路径
+    role: "storage"
+    tags: ["ceph", "osd", "ssd"]
+
+  - host: "192.168.1.12"
+    port: 22
+    username: "admin"
+    password: "your_password"
+    role: "monitor"
+    tags: ["ceph", "mon"]
+
+  - host: "192.168.1.13"
+    port: 22
+    username: "root"
+    password: "your_password"
+    role: "storage"
+    tags: ["ceph", "osd", "hdd"]
+
+# 服务巡检列表
+services:
+  - name: "ceph-mon"
+    pattern: null          # 可选：自定义进程匹配正则
+    required: true         # 是否为必需服务
+    restart_on_fail: false # 异常时是否自动重启
+
+  - name: "ceph-osd"
+    required: true
+    restart_on_fail: false
+
+  - name: "ceph-mgr"
+    required: true
+    restart_on_fail: false
+
+  - name: "sshd"
+    required: true
+    restart_on_fail: false
+
+  - name: "ntpd"
+    required: false
+    restart_on_fail: false
+
+  - name: "crond"
+    required: true
+    restart_on_fail: false

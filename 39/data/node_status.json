@@ -1,0 +1,96 @@
+{
+  "192.168.1.10": {
+    "host": "192.168.1.10",
+    "role": "storage",
+    "tags": [
+      "osd",
+      "ceph"
+    ],
+    "status": "unknown",
+    "health_score": 100,
+    "consecutive_failures": 0,
+    "total_failures": 0,
+    "total_successes": 0,
+    "last_check": null,
+    "last_success": null,
+    "last_failure": null,
+    "last_error": null,
+    "avg_response_time": 0.0,
+    "is_blacklisted": false,
+    "blacklist_reason": null,
+    "blacklist_until": null,
+    "failure_history": [],
+    "metadata": {}
+  },
+  "192.168.1.11": {
+    "host": "192.168.1.11",
+    "role": "storage",
+    "tags": [
+      "ssd",
+      "osd",
+      "ceph"
+    ],
+    "status": "unknown",
+    "health_score": 100,
+    "consecutive_failures": 0,
+    "total_failures": 0,
+    "total_successes": 0,
+    "last_check": null,
+    "last_success": null,
+    "last_failure": null,
+    "last_error": null,
+    "avg_response_time": 0.0,
+    "is_blacklisted": false,
+    "blacklist_reason": null,
+    "blacklist_until": null,
+    "failure_history": [],
+    "metadata": {}
+  },
+  "192.168.1.12": {
+    "host": "192.168.1.12",
+    "role": "monitor",
+    "tags": [
+      "ceph",
+      "mon"
+    ],
+    "status": "unknown",
+    "health_score": 100,
+    "consecutive_failures": 0,
+    "total_failures": 0,
+    "total_successes": 0,
+    "last_check": null,
+    "last_success": null,
+    "last_failure": null,
+    "last_error": null,
+    "avg_response_time": 0.0,
+    "is_blacklisted": false,
+    "blacklist_reason": null,
+    "blacklist_until": null,
+    "failure_history": [],
+    "metadata": {}
+  },
+  "192.168.1.13": {
+    "host": "192.168.1.13",
+    "role": "storage",
+    "tags": [
+      "osd",
+      "hdd",
+      "ceph"
+    ],
+    "status": "unknown",
+    "health_score": 100,
+    "consecutive_failures": 0,
+    "total_failures": 0,
+    "total_successes": 0,
+    "last_check": null,
+    "last_success": null,
+    "last_failure": null,
+    "last_error": null,
+    "avg_response_time": 0.0,
+    "is_blacklisted": false,
+    "blacklist_reason": null,
+    "blacklist_until": null,
+    "failure_history": [],
+    "metadata": {}
+  }
+}
