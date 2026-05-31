@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业异响音频故障检测平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .sidebar-item.active { background: linear-gradient(90deg, #1e40af, #3b82f6); }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .status-badge { padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .status-normal { background: #d1fae5; color: #065f46; }
+        .status-warning { background: #fef3c7; color: #92400e; }
+        .status-danger { background: #fee2e2; color: #991b1b; }
+        .status-info { background: #dbeafe; color: #1e40af; }
+        .loading-spinner { border: 3px solid #f3f3f3; border-top: 3px solid #3b82f6; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-64 bg-slate-900 text-white flex flex-col">
+            <div class="p-6 border-b border-slate-700">
+                <h1 class="text-xl font-bold flex items-center gap-2">
+                    <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+                    </svg>
+                    工业音频检测平台
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">v1.0.0</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-2">
+                <div class="sidebar-item active rounded-lg p-3 cursor-pointer transition-all" onclick="showSection('dashboard')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                        </svg>
+                        仪表盘
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('upload')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        音频上传
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('samples')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        样本库管理
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('devices')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        设备管理
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('model')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        AI模型管理
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('streams')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        实时流监控
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('segments')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
+                        </svg>
+                        片段标记
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('finetune')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                        </svg>
+                        模型微调
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('tasks')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                        任务监控
+                    </span>
+                </div>
+                <div class="sidebar-item rounded-lg p-3 cursor-pointer transition-all hover:bg-slate-800" onclick="showSection('logs')">
+                    <span class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        处理日志
+                    </span>
+                </div>
+            </nav>
+            <div class="p-4 border-t border-slate-700">
+                <div class="text-sm text-slate-400">
+                    <p>系统状态: <span class="text-green-400">正常</span></p>
+                    <p>活动流: <span id="activeStreamsCount">0</span>/100</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-auto">
+            <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between sticky top-0 z-10">
+                <h2 id="pageTitle" class="text-2xl font-bold text-gray-800">仪表盘</h2>
+                <div class="flex items-center gap-4">
+                    <button onclick="refreshData()" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        刷新
+                    </button>
+                </div>
+            </header>
+
+            <section id="dashboard" class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl p-6 shadow-sm card-hover transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">总样本数</p>
+                                <p id="totalSamples" class="text-3xl font-bold text-gray-800 mt-1">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            近7天新增: <span id="recentSamples">0</span>
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm card-hover transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">已标注样本</p>
+                                <p id="labeledSamples" class="text-3xl font-bold text-gray-800 mt-1">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-blue-500 text-sm mt-2">
+                            标注率: <span id="labelRate">0%</span>
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm card-hover transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">设备数量</p>
+                                <p id="totalDevices" class="text-3xl font-bold text-gray-800 mt-1">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-purple-500 text-sm mt-2">
+                            活跃设备: <span id="activeDevices">0</span>
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm card-hover transition-all">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">平均处理时间</p>
+                                <p id="avgProcessingTime" class="text-3xl font-bold text-gray-800 mt-1">0ms</p>
+                            </div>
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-orange-500 text-sm mt-2">
+                            处理性能正常
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4">故障类型分布</h3>
+                        <canvas id="faultChart" height="200"></canvas>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4">设备分布</h3>
+                        <canvas id="deviceChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-sm mt-6">
+                    <h3 class="text-lg font-semibold mb-4">最近处理任务</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left text-gray-500 text-sm border-b">
+                                    <th class="pb-3 font-medium">任务ID</th>
+                                    <th class="pb-3 font-medium">设备ID</th>
+                                    <th class="pb-3 font-medium">阶段</th>
+                                    <th class="pb-3 font-medium">状态</th>
+                                    <th class="pb-3 font-medium">处理时间</th>
+                                    <th class="pb-3 font-medium">时间</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentTasks">
+                                <tr><td colspan="6" class="py-4 text-center text-gray-400">暂无数据</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="upload" class="p-8 hidden">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-xl p-8 shadow-sm">
+                        <h3 class="text-xl font-semibold mb-6">上传音频文件</h3>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">选择设备</label>
+                            <select id="uploadDeviceId" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">-- 请选择设备 --</option>
+                            </select>
+                        </div>
+
+                        <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-blue-500 transition-colors cursor-pointer">
+                            <input type="file" id="audioFileInput" accept=".wav,.mp3,.flac,.ogg" multiple class="hidden">
+                            <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="text-gray-600 mb-2">拖拽音频文件到此处，或点击选择</p>
+                            <p class="text-sm text-gray-400">支持 WAV, MP3, FLAC, OGG 格式</p>
+                        </div>
+
+                        <div id="uploadProgress" class="mt-6 hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">上传进度</span>
+                                <span id="uploadProgressText" class="text-sm text-gray-600">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="uploadProgressBar" class="bg-blue-500 h-2 rounded-full transition-all" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <button onclick="uploadAudio()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                                上传并处理
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm mt-6">
+                        <h3 class="text-lg font-semibold mb-4">WebSocket 实时流配置</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">设备ID</label>
+                                <input type="text" id="streamDeviceId" placeholder="输入设备ID" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">采样率</label>
+                                <input type="number" id="streamSampleRate" value="44100" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button onclick="startStreamDemo()" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+                                启动模拟流
+                            </button>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">
+                            WebSocket连接地址: <code class="bg-gray-100 px-2 py-1 rounded">ws://localhost:8000/ws/audio/{device_id}</code>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="samples" class="p-8 hidden">
+                <div class="bg-white rounded-xl p-6 shadow-sm mb-6">
+                    <div class="flex flex-wrap items-center gap-4 mb-6">
+                        <div class="flex-1 min-w-64">
+                            <input type="text" id="sampleSearch" placeholder="搜索样本ID、设备ID..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <select id="filterDevice" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">所有设备</option>
+                        </select>
+                        <select id="filterFault" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">所有故障类型</option>
+                            <option value="normal">正常</option>
+                            <option value="bearing_fault">轴承故障</option>
+                            <option value="gear_fault">齿轮故障</option>
+                            <option value="motor_fault">电机故障</option>
+                            <option value="pump_fault">泵故障</option>
+                            <option value="unbalance">不平衡</option>
+                            <option value="misalignment">不对中</option>
+                            <option value="loose_part">松动</option>
+                            <option value="unknown">未知</option>
+                        </select>
+                        <select id="filterLabeled" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">全部</option>
+                            <option value="true">已标注</option>
+                            <option value="false">未标注</option>
+                        </select>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left text-gray-500 text-sm border-b">
+                                    <th class="pb-3 font-medium">样本ID</th>
+                                    <th class="pb-3 font-medium">设备ID</th>
+                                    <th class="pb-3 font-medium">时长</th>
+                                    <th class="pb-3 font-medium">标注状态</th>
+                                    <th class="pb-3 font-medium">故障类型</th>
+                                    <th class="pb-3 font-medium">置信度</th>
+                                    <th class="pb-3 font-medium">上传时间</th>
+                                    <th class="pb-3 font-medium">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="samplesTable">
+                                <tr><td colspan="8" class="py-4 text-center text-gray-400">暂无数据</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="flex items-center justify-between mt-6">
+                        <p class="text-sm text-gray-500">显示 <span id="samplesShowing">0</span> 条，共 <span id="samplesTotal">0</span> 条</p>
+                        <div class="flex gap-2">
+                            <button onclick="changePage(-1)" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">上一页</button>
+                            <span id="currentPage" class="px-4 py-2">1</span>
+                            <button onclick="changePage(1)" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">下一页</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="devices" class="p-8 hidden">
+                <div class="bg-white rounded-xl p-6 shadow-sm mb-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold">设备列表</h3>
+                        <button onclick="showAddDeviceModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            添加设备
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="devicesGrid">
+                        <div class="col-span-full text-center py-8 text-gray-400">暂无设备，请添加</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="model" class="p-8 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4">模型信息</h3>
+                        <div id="modelInfo">
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">模型类型</span>
+                                    <span id="modelType" class="font-medium">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">训练状态</span>
+                                    <span id="modelTrained" class="font-medium">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">模型版本</span>
+                                    <span id="modelVersion" class="font-medium">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">准确率</span>
+                                    <span id="modelAccuracy" class="font-medium">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <h4 class="font-medium mb-3">支持的故障类型</h4>
+                            <div id="faultTypes" class="flex flex-wrap gap-2">
+                                <span class="text-gray-400">暂无数据</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-lg font-semibold mb-4">模型训练</h3>
+                        <p class="text-gray-600 text-sm mb-4">
+                            使用已标注的样本数据训练AI故障分类模型。需要至少10个已标注样本，且至少包含2种不同的故障类型。
+                        </p>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">测试集比例</label>
+                                <input type="range" id="testSize" min="0.1" max="0.4" step="0.05" value="0.2" class="w-full">
+                                <span class="text-sm text-gray-500">当前: <span id="testSizeValue">20%</span></span>
+                            </div>
+                            <button onclick="trainModel()" id="trainBtn" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                                开始训练
+                            </button>
+                        </div>
+
+                        <div id="trainingProgress" class="mt-6 hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-600">训练中...</span>
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full animate-pulse" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <div id="trainingResult" class="mt-6 hidden p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-medium text-green-800 mb-2">训练完成!</h4>
+                            <p id="trainingResultText" class="text-sm text-green-700"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="streams" class="p-8 hidden">
+                <div class="bg-white rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold">实时音频流监控</h3>
+                        <span class="status-badge status-info"><span id="streamCount">0</span> 个活动流</span>
+                    </div>
+
+                    <div id="streamsList" class="space-y-4">
+                        <div class="text-center py-8 text-gray-400">暂无活动流</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="logs" class="p-8 hidden">
+                <div class="bg-white rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold">处理日志</h3>
+                        <select id="logStageFilter" class="px-4 py-2 border border-gray-300 rounded-lg" onchange="loadLogs()">
+                            <option value="">所有阶段</option>
+                            <option value="denoise">降噪</option>
+                            <option value="feature_extraction">特征提取</option>
+                            <option value="classification">分类</option>
+                        </select>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left text-gray-500 text-sm border-b">
+                                    <th class="pb-3 font-medium">时间</th>
+                                    <th class="pb-3 font-medium">任务ID</th>
+                                    <th class="pb-3 font-medium">设备ID</th>
+                                    <th class="pb-3 font-medium">阶段</th>
+                                    <th class="pb-3 font-medium">状态</th>
+                                    <th class="pb-3 font-medium">消息</th>
+                                    <th class="pb-3 font-medium">处理时间</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsTable">
+                                <tr><td colspan="7" class="py-4 text-center text-gray-400">暂无日志</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="sampleDetailModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-auto">
+            <div class="p-6 border-b flex items-center justify-between">
+                <h3 class="text-xl font-semibold">样本详情</h3>
+                <button onclick="closeSampleModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6" id="sampleDetailContent">
+            </div>
+        </div>
+    </div>
+
+    <div id="addDeviceModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl max-w-md w-full mx-4">
+            <div class="p-6 border-b flex items-center justify-between">
+                <h3 class="text-xl font-semibold">添加设备</h3>
+                <button onclick="closeAddDeviceModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">设备ID</label>
+                    <input type="text" id="newDeviceId" placeholder="例如: motor_001" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">设备名称</label>
+                    <input type="text" id="newDeviceName" placeholder="例如: 1号电机" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">设备类型</label>
+                    <select id="newDeviceType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="motor">电机</option>
+                        <option value="pump">泵</option>
+                        <option value="fan">风机</option>
+                        <option value="gearbox">齿轮箱</option>
+                        <option value="bearing">轴承</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">安装位置</label>
+                    <input type="text" id="newDeviceLocation" placeholder="例如: 生产车间A区" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">描述</label>
+                    <textarea id="newDeviceDesc" rows="3" placeholder="设备描述信息" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                </div>
+            </div>
+            <div class="p-6 border-t flex justify-end gap-3">
+                <button onclick="closeAddDeviceModal()" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">取消</button>
+                <button onclick="addDevice()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform z-50">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- 片段标记页面 -->
+    <section id="segments" class="p-8 hidden">
+        <div class="mb-6 flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">音频片段标记</h2>
+                <p class="text-gray-500 mt-1">对音频样本进行片段标记、截取和导出</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm mb-6">
+            <h3 class="text-lg font-semibold mb-4">选择样本</h3>
+            <div class="flex gap-4 items-end">
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">选择音频样本</label>
+                    <select id="segmentSampleSelect" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">请选择样本...</option>
+                    </select>
+                </div>
+                <button onclick="loadSampleSegments()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                    加载标记
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm">
+                <h3 class="text-lg font-semibold mb-4">手动添加标记</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">开始时间(秒)</label>
+                        <input type="number" id="markerStartTime" step="0.1" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">结束时间(秒)</label>
+                        <input type="number" id="markerEndTime" step="0.1" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">标签</label>
+                        <select id="markerLabel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">未标注</option>
+                            <option value="normal">正常</option>
+                            <option value="bearing_fault">轴承故障</option>
+                            <option value="gear_fault">齿轮故障</option>
+                            <option value="motor_fault">电机故障</option>
+                            <option value="pump_fault">泵故障</option>
+                            <option value="fan_fault">风扇故障</option>
+                            <option value="unbalance">不平衡</option>
+                            <option value="misalignment">不对中</option>
+                            <option value="loose_part">松动</option>
+                            <option value="unknown">未知</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
+                        <button onclick="addSegmentMarker()" class="w-full px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                            添加标记
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h3 class="text-lg font-semibold mb-4">自动检测</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">检测方法</label>
+                        <select id="autoDetectMethod" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="energy">能量阈值法</option>
+                            <option value="fixed">固定时长分割</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">能量阈值</label>
+                        <input type="number" id="energyThreshold" step="0.01" min="0" value="0.1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <button onclick="autoDetectSegments()" class="w-full px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors">
+                        自动检测片段
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm mt-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">标记列表</h3>
+                <div class="flex gap-3">
+                    <button onclick="extractSegments()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                        提取片段
+                    </button>
+                    <button onclick="exportSegments()" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                        导出片段
+                    </button>
+                </div>
+            </div>
+            <div id="markersList" class="overflow-x-auto">
+                <p class="text-gray-500 text-center py-8">请先选择样本加载标记</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模型微调页面 -->
+    <section id="finetune" class="p-8 hidden">
+        <div class="mb-6 flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">模型在线微调</h2>
+                <p class="text-gray-500 mt-1">使用新标注的样本对模型进行增量学习</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm">
+                <h3 class="text-lg font-semibold mb-4">微调配置</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">学习率</label>
+                        <input type="number" id="finetuneLearningRate" step="0.01" min="0.01" max="1" value="0.1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">控制每次微调的更新幅度</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">验证集比例</label>
+                        <input type="number" id="finetuneValSplit" step="0.05" min="0.1" max="0.5" value="0.2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">用于验证的样本比例</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">选择训练样本 (可选，留空使用所有已标注样本)</label>
+                    <select id="finetuneSampleSelect" multiple class="w-full h-40 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </select>
+                    <p class="text-sm text-gray-500 mt-1">按住Ctrl可多选，不选则使用全部已标注样本</p>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="startFineTune()" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium">
+                        开始微调
+                    </button>
+                    <button onclick="evaluateModel()" class="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-medium">
+                        评估模型
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h3 class="text-lg font-semibold mb-4">当前模型信息</h3>
+                <div id="modelInfo" class="space-y-3">
+                    <p class="text-gray-500">加载中...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm mt-6">
+            <h3 class="text-lg font-semibold mb-4">训练历史</h3>
+            <div id="trainingHistory" class="overflow-x-auto">
+                <p class="text-gray-500 text-center py-8">暂无训练记录</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm mt-6 hidden" id="finetuneResult">
+            <h3 class="text-lg font-semibold mb-4">微调结果</h3>
+            <div id="finetuneResultContent"></div>
+        </div>
+    </section>
+
+    <!-- 任务监控页面 -->
+    <section id="tasks" class="p-8 hidden">
+        <div class="mb-6 flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">任务监控</h2>
+                <p class="text-gray-500 mt-1">实时监控系统任务执行状态和工作进程</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">等待任务</p>
+                        <p id="pendingTasks" class="text-3xl font-bold text-yellow-600 mt-1">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">运行任务</p>
+                        <p id="runningTasks" class="text-3xl font-bold text-blue-600 mt-1">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">已完成</p>
+                        <p id="completedTasks" class="text-3xl font-bold text-green-600 mt-1">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">工作进程</p>
+                        <p id="workerCount" class="text-3xl font-bold text-purple-600 mt-1">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-4">工作进程状态</h3>
+            <div id="workersList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-sm mt-6">
+            <h3 class="text-lg font-semibold mb-4">系统负载</h3>
+            <div class="mb-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm text-gray-600">当前负载</span>
+                    <span id="currentLoad" class="text-sm font-medium">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div id="loadBar" class="bg-blue-600 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div>
+                    <span class="text-gray-500">最小工作进程:</span>
+                    <span id="minWorkers" class="ml-2 font-medium">0</span>
+                </div>
+                <div>
+                    <span class="text-gray-500">最大工作进程:</span>
+                    <span id="maxWorkers" class="ml-2 font-medium">0</span>
+                </div>
+                <div>
+                    <span class="text-gray-500">自动扩缩容:</span>
+                    <span id="autoScale" class="ml-2 font-medium">已启用</span>
+                </div>
+                <div>
+                    <button onclick="refreshTaskStats()" class="text-blue-600 hover:text-blue-800">刷新数据</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const API_BASE = '';
+        let currentPage = 1;
+        let pageSize = 20;
+        let faultChart = null;
+        let deviceChart = null;
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-transform z-50 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`;
+            toast.style.transform = 'translateX(0)';
+            setTimeout(() => {
+                toast.style.transform = 'translateX(120%)';
+            }, 3000);
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('hover:bg-slate-800');
+            });
+            event.currentTarget.classList.add('active');
+            event.currentTarget.classList.remove('hover:bg-slate-800');
+
+            const titles = {
+                dashboard: '仪表盘',
+                upload: '音频上传',
+                samples: '样本库管理',
+                devices: '设备管理',
+                model: 'AI模型管理',
+                streams: '实时流监控',
+                logs: '处理日志'
+            };
+            document.getElementById('pageTitle').textContent = titles[sectionId] || '';
+
+            if (sectionId === 'dashboard') loadDashboard();
+            if (sectionId === 'samples') loadSamples();
+            if (sectionId === 'devices') loadDevices();
+            if (sectionId === 'model') loadModelInfo();
+            if (sectionId === 'streams') loadStreams();
+            if (sectionId === 'logs') loadLogs();
+            if (sectionId === 'upload') loadDeviceSelects();
+        }
+
+        async function loadDashboard() {
+            try {
+                const response = await fetch(`${API_BASE}/api/stats`);
+                const data = await response.json();
+
+                document.getElementById('totalSamples').textContent = data.total_samples;
+                document.getElementById('labeledSamples').textContent = data.labeled_samples;
+                document.getElementById('unlabeledSamples').textContent = data.unlabeled_samples;
+                document.getElementById('totalDevices').textContent = data.total_devices;
+                document.getElementById('recentSamples').textContent = data.recent_samples_7d;
+                document.getElementById('activeDevices').textContent = data.total_devices;
+                document.getElementById('avgProcessingTime').textContent = data.avg_processing_time_ms.toFixed(0) + 'ms';
+                document.getElementById('activeStreamsCount').textContent = document.getElementById('streamCount').textContent;
+
+                const labelRate = data.total_samples > 0 ? (data.labeled_samples / data.total_samples * 100).toFixed(1) : 0;
+                document.getElementById('labelRate').textContent = labelRate + '%';
+
+                updateFaultChart(data.fault_distribution);
+                updateDeviceChart(data.device_distribution);
+
+                const logsResponse = await fetch(`${API_BASE}/api/logs?limit=10`);
+                const logs = await logsResponse.json();
+                updateRecentTasks(logs);
+            } catch (error) {
+                console.error('Failed to load dashboard:', error);
+            }
+        }
+
+        function updateFaultChart(data) {
+            const ctx = document.getElementById('faultChart').getContext('2d');
+            if (faultChart) faultChart.destroy();
+
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#64748b'];
+
+            faultChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels.map(l => l || '未标注'),
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors.slice(0, labels.length),
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'right' }
+                    }
+                }
+            });
+        }
+
+        function updateDeviceChart(data) {
+            const ctx = document.getElementById('deviceChart').getContext('2d');
+            if (deviceChart) deviceChart.destroy();
+
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+
+            deviceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '样本数量',
+                        data: values,
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function updateRecentTasks(logs) {
+            const tbody = document.getElementById('recentTasks');
+            if (!logs || logs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-gray-400">暂无数据</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = logs.map(log => `
+                <tr class="border-b last:border-0">
+                    <td class="py-3 text-sm font-mono text-gray-600">${log.task_id.substring(0, 8)}...</td>
+                    <td class="py-3 text-sm">${log.device_id}</td>
+                    <td class="py-3">
+                        <span class="status-badge status-info">${getStageName(log.stage)}</span>
+                    </td>
+                    <td class="py-3">
+                        <span class="status-badge ${log.status === 'completed' ? 'status-normal' : 'status-danger'}">${log.status}</span>
+                    </td>
+                    <td class="py-3 text-sm text-gray-600">${log.processing_time ? (log.processing_time * 1000).toFixed(0) + 'ms' : '-'}</td>
+                    <td class="py-3 text-sm text-gray-500">${formatTime(log.created_at)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function getStageName(stage) {
+            const names = {
+                denoise: '降噪',
+                feature_extraction: '特征提取',
+                classification: '分类'
+            };
+            return names[stage] || stage;
+        }
+
+        function formatTime(timeStr) {
+            const date = new Date(timeStr);
+            return date.toLocaleString('zh-CN');
+        }
+
+        async function loadDeviceSelects() {
+            try {
+                const response = await fetch(`${API_BASE}/api/devices`);
+                const devices = await response.json();
+                
+                const selects = ['uploadDeviceId', 'filterDevice'];
+                selects.forEach(id => {
+                    const select = document.getElementById(id);
+                    const firstOption = select.options[0];
+                    select.innerHTML = '';
+                    select.appendChild(firstOption);
+                    devices.forEach(d => {
+                        const option = document.createElement('option');
+                        option.value = d.device_id;
+                        option.textContent = `${d.device_name} (${d.device_id})`;
+                        select.appendChild(option);
+                    });
+                });
+            } catch (error) {
+                console.error('Failed to load devices:', error);
+            }
+        }
+
+        document.getElementById('dropZone').addEventListener('click', () => {
+            document.getElementById('audioFileInput').click();
+        });
+
+        document.getElementById('dropZone').addEventListener('dragover', (e) => {
+            e.preventDefault();
+            document.getElementById('dropZone').classList.add('border-blue-500', 'bg-blue-50');
+        });
+
+        document.getElementById('dropZone').addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            document.getElementById('dropZone').classList.remove('border-blue-500', 'bg-blue-50');
+        });
+
+        document.getElementById('dropZone').addEventListener('drop', (e) => {
+            e.preventDefault();
+            document.getElementById('dropZone').classList.remove('border-blue-500', 'bg-blue-50');
+            document.getElementById('audioFileInput').files = e.dataTransfer.files;
+        });
+
+        async function uploadAudio() {
+            const deviceId = document.getElementById('uploadDeviceId').value;
+            const files = document.getElementById('audioFileInput').files;
+
+            if (!deviceId) {
+                showToast('请选择设备', 'error');
+                return;
+            }
+
+            if (!files || files.length === 0) {
+                showToast('请选择音频文件', 'error');
+                return;
+            }
+
+            const progressDiv = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('uploadProgressBar');
+            const progressText = document.getElementById('uploadProgressText');
+            
+            progressDiv.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            progressText.textContent = '0%';
+
+            let successCount = 0;
+            let failCount = 0;
+
+            for (let i = 0; i < files.length; i++) {
+                const formData = new FormData();
+                formData.append('file', files[i]);
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/audio/upload/${deviceId}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        successCount++;
+                        const result = await response.json();
+                        
+                        await fetch(`${API_BASE}/api/process/pipeline/${result.sample_id}?stages=denoise&stages=extract_features&stages=classify`, {
+                            method: 'POST'
+                        });
+                    } else {
+                        failCount++;
+                    }
+                } catch (error) {
+                    failCount++;
+                }
+
+                const progress = ((i + 1) / files.length * 100).toFixed(0);
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+            }
+
+            setTimeout(() => {
+                progressDiv.classList.add('hidden');
+                if (successCount > 0) {
+                    showToast(`成功上传 ${successCount} 个文件${failCount > 0 ? `，失败 ${failCount} 个` : ''}`);
+                } else {
+                    showToast('上传失败', 'error');
+                }
+                document.getElementById('audioFileInput').value = '';
+            }, 500);
+        }
+
+        async function loadSamples() {
+            try {
+                const search = document.getElementById('sampleSearch').value;
+                const device = document.getElementById('filterDevice').value;
+                const fault = document.getElementById('filterFault').value;
+                const labeled = document.getElementById('filterLabeled').value;
+
+                let url = `${API_BASE}/api/samples?limit=${pageSize}&offset=${(currentPage - 1) * pageSize}`;
+                if (device) url += `&device_id=${device}`;
+                if (fault) url += `&fault_type=${fault}`;
+                if (labeled) url += `&is_labeled=${labeled}`;
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                document.getElementById('samplesTotal').textContent = data.total;
+                document.getElementById('samplesShowing').textContent = data.samples.length;
+
+                const tbody = document.getElementById('samplesTable');
+                if (data.samples.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="py-4 text-center text-gray-400">暂无数据</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = data.samples.map(s => `
+                    <tr class="border-b last:border-0 hover:bg-gray-50">
+                        <td class="py-3 text-sm font-mono text-blue-600 cursor-pointer" onclick="showSampleDetail('${s.sample_id}')">${s.sample_id.substring(0, 12)}...</td>
+                        <td class="py-3 text-sm">${s.device_id}</td>
+                        <td class="py-3 text-sm text-gray-600">${s.duration.toFixed(2)}s</td>
+                        <td class="py-3">
+                            <span class="status-badge ${s.is_labeled ? 'status-normal' : 'status-warning'}">${s.is_labeled ? '已标注' : '未标注'}</span>
+                        </td>
+                        <td class="py-3">
+                            <span class="status-badge ${getFaultStatus(s.fault_type || s.classification_result)}">${getFaultName(s.fault_type || s.classification_result || 'unknown')}</span>
+                        </td>
+                        <td class="py-3 text-sm">${s.classification_confidence ? (s.classification_confidence * 100).toFixed(1) + '%' : '-'}</td>
+                        <td class="py-3 text-sm text-gray-500">${formatTime(s.created_at)}</td>
+                        <td class="py-3">
+                            <div class="flex gap-2">
+                                <button onclick="showSampleDetail('${s.sample_id}')" class="p-1 text-blue-600 hover:bg-blue-50 rounded" title="详情">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button onclick="deleteSample('${s.sample_id}')" class="p-1 text-red-600 hover:bg-red-50 rounded" title="删除">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load samples:', error);
+            }
+        }
+
+        function getFaultName(fault) {
+            const names = {
+                normal: '正常',
+                bearing_fault: '轴承故障',
+                gear_fault: '齿轮故障',
+                motor_fault: '电机故障',
+                pump_fault: '泵故障',
+                fan_fault: '风机故障',
+                unbalance: '不平衡',
+                misalignment: '不对中',
+                loose_part: '松动',
+                unknown: '未知'
+            };
+            return names[fault] || fault;
+        }
+
+        function getFaultStatus(fault) {
+            if (fault === 'normal') return 'status-normal';
+            if (fault === 'unknown') return 'status-info';
+            return 'status-danger';
+        }
+
+        function changePage(delta) {
+            const newPage = currentPage + delta;
+            if (newPage >= 1) {
+                currentPage = newPage;
+                document.getElementById('currentPage').textContent = currentPage;
+                loadSamples();
+            }
+        }
+
+        async function showSampleDetail(sampleId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/samples/${sampleId}`);
+                const sample = await response.json();
+
+                const content = document.getElementById('sampleDetailContent');
+                
+                let featuresHtml = '';
+                if (sample.features) {
+                    featuresHtml = Object.entries(sample.features).map(([category, features]) => `
+                        <div class="mb-4">
+                            <h4 class="font-medium text-gray-700 mb-2">${getCategoryName(category)}</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                                ${Object.entries(features).map(([key, value]) => `
+                                    <div class="bg-gray-50 p-2 rounded">
+                                        <span class="text-gray-500">${key}:</span>
+                                        <span class="font-medium ml-1">${typeof value === 'number' ? value.toFixed(4) : value}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                let historyHtml = '';
+                if (sample.processing_history && sample.processing_history.length > 0) {
+                    historyHtml = `
+                        <div class="mb-4">
+                            <h4 class="font-medium text-gray-700 mb-2">处理历史</h4>
+                            <div class="space-y-2">
+                                ${sample.processing_history.map(h => `
+                                    <div class="flex items-center gap-4 text-sm bg-gray-50 p-3 rounded">
+                                        <span class="status-badge status-info">${getStageName(h.stage)}</span>
+                                        <span class="status-badge ${h.status === 'completed' ? 'status-normal' : 'status-danger'}">${h.status}</span>
+                                        <span class="flex-1 text-gray-600">${h.message}</span>
+                                        <span class="text-gray-400">${h.processing_time ? (h.processing_time * 1000).toFixed(0) + 'ms' : '-'}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-3">基本信息</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between"><span class="text-gray-500">样本ID:</span><span class="font-mono">${sample.sample_id}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">设备ID:</span><span>${sample.device_id}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">文件名:</span><span>${sample.file_name}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">时长:</span><span>${sample.duration.toFixed(2)}s</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">采样率:</span><span>${sample.sample_rate}Hz</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">声道数:</span><span>${sample.channels}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">上传时间:</span><span>${formatTime(sample.created_at)}</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-700 mb-3">处理结果</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between"><span class="text-gray-500">标注状态:</span><span class="status-badge ${sample.is_labeled ? 'status-normal' : 'status-warning'}">${sample.is_labeled ? '已标注' : '未标注'}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">故障类型:</span><span>${getFaultName(sample.fault_type || 'unknown')}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">AI分类结果:</span><span class="status-badge ${getFaultStatus(sample.classification_result)}">${getFaultName(sample.classification_result || 'unknown')}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">分类置信度:</span><span>${sample.classification_confidence ? (sample.classification_confidence * 100).toFixed(1) + '%' : '-'}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">降噪前噪声:</span><span>${sample.noise_level_before ? sample.noise_level_before.toFixed(4) : '-'}</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">降噪后噪声:</span><span>${sample.noise_level_after ? sample.noise_level_after.toFixed(4) : '-'}</span></div>
+                            </div>
+                            <div class="mt-4 flex gap-2">
+                                <a href="${API_BASE}/api/samples/${sample.sample_id}/download" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">下载原始音频</a>
+                                <a href="${API_BASE}/api/samples/${sample.sample_id}/download?denoised=true" class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition-colors">下载降噪音频</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${featuresHtml}
+                    ${historyHtml}
+
+                    <div class="mt-6 pt-6 border-t">
+                        <h4 class="font-medium text-gray-700 mb-3">标注样本</h4>
+                        <div class="flex gap-4">
+                            <select id="labelFaultType" class="px-4 py-2 border border-gray-300 rounded-lg flex-1">
+                                <option value="">选择故障类型</option>
+                                <option value="normal">正常</option>
+                                <option value="bearing_fault">轴承故障</option>
+                                <option value="gear_fault">齿轮故障</option>
+                                <option value="motor_fault">电机故障</option>
+                                <option value="pump_fault">泵故障</option>
+                                <option value="unbalance">不平衡</option>
+                                <option value="misalignment">不对中</option>
+                                <option value="loose_part">松动</option>
+                            </select>
+                            <select id="labelSeverity" class="px-4 py-2 border border-gray-300 rounded-lg flex-1">
+                                <option value="">选择严重程度</option>
+                                <option value="low">轻微</option>
+                                <option value="medium">中等</option>
+                                <option value="high">严重</option>
+                                <option value="critical">危急</option>
+                            </select>
+                            <button onclick="labelSample('${sample.sample_id}')" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">确认标注</button>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('sampleDetailModal').classList.remove('hidden');
+                document.getElementById('sampleDetailModal').classList.add('flex');
+            } catch (error) {
+                console.error('Failed to load sample detail:', error);
+                showToast('加载样本详情失败', 'error');
+            }
+        }
+
+        function closeSampleModal() {
+            document.getElementById('sampleDetailModal').classList.add('hidden');
+            document.getElementById('sampleDetailModal').classList.remove('flex');
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                time_domain: '时域特征',
+                frequency_domain: '频域特征',
+                mfcc: 'MFCC特征',
+                spectral: '频谱特征',
+                cepstral: '倒谱特征'
+            };
+            return names[category] || category;
+        }
+
+        async function labelSample(sampleId) {
+            const faultType = document.getElementById('labelFaultType').value;
+            const severity = document.getElementById('labelSeverity').value;
+
+            if (!faultType) {
+                showToast('请选择故障类型', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/samples/${sampleId}/label?fault_type=${faultType}&severity=${severity}`, {
+                    method: 'PUT'
+                });
+
+                if (response.ok) {
+                    showToast('标注成功');
+                    closeSampleModal();
+                    loadSamples();
+                } else {
+                    showToast('标注失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to label sample:', error);
+                showToast('标注失败', 'error');
+            }
+        }
+
+        async function deleteSample(sampleId) {
+            if (!confirm('确定要删除这个样本吗？')) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/samples/${sampleId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    showToast('删除成功');
+                    loadSamples();
+                } else {
+                    showToast('删除失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to delete sample:', error);
+                showToast('删除失败', 'error');
+            }
+        }
+
+        async function loadDevices() {
+            try {
+                const response = await fetch(`${API_BASE}/api/devices`);
+                const devices = await response.json();
+
+                const grid = document.getElementById('devicesGrid');
+                if (devices.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-8 text-gray-400">暂无设备，请添加</div>';
+                    return;
+                }
+
+                grid.innerHTML = devices.map(d => `
+                    <div class="bg-gray-50 rounded-xl p-5 card-hover transition-all">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <button onclick="deleteDevice('${d.device_id}')" class="p-1 text-red-500 hover:bg-red-50 rounded">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">${d.device_name}</h4>
+                        <p class="text-sm text-gray-500 mt-1">ID: ${d.device_id}</p>
+                        <p class="text-sm text-gray-500">类型: ${getDeviceTypeName(d.device_type)}</p>
+                        ${d.location ? `<p class="text-sm text-gray-500">位置: ${d.location}</p>` : ''}
+                        <div class="mt-3 flex items-center gap-2">
+                            <span class="status-badge ${d.status === 'active' ? 'status-normal' : 'status-warning'}">${d.status === 'active' ? '在线' : '离线'}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load devices:', error);
+            }
+        }
+
+        function getDeviceTypeName(type) {
+            const names = {
+                motor: '电机',
+                pump: '泵',
+                fan: '风机',
+                gearbox: '齿轮箱',
+                bearing: '轴承',
+                other: '其他'
+            };
+            return names[type] || type;
+        }
+
+        function showAddDeviceModal() {
+            document.getElementById('addDeviceModal').classList.remove('hidden');
+            document.getElementById('addDeviceModal').classList.add('flex');
+        }
+
+        function closeAddDeviceModal() {
+            document.getElementById('addDeviceModal').classList.add('hidden');
+            document.getElementById('addDeviceModal').classList.remove('flex');
+        }
+
+        async function addDevice() {
+            const deviceId = document.getElementById('newDeviceId').value;
+            const deviceName = document.getElementById('newDeviceName').value;
+            const deviceType = document.getElementById('newDeviceType').value;
+            const location = document.getElementById('newDeviceLocation').value;
+            const description = document.getElementById('newDeviceDesc').value;
+
+            if (!deviceId || !deviceName) {
+                showToast('请填写设备ID和名称', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/devices`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ device_id: deviceId, device_name: deviceName, device_type: deviceType, location, description })
+                });
+
+                if (response.ok) {
+                    showToast('设备添加成功');
+                    closeAddDeviceModal();
+                    loadDevices();
+                    loadDeviceSelects();
+                } else {
+                    const data = await response.json();
+                    showToast(data.detail || '添加失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to add device:', error);
+                showToast('添加失败', 'error');
+            }
+        }
+
+        async function deleteDevice(deviceId) {
+            if (!confirm('确定要删除这个设备吗？')) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/devices/${deviceId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    showToast('删除成功');
+                    loadDevices();
+                } else {
+                    showToast('删除失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to delete device:', error);
+                showToast('删除失败', 'error');
+            }
+        }
+
+        async function loadModelInfo() {
+            try {
+                const response = await fetch(`${API_BASE}/api/model/info`);
+                const data = await response.json();
+
+                document.getElementById('modelType').textContent = data.model_type || '-';
+                document.getElementById('modelTrained').textContent = data.is_trained ? '已训练' : '未训练';
+                document.getElementById('modelVersion').textContent = data.active_model?.model_version || '-';
+                document.getElementById('modelAccuracy').textContent = data.active_model?.accuracy ? (data.active_model.accuracy * 100).toFixed(1) + '%' : '-';
+
+                const faultTypesDiv = document.getElementById('faultTypes');
+                if (data.classes && data.classes.length > 0) {
+                    faultTypesDiv.innerHTML = data.classes.map(c => `
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">${getFaultName(c)}</span>
+                    `).join('');
+                } else {
+                    faultTypesDiv.innerHTML = '<span class="text-gray-400">暂无数据</span>';
+                }
+            } catch (error) {
+                console.error('Failed to load model info:', error);
+            }
+        }
+
+        document.getElementById('testSize').addEventListener('input', (e) => {
+            document.getElementById('testSizeValue').textContent = (e.target.value * 100).toFixed(0) + '%';
+        });
+
+        async function trainModel() {
+            const testSize = parseFloat(document.getElementById('testSize').value);
+
+            document.getElementById('trainBtn').disabled = true;
+            document.getElementById('trainingProgress').classList.remove('hidden');
+            document.getElementById('trainingResult').classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/model/train`, {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('trainingResult').classList.remove('hidden');
+                    document.getElementById('trainingResultText').textContent = 
+                        `训练完成！训练样本: ${data.training_samples}, 测试样本: ${data.test_samples}, 准确率: ${(data.accuracy * 100).toFixed(1)}%`;
+                    showToast('模型训练成功');
+                    loadModelInfo();
+                } else {
+                    showToast(data.error || '训练失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to train model:', error);
+                showToast('训练失败', 'error');
+            } finally {
+                document.getElementById('trainBtn').disabled = false;
+                document.getElementById('trainingProgress').classList.add('hidden');
+            }
+        }
+
+        async function loadStreams() {
+            try {
+                const response = await fetch(`${API_BASE}/api/streams`);
+                const data = await response.json();
+
+                document.getElementById('streamCount').textContent = data.streams.length;
+
+                const listDiv = document.getElementById('streamsList');
+                if (data.streams.length === 0) {
+                    listDiv.innerHTML = '<div class="text-center py-8 text-gray-400">暂无活动流</div>';
+                    return;
+                }
+
+                listDiv.innerHTML = data.streams.map(s => `
+                    <div class="bg-gray-50 rounded-xl p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="font-medium">${s.device_id}</span>
+                            </div>
+                            <button onclick="stopStream('${s.stream_id}')" class="px-3 py-1 bg-red-100 text-red-600 rounded-lg text-sm hover:bg-red-200 transition-colors">
+                                停止
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-500">流ID</p>
+                                <p class="font-mono">${s.stream_id.substring(0, 12)}...</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">已接收块数</p>
+                                <p>${s.chunks_received}</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">总字节数</p>
+                                <p>${(s.total_bytes / 1024).toFixed(1)} KB</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">启动时间</p>
+                                <p>${formatTime(s.start_time)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load streams:', error);
+            }
+        }
+
+        async function stopStream(streamId) {
+            try {
+                const response = await fetch(`${API_BASE}/api/streams/${streamId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    showToast('流已停止');
+                    loadStreams();
+                } else {
+                    showToast('停止失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to stop stream:', error);
+                showToast('停止失败', 'error');
+            }
+        }
+
+        async function loadLogs() {
+            try {
+                const stage = document.getElementById('logStageFilter').value;
+                let url = `${API_BASE}/api/logs?limit=50`;
+                if (stage) url += `&stage=${stage}`;
+
+                const response = await fetch(url);
+                const logs = await response.json();
+
+                const tbody = document.getElementById('logsTable');
+                if (logs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="py-4 text-center text-gray-400">暂无日志</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = logs.map(log => `
+                    <tr class="border-b last:border-0 hover:bg-gray-50">
+                        <td class="py-3 text-sm text-gray-500">${formatTime(log.created_at)}</td>
+                        <td class="py-3 text-sm font-mono text-gray-600">${log.task_id.substring(0, 12)}...</td>
+                        <td class="py-3 text-sm">${log.device_id}</td>
+                        <td class="py-3">
+                            <span class="status-badge status-info">${getStageName(log.stage)}</span>
+                        </td>
+                        <td class="py-3">
+                            <span class="status-badge ${log.status === 'completed' ? 'status-normal' : 'status-danger'}">${log.status}</span>
+                        </td>
+                        <td class="py-3 text-sm text-gray-600">${log.message}</td>
+                        <td class="py-3 text-sm text-gray-500">${log.processing_time ? (log.processing_time * 1000).toFixed(0) + 'ms' : '-'}</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load logs:', error);
+            }
+        }
+
+        function refreshData() {
+            const activeSection = document.querySelector('section:not(.hidden)');
+            if (activeSection) {
+                const sectionId = activeSection.id;
+                if (sectionId === 'dashboard') loadDashboard();
+                if (sectionId === 'samples') loadSamples();
+                if (sectionId === 'devices') loadDevices();
+                if (sectionId === 'model') loadModelInfo();
+                if (sectionId === 'streams') loadStreams();
+                if (sectionId === 'logs') loadLogs();
+            }
+        }
+
+        function startStreamDemo() {
+            showToast('模拟流功能需要后端WebSocket连接支持', 'error');
+        }
+
+        document.getElementById('sampleSearch').addEventListener('input', () => {
+            currentPage = 1;
+            loadSamples();
+        });
+        document.getElementById('filterDevice').addEventListener('change', () => {
+            currentPage = 1;
+            loadSamples();
+        });
+        document.getElementById('filterFault').addEventListener('change', () => {
+            currentPage = 1;
+            loadSamples();
+        });
+        document.getElementById('filterLabeled').addEventListener('change', () => {
+            currentPage = 1;
+            loadSamples();
+        });
+
+        let currentSegmentSampleId = null;
+        let currentMarkers = [];
+
+        async function loadSegmentSampleSelect() {
+            try {
+                const response = await fetch(`${API_BASE}/api/samples?limit=100`);
+                const data = await response.json();
+                
+                const select = document.getElementById('segmentSampleSelect');
+                select.innerHTML = '<option value="">请选择样本...</option>';
+                
+                const finetuneSelect = document.getElementById('finetuneSampleSelect');
+                finetuneSelect.innerHTML = '';
+                
+                data.samples.forEach(sample => {
+                    const option = document.createElement('option');
+                    option.value = sample.sample_id;
+                    option.textContent = `${sample.file_name} (${sample.duration?.toFixed(1)}s)`;
+                    select.appendChild(option);
+                    
+                    if (sample.is_labeled) {
+                        const ftOption = document.createElement('option');
+                        ftOption.value = sample.sample_id;
+                        ftOption.textContent = `${sample.file_name} - ${sample.fault_type || '未标注'}`;
+                        finetuneSelect.appendChild(ftOption);
+                    }
+                });
+            } catch (error) {
+                console.error('Failed to load samples for segments:', error);
+            }
+        }
+
+        async function loadSampleSegments() {
+            const sampleId = document.getElementById('segmentSampleSelect').value;
+            if (!sampleId) {
+                showToast('请先选择样本', 'error');
+                return;
+            }
+            
+            currentSegmentSampleId = sampleId;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/segments/${sampleId}/markers`);
+                const data = await response.json();
+                currentMarkers = data.markers;
+                renderMarkers();
+            } catch (error) {
+                console.error('Failed to load markers:', error);
+                showToast('加载标记失败', 'error');
+            }
+        }
+
+        function renderMarkers() {
+            const container = document.getElementById('markersList');
+            
+            if (currentMarkers.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-8">暂无标记，可手动添加或使用自动检测</p>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left text-gray-500 text-sm border-b">
+                            <th class="pb-3">开始时间</th>
+                            <th class="pb-3">结束时间</th>
+                            <th class="pb-3">时长</th>
+                            <th class="pb-3">标签</th>
+                            <th class="pb-3">创建人</th>
+                            <th class="pb-3">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${currentMarkers.map(m => `
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3">${m.start_time.toFixed(2)}s</td>
+                                <td class="py-3">${m.end_time.toFixed(2)}s</td>
+                                <td class="py-3">${(m.end_time - m.start_time).toFixed(2)}s</td>
+                                <td class="py-3">
+                                    <span class="status-badge ${m.label ? 'status-info' : 'status-warning'}">
+                                        ${m.label || '未标注'}
+                                    </span>
+                                </td>
+                                <td class="py-3 text-gray-500">${m.created_by}</td>
+                                <td class="py-3">
+                                    <button onclick="deleteMarker('${m.marker_id}')" class="text-red-600 hover:text-red-800 text-sm">删除</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function addSegmentMarker() {
+            if (!currentSegmentSampleId) {
+                showToast('请先选择样本', 'error');
+                return;
+            }
+            
+            const startTime = parseFloat(document.getElementById('markerStartTime').value);
+            const endTime = parseFloat(document.getElementById('markerEndTime').value);
+            const label = document.getElementById('markerLabel').value;
+            
+            if (isNaN(startTime) || isNaN(endTime) || startTime >= endTime) {
+                showToast('请输入有效的时间范围', 'error');
+                return;
+            }
+            
+            try {
+                const params = new URLSearchParams({
+                    start_time: startTime,
+                    end_time: endTime
+                });
+                if (label) params.append('label', label);
+                
+                const response = await fetch(`${API_BASE}/api/segments/${currentSegmentSampleId}/markers?${params.toString()}`, {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    showToast('标记添加成功');
+                    loadSampleSegments();
+                    document.getElementById('markerStartTime').value = '';
+                    document.getElementById('markerEndTime').value = '';
+                } else {
+                    const data = await response.json();
+                    showToast(data.detail || '添加失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to add marker:', error);
+                showToast('添加失败', 'error');
+            }
+        }
+
+        async function deleteMarker(markerId) {
+            if (!confirm('确定删除此标记？')) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/segments/markers/${markerId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    showToast('标记已删除');
+                    loadSampleSegments();
+                } else {
+                    showToast('删除失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to delete marker:', error);
+                showToast('删除失败', 'error');
+            }
+        }
+
+        async function autoDetectSegments() {
+            if (!currentSegmentSampleId) {
+                showToast('请先选择样本', 'error');
+                return;
+            }
+            
+            const method = document.getElementById('autoDetectMethod').value;
+            const threshold = parseFloat(document.getElementById('energyThreshold').value);
+            
+            try {
+                const params = new URLSearchParams({
+                    method: method,
+                    threshold: threshold
+                });
+                
+                const response = await fetch(`${API_BASE}/api/segments/${currentSegmentSampleId}/auto-detect?${params.toString()}`, {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showToast(`自动检测完成，发现 ${data.markers_found} 个片段`);
+                    loadSampleSegments();
+                } else {
+                    showToast('自动检测失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to auto detect segments:', error);
+                showToast('自动检测失败', 'error');
+            }
+        }
+
+        async function extractSegments() {
+            if (!currentSegmentSampleId) {
+                showToast('请先选择样本', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/segments/${currentSegmentSampleId}/extract`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    showToast(`成功提取 ${data.segments_extracted} 个片段`);
+                    console.log('Extracted segments:', data);
+                } else {
+                    showToast(data.detail || '提取失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to extract segments:', error);
+                showToast('提取失败', 'error');
+            }
+        }
+
+        async function exportSegments() {
+            if (!currentSegmentSampleId) {
+                showToast('请先选择样本', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/segments/${currentSegmentSampleId}/export`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    showToast(`成功导出 ${data.num_segments} 个片段到 ${data.output_path}`);
+                } else {
+                    showToast(data.detail || '导出失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to export segments:', error);
+                showToast('导出失败', 'error');
+            }
+        }
+
+        async function loadModelInfo() {
+            try {
+                const response = await fetch(`${API_BASE}/api/model/info`);
+                const data = await response.json();
+                
+                const container = document.getElementById('modelInfo');
+                container.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">模型状态</span>
+                            <span class="font-medium ${data.is_trained ? 'text-green-600' : 'text-yellow-600'}">
+                                ${data.is_trained ? '已训练' : '未训练'}
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">模型类型</span>
+                            <span class="font-medium">${data.model_type || 'N/A'}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">支持故障类型</span>
+                            <span class="font-medium">${data.classes?.length || 0} 种</span>
+                        </div>
+                        ${data.active_model ? `
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">当前版本</span>
+                                <span class="font-medium">${data.active_model.model_version}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">准确率</span>
+                                <span class="font-medium text-green-600">${(data.active_model.accuracy * 100).toFixed(1)}%</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Failed to load model info:', error);
+            }
+        }
+
+        async function startFineTune() {
+            const learningRate = parseFloat(document.getElementById('finetuneLearningRate').value);
+            const validationSplit = parseFloat(document.getElementById('finetuneValSplit').value);
+            const selectedOptions = Array.from(document.getElementById('finetuneSampleSelect').selectedOptions);
+            const sampleIds = selectedOptions.map(o => o.value);
+            
+            try {
+                const params = new URLSearchParams({
+                    learning_rate: learningRate,
+                    validation_split: validationSplit
+                });
+                
+                const response = await fetch(`${API_BASE}/api/model/fine-tune?${params.toString()}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: sampleIds.length > 0 ? JSON.stringify(sampleIds) : undefined
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('finetuneResult').classList.remove('hidden');
+                    document.getElementById('finetuneResultContent').innerHTML = `
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">是否成功</p>
+                                <p class="text-xl font-bold text-green-600">${data.success ? '是' : '否'}</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">新版本</p>
+                                <p class="text-xl font-bold text-blue-600">${data.new_model_version}</p>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">准确率</p>
+                                <p class="text-xl font-bold text-purple-600">${(data.accuracy * 100).toFixed(1)}%</p>
+                            </div>
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-500">训练样本</p>
+                                <p class="text-xl font-bold text-orange-600">${data.samples_used}</p>
+                            </div>
+                        </div>
+                        ${data.improvement !== null ? `
+                            <div class="mt-4 p-4 ${data.improvement >= 0 ? 'bg-green-50' : 'bg-red-50'} rounded-lg">
+                                <p class="text-sm text-gray-500">性能变化</p>
+                                <p class="text-lg font-bold ${data.improvement >= 0 ? 'text-green-600' : 'text-red-600'}">
+                                    ${data.improvement >= 0 ? '+' : ''}${(data.improvement * 100).toFixed(2)}%
+                                </p>
+                            </div>
+                        ` : ''}
+                        ${data.warnings?.length > 0 ? `
+                            <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                                <p class="text-sm font-medium text-yellow-800">警告:</p>
+                                <ul class="list-disc list-inside text-sm text-yellow-700 mt-2">
+                                    ${data.warnings.map(w => `<li>${w}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    `;
+                    showToast('模型微调完成');
+                    loadModelInfo();
+                    loadTrainingHistory();
+                } else {
+                    showToast(data.detail || data.error || '微调失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to fine-tune model:', error);
+                showToast('微调失败', 'error');
+            }
+        }
+
+        async function evaluateModel() {
+            try {
+                const response = await fetch(`${API_BASE}/api/model/evaluate`, {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    alert(`模型评估完成\n准确率: ${(data.accuracy * 100).toFixed(1)}%\n样本数: ${data.num_samples}`);
+                } else {
+                    showToast(data.detail || data.error || '评估失败', 'error');
+                }
+            } catch (error) {
+                console.error('Failed to evaluate model:', error);
+                showToast('评估失败', 'error');
+            }
+        }
+
+        async function loadTrainingHistory() {
+            try {
+                const response = await fetch(`${API_BASE}/api/model/training-history`);
+                const data = await response.json();
+                
+                const container = document.getElementById('trainingHistory');
+                if (data.history.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 text-center py-8">暂无训练记录</p>';
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-left text-gray-500 text-sm border-b">
+                                <th class="pb-3">时间</th>
+                                <th class="pb-3">类型</th>
+                                <th class="pb-3">样本数</th>
+                                <th class="pb-3">准确率</th>
+                                <th class="pb-3">提升</th>
+                                <th class="pb-3">版本</th>
+                                <th class="pb-3">耗时</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.history.map(h => `
+                                <tr class="border-b hover:bg-gray-50">
+                                    <td class="py-3">${new Date(h.timestamp * 1000).toLocaleString()}</td>
+                                    <td class="py-3">
+                                        <span class="status-badge status-info">${h.type === 'fine_tune' ? '微调' : '训练'}</span>
+                                    </td>
+                                    <td class="py-3">${h.samples_used}</td>
+                                    <td class="py-3 font-medium">${(h.accuracy * 100).toFixed(1)}%</td>
+                                    <td class="py-3 ${h.improvement >= 0 ? 'text-green-600' : 'text-red-600'}">
+                                        ${h.improvement !== null ? (h.improvement >= 0 ? '+' : '') + (h.improvement * 100).toFixed(2) + '%' : '-'}
+                                    </td>
+                                    <td class="py-3 font-mono text-sm">${h.new_version}</td>
+                                    <td class="py-3">${h.training_time.toFixed(1)}s</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (error) {
+                console.error('Failed to load training history:', error);
+            }
+        }
+
+        let taskStatsInterval = null;
+
+        async function refreshTaskStats() {
+            try {
+                const response = await fetch(`${API_BASE}/api/tasks/stats`);
+                const data = await response.json();
+                
+                document.getElementById('pendingTasks').textContent = data.pending || 0;
+                document.getElementById('runningTasks').textContent = data.running || 0;
+                document.getElementById('completedTasks').textContent = data.completed || 0;
+                document.getElementById('workerCount').textContent = data.workers || 0;
+                document.getElementById('minWorkers').textContent = data.min_workers || 0;
+                document.getElementById('maxWorkers').textContent = data.max_workers || 0;
+                document.getElementById('autoScale').textContent = data.auto_scale ? '已启用' : '已禁用';
+                
+                const loadPercent = ((data.current_load || 0) * 100).toFixed(0);
+                document.getElementById('currentLoad').textContent = loadPercent + '%';
+                document.getElementById('loadBar').style.width = loadPercent + '%';
+                
+                const loadBar = document.getElementById('loadBar');
+                if (data.current_load > 0.8) {
+                    loadBar.className = 'bg-red-600 h-4 rounded-full transition-all duration-500';
+                } else if (data.current_load > 0.5) {
+                    loadBar.className = 'bg-yellow-600 h-4 rounded-full transition-all duration-500';
+                } else {
+                    loadBar.className = 'bg-blue-600 h-4 rounded-full transition-all duration-500';
+                }
+            } catch (error) {
+                console.error('Failed to load task stats:', error);
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/tasks/workers`);
+                const data = await response.json();
+                
+                const container = document.getElementById('workersList');
+                container.innerHTML = data.workers.map(w => `
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium">Worker ${w.worker_id}</span>
+                            <span class="w-2 h-2 rounded-full ${w.is_alive ? 'bg-green-500' : 'bg-red-500'}"></span>
+                        </div>
+                        <p class="text-sm text-gray-500">PID: ${w.pid || 'N/A'}</p>
+                        <p class="text-sm ${w.is_alive ? 'text-green-600' : 'text-red-600'}">
+                            ${w.is_alive ? '运行中' : '已停止'}
+                        </p>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load worker stats:', error);
+            }
+        }
+
+        const originalShowSection = showSection;
+        function showSection(sectionId) {
+            originalShowSection(sectionId);
+            
+            if (sectionId === 'segments') {
+                loadSegmentSampleSelect();
+            } else if (sectionId === 'finetune') {
+                loadModelInfo();
+                loadTrainingHistory();
+                loadSegmentSampleSelect();
+            } else if (sectionId === 'tasks') {
+                refreshTaskStats();
+                if (taskStatsInterval) clearInterval(taskStatsInterval);
+                taskStatsInterval = setInterval(refreshTaskStats, 3000);
+            } else {
+                if (taskStatsInterval) {
+                    clearInterval(taskStatsInterval);
+                    taskStatsInterval = null;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+            loadDeviceSelects();
+        });
+    </script>
+</body>
+</html>
