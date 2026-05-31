@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: iot-gateway-gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:127.0.0.1}:${NACOS_PORT:8848}
+        namespace: ${NACOS_NAMESPACE:public}
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: iot-gateway-api
+          uri: lb://iot-gateway-api
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+    org.springframework.http.server.reactive: debug
+    reactor.netty: debug

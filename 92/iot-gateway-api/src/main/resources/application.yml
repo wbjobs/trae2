@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: iot-gateway-api
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:127.0.0.1}:${NACOS_PORT:8848}
+        namespace: ${NACOS_NAMESPACE:public}
+        metadata:
+          instance-id: ${spring.application.name}:${server.port}
+          version: 1.0.0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DB:iot_gateway}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    database: ${REDIS_DATABASE:0}
+    timeout: 3000ms
+
+server:
+  port: 8081
+
+iot:
+  protocol:
+    modbus:
+      port: 502
+      enabled: true
+    lora:
+      port: 8080
+      enabled: true
+    custom:
+      port: 9090
+      enabled: true
+
+  gateway:
+    sharding:
+      enabled: true
+      strategy: MONTH
+      table-prefix: device_data_
+      auto-create-table: true
+      keep-months: 12
+      hash-modulo: 16
+
+    cluster:
+      health-check-interval: 5000
+      node-timeout-ms: 15000
+      graceful-shutdown-ms: 30000
+
+    batch:
+      batch-size: 100
+      flush-interval-ms: 3000
+      max-queue-size: 100000
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    strict-table-info-handler: com.iot.gateway.persistence.sharding.DynamicTableNameHandler
+
+logging:
+  level:
+    com.iot.gateway: debug
+    org.springframework: info
+    com.iot.gateway.persistence.sharding: info

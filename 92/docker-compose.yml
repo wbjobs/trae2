@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: iot-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: iot_gateway
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./iot-gateway-persistence/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  redis:
+    image: redis:7-alpine
+    container_name: iot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  nacos:
+    image: nacos/nacos-server:v2.2.3
+    container_name: iot-nacos
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: root
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    depends_on:
+      - mysql
+
+  iot-gateway-api:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    container_name: iot-gateway-api-1
+    environment:
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: iot_gateway
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    ports:
+      - "8081:8081"
+      - "502:502"
+      - "8080:8080/udp"
+      - "9090:9090"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  iot-gateway-api-2:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    container_name: iot-gateway-api-2
+    environment:
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: iot_gateway
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SERVER_PORT: 8082
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql
+      - redis
+      - nacos
+
+  iot-gateway-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile-gateway
+    container_name: iot-gateway-gateway
+    environment:
+      NACOS_HOST: nacos
+      NACOS_PORT: 8848
+    ports:
+      - "9000:9000"
+    depends_on:
+      - nacos
+      - iot-gateway-api
+      - iot-gateway-api-2
+
+volumes:
+  mysql-data:
+  redis-data:
