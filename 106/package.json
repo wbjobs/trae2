@@ -1,0 +1,51 @@
+{
+  "name": "printer-management-system",
+  "version": "1.0.0",
+  "description": "多品牌打印机集中管控桌面应用",
+  "main": "electron/dist/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:cpp\" \"npm run dev:electron\"",
+    "dev:electron": "tsc -p electron/tsconfig.json && electron .",
+    "dev:cpp": "cmake --build cpp-backend/build --config Release",
+    "build:cpp": "cd cpp-backend && cmake -B build -S . && cmake --build build --config Release",
+    "build:electron": "tsc -p electron/tsconfig.json",
+    "build:addon": "cd native-addon && node-gyp rebuild",
+    "build": "npm run build:cpp && npm run build:addon && npm run build:electron",
+    "package": "electron-builder",
+    "package:win": "electron-builder --win",
+    "package:linux": "electron-builder --linux"
+  },
+  "author": "Printer Management Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "concurrently": "^8.0.0",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0",
+    "node-gyp": "^10.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^7.0.0"
+  },
+  "build": {
+    "appId": "com.printer.management",
+    "productName": "Printer Management System",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/dist/**/*",
+      "native-addon/build/Release/**/*",
+      "cpp-backend/build/Release/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
+  }
+}

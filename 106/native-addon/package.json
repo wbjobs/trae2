@@ -1,0 +1,14 @@
+{
+  "name": "printer-native-addon",
+  "version": "1.0.0",
+  "description": "Native addon for printer backend",
+  "main": "build/Release/printer_backend.node",
+  "gypfile": true,
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^7.0.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^10.0.0"
+  }
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打印机集中管控系统</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="app-title">🖨️ 打印机集中管控系统</h1>
+      </div>
+      <div class="header-right">
+        <div class="status-bar">
+          <span class="status-indicator online"></span>
+          <span id="connectionStatus">已连接</span>
+        </div>
+        <button id="refreshBtn" class="btn btn-secondary">
+          🔄 刷新
+        </button>
+      </div>
+    </header>
+
+    <div class="app-main">
+      <aside class="sidebar">
+        <nav class="nav-menu">
+          <div class="nav-item active" data-tab="printers">
+            <span class="nav-icon">🖨️</span>
+            <span class="nav-text">打印机管理</span>
+          </div>
+          <div class="nav-item" data-tab="tasks">
+            <span class="nav-icon">📋</span>
+            <span class="nav-text">打印任务</span>
+            <span class="badge" id="taskBadge">0</span>
+          </div>
+          <div class="nav-item" data-tab="templates">
+            <span class="nav-icon">📄</span>
+            <span class="nav-text">打印模板</span>
+          </div>
+          <div class="nav-item" data-tab="alerts">
+            <span class="nav-icon">⚠️</span>
+            <span class="nav-text">告警中心</span>
+            <span class="badge warning" id="alertBadge">0</span>
+          </div>
+          <div class="nav-item" data-tab="settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">系统设置</span>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section id="printers-tab" class="tab-content active">
+          <div class="tab-header">
+            <h2>打印机管理</h2>
+            <div class="tab-actions">
+              <button id="addPrinterBtn" class="btn btn-primary">+ 添加打印机</button>
+            </div>
+          </div>
+          <div id="printerList" class="printer-grid"></div>
+        </section>
+
+        <section id="tasks-tab" class="tab-content">
+          <div class="tab-header">
+            <h2>打印任务</h2>
+            <div class="tab-actions">
+              <select id="taskPriorityFilter" class="priority-filter">
+                <option value="all">所有优先级</option>
+                <option value="3">紧急</option>
+                <option value="2">高</option>
+                <option value="1">普通</option>
+                <option value="0">低</option>
+              </select>
+              <button id="printFileBtn" class="btn btn-primary">📂 打印文件</button>
+            </div>
+          </div>
+          <div class="task-tabs">
+            <button class="task-tab active" data-task-tab="active">进行中</button>
+            <button class="task-tab" data-task-tab="completed">已完成</button>
+          </div>
+          <div id="activeTasks" class="task-list"></div>
+          <div id="completedTasks" class="task-list hidden"></div>
+        </section>
+
+        <section id="templates-tab" class="tab-content">
+          <div class="tab-header">
+            <h2>打印模板</h2>
+            <div class="tab-actions">
+              <button id="createTemplateBtn" class="btn btn-primary">+ 创建模板</button>
+              <button id="importTemplateBtn" class="btn btn-secondary">📥 导入</button>
+              <button id="batchImportTemplateBtn" class="btn btn-secondary">📥 批量导入</button>
+              <button id="batchExportTemplateBtn" class="btn btn-secondary">📤 批量导出</button>
+            </div>
+          </div>
+          <div id="templateList" class="template-grid"></div>
+        </section>
+
+        <section id="alerts-tab" class="tab-content">
+          <div class="tab-header">
+            <h2>告警中心</h2>
+            <div class="tab-actions">
+              <button id="clearAlertsBtn" class="btn btn-secondary">🗑️ 清除所有</button>
+            </div>
+          </div>
+          <div id="alertList" class="alert-list"></div>
+        </section>
+
+        <section id="settings-tab" class="tab-content">
+          <div class="tab-header">
+            <h2>系统设置</h2>
+          </div>
+          <div class="settings-form">
+            <div class="setting-group">
+              <h3>常规设置</h3>
+              <div class="setting-item">
+                <label>自动刷新间隔（秒）</label>
+                <input type="number" id="refreshInterval" value="10" min="1" max="300">
+              </div>
+              <div class="setting-item">
+                <label>默认打印机</label>
+                <select id="defaultPrinterSelect"></select>
+              </div>
+            </div>
+            <div class="setting-group">
+              <h3>通知设置</h3>
+              <div class="setting-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="enableNotifications" checked>
+                  <span>启用桌面通知</span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="alertOnError" checked>
+                  <span>打印错误时告警</span>
+                </label>
+              </div>
+            </div>
+            <div class="setting-group">
+              <h3>关于</h3>
+              <div class="setting-item">
+                <label>版本</label>
+                <span id="appVersion">1.0.0</span>
+              </div>
+              <div class="setting-item">
+                <label>平台</label>
+                <span id="platform">Windows</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="printerModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">打印机详情</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary close-modal">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="alertModal" class="modal alert-modal">
+    <div class="modal-content alert-modal-content">
+      <div class="modal-header alert-modal-header">
+        <h3 id="alertModalTitle">⚠️ 设备告警</h3>
+      </div>
+      <div class="modal-body" id="alertModalBody">
+        <p id="alertModalMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="alertModalAck">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
