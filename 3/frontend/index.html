@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点云渲染系统 - Point Cloud Rendering System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a1a;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        #app {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        #point-cloud-container {
+            width: 100%;
+            height: 100%;
+        }
+        
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: rgba(10, 10, 26, 0.95);
+            border-bottom: 1px solid rgba(79, 195, 247, 0.3);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 200;
+        }
+        
+        #header h1 {
+            font-size: 18px;
+            font-weight: 500;
+            color: #4fc3f7;
+            margin-right: 20px;
+        }
+        
+        #header .subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        #header .status {
+            margin-left: auto;
+            display: flex;
+            gap: 15px;
+            font-size: 11px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4caf50;
+        }
+        
+        .status-dot.warning {
+            background: #ff9800;
+        }
+        
+        .status-dot.error {
+            background: #f44336;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 40, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #aaa;
+            z-index: 100;
+        }
+        
+        #controls div {
+            margin-bottom: 4px;
+        }
+        
+        #controls kbd {
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #fff;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 300;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(79, 195, 247, 0.2);
+            border-top-color: #4fc3f7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        #loading.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+            <h1>🌐 点云渲染系统</h1>
+            <span class="subtitle">Point Cloud Rendering System v1.0</span>
+            <div class="status">
+                <div class="status-item">
+                    <span class="status-dot" id="tile-service-status"></span>
+                    <span>瓦片服务</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot" id="spatial-service-status"></span>
+                    <span>空间索引服务</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loading">
+            <div class="spinner"></div>
+            <div>正在初始化点云渲染系统...</div>
+        </div>
+        
+        <div id="point-cloud-container"></div>
+        
+        <div id="controls">
+            <div><kbd>鼠标左键</kbd> 旋转</div>
+            <div><kbd>鼠标右键</kbd> 平移</div>
+            <div><kbd>滚轮</kbd> 缩放</div>
+            <div><kbd>点击</kbd> 选择点</div>
+        </div>
+    </div>
+    
+    <script type="module" src="/src/main.js"></script>
+    <script>
+        setTimeout(() => {
+            document.getElementById('loading').classList.add('hidden');
+        }, 1500);
+        
+        async function checkServices() {
+            try {
+                const tileResponse = await fetch('/tile-service/api/health');
+                const tileData = await tileResponse.json();
+                document.getElementById('tile-service-status').className = 'status-dot';
+            } catch (e) {
+                document.getElementById('tile-service-status').className = 'status-dot error';
+            }
+            
+            try {
+                const spatialResponse = await fetch('/spatial-index/api/health');
+                const spatialData = await spatialResponse.json();
+                document.getElementById('spatial-service-status').className = 'status-dot';
+            } catch (e) {
+                document.getElementById('spatial-service-status').className = 'status-dot error';
+            }
+        }
+        
+        setInterval(checkServices, 5000);
+        checkServices();
+    </script>
+</body>
+</html>

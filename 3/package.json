@@ -1,0 +1,32 @@
+{
+  "name": "point-cloud-system",
+  "version": "1.0.0",
+  "description": "Point Cloud Rendering System with Three.js frontend and microservices backend",
+  "private": true,
+  "scripts": {
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend/services/tile-service && npm install && cd ../spatial-index && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "start": "node scripts/start-all.js",
+    "start:backend": "node scripts/start-backend.js",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:tile-service": "cd backend/services/tile-service && npm start",
+    "start:spatial-index": "cd backend/services/spatial-index && npm start",
+    "start:gateway": "node backend/gateway.js",
+    "generate:data": "node scripts/generate-sample-data.js",
+    "dev": "npm run generate:data && npm run start"
+  },
+  "keywords": [
+    "point-cloud",
+    "three.js",
+    "3d-visualization",
+    "gis",
+    "spatial-index"
+  ],
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "backend/services/*",
+    "frontend"
+  ]
+}
