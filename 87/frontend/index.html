@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业时序工况数据分析与可视化平台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.8/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-plus@2.4.4/dist/index.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.4.4/dist/index.css">
+</head>
+<body>
+    <div id="app">
+        <el-container v-if="!isLoggedIn">
+            <el-card class="login-card">
+                <template #header>
+                    <div class="card-header">
+                        <span>工业时序工况数据分析平台</span>
+                    </div>
+                </template>
+                <el-form :model="loginForm" label-width="80px">
+                    <el-form-item label="用户名">
+                        <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码">
+                        <el-input v-model="loginForm.password" type="password" placeholder="请输入密码" @keyup.enter="handleLogin"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="handleLogin" style="width: 100%">登录</el-button>
+                    </el-form-item>
+                </el-form>
+                <div style="text-align: center; color: #999; font-size: 12px;">
+                    默认账号: admin / admin123
+                </div>
+            </el-card>
+        </el-container>
+
+        <el-container v-else class="main-container">
+            <el-header class="main-header">
+                <div class="header-left">
+                    <h2>工业时序工况数据分析与可视化平台</h2>
+                </div>
+                <div class="header-right">
+                    <el-select v-model="currentView" placeholder="选择视图" style="width: 150px; margin-right: 20px;" @change="handleViewChange">
+                        <el-option label="概览大屏" value="dashboard"></el-option>
+                        <el-option label="同比环比分析" value="comparison"></el-option>
+                        <el-option label="预警阈值配置" value="alerts"></el-option>
+                        <el-option label="趋势分析" value="trends"></el-option>
+                        <el-option label="数据清洗" value="cleaning"></el-option>
+                        <el-option label="报表管理" value="reports"></el-option>
+                        <el-option label="大屏布局管理" value="layouts"></el-option>
+                        <el-option label="用户管理" value="users"></el-option>
+                    </el-select>
+                    <span style="margin-right: 20px;">欢迎, {{ currentUser?.full_name || currentUser?.username }}</span>
+                    <el-button type="danger" size="small" @click="handleLogout">退出</el-button>
+                </div>
+            </el-header>
+
+            <el-main class="main-content">
+                <div v-if="currentView === 'dashboard'" class="dashboard-view">
+                    <div class="dashboard-filters">
+                        <el-form :inline="true" size="small">
+                            <el-form-item label="工厂">
+                                <el-select v-model="selectedFactory" placeholder="选择工厂" style="width: 150px;" @change="loadDashboardData">
+                                    <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="时间范围">
+                                <el-date-picker v-model="dateRange" type="datetimerange" range-separator="至" start-placeholder="开始时间" end-placeholder="结束时间" style="width: 350px;" @change="loadDashboardData"></el-date-picker>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="refreshDashboard">刷新</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+
+                    <div class="stats-cards">
+                        <el-card class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <span>📊</span>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">{{ dashboardSummary.device_count }}</div>
+                                <div class="stat-label">设备总数</div>
+                            </div>
+                        </el-card>
+                        <el-card class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <span>📈</span>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">{{ dashboardSummary.metric_count }}</div>
+                                <div class="stat-label">监控指标</div>
+                            </div>
+                        </el-card>
+                        <el-card class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <span>💾</span>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">{{ formatNumber(dashboardSummary.total_data_points) }}</div>
+                                <div class="stat-label">数据点数</div>
+                            </div>
+                        </el-card>
+                        <el-card class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                <span>✅</span>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">{{ (dashboardSummary.quality_rate * 100).toFixed(1) }}%</div>
+                                <div class="stat-label">数据质量</div>
+                            </div>
+                        </el-card>
+                    </div>
+
+                    <div class="dashboard-charts">
+                        <el-row :gutter="20">
+                            <el-col :span="12">
+                                <el-card class="chart-card">
+                                    <template #header>
+                                        <div class="card-header">
+                                            <span>实时工况趋势</span>
+                                            <el-button-group size="small">
+                                                <el-button :type="realtimeRange === 10 ? 'primary' : ''" @click="realtimeRange = 10; loadRealtimeData">10分钟</el-button>
+                                                <el-button :type="realtimeRange === 30 ? 'primary' : ''" @click="realtimeRange = 30; loadRealtimeData">30分钟</el-button>
+                                                <el-button :type="realtimeRange === 60 ? 'primary' : ''" @click="realtimeRange = 60; loadRealtimeData">1小时</el-button>
+                                            </el-button-group>
+                                        </div>
+                                    </template>
+                                    <div ref="realtimeChart" class="chart-container"></div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-card class="chart-card">
+                                    <template #header>
+                                        <div class="card-header">
+                                            <span>指标统计分布</span>
+                                        </div>
+                                    </template>
+                                    <div ref="statsChart" class="chart-container"></div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="20" style="margin-top: 20px;">
+                            <el-col :span="16">
+                                <el-card class="chart-card">
+                                    <template #header>
+                                        <div class="card-header">
+                                            <span>多指标对比分析</span>
+                                            <el-select v-model="selectedMetrics" multiple placeholder="选择指标" style="width: 300px;" @change="loadTrendData">
+                                                <el-option v-for="metric in metrics" :key="metric.metric_name" :label="metric.metric_name" :value="metric.metric_name"></el-option>
+                                            </el-select>
+                                        </div>
+                                    </template>
+                                    <div ref="trendChart" class="chart-container"></div>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="8">
+                                <el-card class="chart-card">
+                                    <template #header>
+                                        <div class="card-header">
+                                            <span>设备状态监控</span>
+                                        </div>
+                                    </template>
+                                    <el-table :data="devices" size="small" max-height="350">
+                                        <el-table-column prop="device_name" label="设备名称"></el-table-column>
+                                        <el-table-column prop="device_type" label="类型"></el-table-column>
+                                        <el-table-column prop="status" label="状态">
+                                            <template #default="{ row }">
+                                                <el-tag :type="row.status === 'online' ? 'success' : 'danger'" size="small">{{ row.status === 'online' ? '在线' : '离线' }}</el-tag>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'trends'" class="trends-view">
+                    <el-card>
+                        <template #header>
+                            <div class="card-header">
+                                <span>趋势深度分析</span>
+                            </div>
+                        </template>
+                        <el-form :inline="true" size="small" style="margin-bottom: 20px;">
+                            <el-form-item label="工厂">
+                                <el-select v-model="trendFilter.factory" placeholder="选择工厂" style="width: 150px;" @change="loadTrendDevices">
+                                    <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="设备">
+                                <el-select v-model="trendFilter.devices" multiple placeholder="选择设备" style="width: 250px;">
+                                    <el-option v-for="device in trendDevices" :key="device.device_id" :label="device.device_name" :value="device.device_id"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="指标">
+                                <el-select v-model="trendFilter.metrics" multiple placeholder="选择指标" style="width: 250px;">
+                                    <el-option v-for="metric in metrics" :key="metric.metric_name" :label="metric.metric_name" :value="metric.metric_name"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="聚合">
+                                <el-select v-model="trendFilter.aggregation" placeholder="聚合粒度" style="width: 120px;">
+                                    <el-option label="原始数据" value="raw"></el-option>
+                                    <el-option label="1分钟" value="1min"></el-option>
+                                    <el-option label="1小时" value="1hour"></el-option>
+                                    <el-option label="1天" value="1day"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="loadAnalysisData">查询</el-button>
+                            </el-form-item>
+                        </el-form>
+                        <div ref="analysisChart" class="chart-container-large"></div>
+                        <div style="margin-top: 20px;">
+                            <el-table :data="statisticsData" size="small">
+                                <el-table-column prop="metric_name" label="指标名称"></el-table-column>
+                                <el-table-column prop="device_id" label="设备ID"></el-table-column>
+                                <el-table-column prop="avg_value" label="平均值" :formatter="row => row.avg_value?.toFixed(2)"></el-table-column>
+                                <el-table-column prop="min_value" label="最小值" :formatter="row => row.min_value?.toFixed(2)"></el-table-column>
+                                <el-table-column prop="max_value" label="最大值" :formatter="row => row.max_value?.toFixed(2)"></el-table-column>
+                                <el-table-column prop="stddev" label="标准差" :formatter="row => row.stddev?.toFixed(2)"></el-table-column>
+                                <el-table-column prop="median" label="中位数" :formatter="row => row.median?.toFixed(2)"></el-table-column>
+                            </el-table>
+                        </div>
+                    </el-card>
+                </div>
+
+                <div v-if="currentView === 'cleaning'" class="cleaning-view">
+                    <el-row :gutter="20">
+                        <el-col :span="12">
+                            <el-card>
+                                <template #header>
+                                    <div class="card-header">
+                                        <span>数据质量报告</span>
+                                        <el-button type="primary" size="small" @click="loadQualityReport">刷新</el-button>
+                                    </div>
+                                </template>
+                                <el-form :inline="true" size="small">
+                                    <el-form-item label="工厂">
+                                        <el-select v-model="qualityFilter.factory" placeholder="选择工厂" style="width: 150px;">
+                                            <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-form-item label="天数">
+                                        <el-input-number v-model="qualityFilter.days" :min="1" :max="90"></el-input-number>
+                                    </el-form-item>
+                                </el-form>
+                                <el-table :data="qualityReport" size="small" max-height="400">
+                                    <el-table-column prop="metric_name" label="指标名称"></el-table-column>
+                                    <el-table-column prop="total_points" label="总点数" :formatter="formatNumber"></el-table-column>
+                                    <el-table-column prop="good_quality_rate" label="优良率" :formatter="row => (row.good_quality_rate * 100).toFixed(1) + '%'"></el-table-column>
+                                    <el-table-column prop="missing_rate" label="缺失率" :formatter="row => (row.missing_rate * 100).toFixed(2) + '%'"></el-table-column>
+                                </el-table>
+                            </el-card>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-card>
+                                <template #header>
+                                    <div class="card-header">
+                                        <span>数据清洗任务</span>
+                                    </div>
+                                </template>
+                                <el-table :data="cleaningTasks" size="small" max-height="500">
+                                    <el-table-column prop="task_name" label="任务名称"></el-table-column>
+                                    <el-table-column prop="source_table" label="源表"></el-table-column>
+                                    <el-table-column prop="status" label="状态">
+                                        <template #default="{ row }">
+                                            <el-tag :type="getStatusType(row.status)" size="small">{{ row.status }}</el-tag>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="processed_rows" label="处理行数" :formatter="formatNumber"></el-table-column>
+                                    <el-table-column prop="created_at" label="创建时间"></el-table-column>
+                                </el-table>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
+
+                <div v-if="currentView === 'reports'" class="reports-view">
+                    <el-card>
+                        <template #header>
+                            <div class="card-header">
+                                <span>报表生成</span>
+                            </div>
+                        </template>
+                        <el-form :inline="true" size="small">
+                            <el-form-item label="工厂">
+                                <el-select v-model="reportFilter.factory" placeholder="选择工厂" style="width: 150px;">
+                                    <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="报表名称">
+                                <el-input v-model="reportFilter.name" placeholder="输入报表名称" style="width: 150px;"></el-input>
+                            </el-form-item>
+                            <el-form-item label="时间范围">
+                                <el-date-picker v-model="reportFilter.dateRange" type="datetimerange" range-separator="至" start-placeholder="开始" end-placeholder="结束" style="width: 300px;"></el-date-picker>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="generateReport('excel')">生成Excel</el-button>
+                                <el-button type="success" @click="generateReport('pdf')">生成PDF</el-button>
+                            </el-form-item>
+                        </el-form>
+                        <el-divider></el-divider>
+                        <el-table :data="reportTasks" size="small">
+                            <el-table-column prop="report_name" label="报表名称"></el-table-column>
+                            <el-table-column prop="report_type" label="类型">
+                                <template #default="{ row }">
+                                    <el-tag size="small">{{ row.report_type.toUpperCase() }}</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="status" label="状态">
+                                <template #default="{ row }">
+                                    <el-tag :type="getStatusType(row.status)" size="small">{{ row.status }}</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="file_name" label="文件名"></el-table-column>
+                            <el-table-column prop="file_size" label="大小" :formatter="formatFileSize"></el-table-column>
+                            <el-table-column prop="created_at" label="创建时间"></el-table-column>
+                            <el-table-column label="操作">
+                                <template #default="{ row }">
+                                    <el-button type="primary" size="small" link @click="downloadReport(row.file_name)" :disabled="!row.file_name">下载</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-card>
+                </div>
+
+                <div v-if="currentView === 'comparison'" class="comparison-view">
+                    <el-card>
+                        <template #header>
+                            <div class="card-header">
+                                <span>📊 同比环比分析</span>
+                            </div>
+                        </template>
+                        <el-form :inline="true" size="small" style="margin-bottom: 20px;">
+                            <el-form-item label="工厂">
+                                <el-select v-model="comparisonFilter.factory" placeholder="选择工厂" style="width: 150px;" @change="loadComparisonData">
+                                    <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="指标">
+                                <el-select v-model="comparisonFilter.metrics" multiple placeholder="选择指标" style="width: 250px;" @change="loadComparisonData">
+                                    <el-option v-for="metric in metrics" :key="metric.metric_name" :label="metric.metric_name" :value="metric.metric_name"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="对比类型">
+                                <el-select v-model="comparisonFilter.compareType" placeholder="同比/环比" style="width: 140px;" @change="loadComparisonData">
+                                    <el-option label="同比(YoY)" value="yoy"></el-option>
+                                    <el-option label="季度环比(QoQ)" value="qoq"></el-option>
+                                    <el-option label="月度环比(MoM)" value="mom"></el-option>
+                                    <el-option label="周环比(WoW)" value="wow"></el-option>
+                                    <el-option label="日环比(DoD)" value="dod"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="周期粒度">
+                                <el-select v-model="comparisonFilter.periodType" placeholder="周期" style="width: 120px;" @change="loadComparisonData">
+                                    <el-option label="按日" value="day"></el-option>
+                                    <el-option label="按周" value="week"></el-option>
+                                    <el-option label="按月" value="month"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="数值类型">
+                                <el-select v-model="comparisonFilter.metricType" placeholder="数值类型" style="width: 120px;" @change="loadComparisonData">
+                                    <el-option label="平均值" value="avg_value"></el-option>
+                                    <el-option label="累计值" value="sum_value"></el-option>
+                                    <el-option label="最大值" value="max_value"></el-option>
+                                    <el-option label="最小值" value="min_value"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="周期数">
+                                <el-input-number v-model="comparisonFilter.periods" :min="1" :max="60" @change="loadComparisonData"></el-input-number>
+                            </el-form-item>
+                        </el-form>
+
+                        <el-row :gutter="20">
+                            <el-col :span="24" v-for="(item, idx) in comparisonData" :key="idx" style="margin-bottom: 20px;">
+                                <el-card>
+                                    <template #header>
+                                        <div class="card-header">
+                                            <span>{{ item.device_id }} - {{ item.metric_name }}</span>
+                                            <div style="display: flex; gap: 20px; align-items: center;">
+                                                <div>
+                                                    <span style="color: #999;">本期:</span>
+                                                    <el-tag type="primary" size="large" style="font-size: 16px; margin-left: 8px;">{{ item.current_total.toFixed(2) }}</el-tag>
+                                                </div>
+                                                <div>
+                                                    <span style="color: #999;">同期:</span>
+                                                    <el-tag type="info" size="large" style="font-size: 16px; margin-left: 8px;">{{ item.compare_total.toFixed(2) }}</el-tag>
+                                                </div>
+                                                <div>
+                                                    <span style="color: #999;">变化:</span>
+                                                    <el-tag :type="item.trend === 'up' ? 'danger' : (item.trend === 'down' ? 'success' : 'info')" size="large" style="font-size: 16px; margin-left: 8px;">
+                                                        {{ item.trend === 'up' ? '↑' : (item.trend === 'down' ? '↓' : '→') }} {{ Math.abs(item.change_rate).toFixed(2) }}%
+                                                    </el-tag>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div :ref="el => { if(el) comparisonChartRefs[idx] = el }" class="chart-container-large"></div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+
+                        <el-row :gutter="20" style="margin-top: 20px;">
+                            <el-col :span="24">
+                                <el-card>
+                                    <template #header>
+                                        <span>📈 变化率对比</span>
+                                    </template>
+                                    <div ref="comparisonBarChart" class="chart-container"></div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </div>
+
+                <div v-if="currentView === 'alerts'" class="alerts-view">
+                    <el-row :gutter="20">
+                        <el-col :span="16">
+                            <el-card>
+                                <template #header>
+                                    <div class="card-header">
+                                        <span>⚙️ 预警阈值配置</span>
+                                        <el-button type="primary" size="small" @click="showThresholdDialog = true">+ 新增阈值</el-button>
+                                        <el-button type="warning" size="small" @click="detectAlerts" :loading="detecting">🔍 立即检测</el-button>
+                                    </div>
+                                </template>
+                                <el-form :inline="true" size="small">
+                                    <el-form-item label="工厂">
+                                        <el-select v-model="alertFilter.factory" placeholder="选择工厂" style="width: 150px;" @change="loadThresholds">
+                                            <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-form>
+                                <el-table :data="thresholdConfigs" size="small">
+                                    <el-table-column prop="metric_name" label="指标名称"></el-table-column>
+                                    <el-table-column prop="device_id" label="设备"></el-table-column>
+                                    <el-table-column prop="threshold_type" label="类型">
+                                        <template #default="{ row }">
+                                            <el-tag size="small">{{ row.threshold_type === 'range' ? '范围' : '阈值' }}</el-tag>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="阈值范围">
+                                        <template #default="{ row }">
+                                            <span v-if="row.threshold_type === 'range'">
+                                                {{ row.min_value !== null ? row.min_value : '-∞' }} ~ {{ row.max_value !== null ? row.max_value : '+∞' }}
+                                            </span>
+                                            <span v-else>
+                                                警告: {{ row.warning_value }}, 危急: {{ row.critical_value }}
+                                            </span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="severity" label="严重等级">
+                                        <template #default="{ row }">
+                                            <el-tag :type="row.severity === 'critical' ? 'danger' : (row.severity === 'warning' ? 'warning' : 'info')" size="small">{{ row.severity }}</el-tag>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="enabled" label="状态">
+                                        <template #default="{ row }">
+                                            <el-switch v-model="row.enabled" size="small" @change="toggleThreshold(row)"></el-switch>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="操作">
+                                        <template #default="{ row }">
+                                            <el-button type="danger" size="small" link @click="deleteThreshold(row)">删除</el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+
+                                <el-divider></el-divider>
+
+                                <h4 style="margin-bottom: 15px;">📋 告警记录</h4>
+                                <el-form :inline="true" size="small">
+                                    <el-form-item label="状态">
+                                        <el-select v-model="alertFilter.status" clearable placeholder="全部" style="width: 120px;" @change="loadAlertRecords">
+                                            <el-option label="活动中" value="active"></el-option>
+                                            <el-option label="已确认" value="acknowledged"></el-option>
+                                            <el-option label="已解决" value="resolved"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                    <el-form-item label="级别">
+                                        <el-select v-model="alertFilter.severity" clearable placeholder="全部" style="width: 120px;" @change="loadAlertRecords">
+                                            <el-option label="信息" value="info"></el-option>
+                                            <el-option label="警告" value="warning"></el-option>
+                                            <el-option label="危急" value="critical"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-form>
+                                <el-table :data="alertRecords" size="small">
+                                    <el-table-column prop="metric_name" label="指标"></el-table-column>
+                                    <el-table-column prop="device_id" label="设备"></el-table-column>
+                                    <el-table-column prop="alert_type" label="类型"></el-table-column>
+                                    <el-table-column prop="severity" label="级别">
+                                        <template #default="{ row }">
+                                            <el-tag :type="row.severity === 'critical' ? 'danger' : (row.severity === 'warning' ? 'warning' : 'info')" size="small">{{ row.severity }}</el-tag>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="数值">
+                                        <template #default="{ row }">
+                                            当前: <b>{{ row.metric_value.toFixed(2) }}</b>, 阈值: {{ row.threshold_value }}
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="message" label="消息" min-width="200"></el-table-column>
+                                    <el-table-column prop="status" label="状态">
+                                        <template #default="{ row }">
+                                            <el-tag :type="row.status === 'active' ? 'danger' : (row.status === 'acknowledged' ? 'warning' : 'success')" size="small">{{ row.status }}</el-tag>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="triggered_at" label="触发时间"></el-table-column>
+                                    <el-table-column label="操作">
+                                        <template #default="{ row }">
+                                            <el-button v-if="row.status === 'active'" type="warning" size="small" link @click="acknowledgeAlert(row)">确认</el-button>
+                                            <el-button v-if="row.status !== 'resolved'" type="success" size="small" link @click="resolveAlert(row)">解决</el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </el-card>
+                        </el-col>
+                        <el-col :span="8">
+                            <el-card>
+                                <template #header>
+                                    <div class="card-header">
+                                        <span>📊 告警统计</span>
+                                        <el-button type="primary" size="small" @click="loadAlertSummary">刷新</el-button>
+                                    </div>
+                                </template>
+                                <el-row :gutter="10">
+                                    <el-col :span="12">
+                                        <el-statistic title="告警总数" :value="alertSummary.total_alerts" value-style="color: #F56C6C;"></el-statistic>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-statistic title="活动告警" :value="alertSummary.active_alerts" value-style="color: #E6A23C;"></el-statistic>
+                                    </el-col>
+                                </el-row>
+                                <el-divider></el-divider>
+                                <div ref="alertPieChart" class="chart-container"></div>
+                            </el-card>
+                            <el-card style="margin-top: 20px;">
+                                <template #header>
+                                    <span>⚠️ 实时检测结果</span>
+                                </template>
+                                <el-empty v-if="currentViolations.length === 0" description="当前无异常"></el-empty>
+                                <el-table v-else :data="currentViolations" size="small">
+                                    <el-table-column prop="metric_name" label="指标"></el-table-column>
+                                    <el-table-column prop="severity" label="级别">
+                                        <template #default="{ row }">
+                                            <el-tag :type="row.severity === 'critical' ? 'danger' : 'warning'" size="small">{{ row.severity }}</el-tag>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="message" label="消息"></el-table-column>
+                                </el-table>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
+
+                <div v-if="currentView === 'layouts'" class="layouts-view">
+                    <el-card>
+                        <template #header>
+                            <div class="card-header">
+                                <span>🖼️ 大屏布局管理</span>
+                                <div>
+                                    <el-button type="primary" size="small" @click="showLayoutDialog = true; newLayout = {}">+ 新建布局</el-button>
+                                    <el-button type="success" size="small" @click="startLayoutEdit = true; loadCurrentLayoutToEditor()" v-if="!startLayoutEdit">✏️ 编辑当前布局</el-button>
+                                    <el-button type="success" size="small" @click="saveCurrentLayout()" v-if="startLayoutEdit">💾 保存布局</el-button>
+                                    <el-button type="info" size="small" @click="startLayoutEdit = false; resetLayout()" v-if="startLayoutEdit">❌ 取消编辑</el-button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <el-row :gutter="20" style="margin-bottom: 20px;">
+                            <el-col :span="8">
+                                <el-card>
+                                    <template #header>
+                                        <span>📁 我的布局</span>
+                                    </template>
+                                    <div v-for="layout in savedLayouts" :key="layout.layout_id" class="layout-item" :class="{ 'active': currentLayoutId === layout.layout_id }">
+                                        <div class="layout-item-header">
+                                            <span style="font-weight: 600;">{{ layout.layout_name }}</span>
+                                            <el-tag v-if="layout.is_default" type="success" size="small">默认</el-tag>
+                                        </div>
+                                        <div style="color: #999; font-size: 12px; margin: 5px 0;">
+                                            更新: {{ layout.updated_at }}
+                                        </div>
+                                        <div style="display: flex; gap: 8px;">
+                                            <el-button type="primary" size="small" link @click="applyLayout(layout)">应用</el-button>
+                                            <el-button type="primary" size="small" link @click="setDefaultLayout(layout)" v-if="!layout.is_default">设为默认</el-button>
+                                            <el-button type="danger" size="small" link @click="deleteLayout(layout)">删除</el-button>
+                                        </div>
+                                    </div>
+                                    <el-empty v-if="savedLayouts.length === 0" description="暂无保存的布局"></el-empty>
+                                </el-card>
+                            </el-col>
+                            <el-col :span="16">
+                                <el-card>
+                                    <template #header>
+                                        <span>🔍 布局预览 / 编辑器</span>
+                                    </template>
+                                    <div class="layout-editor" :class="{ 'editing': startLayoutEdit }">
+                                        <el-row :gutter="10">
+                                            <el-col :span="12" v-for="widget in dashboardLayout.widgets" :key="widget.id" class="layout-widget" :style="{ height: widget.height + 'px', opacity: startLayoutEdit ? 0.8 : 1 }">
+                                                <div v-if="startLayoutEdit" class="widget-handle">
+                                                    <span class="widget-title">{{ widget.title }}</span>
+                                                    <div style="display: flex; gap: 4px;">
+                                                        <el-button type="danger" size="mini" circle @click="removeWidget(widget)">×</el-button>
+                                                    </div>
+                                                </div>
+                                                <el-card v-else shadow="hover">
+                                                    <template #header>
+                                                        <span>{{ widget.title }}</span>
+                                                    </template>
+                                                    <div style="height: calc(100% - 60px); display: flex; align-items: center; justify-content: center; background: #f5f7fa; border-radius: 4px;">
+                                                        <el-empty :description="widget.title" :image-size="40"></el-empty>
+                                                    </div>
+                                                </el-card>
+                                            </el-col>
+                                        </el-row>
+                                        <div v-if="startLayoutEdit" style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-radius: 8px;">
+                                            <div style="margin-bottom: 10px; font-weight: 600;">➕ 添加组件</div>
+                                            <el-tag v-for="w in availableWidgets" :key="w.id" :type="getWidgetType(w.id)" style="cursor: pointer; margin: 4px;" @click="addWidget(w)">
+                                                {{ w.title }}
+                                            </el-tag>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </div>
+
+                <div v-if="currentView === 'users'" class="users-view">
+                    <el-card v-if="currentUser?.role === 'admin'">
+                        <template #header>
+                            <div class="card-header">
+                                <span>用户管理</span>
+                                <el-button type="primary" size="small" @click="showUserDialog = true">添加用户</el-button>
+                            </div>
+                        </template>
+                        <el-table :data="users" size="small">
+                            <el-table-column prop="username" label="用户名"></el-table-column>
+                            <el-table-column prop="email" label="邮箱"></el-table-column>
+                            <el-table-column prop="full_name" label="姓名"></el-table-column>
+                            <el-table-column prop="role" label="角色">
+                                <template #default="{ row }">
+                                    <el-tag :type="row.role === 'admin' ? 'danger' : 'primary'" size="small">{{ row.role }}</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="is_active" label="状态">
+                                <template #default="{ row }">
+                                    <el-tag :type="row.is_active ? 'success' : 'info'" size="small">{{ row.is_active ? '启用' : '禁用' }}</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="last_login" label="最后登录"></el-table-column>
+                        </el-table>
+                    </el-card>
+                    <el-alert v-else type="warning" title="权限不足" description="只有管理员可以访问用户管理页面" show-icon style="margin-top: 50px;"></el-alert>
+                </div>
+            </el-main>
+        </el-container>
+
+        <el-dialog v-model="showThresholdDialog" title="新增预警阈值配置" width="600px">
+            <el-form :model="newThreshold" label-width="120px">
+                <el-form-item label="工厂">
+                    <el-select v-model="newThreshold.factory_id" style="width: 100%;">
+                        <el-option v-for="factory in factories" :key="factory.factory_id" :label="factory.factory_name" :value="factory.factory_id"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="设备">
+                    <el-select v-model="newThreshold.device_id" clearable placeholder="所有设备" style="width: 100%;">
+                        <el-option v-for="device in devices" :key="device.device_id" :label="device.device_name" :value="device.device_id"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="监控指标">
+                    <el-select v-model="newThreshold.metric_name" style="width: 100%;">
+                        <el-option v-for="metric in metrics" :key="metric.metric_name" :label="metric.metric_name" :value="metric.metric_name"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="阈值类型">
+                    <el-radio-group v-model="newThreshold.threshold_type">
+                        <el-radio label="range">范围限制</el-radio>
+                        <el-radio label="warning">阈值告警</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <template v-if="newThreshold.threshold_type === 'range'">
+                    <el-form-item label="最小值">
+                        <el-input-number v-model="newThreshold.min_value" :precision="2" :step="0.1" style="width: 100%;"></el-input-number>
+                    </el-form-item>
+                    <el-form-item label="最大值">
+                        <el-input-number v-model="newThreshold.max_value" :precision="2" :step="0.1" style="width: 100%;"></el-input-number>
+                    </el-form-item>
+                </template>
+                <template v-else>
+                    <el-form-item label="警告阈值">
+                        <el-input-number v-model="newThreshold.warning_value" :precision="2" :step="0.1" style="width: 100%;"></el-input-number>
+                    </el-form-item>
+                    <el-form-item label="危急阈值">
+                        <el-input-number v-model="newThreshold.critical_value" :precision="2" :step="0.1" style="width: 100%;"></el-input-number>
+                    </el-form-item>
+                </template>
+                <el-form-item label="严重等级">
+                    <el-select v-model="newThreshold.severity" style="width: 100%;">
+                        <el-option label="信息" value="info"></el-option>
+                        <el-option label="警告" value="warning"></el-option>
+                        <el-option label="危急" value="critical"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="是否启用">
+                    <el-switch v-model="newThreshold.enabled"></el-switch>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <el-button @click="showThresholdDialog = false">取消</el-button>
+                <el-button type="primary" @click="createThreshold">保存</el-button>
+            </template>
+        </el-dialog>
+
+        <el-dialog v-model="showLayoutDialog" title="保存布局" width="500px">
+            <el-form :model="newLayout" label-width="100px">
+                <el-form-item label="布局名称">
+                    <el-input v-model="newLayout.layout_name" placeholder="请输入布局名称"></el-input>
+                </el-form-item>
+                <el-form-item label="设为默认">
+                    <el-switch v-model="newLayout.is_default"></el-switch>
+                </el-form-item>
+                <el-form-item label="公开布局">
+                    <el-switch v-model="newLayout.is_public"></el-switch>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <el-button @click="showLayoutDialog = false">取消</el-button>
+                <el-button type="primary" @click="saveLayoutConfig">保存</el-button>
+            </template>
+        </el-dialog>
+
+        <el-dialog v-model="showUserDialog" title="添加用户" width="500px">
+            <el-form :model="newUser" label-width="100px">
+                <el-form-item label="用户名">
+                    <el-input v-model="newUser.username"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-input v-model="newUser.email"></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                    <el-input v-model="newUser.password" type="password"></el-input>
+                </el-form-item>
+                <el-form-item label="姓名">
+                    <el-input v-model="newUser.full_name"></el-input>
+                </el-form-item>
+                <el-form-item label="角色">
+                    <el-select v-model="newUser.role" style="width: 100%;">
+                        <el-option label="管理员" value="admin"></el-option>
+                        <el-option label="编辑者" value="editor"></el-option>
+                        <el-option label="查看者" value="viewer"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <el-button @click="showUserDialog = false">取消</el-button>
+                <el-button type="primary" @click="createUser">确定</el-button>
+            </template>
+        </el-dialog>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
