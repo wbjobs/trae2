@@ -1,0 +1,17 @@
+{
+    "old_version": "v1.0.0",
+    "new_version": "v1.1.0",
+    "description": "修复内存泄漏问题，优化数据采集性能",
+    "changelog": [
+        "修复传感器数据采集时的内存泄漏",
+        "优化MQTT消息发送性能",
+        "增加设备自检功能",
+        "修复极端温度下的时钟漂移问题"
+    ],
+    "author": "Firmware Team",
+    "release_date": "2024-01-15",
+    "compatibility": [
+        "IoT-Sensor-V1",
+        "IoT-Sensor-V2"
+    ]
+}

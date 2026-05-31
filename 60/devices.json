@@ -1,0 +1,47 @@
+[
+    {
+        "id": "dev_001",
+        "ip": "192.168.1.101",
+        "port": 1883,
+        "protocol": "mqtt",
+        "model": "IoT-Sensor-V1",
+        "version": "v1.0.0",
+        "status": "online"
+    },
+    {
+        "id": "dev_002",
+        "ip": "192.168.1.102",
+        "port": 8080,
+        "protocol": "http",
+        "model": "IoT-Gateway-V2",
+        "version": "v1.2.0",
+        "status": "online"
+    },
+    {
+        "id": "dev_003",
+        "ip": "192.168.1.103",
+        "port": 5683,
+        "protocol": "coap",
+        "model": "SmartMeter-V3",
+        "version": "v2.0.1",
+        "status": "online"
+    },
+    {
+        "id": "dev_004",
+        "ip": "192.168.1.104",
+        "port": 502,
+        "protocol": "modbus",
+        "model": "PLC-Controller-X1",
+        "version": "v3.1.0",
+        "status": "online"
+    },
+    {
+        "id": "dev_005",
+        "ip": "192.168.1.105",
+        "port": 1883,
+        "protocol": "mqtt",
+        "model": "EdgeDevice-Pro",
+        "version": "v1.5.2",
+        "status": "offline"
+    }
+]

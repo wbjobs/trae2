@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""物联网终端固件差分升级与版本管控工具 - 命令行入口"""
+
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from iot_fw_upgrade.main import main
+
+if __name__ == "__main__":
+    sys.exit(main())

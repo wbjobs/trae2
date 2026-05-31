@@ -1,0 +1,11 @@
+{
+    "log_level": "INFO",
+    "device_timeout": 30,
+    "max_parallel_upgrades": 10,
+    "diff_algorithm": "bsdiff",
+    "retry_count": 3,
+    "retry_interval": 5,
+    "firmware_store": "./firmware",
+    "upgrade_log_dir": "./upgrade_logs",
+    "device_config": "./devices.json"
+}

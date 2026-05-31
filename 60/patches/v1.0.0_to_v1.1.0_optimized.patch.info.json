@@ -1,0 +1,14 @@
+{
+  "old_version": "firmware_v1.0.0.bin",
+  "new_version": "firmware_v1.1.0.bin",
+  "algorithm": "optimized",
+  "old_size": 1048597,
+  "new_size": 1048597,
+  "diff_size": 1048616,
+  "compression_ratio": -0.0018119449130660215,
+  "old_md5": "686b5786fdf8ee0a97d32c5793204b62",
+  "new_md5": "c342b1080ef86b175122b06ff229c168",
+  "diff_md5": "f60003bab274e21c7000c135f13ad745",
+  "created_at": 1779876506.2516448,
+  "metadata": {}
+}
