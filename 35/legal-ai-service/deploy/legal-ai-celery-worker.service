@@ -1,0 +1,21 @@
+[Unit]
+Description=Legal AI Service - Celery Worker
+After=network.target redis-server.service legal-ai-service.service
+
+[Service]
+Type=simple
+User=legalai
+Group=legalai
+WorkingDirectory=/opt/legal-ai-service
+Environment="PATH=/opt/legal-ai-service/venv/bin"
+Environment="PYTHONPATH=/opt/legal-ai-service"
+Environment="CUDA_VISIBLE_DEVICES="
+ExecStart=/opt/legal-ai-service/venv/bin/celery -A deploy.celery_tasks worker --loglevel=info --concurrency=4
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=legal-ai-celery
+
+[Install]
+WantedBy=multi-user.target

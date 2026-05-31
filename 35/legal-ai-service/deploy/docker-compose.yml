@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: legal-ai-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - legal-ai-network
+
+  legal-ai-service:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: legal-ai-service
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
+      - CUDA_VISIBLE_DEVICES=
+    volumes:
+      - ./logs:/opt/legal-ai-service/logs
+      - ./data:/opt/legal-ai-service/data
+    depends_on:
+      - redis
+    networks:
+      - legal-ai-network
+
+  celery-worker:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: legal-ai-celery-worker
+    restart: unless-stopped
+    command: celery -A deploy.celery_tasks worker --loglevel=info --concurrency=4
+    environment:
+      - REDIS_HOST=redis
+      - CELERY_BROKER_URL=redis://redis:6379/1
+      - CELERY_RESULT_BACKEND=redis://redis:6379/2
+      - PYTHONPATH=/opt/legal-ai-service
+    volumes:
+      - ./logs:/opt/legal-ai-service/logs
+      - ./data:/opt/legal-ai-service/data
+    depends_on:
+      - redis
+      - legal-ai-service
+    networks:
+      - legal-ai-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: legal-ai-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - legal-ai-service
+    networks:
+      - legal-ai-network
+
+volumes:
+  redis_data:
+
+networks:
+  legal-ai-network:
+    driver: bridge

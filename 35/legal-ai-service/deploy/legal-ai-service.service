@@ -1,0 +1,21 @@
+[Unit]
+Description=Legal AI Service - FastAPI Application
+After=network.target redis-server.service
+
+[Service]
+Type=simple
+User=legalai
+Group=legalai
+WorkingDirectory=/opt/legal-ai-service
+Environment="PATH=/opt/legal-ai-service/venv/bin"
+Environment="PYTHONPATH=/opt/legal-ai-service"
+Environment="CUDA_VISIBLE_DEVICES=0"
+ExecStart=/opt/legal-ai-service/venv/bin/python main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=legal-ai-service
+
+[Install]
+WantedBy=multi-user.target
