@@ -1,0 +1,19 @@
+{
+  "name": "electron-log-analyzer",
+  "version": "1.0.0",
+  "description": "基于 Electron 的桌面日志采集分析应用",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging"
+  },
+  "keywords": ["electron", "log", "analyzer", "visualization"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1"
+  }
+}

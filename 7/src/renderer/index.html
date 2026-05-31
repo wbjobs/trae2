@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>日志采集分析仪</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="title">
+      <span class="logo">●</span>
+      <h1>日志采集分析仪</h1>
+    </div>
+    <div class="toolbar">
+      <button id="btn-import" class="btn btn-primary">导入日志</button>
+      <button id="btn-watch" class="btn">实时监控</button>
+      <button id="btn-clear" class="btn">清空</button>
+      <button id="btn-refresh" class="btn">刷新</button>
+      <button id="btn-config" class="btn">配置</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <aside class="sidebar">
+      <section class="panel">
+        <h2>过滤分析</h2>
+        <div class="filter-group">
+          <label>级别</label>
+          <div id="filter-levels" class="checkbox-group"></div>
+        </div>
+        <div class="filter-group">
+          <label for="filter-module">模块</label>
+          <select id="filter-module" class="input">
+            <option value="">全部</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-keyword">关键字</label>
+          <input id="filter-keyword" type="text" class="input" placeholder="模糊匹配消息内容" />
+        </div>
+        <div class="filter-group">
+          <label for="filter-date">时间范围</label>
+          <div class="date-range">
+            <input id="filter-date-start" type="datetime-local" class="input" />
+            <span>~</span>
+            <input id="filter-date-end" type="datetime-local" class="input" />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label>
+            <input type="checkbox" id="filter-anomalies" />
+            <span style="color:#f44336;margin-left:4px;">仅显示异常</span>
+          </label>
+        </div>
+        <div class="filter-actions">
+          <button id="btn-apply-filter" class="btn btn-primary">应用</button>
+          <button id="btn-reset-filter" class="btn">重置</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>实时监控</h2>
+        <div id="watched-files" class="watched-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>统计概览</h2>
+        <div id="stats" class="stats"></div>
+      </section>
+    </aside>
+
+    <section class="content">
+      <section class="panel">
+        <h2>日志明细</h2>
+        <div class="log-table-wrap">
+          <table class="log-table" id="log-table">
+            <thead>
+              <tr>
+                <th style="width:50px"></th>
+                <th style="width:70px">ID</th>
+                <th style="width:170px">时间</th>
+                <th style="width:70px">级别</th>
+                <th style="width:100px">模块</th>
+                <th>消息</th>
+                <th style="width:110px">来源</th>
+              </tr>
+            </thead>
+            <tbody id="log-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>可视化图表</h2>
+        <div class="chart-controls">
+          <div class="chart-type">
+            <label>图表类型：</label>
+            <select id="chart-type" class="input">
+              <option value="bar">柱状图</option>
+              <option value="line">折线图</option>
+              <option value="doughnut">环形图</option>
+            </select>
+          </div>
+          <div class="chart-metric">
+            <label>维度：</label>
+            <select id="chart-metric" class="input">
+              <option value="level">按级别</option>
+              <option value="module">按模块</option>
+              <option value="hour">按小时</option>
+            </select>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="main-chart"></canvas>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="config-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>应用配置</h2>
+        <button id="config-close" class="btn-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="filter-group">
+          <label for="cfg-max-logs">最大日志条数</label>
+          <input id="cfg-max-logs" type="number" min="100" max="100000" class="input" />
+        </div>
+        <div class="filter-group">
+          <label>主题</label>
+          <select id="cfg-theme" class="input">
+            <option value="dark">深色</option>
+            <option value="light">浅色</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="cfg-auto-refresh">自动刷新</label>
+          <input id="cfg-auto-refresh" type="checkbox" />
+        </div>
+        <div class="filter-group">
+          <label for="cfg-refresh-interval">刷新间隔 (ms)</label>
+          <input id="cfg-refresh-interval" type="number" min="500" max="30000" step="100" class="input" />
+        </div>
+        <div class="filter-group">
+          <label>默认图表类型</label>
+          <select id="cfg-chart-type" class="input">
+            <option value="bar">柱状图</option>
+            <option value="line">折线图</option>
+            <option value="doughnut">环形图</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cfg-reset" class="btn">恢复默认</button>
+        <button id="cfg-save" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/constants.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
