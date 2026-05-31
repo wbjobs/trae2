@@ -1,0 +1,251 @@
+{
+  "app_name": "hardware-monitor-embedded",
+  "app_version": "1.0.0",
+  "device_id": "device-embedded-rpi-001",
+  "devices": [
+    {
+      "device_id": "cpu-arm-001",
+      "name": "ARM Cortex-A76",
+      "hardware_type": "Cpu",
+      "enabled": true,
+      "poll_interval_ms": 2000,
+      "settings": {
+        "architecture": "ARMv8.2",
+        "cores": "4",
+        "governor": "ondemand"
+      }
+    },
+    {
+      "device_id": "memory-8gb-001",
+      "name": "LPDDR4 8GB",
+      "hardware_type": "Memory",
+      "enabled": true,
+      "poll_interval_ms": 2000,
+      "settings": {
+        "type": "LPDDR4X",
+        "speed_mhz": "3200"
+      }
+    },
+    {
+      "device_id": "disk-emmc-001",
+      "name": "eMMC 64GB",
+      "hardware_type": "Disk",
+      "enabled": true,
+      "poll_interval_ms": 10000,
+      "settings": {
+        "type": "eMMC 5.1",
+        "bus_width": "8-bit"
+      }
+    },
+    {
+      "device_id": "network-wifi-001",
+      "name": "Wi-Fi 6 AX200",
+      "hardware_type": "Network",
+      "enabled": true,
+      "poll_interval_ms": 5000,
+      "settings": {
+        "mode": "station",
+        "ssid": "IoT-Network",
+        "band": "5GHz"
+      }
+    },
+    {
+      "device_id": "network-eth-001",
+      "name": "Gigabit Ethernet",
+      "hardware_type": "Network",
+      "enabled": true,
+      "poll_interval_ms": 5000,
+      "settings": {
+        "speed": "1000",
+        "duplex": "full"
+      }
+    },
+    {
+      "device_id": "sensor-gpio-001",
+      "name": "GPIO输入传感器",
+      "hardware_type": "Sensor",
+      "enabled": true,
+      "poll_interval_ms": 100,
+      "settings": {
+        "pins": "GPIO17,GPIO18,GPIO27,GPIO22",
+        "pull_mode": "up"
+      }
+    },
+    {
+      "device_id": "sensor-i2c-001",
+      "name": "环境传感器BME280",
+      "hardware_type": "Sensor",
+      "enabled": true,
+      "poll_interval_ms": 1000,
+      "settings": {
+        "bus": "i2c-1",
+        "address": "0x76",
+        "sensors": "temperature,humidity,pressure"
+      }
+    },
+    {
+      "device_id": "sensor-spi-001",
+      "name": "ADC MCP3008",
+      "hardware_type": "Sensor",
+      "enabled": true,
+      "poll_interval_ms": 500,
+      "settings": {
+        "bus": "spi0",
+        "chip_select": "CE0",
+        "channels": "8",
+        "reference_voltage": "3.3"
+      }
+    },
+    {
+      "device_id": "sensor-uart-001",
+      "name": "GPS模块NEO-6M",
+      "hardware_type": "ExternalDevice",
+      "enabled": true,
+      "poll_interval_ms": 1000,
+      "settings": {
+        "port": "/dev/serial0",
+        "baud_rate": "9600",
+        "protocol": "NMEA"
+      }
+    },
+    {
+      "device_id": "motherboard-rpi",
+      "name": "Raspberry Pi 4 Model B",
+      "hardware_type": "Motherboard",
+      "enabled": true,
+      "poll_interval_ms": 30000,
+      "settings": {
+        "revision": "c03112",
+        "serial": "10000000abcdef12"
+      }
+    }
+  ],
+  "collection_rules": [
+    {
+      "rule_id": "rule-realtime",
+      "name": "实时采集规则",
+      "enabled": true,
+      "hardware_types": ["Sensor"],
+      "collection_interval_ms": 100,
+      "timeout_ms": 500,
+      "max_retries": 1,
+      "filters": ["edge_detection", "debounce"],
+      "aggregate": false
+    },
+    {
+      "rule_id": "rule-system",
+      "name": "系统状态规则",
+      "enabled": true,
+      "hardware_types": ["Cpu", "Memory"],
+      "collection_interval_ms": 2000,
+      "timeout_ms": 3000,
+      "max_retries": 2,
+      "filters": [],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-storage",
+      "name": "存储规则",
+      "enabled": true,
+      "hardware_types": ["Disk"],
+      "collection_interval_ms": 10000,
+      "timeout_ms": 5000,
+      "max_retries": 2,
+      "filters": ["low_space_warning"],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-connectivity",
+      "name": "连接性规则",
+      "enabled": true,
+      "hardware_types": ["Network", "ExternalDevice"],
+      "collection_interval_ms": 5000,
+      "timeout_ms": 3000,
+      "max_retries": 3,
+      "filters": ["connection_loss"],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-device-info",
+      "name": "设备信息规则",
+      "enabled": true,
+      "hardware_types": ["Motherboard"],
+      "collection_interval_ms": 30000,
+      "timeout_ms": 5000,
+      "max_retries": 1,
+      "filters": [],
+      "aggregate": false
+    }
+  ],
+  "reporters": [
+    {
+      "reporter_id": "reporter-iot-core",
+      "name": "阿里云IoT Core",
+      "enabled": true,
+      "endpoint_url": "tcp://a1BcDefGHiJ.iot-as-mqtt.cn-shanghai.aliyuncs.com:1883",
+      "auth_token": "DeviceId|DeviceSecret",
+      "encryption_key": "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "batch_size": 50,
+      "max_interval_ms": 10000,
+      "retry_count": 3,
+      "retry_interval_ms": 3000,
+      "timeout_ms": 5000,
+      "use_tls": true,
+      "headers": {
+        "protocol": "mqtt",
+        "qos": "1",
+        "topic": "/sys/a1BcDefGHiJ/${deviceId}/thing/event/property/post"
+      }
+    },
+    {
+      "reporter_id": "reporter-edge",
+      "name": "边缘计算节点",
+      "enabled": true,
+      "endpoint_url": "http://192.168.1.1:8080/edge/report",
+      "auth_token": "",
+      "encryption_key": "",
+      "batch_size": 20,
+      "max_interval_ms": 5000,
+      "retry_count": 2,
+      "retry_interval_ms": 2000,
+      "timeout_ms": 2000,
+      "use_tls": false,
+      "headers": {}
+    },
+    {
+      "reporter_id": "reporter-cellular",
+      "name": "4G/5G备份上报",
+      "enabled": false,
+      "endpoint_url": "https://backup.example.com/report",
+      "auth_token": "Bearer cellular-backup-token",
+      "encryption_key": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "batch_size": 200,
+      "max_interval_ms": 60000,
+      "retry_count": 5,
+      "retry_interval_ms": 10000,
+      "timeout_ms": 30000,
+      "use_tls": true,
+      "headers": {
+        "X-Transport": "cellular"
+      }
+    }
+  ],
+  "logging": {
+    "level": "info",
+    "file_path": "/home/pi/hardware-monitor.log",
+    "max_file_size_mb": 20,
+    "max_files": 5,
+    "console_output": true
+  },
+  "extra": {
+    "device_type": "Raspberry Pi 4B",
+    "location": "Warehouse-A",
+    "zone": "Zone-3",
+    "shelf": "A-12",
+    "project": "Smart-Logistics",
+    "operator": "IoT-Team",
+    "power_source": "PoE"
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
+}

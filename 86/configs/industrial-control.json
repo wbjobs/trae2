@@ -1,0 +1,167 @@
+{
+  "app_name": "hardware-monitor-industrial",
+  "app_version": "1.0.0",
+  "device_id": "device-industrial-001",
+  "devices": [
+    {
+      "device_id": "plc-001",
+      "name": "西门子PLC S7-1200",
+      "hardware_type": "ExternalDevice",
+      "enabled": true,
+      "poll_interval_ms": 100,
+      "settings": {
+        "protocol": "modbus-tcp",
+        "host": "192.168.1.100",
+        "port": "502",
+        "slave_id": "1"
+      }
+    },
+    {
+      "device_id": "sensor-temp-001",
+      "name": "温度传感器PT100",
+      "hardware_type": "Sensor",
+      "enabled": true,
+      "poll_interval_ms": 500,
+      "settings": {
+        "bus": "i2c",
+        "address": "0x48",
+        "unit": "celsius"
+      }
+    },
+    {
+      "device_id": "sensor-pressure-001",
+      "name": "压力传感器",
+      "hardware_type": "Sensor",
+      "enabled": true,
+      "poll_interval_ms": 500,
+      "settings": {
+        "bus": "spi",
+        "channel": "0",
+        "unit": "bar"
+      }
+    },
+    {
+      "device_id": "sensor-vibration-001",
+      "name": "振动传感器",
+      "hardware_type": "Sensor",
+      "enabled": true,
+      "poll_interval_ms": 100,
+      "settings": {
+        "bus": "uart",
+        "port": "/dev/ttyUSB0",
+        "baud_rate": "9600"
+      }
+    },
+    {
+      "device_id": "cpu-main",
+      "name": "工控机CPU",
+      "hardware_type": "Cpu",
+      "enabled": true,
+      "poll_interval_ms": 1000,
+      "settings": {}
+    },
+    {
+      "device_id": "memory-main",
+      "name": "工控机内存",
+      "hardware_type": "Memory",
+      "enabled": true,
+      "poll_interval_ms": 1000,
+      "settings": {}
+    },
+    {
+      "device_id": "motherboard-001",
+      "name": "主板信息",
+      "hardware_type": "Motherboard",
+      "enabled": true,
+      "poll_interval_ms": 60000,
+      "settings": {}
+    }
+  ],
+  "collection_rules": [
+    {
+      "rule_id": "rule-high-frequency",
+      "name": "高频采集规则",
+      "enabled": true,
+      "hardware_types": ["Sensor", "ExternalDevice"],
+      "collection_interval_ms": 100,
+      "timeout_ms": 1000,
+      "max_retries": 1,
+      "filters": ["value_out_of_range"],
+      "aggregate": false
+    },
+    {
+      "rule_id": "rule-system",
+      "name": "系统状态规则",
+      "enabled": true,
+      "hardware_types": ["Cpu", "Memory", "Motherboard"],
+      "collection_interval_ms": 5000,
+      "timeout_ms": 10000,
+      "max_retries": 3,
+      "filters": [],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-disk-network",
+      "name": "磁盘网络规则",
+      "enabled": true,
+      "hardware_types": ["Disk", "Network"],
+      "collection_interval_ms": 10000,
+      "timeout_ms": 15000,
+      "max_retries": 2,
+      "filters": [],
+      "aggregate": true
+    }
+  ],
+  "reporters": [
+    {
+      "reporter_id": "reporter-scada",
+      "name": "SCADA系统上报",
+      "enabled": true,
+      "endpoint_url": "https://scada.company.com/api/v1/telemetry",
+      "auth_token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoYXJkd2FyZS1tb25pdG9yIiwic3ViIjoiaW5kdXN0cmlhbC0wMDEiLCJpYXQiOjE3MDQwNjQwMDB9",
+      "encryption_key": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
+      "batch_size": 500,
+      "max_interval_ms": 5000,
+      "retry_count": 5,
+      "retry_interval_ms": 2000,
+      "timeout_ms": 5000,
+      "use_tls": true,
+      "tls_cert_path": "/etc/ssl/certs/scada.crt",
+      "headers": {
+        "X-Device-Type": "Industrial-PC",
+        "X-Factory": "Factory-A",
+        "X-Line": "Production-Line-1"
+      }
+    },
+    {
+      "reporter_id": "reporter-local",
+      "name": "本地备份上报",
+      "enabled": true,
+      "endpoint_url": "http://192.168.1.10:8080/report",
+      "auth_token": "",
+      "encryption_key": "",
+      "batch_size": 100,
+      "max_interval_ms": 10000,
+      "retry_count": 3,
+      "retry_interval_ms": 3000,
+      "timeout_ms": 3000,
+      "use_tls": false,
+      "headers": {}
+    }
+  ],
+  "logging": {
+    "level": "debug",
+    "file_path": "/var/log/hardware-monitor/industrial.log",
+    "max_file_size_mb": 50,
+    "max_files": 10,
+    "console_output": true
+  },
+  "extra": {
+    "factory": "Factory-A",
+    "production_line": "Line-1",
+    "equipment_type": "CNC-Machine",
+    "maintenance_interval": "720h"
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
+}

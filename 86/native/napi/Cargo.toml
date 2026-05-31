@@ -1,0 +1,30 @@
+[package]
+name = "napi"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+name = "hardware_monitor"
+
+[dependencies]
+core = { path = "../core" }
+hal = { path = "../hal" }
+config = { path = "../config" }
+collector = { path = "../collector" }
+reporter = { path = "../reporter" }
+platform = { path = "../platform" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+napi = { workspace = true }
+napi-derive = { workspace = true }
+tokio = { workspace = true }
+log = { workspace = true }
+env_logger = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+
+[build-dependencies]
+napi-build = { workspace = true }

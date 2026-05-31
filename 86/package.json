@@ -1,0 +1,63 @@
+{
+  "name": "hardware-monitor-suite",
+  "version": "1.0.0",
+  "description": "Cross-platform hardware parameter collection desktop application suite",
+  "main": "dist-electron/main/index.js",
+  "author": "Hardware Monitor Team",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "build:rust": "npm run build:napi",
+    "build:napi": "cd native && cargo build --release",
+    "preview": "vite preview",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "@napi-rs/cli": "^2.18.4",
+    "axios": "^1.7.2",
+    "crypto-js": "^4.2.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.27",
+    "vue-router": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20.12.12",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "electron": "^30.0.9",
+    "electron-builder": "^24.13.3",
+    "sass": "^1.77.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-electron": "^0.28.7",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vue-tsc": "^2.0.19"
+  },
+  "build": {
+    "appId": "com.hardware.monitor",
+    "productName": "HardwareMonitor",
+    "directories": {
+      "output": "release/${version}"
+    },
+    "files": [
+      "dist",
+      "dist-electron",
+      "native/target/release/*.node",
+      "configs"
+    ],
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": ["deb", "AppImage"],
+      "icon": "build/icon.png",
+      "category": "System"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

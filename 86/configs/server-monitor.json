@@ -1,0 +1,218 @@
+{
+  "app_name": "hardware-monitor-server",
+  "app_version": "1.0.0",
+  "device_id": "device-server-prod-001",
+  "devices": [
+    {
+      "device_id": "cpu-xeon-001",
+      "name": "Intel Xeon Gold 6148",
+      "hardware_type": "Cpu",
+      "enabled": true,
+      "poll_interval_ms": 500,
+      "settings": {
+        "cores": "20",
+        "threads": "40",
+        "socket": "Socket-0"
+      }
+    },
+    {
+      "device_id": "cpu-xeon-002",
+      "name": "Intel Xeon Gold 6148",
+      "hardware_type": "Cpu",
+      "enabled": true,
+      "poll_interval_ms": 500,
+      "settings": {
+        "cores": "20",
+        "threads": "40",
+        "socket": "Socket-1"
+      }
+    },
+    {
+      "device_id": "memory-ecc-001",
+      "name": "DDR4 ECC 256GB",
+      "hardware_type": "Memory",
+      "enabled": true,
+      "poll_interval_ms": 1000,
+      "settings": {
+        "type": "DDR4",
+        "ecc": "true",
+        "speed_mhz": "2666"
+      }
+    },
+    {
+      "device_id": "disk-raid-001",
+      "name": "RAID Array 0",
+      "hardware_type": "Disk",
+      "enabled": true,
+      "poll_interval_ms": 3000,
+      "settings": {
+        "raid_level": "5",
+        "disks": "4",
+        "controller": "PERC H740P"
+      }
+    },
+    {
+      "device_id": "disk-raid-002",
+      "name": "RAID Array 1",
+      "hardware_type": "Disk",
+      "enabled": true,
+      "poll_interval_ms": 3000,
+      "settings": {
+        "raid_level": "1",
+        "disks": "2",
+        "controller": "PERC H740P"
+      }
+    },
+    {
+      "device_id": "network-bond-001",
+      "name": "Bonded Network",
+      "hardware_type": "Network",
+      "enabled": true,
+      "poll_interval_ms": 2000,
+      "settings": {
+        "bond_mode": "802.3ad",
+        "slaves": "eth0,eth1",
+        "mtu": "9000"
+      }
+    },
+    {
+      "device_id": "ipmi-001",
+      "name": "IPMI BMC",
+      "hardware_type": "ExternalDevice",
+      "enabled": true,
+      "poll_interval_ms": 5000,
+      "settings": {
+        "host": "10.0.0.100",
+        "username": "admin",
+        "interface": "lanplus"
+      }
+    },
+    {
+      "device_id": "motherboard-dell",
+      "name": "Dell PowerEdge R740",
+      "hardware_type": "Motherboard",
+      "enabled": true,
+      "poll_interval_ms": 60000,
+      "settings": {}
+    }
+  ],
+  "collection_rules": [
+    {
+      "rule_id": "rule-performance",
+      "name": "性能采集规则",
+      "enabled": true,
+      "hardware_types": ["Cpu", "Memory"],
+      "collection_interval_ms": 1000,
+      "timeout_ms": 5000,
+      "max_retries": 3,
+      "filters": ["anomaly_detection"],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-storage",
+      "name": "存储监控规则",
+      "enabled": true,
+      "hardware_types": ["Disk"],
+      "collection_interval_ms": 5000,
+      "timeout_ms": 10000,
+      "max_retries": 3,
+      "filters": ["smart_health", "low_disk_space"],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-network",
+      "name": "网络监控规则",
+      "enabled": true,
+      "hardware_types": ["Network"],
+      "collection_interval_ms": 2000,
+      "timeout_ms": 5000,
+      "max_retries": 2,
+      "filters": ["high_bandwidth", "error_packets"],
+      "aggregate": true
+    },
+    {
+      "rule_id": "rule-hardware-health",
+      "name": "硬件健康规则",
+      "enabled": true,
+      "hardware_types": ["Motherboard", "ExternalDevice", "Sensor"],
+      "collection_interval_ms": 10000,
+      "timeout_ms": 15000,
+      "max_retries": 3,
+      "filters": ["temperature_high", "fan_failure", "power_supply"],
+      "aggregate": false
+    }
+  ],
+  "reporters": [
+    {
+      "reporter_id": "reporter-prometheus",
+      "name": "Prometheus Metrics",
+      "enabled": true,
+      "endpoint_url": "https://prometheus.company.com/metrics/job/server-monitor",
+      "auth_token": "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+      "encryption_key": "",
+      "batch_size": 1000,
+      "max_interval_ms": 15000,
+      "retry_count": 3,
+      "retry_interval_ms": 10000,
+      "timeout_ms": 10000,
+      "use_tls": true,
+      "headers": {
+        "Content-Type": "text/plain; version=0.0.4"
+      }
+    },
+    {
+      "reporter_id": "reporter-alerting",
+      "name": "告警系统上报",
+      "enabled": true,
+      "endpoint_url": "https://alertmanager.company.com/api/v2/alerts",
+      "auth_token": "",
+      "encryption_key": "f0e1d2c3b4a5968778695a4b3c2d1e0f1e2d3c4b5a69788796a5b4c3d2e1f0e1",
+      "batch_size": 10,
+      "max_interval_ms": 1000,
+      "retry_count": 5,
+      "retry_interval_ms": 1000,
+      "timeout_ms": 3000,
+      "use_tls": true,
+      "headers": {
+        "X-Alert-Source": "hardware-monitor",
+        "X-Severity": "critical"
+      }
+    },
+    {
+      "reporter_id": "reporter-logging",
+      "name": "日志系统上报",
+      "enabled": true,
+      "endpoint_url": "https://elasticsearch.company.com:9200/hardware-monitor/_doc",
+      "auth_token": "ApiKey VlVsWlVlRUJjSm1xR2lZNndqNFE6RDNfN19WcG9UU3lTaUJqYW51TnVNUQ==",
+      "encryption_key": "",
+      "batch_size": 200,
+      "max_interval_ms": 30000,
+      "retry_count": 3,
+      "retry_interval_ms": 5000,
+      "timeout_ms": 15000,
+      "use_tls": true,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ],
+  "logging": {
+    "level": "info",
+    "file_path": "/var/log/hardware-monitor/server.log",
+    "max_file_size_mb": 100,
+    "max_files": 30,
+    "console_output": false
+  },
+  "extra": {
+    "environment": "production",
+    "datacenter": "DC-East-1",
+    "rack": "A-42",
+    "rack_unit": "23-24",
+    "service_tag": "7XWXYZ1",
+    "os": "Ubuntu 22.04 LTS",
+    "kernel": "5.15.0-78-generic",
+    "role": "database-primary"
+  },
+  "created_at": "2024-01-01T00:00:00Z",
+  "updated_at": "2024-01-01T00:00:00Z"
+}
