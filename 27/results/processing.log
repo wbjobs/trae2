@@ -1,0 +1,9 @@
+2026-05-27 12:26:07,515 - astro_analysis - INFO - Starting 2 worker threads
+2026-05-27 12:26:07,516 - astro_analysis - INFO - Task scheduler started
+2026-05-27 12:26:07,517 - astro_analysis - INFO - Scheduler started
+2026-05-27 12:26:07,517 - astro_analysis - INFO - Stopping task scheduler
+2026-05-27 12:26:08,518 - astro_analysis - INFO - Task scheduler stopped
+2026-05-27 12:45:45,576 - astro_analysis - INFO - Matching 3 trajectories with 3 trajectories
+2026-05-27 12:45:45,586 - astro_analysis - INFO - Matched 3 trajectory pairs
+2026-05-27 12:46:25,445 - astro_analysis - INFO - Matching 3 trajectories with 3 trajectories
+2026-05-27 12:46:25,459 - astro_analysis - INFO - Matched 3 trajectory pairs

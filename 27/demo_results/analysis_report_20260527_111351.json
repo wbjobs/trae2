@@ -1,0 +1,28 @@
+{
+  "job_id": "342ebf8b-b40f-4f40-8973-74496b8905a9",
+  "source_file": "./demo_results\\demo_data\\demo_observation_20260527_111347.npy",
+  "start_time": "2026-05-27T11:13:47.747596",
+  "end_time": "2026-05-27T11:13:50.501102",
+  "processing_time_seconds": 2.753506,
+  "success": true,
+  "error_message": null,
+  "statistics": {
+    "total_frames": 20,
+    "detected_spots": 7,
+    "num_trajectories": 0
+  },
+  "trajectories": [],
+  "visualization_files": {},
+  "metadata": {
+    "visualization_files": {
+      "quality_metrics": "./demo_results\\quality_metrics_20260527_111350.png"
+    }
+  },
+  "noise_analysis": {
+    "denoising_method": "adaptive",
+    "mean_noise_level": 11.348533206853133,
+    "std_noise_level": 0.04272445656193802,
+    "min_noise_level": 11.27282542751352,
+    "max_noise_level": 11.441684561868678
+  }
+}

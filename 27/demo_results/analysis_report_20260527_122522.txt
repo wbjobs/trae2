@@ -1,0 +1,63 @@
+================================================================================
+ASTRONOMICAL SPOT TRAJECTORY ANALYSIS REPORT
+================================================================================
+
+PROCESSING SUMMARY
+----------------------------------------
+Job ID: 21d5bbe8-3e2a-4ed3-9af1-fd70bc40cde3
+Source File: ./demo_results\demo_data\demo_observation_20260527_122325.npy
+Processing Start: 2026-05-27T12:23:25.609894
+Processing End: 2026-05-27T12:23:36.961585
+Total Processing Time: 11.35 seconds
+Success: Yes
+
+DATA STATISTICS
+----------------------------------------
+Total Frames Processed: 20
+Total Spots Detected: 6815
+Number of Trajectories: 1557
+
+NOISE ANALYSIS
+----------------------------------------
+Denoising Method: adaptive
+Mean Noise Level: 5.10
+Noise Level Std: 0.11
+Min Noise Level: 4.87
+Max Noise Level: 5.29
+
+TRAJECTORY STATISTICS
+----------------------------------------
+Mean R²: 0.7276
+Median R²: 0.7621
+Min R²: 0.0087
+Max R²: 0.9998
+
+Mean RMSE: 4.74 pixels
+Median RMSE: 4.20 pixels
+
+Mean Points per Trajectory: 3.3
+Median Points per Trajectory: 3.0
+
+Mean Duration: 0.00 s
+Total Observation Time: 0.00 s
+
+TOP TRAJECTORIES (by R²)
+----------------------------------------
+  1. ID: ea209c0a-203... R²=0.9998 RMSE=0.22 Points=3 Method=polynomial_degree_2
+  2. ID: b5c1ace1-234... R²=0.9989 RMSE=0.24 Points=3 Method=polynomial_degree_2
+  3. ID: 880553ea-8be... R²=0.9988 RMSE=0.29 Points=3 Method=polynomial_degree_2
+  4. ID: 6a1085fb-687... R²=0.9984 RMSE=0.30 Points=3 Method=polynomial_degree_2
+  5. ID: aa33ece1-646... R²=0.9983 RMSE=0.42 Points=3 Method=polynomial_degree_2
+  6. ID: a871d5ec-909... R²=0.9981 RMSE=0.66 Points=3 Method=polynomial_degree_2
+  7. ID: 20691ea9-2ed... R²=0.9977 RMSE=0.65 Points=3 Method=polynomial_degree_2
+  8. ID: 035c6feb-421... R²=0.9975 RMSE=0.28 Points=3 Method=polynomial_degree_2
+  9. ID: fd892265-dcc... R²=0.9970 RMSE=0.82 Points=3 Method=polynomial_degree_2
+  10. ID: f86ca350-9b1... R²=0.9965 RMSE=0.93 Points=3 Method=polynomial_degree_2
+
+ADDITIONAL METADATA
+----------------------------------------
+  visualization_files: {'trajectories': './demo_results\\trajectories_20260527_122440.png', 'frame_comparison': './demo_results\\frame_comparison_frame_10_20260527_122508.png', 'spots': './demo_results\\spots_frame_10_20260527_122511.png', 'histogram': './demo_results\\intensity_histogram_frame_10_20260527_122512.png', 'quality_metrics': './demo_results\\quality_metrics_20260527_122513.png', 'trajectory_0': './demo_results\\trajectory_analysis_3d04c93a_20260527_122515.png', 'trajectory_1': './demo_results\\trajectory_analysis_25c605f6_20260527_122516.png', 'trajectory_2': './demo_results\\trajectory_analysis_5e8fa19a_20260527_122518.png', 'trajectory_3': './demo_results\\trajectory_analysis_e5a8969c_20260527_122520.png', 'trajectory_4': './demo_results\\trajectory_analysis_6d82fce5_20260527_122521.png'}
+
+================================================================================
+END OF REPORT
+================================================================================

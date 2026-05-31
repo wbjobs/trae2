@@ -1,0 +1,151 @@
+2026-05-27 11:12:34,109 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:12:34,109 - astro_analysis - INFO - Starting Astronomical Spot Trajectory Analysis Pipeline
+2026-05-27 11:12:34,109 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:12:34,110 - astro_analysis - INFO - Source file: ./demo_results\demo_data\demo_observation_20260527_111234.npy
+2026-05-27 11:12:34,110 - astro_analysis - INFO - Number of workers: 4
+2026-05-27 11:12:34,110 - astro_analysis - INFO - Output directory: ./demo_results
+2026-05-27 11:12:34,110 - astro_analysis - INFO - 
+2026-05-27 11:12:34,110 - astro_analysis - INFO - Step 1: Parsing raw observation data
+2026-05-27 11:12:34,136 - astro_analysis - INFO -   Parsed 20 frames
+2026-05-27 11:12:34,137 - astro_analysis - INFO - Step 2: Parallel frame denoising and spot detection
+2026-05-27 11:12:34,137 - astro_analysis - INFO - Starting multiprocessing with 4 workers
+2026-05-27 11:12:34,138 - astro_analysis - INFO - Split 20 frames into 1 chunks
+2026-05-27 11:12:34,183 - astro_analysis - ERROR - Chunk 0 generated an exception: cannot pickle '_thread.lock' object
+2026-05-27 11:12:36,525 - astro_analysis - INFO - Multiprocessing completed. Total denoised frames: 0, spots: 0
+2026-05-27 11:12:36,526 - astro_analysis - INFO -   Denoised 0 frames, detected 0 spots
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Step 3: Tracking spots across frames
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Starting spot tracking across 0 frames
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Tracking completed. Found 0 valid tracks (min 3 points)
+2026-05-27 11:12:36,526 - astro_analysis - INFO -   Found 0 valid tracks
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Step 4: Fitting trajectories
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Fitting 0 tracks using method: auto
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Successfully fitted 0 trajectories
+2026-05-27 11:12:36,526 - astro_analysis - INFO -   Fitted 0 trajectories
+2026-05-27 11:12:36,526 - astro_analysis - INFO - Step 5: Generating visualizations
+2026-05-27 11:12:36,528 - astro_analysis - INFO - Starting result visualization
+2026-05-27 11:12:36,528 - astro_analysis - INFO - Generating quality metrics summary
+2026-05-27 11:12:37,175 - astro_analysis - INFO - Saved quality metrics to ./demo_results\quality_metrics_20260527_111236.png
+2026-05-27 11:12:37,175 - astro_analysis - INFO - Visualization completed. Generated 1 files
+2026-05-27 11:12:37,176 - astro_analysis - INFO -   Generated 1 visualization files
+2026-05-27 11:12:37,176 - astro_analysis - INFO - Step 6: Generating reports
+2026-05-27 11:12:37,176 - astro_analysis - INFO - Generating text report
+2026-05-27 11:12:37,177 - astro_analysis - INFO - Saved text report to ./demo_results\analysis_report_20260527_111237.txt
+2026-05-27 11:12:37,177 - astro_analysis - INFO - Generating JSON report
+2026-05-27 11:12:37,178 - astro_analysis - INFO - Saved JSON report to ./demo_results\analysis_report_20260527_111237.json
+2026-05-27 11:12:37,178 - astro_analysis - INFO -   Text report: ./demo_results\analysis_report_20260527_111237.txt
+2026-05-27 11:12:37,178 - astro_analysis - INFO -   JSON report: ./demo_results\analysis_report_20260527_111237.json
+2026-05-27 11:12:37,179 - astro_analysis - INFO -   Result data saved to: ./demo_results\result_20260527_111237.pkl
+2026-05-27 11:12:37,179 - astro_analysis - INFO - 
+2026-05-27 11:12:37,179 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:12:37,180 - astro_analysis - INFO - Pipeline completed successfully!
+2026-05-27 11:12:37,180 - astro_analysis - INFO - Total processing time: 2.42 seconds
+2026-05-27 11:12:37,180 - astro_analysis - INFO - Frames processed: 20
+2026-05-27 11:12:37,180 - astro_analysis - INFO - Spots detected: 0
+2026-05-27 11:12:37,180 - astro_analysis - INFO - Trajectories found: 0
+2026-05-27 11:12:37,180 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:13:47,744 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:13:47,744 - astro_analysis - INFO - Starting Astronomical Spot Trajectory Analysis Pipeline
+2026-05-27 11:13:47,744 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:13:47,744 - astro_analysis - INFO - Source file: ./demo_results\demo_data\demo_observation_20260527_111347.npy
+2026-05-27 11:13:47,744 - astro_analysis - INFO - Number of workers: 4
+2026-05-27 11:13:47,747 - astro_analysis - INFO - Output directory: ./demo_results
+2026-05-27 11:13:47,747 - astro_analysis - INFO - 
+2026-05-27 11:13:47,747 - astro_analysis - INFO - Step 1: Parsing raw observation data
+2026-05-27 11:13:47,764 - astro_analysis - INFO -   Parsed 20 frames
+2026-05-27 11:13:47,764 - astro_analysis - INFO - Step 2: Parallel frame denoising and spot detection
+2026-05-27 11:13:47,764 - astro_analysis - INFO - Starting multiprocessing with 4 workers
+2026-05-27 11:13:47,764 - astro_analysis - INFO - Split 20 frames into 1 chunks
+2026-05-27 11:13:50,498 - astro_analysis - INFO - Multiprocessing completed. Total denoised frames: 20, spots: 7
+2026-05-27 11:13:50,499 - astro_analysis - INFO -   Denoised 20 frames, detected 7 spots
+2026-05-27 11:13:50,499 - astro_analysis - INFO - Step 3: Tracking spots across frames
+2026-05-27 11:13:50,499 - astro_analysis - INFO - Starting spot tracking across 5 frames
+2026-05-27 11:13:50,499 - astro_analysis - INFO - Tracking completed. Found 0 valid tracks (min 3 points)
+2026-05-27 11:13:50,499 - astro_analysis - INFO -   Found 0 valid tracks
+2026-05-27 11:13:50,499 - astro_analysis - INFO - Step 4: Fitting trajectories
+2026-05-27 11:13:50,499 - astro_analysis - INFO - Fitting 0 tracks using method: auto
+2026-05-27 11:13:50,499 - astro_analysis - INFO - Successfully fitted 0 trajectories
+2026-05-27 11:13:50,499 - astro_analysis - INFO -   Fitted 0 trajectories
+2026-05-27 11:13:50,501 - astro_analysis - INFO - Step 5: Generating visualizations
+2026-05-27 11:13:50,501 - astro_analysis - INFO - Starting result visualization
+2026-05-27 11:13:50,501 - astro_analysis - INFO - Generating quality metrics summary
+2026-05-27 11:13:51,272 - astro_analysis - INFO - Saved quality metrics to ./demo_results\quality_metrics_20260527_111350.png
+2026-05-27 11:13:51,273 - astro_analysis - INFO - Visualization completed. Generated 1 files
+2026-05-27 11:13:51,273 - astro_analysis - INFO -   Generated 1 visualization files
+2026-05-27 11:13:51,273 - astro_analysis - INFO - Step 6: Generating reports
+2026-05-27 11:13:51,273 - astro_analysis - INFO - Generating text report
+2026-05-27 11:13:51,275 - astro_analysis - INFO - Saved text report to ./demo_results\analysis_report_20260527_111351.txt
+2026-05-27 11:13:51,275 - astro_analysis - INFO - Generating JSON report
+2026-05-27 11:13:51,276 - astro_analysis - INFO - Saved JSON report to ./demo_results\analysis_report_20260527_111351.json
+2026-05-27 11:13:51,277 - astro_analysis - INFO -   Text report: ./demo_results\analysis_report_20260527_111351.txt
+2026-05-27 11:13:51,277 - astro_analysis - INFO -   JSON report: ./demo_results\analysis_report_20260527_111351.json
+2026-05-27 11:13:51,296 - astro_analysis - INFO -   Result data saved to: ./demo_results\result_20260527_111351.pkl
+2026-05-27 11:13:51,296 - astro_analysis - INFO - 
+2026-05-27 11:13:51,296 - astro_analysis - INFO - ================================================================================
+2026-05-27 11:13:51,296 - astro_analysis - INFO - Pipeline completed successfully!
+2026-05-27 11:13:51,296 - astro_analysis - INFO - Total processing time: 2.75 seconds
+2026-05-27 11:13:51,298 - astro_analysis - INFO - Frames processed: 20
+2026-05-27 11:13:51,298 - astro_analysis - INFO - Spots detected: 7
+2026-05-27 11:13:51,298 - astro_analysis - INFO - Trajectories found: 0
+2026-05-27 11:13:51,298 - astro_analysis - INFO - ================================================================================
+2026-05-27 12:23:25,608 - astro_analysis - INFO - ================================================================================
+2026-05-27 12:23:25,608 - astro_analysis - INFO - Starting Astronomical Spot Trajectory Analysis Pipeline
+2026-05-27 12:23:25,608 - astro_analysis - INFO - ================================================================================
+2026-05-27 12:23:25,609 - astro_analysis - INFO - Source file: ./demo_results\demo_data\demo_observation_20260527_122325.npy
+2026-05-27 12:23:25,609 - astro_analysis - INFO - Number of workers: 4
+2026-05-27 12:23:25,609 - astro_analysis - INFO - Output directory: ./demo_results
+2026-05-27 12:23:25,609 - astro_analysis - INFO - 
+2026-05-27 12:23:25,609 - astro_analysis - INFO - Step 1: Parsing raw observation data
+2026-05-27 12:23:25,689 - astro_analysis - INFO -   Parsed 20 frames
+2026-05-27 12:23:25,690 - astro_analysis - INFO - Step 2: Parallel frame denoising and spot detection
+2026-05-27 12:23:25,690 - astro_analysis - INFO - Starting multiprocessing with 4 workers
+2026-05-27 12:23:25,690 - astro_analysis - INFO - Split 20 frames into 1 chunks
+2026-05-27 12:23:32,739 - astro_analysis - INFO - Multiprocessing completed. Total denoised frames: 20, spots: 6815
+2026-05-27 12:23:32,739 - astro_analysis - INFO -   Denoised 20 frames, detected 6815 spots
+2026-05-27 12:23:32,739 - astro_analysis - INFO - Step 3: Tracking spots across frames
+2026-05-27 12:23:32,739 - astro_analysis - INFO - Starting spot tracking across 20 frames
+2026-05-27 12:23:36,438 - astro_analysis - INFO - Tracking completed. Found 1557 valid tracks (min 3 points)
+2026-05-27 12:23:36,438 - astro_analysis - INFO -   Found 1557 valid tracks
+2026-05-27 12:23:36,439 - astro_analysis - INFO - Step 4: Fitting trajectories
+2026-05-27 12:23:36,439 - astro_analysis - INFO - Fitting 1557 tracks using method: auto
+2026-05-27 12:23:36,961 - astro_analysis - INFO - Successfully fitted 1557 trajectories
+2026-05-27 12:23:36,961 - astro_analysis - INFO -   Fitted 1557 trajectories
+2026-05-27 12:23:36,961 - astro_analysis - INFO - Step 5: Generating visualizations
+2026-05-27 12:23:36,961 - astro_analysis - INFO - Starting result visualization
+2026-05-27 12:23:36,961 - astro_analysis - INFO - Generating trajectory plot for 1557 trajectories
+2026-05-27 12:25:08,509 - astro_analysis - INFO - Saved trajectory plot to ./demo_results\trajectories_20260527_122440.png
+2026-05-27 12:25:08,511 - astro_analysis - INFO - Generating frame comparison plot for frame 10
+2026-05-27 12:25:10,099 - astro_analysis - INFO - Saved frame comparison to ./demo_results\frame_comparison_frame_10_20260527_122508.png
+2026-05-27 12:25:10,099 - astro_analysis - INFO - Generating spot detection plot for frame 10
+2026-05-27 12:25:12,670 - astro_analysis - INFO - Saved spot detection plot to ./demo_results\spots_frame_10_20260527_122511.png
+2026-05-27 12:25:12,670 - astro_analysis - INFO - Generating intensity histogram for frame 10
+2026-05-27 12:25:13,614 - astro_analysis - INFO - Saved intensity histogram to ./demo_results\intensity_histogram_frame_10_20260527_122512.png
+2026-05-27 12:25:13,614 - astro_analysis - INFO - Generating quality metrics summary
+2026-05-27 12:25:15,287 - astro_analysis - INFO - Saved quality metrics to ./demo_results\quality_metrics_20260527_122513.png
+2026-05-27 12:25:15,288 - astro_analysis - INFO - Generating detailed analysis for trajectory 3d04c93a-332d-4486-ba89-81d6d5bec000
+2026-05-27 12:25:16,686 - astro_analysis - INFO - Saved trajectory analysis to ./demo_results\trajectory_analysis_3d04c93a_20260527_122515.png
+2026-05-27 12:25:16,686 - astro_analysis - INFO - Generating detailed analysis for trajectory 25c605f6-0596-46d8-9420-135b06b82534
+2026-05-27 12:25:17,944 - astro_analysis - INFO - Saved trajectory analysis to ./demo_results\trajectory_analysis_25c605f6_20260527_122516.png
+2026-05-27 12:25:17,944 - astro_analysis - INFO - Generating detailed analysis for trajectory 5e8fa19a-21c9-49f1-b974-1e00bf0a4c07
+2026-05-27 12:25:18,968 - astro_analysis - INFO - Saved trajectory analysis to ./demo_results\trajectory_analysis_5e8fa19a_20260527_122518.png
+2026-05-27 12:25:18,968 - astro_analysis - INFO - Generating detailed analysis for trajectory e5a8969c-2794-4142-adcf-0964debd44be
+2026-05-27 12:25:21,518 - astro_analysis - INFO - Saved trajectory analysis to ./demo_results\trajectory_analysis_e5a8969c_20260527_122520.png
+2026-05-27 12:25:21,518 - astro_analysis - INFO - Generating detailed analysis for trajectory 6d82fce5-c1c9-4122-a6a8-ffd224e5ccc2
+2026-05-27 12:25:22,493 - astro_analysis - INFO - Saved trajectory analysis to ./demo_results\trajectory_analysis_6d82fce5_20260527_122521.png
+2026-05-27 12:25:22,493 - astro_analysis - INFO - Visualization completed. Generated 10 files
+2026-05-27 12:25:22,494 - astro_analysis - INFO -   Generated 10 visualization files
+2026-05-27 12:25:22,494 - astro_analysis - INFO - Step 6: Generating reports
+2026-05-27 12:25:22,494 - astro_analysis - INFO - Generating text report
+2026-05-27 12:25:22,498 - astro_analysis - INFO - Saved text report to ./demo_results\analysis_report_20260527_122522.txt
+2026-05-27 12:25:22,498 - astro_analysis - INFO - Generating JSON report
+2026-05-27 12:25:22,698 - astro_analysis - INFO - Saved JSON report to ./demo_results\analysis_report_20260527_122522.json
+2026-05-27 12:25:22,705 - astro_analysis - INFO -   Text report: ./demo_results\analysis_report_20260527_122522.txt
+2026-05-27 12:25:22,705 - astro_analysis - INFO -   JSON report: ./demo_results\analysis_report_20260527_122522.json
+2026-05-27 12:25:22,805 - astro_analysis - INFO -   Result data saved to: ./demo_results\result_20260527_122522.pkl
+2026-05-27 12:25:22,805 - astro_analysis - INFO - 
+2026-05-27 12:25:22,805 - astro_analysis - INFO - ================================================================================
+2026-05-27 12:25:22,805 - astro_analysis - INFO - Pipeline completed successfully!
+2026-05-27 12:25:22,805 - astro_analysis - INFO - Total processing time: 11.35 seconds
+2026-05-27 12:25:22,805 - astro_analysis - INFO - Frames processed: 20
+2026-05-27 12:25:22,806 - astro_analysis - INFO - Spots detected: 6815
+2026-05-27 12:25:22,806 - astro_analysis - INFO - Trajectories found: 1557
+2026-05-27 12:25:22,806 - astro_analysis - INFO - ================================================================================

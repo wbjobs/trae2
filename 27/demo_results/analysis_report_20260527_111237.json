@@ -1,0 +1,21 @@
+{
+  "job_id": "ddd8dd77-e47a-445c-96b6-2bbfc5b31dd9",
+  "source_file": "./demo_results\\demo_data\\demo_observation_20260527_111234.npy",
+  "start_time": "2026-05-27T11:12:34.110138",
+  "end_time": "2026-05-27T11:12:36.526617",
+  "processing_time_seconds": 2.416479,
+  "success": true,
+  "error_message": null,
+  "statistics": {
+    "total_frames": 20,
+    "detected_spots": 0,
+    "num_trajectories": 0
+  },
+  "trajectories": [],
+  "visualization_files": {},
+  "metadata": {
+    "visualization_files": {
+      "quality_metrics": "./demo_results\\quality_metrics_20260527_111236.png"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+================================================================================
+ASTRONOMICAL SPOT TRAJECTORY ANALYSIS REPORT
+================================================================================
+
+PROCESSING SUMMARY
+----------------------------------------
+Job ID: ddd8dd77-e47a-445c-96b6-2bbfc5b31dd9
+Source File: ./demo_results\demo_data\demo_observation_20260527_111234.npy
+Processing Start: 2026-05-27T11:12:34.110138
+Processing End: 2026-05-27T11:12:36.526617
+Total Processing Time: 2.42 seconds
+Success: Yes
+
+DATA STATISTICS
+----------------------------------------
+Total Frames Processed: 20
+Total Spots Detected: 0
+Number of Trajectories: 0
+
+ADDITIONAL METADATA
+----------------------------------------
+  visualization_files: {'quality_metrics': './demo_results\\quality_metrics_20260527_111236.png'}
+
+================================================================================
+END OF REPORT
+================================================================================

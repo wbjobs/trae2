@@ -1,0 +1,34 @@
+================================================================================
+ASTRONOMICAL SPOT TRAJECTORY ANALYSIS REPORT
+================================================================================
+
+PROCESSING SUMMARY
+----------------------------------------
+Job ID: 342ebf8b-b40f-4f40-8973-74496b8905a9
+Source File: ./demo_results\demo_data\demo_observation_20260527_111347.npy
+Processing Start: 2026-05-27T11:13:47.747596
+Processing End: 2026-05-27T11:13:50.501102
+Total Processing Time: 2.75 seconds
+Success: Yes
+
+DATA STATISTICS
+----------------------------------------
+Total Frames Processed: 20
+Total Spots Detected: 7
+Number of Trajectories: 0
+
+NOISE ANALYSIS
+----------------------------------------
+Denoising Method: adaptive
+Mean Noise Level: 11.35
+Noise Level Std: 0.04
+Min Noise Level: 11.27
+Max Noise Level: 11.44
+
+ADDITIONAL METADATA
+----------------------------------------
+  visualization_files: {'quality_metrics': './demo_results\\quality_metrics_20260527_111350.png'}
+
+================================================================================
+END OF REPORT
+================================================================================
