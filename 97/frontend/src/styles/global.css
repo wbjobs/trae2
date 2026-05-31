@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #0c1929 0%, #1a2a4a 50%, #0f3460 100%);
+  color: #ffffff;
+}
+
+.dashboard-layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  height: 60px;
+  background: rgba(15, 52, 96, 0.9);
+  border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.dashboard-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #4fc3f7;
+  text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(100, 150, 255, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.stats-card .stats-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #4fc3f7;
+}
+
+.stats-card .stats-label {
+  font-size: 14px;
+  color: #90a4ae;
+  margin-top: 4px;
+}
+
+.chart-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(100, 150, 255, 0.15);
+  border-radius: 8px;
+  padding: 16px;
+  height: 100%;
+}
+
+.chart-card .chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e3f2fd;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.status-normal {
+  color: #66bb6a;
+}
+
+.status-warning {
+  color: #ffa726;
+}
+
+.status-critical {
+  color: #ef5350;
+}
+
+.anomaly-alert {
+  background: rgba(239, 83, 80, 0.1);
+  border-left: 3px solid #ef5350;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.anomaly-alert .alert-device {
+  font-weight: 600;
+  color: #ef5350;
+}
+
+.anomaly-alert .alert-metric {
+  color: #90a4ae;
+  font-size: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 150, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 150, 255, 0.5);
+}
