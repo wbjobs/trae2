@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "export_time": "2026-05-28T07:57:12.314869",
+    "time_steps": 3,
+    "start_time": "2026-05-28T07:57:11.173729",
+    "end_time": "2026-05-28T09:57:11.173729",
+    "grid_def": {
+      "lat_min": 20,
+      "lat_max": 50,
+      "lon_min": 100,
+      "lon_max": 140,
+      "resolution": 10,
+      "shape": [
+        4,
+        5
+      ]
+    }
+  },
+  "variables": {
+    "temperature": {
+      "units": "degrees_Celsius",
+      "overall_min": 20.0,
+      "overall_max": 22.0,
+      "overall_mean": 21.0,
+      "overall_std": 0.816496580927726,
+      "time_mean_min": 20.0,
+      "time_mean_max": 22.0,
+      "time_mean_std": 0.816496580927726,
+      "trend": 0.9999999999999984
+    },
+    "humidity": {
+      "units": "percent",
+      "overall_min": 50.0,
+      "overall_max": 60.0,
+      "overall_mean": 55.0,
+      "overall_std": 4.08248290463863,
+      "time_mean_min": 50.0,
+      "time_mean_max": 60.0,
+      "time_mean_std": 4.08248290463863,
+      "trend": -4.999999999999998
+    },
+    "pressure": {
+      "units": "hPa",
+      "overall_min": 1013.0,
+      "overall_max": 1013.0,
+      "overall_mean": 1013.0,
+      "overall_std": 0.0,
+      "time_mean_min": 1013.0,
+      "time_mean_max": 1013.0,
+      "time_mean_std": 0.0,
+      "trend": -8.244821558729713e-14
+    },
+    "wind_speed": {
+      "units": "m s-1",
+      "overall_min": 5.0,
+      "overall_max": 5.0,
+      "overall_mean": 5.0,
+      "overall_std": 0.0,
+      "time_mean_min": 5.0,
+      "time_mean_max": 5.0,
+      "time_mean_std": 0.0,
+      "trend": 2.8828903816168033e-16
+    },
+    "wind_direction": {
+      "units": "degrees",
+      "overall_min": 180.0,
+      "overall_max": 180.0,
+      "overall_mean": 180.0,
+      "overall_std": 0.0,
+      "time_mean_min": 180.0,
+      "time_mean_max": 180.0,
+      "time_mean_std": 0.0,
+      "trend": -9.030322742862276e-16
+    },
+    "precipitation": {
+      "units": "mm",
+      "overall_min": 0.0,
+      "overall_max": 0.0,
+      "overall_mean": 0.0,
+      "overall_std": 0.0,
+      "time_mean_min": 0.0,
+      "time_mean_max": 0.0,
+      "time_mean_std": 0.0,
+      "trend": 0.0
+    }
+  }
+}
