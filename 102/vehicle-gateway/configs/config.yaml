@@ -1,0 +1,188 @@
+server:
+  node_id: "node-001"
+  http_addr: ":8080"
+  tcp_addr: ":8081"
+  grpc_addr: ":8082"
+  metrics_addr: ":9090"
+  max_connections: 10000
+  read_timeout: 30
+  write_timeout: 30
+  auth_enabled: true
+
+database:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "123456"
+  dbname: "vehicle_gateway"
+  max_open_conns: 100
+  max_idle_conns: 20
+  conn_max_lifetime: 3600
+  sharding_enabled: false
+  shard_count: 4
+  batch_size: 100
+  flush_interval: 5
+  multi_db:
+    enabled: false
+    strategy: "region"
+    shard_count: 4
+    month_retention: 12
+    region_databases:
+      north:
+        name: "north_db"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_north"
+        weight: 1
+        read_only: false
+        region: "north"
+      south:
+        name: "south_db"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_south"
+        weight: 1
+        read_only: false
+        region: "south"
+      east:
+        name: "east_db"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_east"
+        weight: 1
+        read_only: false
+        region: "east"
+      west:
+        name: "west_db"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_west"
+        weight: 1
+        read_only: false
+        region: "west"
+    shard_databases:
+      - name: "shard_00"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_shard00"
+        weight: 1
+        read_only: false
+      - name: "shard_01"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_shard01"
+        weight: 1
+        read_only: false
+      - name: "shard_02"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_shard02"
+        weight: 1
+        read_only: false
+      - name: "shard_03"
+        driver: "mysql"
+        host: "127.0.0.1"
+        port: 3306
+        user: "root"
+        password: "123456"
+        dbname: "vehicle_gateway_shard03"
+        weight: 1
+        read_only: false
+
+redis:
+  addr: "127.0.0.1:6379"
+  password: ""
+  db: 0
+  cluster_addrs: []
+  cluster_mode: false
+  pool_size: 100
+  min_idle_conns: 10
+  dial_timeout: 5
+  read_timeout: 3
+  write_timeout: 3
+
+cluster:
+  enabled: true
+  service_name: "vehicle-gateway"
+  register_addr: ""
+  registry_type: "redis"
+  load_balance: "round_robin"
+  region_router: true
+  region_map:
+    north: ["node-001"]
+    south: ["node-002"]
+    east: ["node-003"]
+    west: ["node-004"]
+    central: ["node-001", "node-002"]
+  health_check:
+    interval: 10
+    timeout: 5
+    path: "/api/v1/health"
+  region_whitelist:
+    enabled: true
+    mode: "strict"
+    default_allow_regions: []
+    device_region_map: {}
+  auto_scaling:
+    enabled: true
+    max_nodes: 10
+    min_nodes: 2
+    scale_up_threshold: 70.0
+    scale_down_threshold: 30.0
+    scale_up_cooldown: 300
+    scale_down_cooldown: 600
+    traffic_migration_rate: 10.0
+    node_warmup_duration: 60
+
+flowctrl:
+  enabled: true
+  global_qps: 10000
+  per_device_qps: 100
+  per_ip_qps: 500
+  burst_ratio: 2.0
+  limiter_type: "token_bucket"
+  circuit_breaker:
+    enabled: true
+    failure_threshold: 0.5
+    request_count: 100
+    timeout: 30
+    half_open_max_calls: 10
+
+cache:
+  offline_data_ttl: 86400
+  max_offline_size: 100000
+  compress_enabled: true
+  compress_min_size: 1024
+  retry_queue_size: 10000
+  retry_max_attempts: 5
+
+log:
+  level: "info"
+  format: "console"
+  output: "stdout"
+  filename: "logs/gateway.log"
+  max_size: 100
+  max_backups: 10
+  max_age: 30
+  compress: true

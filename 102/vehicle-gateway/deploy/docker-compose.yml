@@ -1,0 +1,142 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: vehicle-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: vehicle_gateway
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - vehicle-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: vehicle-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - vehicle-network
+
+  gateway-node1:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: gateway-node1
+    environment:
+      - CONFIGOR_SERVER_NODE_ID=node-001
+      - CONFIGOR_SERVER_HTTP_ADDR=:8080
+      - CONFIGOR_SERVER_TCP_ADDR=:8081
+      - CONFIGOR_DATABASE_HOST=mysql
+      - CONFIGOR_REDIS_ADDR=redis:6379
+      - CONFIGOR_CLUSTER_REGION_MAP_NORTH=node-001
+      - CONFIGOR_CLUSTER_REGION_MAP_CENTRAL=node-001,node-002
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - vehicle-network
+    restart: unless-stopped
+
+  gateway-node2:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: gateway-node2
+    environment:
+      - CONFIGOR_SERVER_NODE_ID=node-002
+      - CONFIGOR_SERVER_HTTP_ADDR=:8080
+      - CONFIGOR_SERVER_TCP_ADDR=:8081
+      - CONFIGOR_DATABASE_HOST=mysql
+      - CONFIGOR_REDIS_ADDR=redis:6379
+      - CONFIGOR_CLUSTER_REGION_MAP_SOUTH=node-002
+      - CONFIGOR_CLUSTER_REGION_MAP_CENTRAL=node-001,node-002
+    ports:
+      - "8082:8080"
+      - "8083:8081"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - vehicle-network
+    restart: unless-stopped
+
+  gateway-node3:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: gateway-node3
+    environment:
+      - CONFIGOR_SERVER_NODE_ID=node-003
+      - CONFIGOR_SERVER_HTTP_ADDR=:8080
+      - CONFIGOR_SERVER_TCP_ADDR=:8081
+      - CONFIGOR_DATABASE_HOST=mysql
+      - CONFIGOR_REDIS_ADDR=redis:6379
+      - CONFIGOR_CLUSTER_REGION_MAP_EAST=node-003
+    ports:
+      - "8084:8080"
+      - "8085:8081"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - vehicle-network
+    restart: unless-stopped
+
+  gateway-node4:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: gateway-node4
+    environment:
+      - CONFIGOR_SERVER_NODE_ID=node-004
+      - CONFIGOR_SERVER_HTTP_ADDR=:8080
+      - CONFIGOR_SERVER_TCP_ADDR=:8081
+      - CONFIGOR_DATABASE_HOST=mysql
+      - CONFIGOR_REDIS_ADDR=redis:6379
+      - CONFIGOR_CLUSTER_REGION_MAP_WEST=node-004
+    ports:
+      - "8086:8080"
+      - "8087:8081"
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - vehicle-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: gateway-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - gateway-node1
+      - gateway-node2
+      - gateway-node3
+      - gateway-node4
+    networks:
+      - vehicle-network
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
+  redis-data:
+
+networks:
+  vehicle-network:
+    driver: bridge
