@@ -1,0 +1,98 @@
+# =============================================================================
+# 容器集群资源水位巡检工具 - 示例配置文件
+# Container Cluster Inspector - Example Configuration
+# =============================================================================
+
+# 全局设置
+global_settings:
+  cluster_name: "production-cluster"
+  environment: "production"
+  notification_enabled: false
+
+# SSH 连接配置
+ssh:
+  timeout: 45
+  auth_timeout: 20
+  banner_timeout: 15
+  retry_count: 3
+  retry_delay: 2.0
+  keepalive_interval: 30
+  allow_agent: false
+  look_for_keys: false
+
+# 资源水位阈值配置
+thresholds:
+  # CPU 阈值 (%)
+  cpu_warning: 70.0
+  cpu_critical: 90.0
+  # 内存阈值 (%)
+  memory_warning: 75.0
+  memory_critical: 90.0
+  # 磁盘阈值 (%)
+  disk_warning: 80.0
+  disk_critical: 95.0
+  # 容器重启次数阈值
+  container_restart_warning: 3
+  container_restart_critical: 5
+
+# 日志配置
+log:
+  log_dir: "./logs"
+  log_format: "json"
+  log_level: "INFO"
+  max_file_size: 10
+  backup_count: 5
+  include_timestamp: true
+  separate_by_node: true
+  encoding: "utf-8"
+
+# 集群节点配置
+nodes:
+  # 主节点示例 - 使用密码认证
+  - name: "master-node-01"
+    host: "192.168.1.10"
+    port: 22
+    username: "root"
+    password: "your_password_here"
+    role: "master"
+    labels:
+      - "production"
+      - "k8s-master"
+    enabled: true
+
+  # 工作节点示例 - 使用 SSH 密钥认证
+  - name: "worker-node-01"
+    host: "192.168.1.11"
+    port: 22
+    username: "root"
+    ssh_key: "~/.ssh/id_rsa"
+    ssh_key_passphrase: ""
+    role: "worker"
+    labels:
+      - "production"
+      - "k8s-worker"
+    enabled: true
+
+  # 工作节点示例 - GPU 节点
+  - name: "worker-node-02"
+    host: "192.168.1.12"
+    port: 22
+    username: "root"
+    password: "your_password_here"
+    role: "worker"
+    labels:
+      - "production"
+      - "k8s-worker"
+      - "gpu"
+    enabled: true
+
+  # 禁用的节点示例
+  - name: "staging-node-01"
+    host: "192.168.2.10"
+    port: 22
+    username: "root"
+    password: "your_password_here"
+    role: "worker"
+    labels:
+      - "staging"
+    enabled: false
