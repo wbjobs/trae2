@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: railway-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: railway_monitor
+
+  redis:
+    image: redis:6-alpine
+    container_name: railway-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.backend
+    container_name: railway-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/railway_monitor
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GROUND_SERVER_URL=http://ground-server:8080
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ../logs:/app/logs
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../deployment/Dockerfile.frontend
+    container_name: railway-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80
+    depends_on:
+      - backend
+
+  ground-server:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.ground
+    container_name: railway-ground-server
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/railway_monitor_ground
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:
+  redis_data:

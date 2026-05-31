@@ -1,0 +1,15 @@
+[Unit]
+Description=Railway Monitor Frontend
+After=network.target railway-monitor.service
+
+[Service]
+Type=simple
+User=railway
+Group=railway
+WorkingDirectory=/opt/railway-monitor/frontend
+ExecStart=/usr/bin/npx serve -l 8080 .
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

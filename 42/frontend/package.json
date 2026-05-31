@@ -1,0 +1,14 @@
+{
+  "name": "railway-monitor-frontend",
+  "version": "1.0.0",
+  "description": "轨道交通车载通信单元信道状态监控系统 - 前端面板",
+  "scripts": {
+    "dev": "npx serve -l 8080 .",
+    "build": "echo 'Static site, no build required'",
+    "start": "npx serve -l 8080 ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

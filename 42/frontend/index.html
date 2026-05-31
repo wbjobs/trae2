@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轨道交通车载通信信道监控系统</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.4/dist/socket.io.min.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">🚄</div>
+      <div>
+        <h1>轨道交通车载通信信道监控系统</h1>
+        <p class="subtitle">Railway On-board Communication Channel Monitoring System</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="status-indicator">
+        <span class="status-dot" id="connectionStatus"></span>
+        <span id="connectionText">连接中...</span>
+      </div>
+      <div class="time-display" id="currentTime"></div>
+      <div class="vehicle-info">
+        <span id="vehicleId">V-001</span>
+        <span class="separator">|</span>
+        <span id="trainLine">Line-1</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-tab="overview">总览</button>
+    <button class="nav-tab" data-tab="channels">信道监控</button>
+    <button class="nav-tab" data-tab="nodes">节点管理</button>
+    <button class="nav-tab" data-tab="analysis">质量分析</button>
+    <button class="nav-tab" data-tab="alerts">告警中心</button>
+    <button class="nav-tab" data-tab="audit">日志审计</button>
+  </nav>
+
+  <main class="main-content">
+    <section id="overview" class="tab-content active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📡</div>
+          <div class="stat-info">
+            <h3>活动信道</h3>
+            <p class="stat-value" id="activeChannels">0</p>
+            <p class="stat-sub">总计 <span id="totalChannels">0</span> 个信道</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-info">
+            <h3>平均信噪比</h3>
+            <p class="stat-value" id="avgSnr">0 dB</p>
+            <p class="stat-sub quality" id="snrQuality">--</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📉</div>
+          <div class="stat-info">
+            <h3>平均丢包率</h3>
+            <p class="stat-value" id="avgPacketLoss">0%</p>
+            <p class="stat-sub quality" id="packetLossQuality">--</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔗</div>
+          <div class="stat-info">
+            <h3>在线节点</h3>
+            <p class="stat-value" id="onlineNodes">0</p>
+            <p class="stat-sub">总计 <span id="totalNodes">0</span> 个节点</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚠️</div>
+          <div class="stat-info">
+            <h3>活动告警</h3>
+            <p class="stat-value warning" id="activeAlerts">0</p>
+            <p class="stat-sub">严重: <span id="criticalAlerts">0</span></p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🌐</div>
+          <div class="stat-info">
+            <h3>地面同步</h3>
+            <p class="stat-value" id="groundSyncStatus">--</p>
+            <p class="stat-sub" id="lastSyncTime">从未同步</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-container">
+          <h3>信噪比趋势</h3>
+          <canvas id="snrChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>丢包率趋势</h3>
+          <canvas id="packetLossChart"></canvas>
+        </div>
+      </div>
+
+      <div class="charts-row">
+        <div class="chart-container">
+          <h3>信道质量分布</h3>
+          <canvas id="qualityPieChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>实时信令流量</h3>
+          <canvas id="trafficChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>最近告警</h3>
+        <div class="alert-list" id="recentAlerts">
+          <p class="empty">暂无告警</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels" class="tab-content">
+      <div class="filters">
+        <select id="protocolFilter">
+          <option value="">全部协议</option>
+          <option value="LTE-M">LTE-M</option>
+          <option value="GSM-R">GSM-R</option>
+          <option value="5G-R">5G-R</option>
+          <option value="TETRA">TETRA</option>
+        </select>
+        <select id="qualityFilter">
+          <option value="">全部质量</option>
+          <option value="excellent">优秀</option>
+          <option value="good">良好</option>
+          <option value="fair">一般</option>
+          <option value="poor">较差</option>
+        </select>
+        <input type="text" id="channelSearch" placeholder="搜索信道ID...">
+      </div>
+      <div class="channel-grid" id="channelGrid"></div>
+    </section>
+
+    <section id="nodes" class="tab-content">
+      <div class="node-status-bar">
+        <span class="status-chip online">在线 <span id="nodeOnlineCount">0</span></span>
+        <span class="status-chip offline">离线 <span id="nodeOfflineCount">0</span></span>
+        <span class="status-chip timeout">超时 <span id="nodeTimeoutCount">0</span></span>
+      </div>
+      <div class="node-grid" id="nodeGrid"></div>
+    </section>
+
+    <section id="analysis" class="tab-content">
+      <div class="analysis-summary">
+        <div class="analysis-score">
+          <h3>综合质量评分</h3>
+          <div class="score-circle" id="overallScore">
+            <span>--</span>
+          </div>
+        </div>
+        <div class="analysis-details">
+          <h3>分析建议</h3>
+          <div class="recommendations" id="recommendations"></div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="chart-container">
+          <h3>综合评分趋势</h3>
+          <canvas id="scoreTrendChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>各协议质量对比</h3>
+          <canvas id="protocolCompareChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section id="alerts" class="tab-content">
+      <div class="alert-filters">
+        <select id="alertSeverityFilter">
+          <option value="">全部级别</option>
+          <option value="critical">严重</option>
+          <option value="warning">警告</option>
+        </select>
+        <select id="alertStatusFilter">
+          <option value="">全部状态</option>
+          <option value="active">活动</option>
+          <option value="acknowledged">已确认</option>
+          <option value="resolved">已解决</option>
+        </select>
+        <button class="btn" onclick="markAllRead()">全部确认</button>
+      </div>
+      <div class="alert-table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>级别</th>
+              <th>信道</th>
+              <th>标题</th>
+              <th>详情</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="alertTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit" class="tab-content">
+      <div class="audit-filters">
+        <select id="auditCategoryFilter">
+          <option value="">全部分类</option>
+          <option value="SYSTEM">系统</option>
+          <option value="USER">用户</option>
+          <option value="CONFIG">配置</option>
+          <option value="ANALYSIS">分析</option>
+          <option value="SYNC">同步</option>
+          <option value="ALERT">告警</option>
+        </select>
+        <input type="text" id="auditKeyword" placeholder="搜索关键词...">
+        <button class="btn" onclick="exportAuditLogs()">导出日志</button>
+      </div>
+      <div class="audit-stats" id="auditStats"></div>
+      <div class="audit-log-table">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>分类</th>
+              <th>操作</th>
+              <th>操作员</th>
+              <th>详情</th>
+            </tr>
+          </thead>
+          <tbody id="auditTableBody"></tbody>
+        </table>
+      </div>
+      <div class="pagination" id="auditPagination"></div>
+    </section>
+  </main>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="src/api/api.js"></script>
+  <script src="src/components/Charts.js"></script>
+  <script src="src/components/ChannelGrid.js"></script>
+  <script src="src/components/NodeGrid.js"></script>
+  <script src="src/components/AlertPanel.js"></script>
+  <script src="src/components/AuditPanel.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
