@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #16162a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a6a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6a6a8a;
+}
+
+::selection {
+  background: #4361ee;
+  color: white;
+}
