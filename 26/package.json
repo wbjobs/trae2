@@ -1,0 +1,20 @@
+{
+  "name": "intangible-cultural-heritage-traceability",
+  "version": "1.0.0",
+  "description": "非遗手工艺作品溯源档案全栈Web管理平台",
+  "main": "server/app.js",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["heritage", "traceability", "blockchain", "cultural"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
