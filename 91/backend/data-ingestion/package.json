@@ -1,0 +1,24 @@
+{
+  "name": "data-ingestion",
+  "version": "1.0.0",
+  "description": "Data ingestion module for RabbitMQ consumer + ClickHouse writer",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "npx ts-node src/index.ts",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@clickhouse/client": "^1.4.1",
+    "amqplib": "^0.10.4",
+    "dotenv": "^16.4.5",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/amqplib": "^0.10.5",
+    "typescript": "^5.4.5",
+    "ts-node": "^10.9.2"
+  }
+}

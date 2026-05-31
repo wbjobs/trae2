@@ -1,0 +1,33 @@
+{
+  "name": "mirror-forward",
+  "version": "1.0.0",
+  "description": "Signaling mirror forwarding module - receives raw network packets and forwards to RabbitMQ",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "npx ts-node src/index.ts",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "koa": "2.14.2",
+    "koa-router": "^12.0.1",
+    "koa-bodyparser": "^4.4.1",
+    "@koa/cors": "^5.0.0",
+    "amqplib": "^0.10.3",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "redis": "^4.6.12"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.11.0",
+    "@types/koa": "^2.14.0",
+    "@types/koa-router": "^7.4.7",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa__cors": "^5.0.0",
+    "@types/amqplib": "^0.10.4"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "industrial-signaling-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "cd backend/shared && npm install && cd ../mirror-forward && npm install && cd ../packet-parser && npm install && cd ../trace-retrieval && npm install && cd ../data-ingestion && npm install && cd ../../frontend && npm install",
+    "dev:mirror-forward": "cd backend/mirror-forward && npm run dev",
+    "dev:packet-parser": "cd backend/packet-parser && npm run dev",
+    "dev:trace-retrieval": "cd backend/trace-retrieval && npm run dev",
+    "dev:data-ingestion": "cd backend/data-ingestion && npx ts-node src/index.ts",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "concurrently \"npm run dev:mirror-forward\" \"npm run dev:packet-parser\" \"npm run dev:trace-retrieval\" \"npm run dev:data-ingestion\"",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:mirror-forward": "cd backend/mirror-forward && npm run build",
+    "build:packet-parser": "cd backend/packet-parser && npm run build",
+    "build:trace-retrieval": "cd backend/trace-retrieval && npx tsc",
+    "build:data-ingestion": "cd backend/data-ingestion && npx tsc",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:mirror-forward && npm run build:packet-parser && npm run build:trace-retrieval && npm run build:data-ingestion && npm run build:frontend",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "verify": "node scripts/verify-integration.js",
+    "test:dataflow": "powershell -ExecutionPolicy Bypass -File scripts/test-dataflow.ps1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

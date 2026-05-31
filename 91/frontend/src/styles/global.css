@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #0a192f;
+  color: #b9c0cc;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #001529;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2d3d;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d4059;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;
+}
+
+.el-button--primary {
+  --el-button-bg-color: #409eff;
+  --el-button-border-color: #409eff;
+  --el-button-hover-bg-color: #66b1ff;
+  --el-button-hover-border-color: #66b1ff;
+  --el-button-active-bg-color: #3a8ee6;
+  --el-button-active-border-color: #3a8ee6;
+}
+
+.el-button--success {
+  --el-button-bg-color: #67c23a;
+  --el-button-border-color: #67c23a;
+  --el-button-hover-bg-color: #85ce61;
+  --el-button-hover-border-color: #85ce61;
+}
+
+.el-button--warning {
+  --el-button-bg-color: #e6a23c;
+  --el-button-border-color: #e6a23c;
+  --el-button-hover-bg-color: #ebb563;
+  --el-button-hover-border-color: #ebb563;
+}
+
+.el-button--danger {
+  --el-button-bg-color: #f56c6c;
+  --el-button-border-color: #f56c6c;
+  --el-button-hover-bg-color: #f78989;
+  --el-button-hover-border-color: #f78989;
+}
+
+.el-tag--primary {
+  --el-tag-background-color: rgba(64, 158, 255, 0.1);
+  --el-tag-border-color: rgba(64, 158, 255, 0.2);
+  --el-tag-text-color: #409eff;
+}
+
+.el-tag--success {
+  --el-tag-background-color: rgba(103, 194, 58, 0.1);
+  --el-tag-border-color: rgba(103, 194, 58, 0.2);
+  --el-tag-text-color: #67c23a;
+}
+
+.el-tag--warning {
+  --el-tag-background-color: rgba(230, 162, 60, 0.1);
+  --el-tag-border-color: rgba(230, 162, 60, 0.2);
+  --el-tag-text-color: #e6a23c;
+}
+
+.el-tag--danger {
+  --el-tag-background-color: rgba(245, 108, 108, 0.1);
+  --el-tag-border-color: rgba(245, 108, 108, 0.2);
+  --el-tag-text-color: #f56c6c;
+}
+
+.el-tag--info {
+  --el-tag-background-color: rgba(144, 147, 153, 0.1);
+  --el-tag-border-color: rgba(144, 147, 153, 0.2);
+  --el-tag-text-color: #909399;
+}
+
+.el-message {
+  --el-message-bg-color: #001529;
+  --el-message-border-color: #1f2d3d;
+  --el-message-text-color: #b9c0cc;
+}
+
+.el-message--success {
+  --el-message-bg-color: rgba(103, 194, 58, 0.1);
+  --el-message-border-color: rgba(103, 194, 58, 0.3);
+}
+
+.el-message--warning {
+  --el-message-bg-color: rgba(230, 162, 60, 0.1);
+  --el-message-border-color: rgba(230, 162, 60, 0.3);
+}
+
+.el-message--error {
+  --el-message-bg-color: rgba(245, 108, 108, 0.1);
+  --el-message-border-color: rgba(245, 108, 108, 0.3);
+}
+
+.el-message-box {
+  --el-messagebox-bg-color: #001529;
+  --el-messagebox-border-color: #1f2d3d;
+  --el-text-color-primary: #fff;
+  --el-text-color-regular: #b9c0cc;
+}
+
+.el-message-box__headerbtn .el-message-box__close {
+  color: #8b9aae;
+}
+
+.el-progress-bar__outer {
+  background-color: #001e36;
+}
+
+.el-loading-mask {
+  background-color: rgba(0, 21, 41, 0.8);
+}
+
+.el-loading-spinner .path {
+  stroke: #409eff;
+}
+
+.el-loading-spinner .el-loading-text {
+  color: #409eff;
+}
+
+.el-dropdown-menu {
+  --el-dropdown-menu-bg-color: #001529;
+  --el-dropdown-menu-border-color: #1f2d3d;
+  --el-dropdown-menu-item-color: #b9c0cc;
+  --el-dropdown-menu-item-hover-bg-color: #001e36;
+}
+
+.el-breadcrumb__inner {
+  color: #8b9aae;
+}
+
+.el-breadcrumb__inner.is-link:hover {
+  color: #409eff;
+}
+
+.el-avatar {
+  background-color: #001e36;
+}
