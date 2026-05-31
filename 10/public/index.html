@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>协同3D几何体编辑器</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="login-screen" class="login-screen">
+        <div class="login-container">
+            <h1>协同3D几何体编辑器</h1>
+            <p>实时参数化几何体协同编辑</p>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" placeholder="输入你的用户名">
+            </div>
+            <div class="form-group">
+                <label for="roomId">房间ID</label>
+                <input type="text" id="roomId" placeholder="输入或创建房间ID">
+            </div>
+            <button id="joinBtn" class="btn">加入房间</button>
+            <div class="status" id="loginStatus"></div>
+        </div>
+    </div>
+
+    <div id="editor-screen" class="editor-screen hidden">
+        <div class="top-bar">
+            <div class="room-info">
+                <span class="label">房间:</span>
+                <span id="currentRoomId"></span>
+                <span class="label">用户:</span>
+                <span id="currentUserId"></span>
+                <span class="label">版本:</span>
+                <span id="currentVersion">0</span>
+            </div>
+            <div class="peers-info">
+                <span class="label">在线用户:</span>
+                <span id="peersCount">1</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="panel">
+                    <h3>添加几何体</h3>
+                    <div class="shape-buttons">
+                        <button class="shape-btn" data-shape="box">
+                            <div class="shape-icon cube"></div>
+                            立方体
+                        </button>
+                        <button class="shape-btn" data-shape="sphere">
+                            <div class="shape-icon sphere"></div>
+                            球体
+                        </button>
+                        <button class="shape-btn" data-shape="cylinder">
+                            <div class="shape-icon cylinder"></div>
+                            圆柱体
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel" id="propertiesPanel" style="display: none;">
+                    <h3>属性编辑</h3>
+                    <div class="prop-group">
+                        <label>颜色</label>
+                        <input type="color" id="propColor" value="#00ff00">
+                    </div>
+                    <div class="prop-group">
+                        <label>位置</label>
+                        <div class="vector-input">
+                            <input type="number" id="posX" step="0.1" placeholder="X">
+                            <input type="number" id="posY" step="0.1" placeholder="Y">
+                            <input type="number" id="posZ" step="0.1" placeholder="Z">
+                        </div>
+                    </div>
+                    <div class="prop-group">
+                        <label>旋转 (弧度)</label>
+                        <div class="vector-input">
+                            <input type="number" id="rotX" step="0.1" placeholder="X">
+                            <input type="number" id="rotY" step="0.1" placeholder="Y">
+                            <input type="number" id="rotZ" step="0.1" placeholder="Z">
+                        </div>
+                    </div>
+                    <div class="prop-group">
+                        <label>缩放</label>
+                        <div class="vector-input">
+                            <input type="number" id="scaleX" step="0.1" min="0.1" placeholder="X">
+                            <input type="number" id="scaleY" step="0.1" min="0.1" placeholder="Y">
+                            <input type="number" id="scaleZ" step="0.1" min="0.1" placeholder="Z">
+                        </div>
+                    </div>
+                    <button id="deleteBtn" class="btn btn-danger">删除选中物体</button>
+                </div>
+
+                <div class="panel">
+                    <h3>操作日志</h3>
+                    <div id="opLog" class="op-log"></div>
+                </div>
+
+                <div class="panel">
+                    <h3>连接状态</h3>
+                    <div id="connectionStatus" class="connection-status">
+                        <div class="status-item">
+                            <span class="status-label">Socket.IO:</span>
+                            <span id="socketStatus" class="status-dot connecting"></span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">WebRTC:</span>
+                            <span id="webrtcStatus" class="status-dot connecting"></span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">延迟:</span>
+                            <span id="latency">-- ms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="threeCanvas"></canvas>
+                <div id="syncOverlay" class="sync-overlay hidden">
+                    <div class="sync-content">
+                        <div class="spinner"></div>
+                        <p>同步场景数据中...</p>
+                    </div>
+                </div>
+                <div id="timelineContainer" class="timeline-container hidden">
+                    <div class="timeline-header">
+                        <div class="timeline-title">
+                            <span class="label">时间轴回溯</span>
+                            <span id="timelineCurrentTime" class="timeline-time">--:--:--</span>
+                        </div>
+                        <div class="timeline-controls">
+                            <button id="playBtn" class="timeline-btn" title="播放">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </button>
+                            <button id="pauseBtn" class="timeline-btn hidden" title="暂停">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                                </svg>
+                            </button>
+                            <button id="resetTimelineBtn" class="timeline-btn" title="返回最新">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                </svg>
+                            </button>
+                            <div class="timeline-toggle">
+                                <label class="switch">
+                                    <input type="checkbox" id="timelineToggle">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>历史模式</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-slider-container">
+                        <div class="timeline-marks" id="timelineMarks"></div>
+                        <input type="range" id="timelineSlider" class="timeline-slider" min="0" max="100" value="100">
+                        <div class="timeline-range">
+                            <span class="timeline-label" id="timelineStart">--:--:--</span>
+                            <span class="timeline-label" id="timelineEnd">--:--:--</span>
+                        </div>
+                    </div>
+                    <div id="timelineExportSection" class="timeline-export-section hidden">
+                        <div class="export-header">
+                            <span class="label">导出动画</span>
+                            <button id="closeExportBtn" class="close-btn">&times;</button>
+                        </div>
+                        <div class="export-controls">
+                            <div class="export-row">
+                                <label>起始时间:</label>
+                                <input type="range" id="exportStartSlider" min="0" max="100" value="0" class="export-slider">
+                                <span id="exportStartTime" class="export-time">--:--:--</span>
+                            </div>
+                            <div class="export-row">
+                                <label>结束时间:</label>
+                                <input type="range" id="exportEndSlider" min="0" max="100" value="100" class="export-slider">
+                                <span id="exportEndTime" class="export-time">--:--:--</span>
+                            </div>
+                            <div class="export-row">
+                                <label>帧率:</label>
+                                <select id="exportFps">
+                                    <option value="24">24 FPS</option>
+                                    <option value="30" selected>30 FPS</option>
+                                    <option value="60">60 FPS</option>
+                                </select>
+                                <label>分辨率:</label>
+                                <select id="exportResolution">
+                                    <option value="1280x720">720p</option>
+                                    <option value="1920x1080" selected>1080p</option>
+                                    <option value="2560x1440">1440p</option>
+                                </select>
+                            </div>
+                            <button id="exportBtn" class="btn export-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                                </svg>
+                                导出 MP4 动画
+                            </button>
+                            <div id="exportProgress" class="export-progress hidden">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                                <span id="progressText">准备中...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="showExportBtn" class="show-export-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        导出动画
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@9.0.0/dist/umd/uuidv4.min.js"></script>
+    
+    <script src="js/webrtcManager.js"></script>
+    <script src="js/sceneManager.js"></script>
+    <script src="js/operationManager.js"></script>
+    <script src="js/timelineManager.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
