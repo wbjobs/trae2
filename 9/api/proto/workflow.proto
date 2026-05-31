@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package workflow;
+
+option go_package = "workflow-engine/api/proto;workflowpb";
+
+// 步骤类型定义
+enum StepType {
+  STEP_TYPE_UNSPECIFIED = 0;
+  STEP_TYPE_SHELL = 1;
+  STEP_TYPE_HTTP = 2;
+}
+
+// 步骤状态定义
+enum StepStatus {
+  STEP_STATUS_UNSPECIFIED = 0;
+  STEP_STATUS_PENDING = 1;
+  STEP_STATUS_RUNNING = 2;
+  STEP_STATUS_COMPLETED = 3;
+  STEP_STATUS_FAILED = 4;
+  STEP_STATUS_SKIPPED = 5;
+}
+
+// HTTP请求配置
+message HTTPConfig {
+  string url = 1;
+  string method = 2;
+  map<string, string> headers = 3;
+  string body = 4;
+  int32 timeout_seconds = 5;
+}
+
+// Shell命令配置
+message ShellConfig {
+  string command = 1;
+  repeated string args = 2;
+  string working_dir = 3;
+  int32 timeout_seconds = 4;
+}
+
+// 步骤定义
+message StepDefinition {
+  string step_id = 1;
+  string name = 2;
+  StepType type = 3;
+  ShellConfig shell_config = 4;
+  HTTPConfig http_config = 5;
+  repeated string dependencies = 6;
+  map<string, string> metadata = 7;
+}
+
+// 工作流定义
+message WorkflowDefinition {
+  string workflow_id = 1;
+  string name = 2;
+  string description = 3;
+  repeated StepDefinition steps = 4;
+  map<string, string> metadata = 5;
+  int64 created_at = 6;
+}
+
+// 创建工作流请求
+message CreateWorkflowRequest {
+  string name = 1;
+  string description = 2;
+  repeated StepDefinition steps = 3;
+  map<string, string> metadata = 4;
+}
+
+// 创建工作流响应
+message CreateWorkflowResponse {
+  string workflow_id = 1;
+  string status = 2;
+}
+
+// 启动作业实例请求
+message StartInstanceRequest {
+  string workflow_id = 1;
+  map<string, string> input = 2;
+}
+
+// 启动作业实例响应
+message StartInstanceResponse {
+  string instance_id = 1;
+  string trace_id = 2;
+  string status = 3;
+}
+
+// 步骤执行请求
+message ExecuteStepRequest {
+  string instance_id = 1;
+  string step_id = 2;
+  string step_name = 3;
+  StepType step_type = 4;
+  ShellConfig shell_config = 5;
+  HTTPConfig http_config = 6;
+  map<string, string> metadata = 7;
+}
+
+// 步骤执行响应
+message ExecuteStepResponse {
+  string step_id = 1;
+  StepStatus status = 2;
+  string output = 3;
+  string error_message = 4;
+  int64 start_time = 5;
+  int64 end_time = 6;
+  map<string, string> metadata = 7;
+}
+
+// Worker服务 - 由Worker节点实现，Scheduler调用
+service WorkerService {
+  rpc ExecuteStep(ExecuteStepRequest) returns (ExecuteStepResponse);
+}
+
+// Scheduler服务 - 由Scheduler实现，提供管理接口
+service SchedulerService {
+  rpc CreateWorkflow(CreateWorkflowRequest) returns (CreateWorkflowResponse);
+  rpc StartInstance(StartInstanceRequest) returns (StartInstanceResponse);
+}

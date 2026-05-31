@@ -1,0 +1,180 @@
+### Workflow Engine API Examples
+
+### 1. Health Check
+GET http://localhost:8080/health
+
+### 2. Create a Workflow (DAG with 4 steps)
+POST http://localhost:8080/api/v1/workflow
+Content-Type: application/json
+
+{
+  "name": "Data Processing Pipeline",
+  "description": "Extract, transform, and load data pipeline",
+  "metadata": {
+    "team": "data",
+    "priority": "high"
+  },
+  "steps": [
+    {
+      "step_id": "extract",
+      "name": "Extract Data",
+      "type": 1,
+      "dependencies": [],
+      "metadata": {
+        "source": "database"
+      },
+      "shell_config": {
+        "command": "echo 'Extracting data from source'",
+        "timeout_seconds": 30
+      }
+    },
+    {
+      "step_id": "validate",
+      "name": "Validate Data",
+      "type": 1,
+      "dependencies": ["extract"],
+      "metadata": {
+        "schema_version": "1.0"
+      },
+      "shell_config": {
+        "command": "echo 'Validating data schema'",
+        "timeout_seconds": 15
+      }
+    },
+    {
+      "step_id": "transform",
+      "name": "Transform Data",
+      "type": 1,
+      "dependencies": ["validate"],
+      "shell_config": {
+        "command": "echo 'Transforming data format'",
+        "timeout_seconds": 60
+      }
+    },
+    {
+      "step_id": "load",
+      "name": "Load to Warehouse",
+      "type": 2,
+      "dependencies": ["transform"],
+      "http_config": {
+        "url": "https://httpbin.org/post",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": "{\"status\": \"completed\"}",
+        "timeout_seconds": 30
+      }
+    }
+  ]
+}
+
+### 3. Start a Workflow Instance
+### Replace <workflow_id> with the ID from step 2
+POST http://localhost:8080/api/v1/instance
+Content-Type: application/json
+
+{
+  "workflow_id": "<workflow_id>",
+  "input": {
+    "source": "production_db",
+    "target": "analytics_warehouse"
+  }
+}
+
+### 4. Get Trace by Trace ID
+### Replace <trace_id> with the trace_id from step 3
+GET http://localhost:8080/api/v1/trace/<trace_id>
+
+### Example Response:
+{
+  "trace_id": "abc123...",
+  "status": "COMPLETED",
+  "tree": {
+    "trace_id": "abc123...",
+    "span_id": "span1",
+    "step_id": "extract",
+    "step_name": "Extract Data",
+    "status": "COMPLETED",
+    "duration_ms": 150,
+    "children": [
+      {
+        "span_id": "span2",
+        "parent_span_id": "span1",
+        "step_id": "validate",
+        "step_name": "Validate Data",
+        "status": "COMPLETED",
+        "duration_ms": 80,
+        "children": [
+          {
+            "span_id": "span3",
+            "parent_span_id": "span2",
+            "step_id": "transform",
+            "step_name": "Transform Data",
+            "status": "COMPLETED",
+            "duration_ms": 200,
+            "children": [
+              {
+                "span_id": "span4",
+                "parent_span_id": "span3",
+                "step_id": "load",
+                "step_name": "Load to Warehouse",
+                "status": "COMPLETED",
+                "duration_ms": 300
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+### 5. Create a Workflow with Parallel Steps
+POST http://localhost:8080/api/v1/workflow
+Content-Type: application/json
+
+{
+  "name": "Parallel Processing",
+  "description": "Process multiple data sources in parallel",
+  "steps": [
+    {
+      "step_id": "init",
+      "name": "Initialize",
+      "type": 1,
+      "dependencies": [],
+      "shell_config": {
+        "command": "echo 'Initializing workflow'"
+      }
+    },
+    {
+      "step_id": "fetch_a",
+      "name": "Fetch Data Source A",
+      "type": 2,
+      "dependencies": ["init"],
+      "http_config": {
+        "url": "https://httpbin.org/get?source=a",
+        "method": "GET"
+      }
+    },
+    {
+      "step_id": "fetch_b",
+      "name": "Fetch Data Source B",
+      "type": 2,
+      "dependencies": ["init"],
+      "http_config": {
+        "url": "https://httpbin.org/get?source=b",
+        "method": "GET"
+      }
+    },
+    {
+      "step_id": "merge",
+      "name": "Merge Results",
+      "type": 1,
+      "dependencies": ["fetch_a", "fetch_b"],
+      "shell_config": {
+        "command": "echo 'Merging results from A and B'"
+      }
+    }
+  ]
+}

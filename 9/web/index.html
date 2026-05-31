@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作流追踪火焰图</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .input-group input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .threshold-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .threshold-input label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .threshold-input input {
+            width: 100px;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .flame-graph-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .graph-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .graph-header h2 {
+            color: #333;
+            font-size: 20px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            overflow: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 350px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .tooltip h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 6px;
+        }
+
+        .tooltip-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            gap: 16px;
+        }
+
+        .tooltip-label {
+            color: #aaa;
+        }
+
+        .tooltip-value {
+            font-weight: 600;
+        }
+
+        .tooltip-metadata {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tooltip-metadata h5 {
+            margin-bottom: 6px;
+            color: #aaa;
+        }
+
+        .metadata-item {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            font-size: 11px;
+        }
+
+        .analysis-results {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .analysis-results h3 {
+            color: #333;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .bottleneck-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .bottleneck-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border-left: 4px solid #f5576c;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .bottleneck-card h4 {
+            color: #d32f2f;
+            margin-bottom: 8px;
+        }
+
+        .bottleneck-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            color: #666;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f0f0f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #ffe0e0;
+            color: #d32f2f;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="header">
+                <h1>🔥 工作流追踪火焰图</h1>
+                <div class="input-group">
+                    <input 
+                        v-model="traceId" 
+                        placeholder="输入 Trace ID (例如: 0123456789abcdef0123456789abcdef)"
+                        @keyup.enter="fetchTrace"
+                    />
+                    <button class="btn btn-primary" @click="fetchTrace" :disabled="loading">
+                        {{ loading ? '加载中...' : '查询追踪' }}
+                    </button>
+                </div>
+            </div>
+
+            <div v-if="error" class="error-message">
+                {{ error }}
+            </div>
+
+            <div v-if="traceData" class="flame-graph-container">
+                <div class="graph-header">
+                    <h2>Trace: {{ traceData.trace_id }}</h2>
+                    <div class="controls">
+                        <div class="threshold-input">
+                            <label>阈值 (ms):</label>
+                            <input type="number" v-model.number="threshold" min="0" />
+                        </div>
+                        <button class="btn btn-danger" @click="analyzeBottlenecks">
+                            🔍 性能瓶颈分析
+                        </button>
+                        <button class="btn btn-secondary" @click="clearAnalysis">
+                            清除高亮
+                        </button>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #667eea;"></div>
+                        <span>工作流</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #48bb78;"></div>
+                        <span>步骤执行</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ed8936;"></div>
+                        <span>条件决策</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #a0aec0;"></div>
+                        <span>已跳过</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f56565;"></div>
+                        <span>性能瓶颈</span>
+                    </div>
+                </div>
+
+                <div 
+                    class="canvas-wrapper" 
+                    ref="canvasWrapper"
+                    @mousemove="handleMouseMove"
+                    @mouseleave="hideTooltip"
+                >
+                    <canvas ref="flameCanvas"></canvas>
+                    <div 
+                        v-if="tooltip.show" 
+                        class="tooltip" 
+                        :style="{ left: tooltip.x + 'px', top: tooltip.y + 'px' }"
+                    >
+                        <h4>{{ tooltip.data.name }}</h4>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">状态:</span>
+                            <span class="tooltip-value">{{ tooltip.data.status }}</span>
+                        </div>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">耗时:</span>
+                            <span class="tooltip-value">{{ tooltip.data.duration_ms }} ms</span>
+                        </div>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">开始时间:</span>
+                            <span class="tooltip-value">{{ tooltip.data.start_time }}</span>
+                        </div>
+                        <div class="tooltip-row">
+                            <span class="tooltip-label">结束时间:</span>
+                            <span class="tooltip-value">{{ tooltip.data.end_time }}</span>
+                        </div>
+                        <div v-if="tooltip.data.attributes && Object.keys(tooltip.data.attributes).length > 0" class="tooltip-metadata">
+                            <h5>属性</h5>
+                            <span 
+                                v-for="(value, key) in tooltip.data.attributes" 
+                                :key="key"
+                                class="metadata-item"
+                            >
+                                {{ key }}: {{ value }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="analysisResults.length > 0" class="analysis-results">
+                <h3>📊 性能分析结果</h3>
+                <div class="stats-summary">
+                    <div class="stat-card">
+                        <div class="stat-value">{{ analysisStats.totalSpans }}</div>
+                        <div class="stat-label">总 Span 数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">{{ analysisStats.totalDuration }} ms</div>
+                        <div class="stat-label">总耗时</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">{{ analysisStats.bottleneckCount }}</div>
+                        <div class="stat-label">瓶颈数量</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">{{ analysisStats.maxDuration }} ms</div>
+                        <div class="stat-label">最大耗时</div>
+                    </div>
+                </div>
+                <div class="bottleneck-list">
+                    <div v-for="(item, index) in analysisResults" :key="index" class="bottleneck-card">
+                        <h4>#{{ index + 1 }} {{ item.name }}</h4>
+                        <div class="bottleneck-stats">
+                            <span>耗时: <strong>{{ item.duration_ms }} ms</strong></span>
+                            <span>占比: <strong>{{ item.percentage }}%</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="!traceData && !loading && !error" class="flame-graph-container">
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <p>请输入 Trace ID 查询追踪数据</p>
+                </div>
+            </div>
+
+            <div v-if="loading" class="flame-graph-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted, nextTick, computed } = Vue;
+
+        createApp({
+            setup() {
+                const traceId = ref('');
+                const traceData = ref(null);
+                const loading = ref(false);
+                const error = ref('');
+                const threshold = ref(500);
+                const analysisResults = ref([]);
+                const highlightedSpans = ref(new Set());
+                
+                const flameCanvas = ref(null);
+                const canvasWrapper = ref(null);
+                
+                const tooltip = ref({
+                    show: false,
+                    x: 0,
+                    y: 0,
+                    data: null
+                });
+
+                const spanRects = ref([]);
+
+                const analysisStats = computed(() => {
+                    if (!traceData.value) {
+                        return { totalSpans: 0, totalDuration: 0, bottleneckCount: 0, maxDuration: 0 };
+                    }
+                    const allSpans = getAllSpans(traceData.value.root);
+                    const totalDuration = traceData.value.root?.duration_ms || 0;
+                    const maxDuration = Math.max(...allSpans.map(s => s.duration_ms));
+                    return {
+                        totalSpans: allSpans.length,
+                        totalDuration,
+                        bottleneckCount: analysisResults.value.length,
+                        maxDuration
+                    };
+                });
+
+                function getAllSpans(node, result = []) {
+                    if (node) {
+                        result.push(node);
+                        if (node.children) {
+                            node.children.forEach(child => getAllSpans(child, result));
+                        }
+                    }
+                    return result;
+                }
+
+                async function fetchTrace() {
+                    if (!traceId.value.trim()) {
+                        error.value = '请输入 Trace ID';
+                        return;
+                    }
+
+                    loading.value = true;
+                    error.value = '';
+                    traceData.value = null;
+                    analysisResults.value = [];
+                    highlightedSpans.value.clear();
+
+                    try {
+                        const response = await fetch(`/api/v1/trace/${traceId.value.trim()}`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        const data = await response.json();
+                        traceData.value = data;
+                        await nextTick();
+                        renderFlameGraph();
+                    } catch (err) {
+                        error.value = `获取追踪数据失败: ${err.message}`;
+                    } finally {
+                        loading.value = false;
+                    }
+                }
+
+                function getSpanColor(span, isHighlighted) {
+                    if (isHighlighted) {
+                        return '#f56565';
+                    }
+                    
+                    const name = span.name || '';
+                    const status = span.status || '';
+                    
+                    if (status === 'SKIPPED') {
+                        return '#a0aec0';
+                    }
+                    if (name.startsWith('decision')) {
+                        return '#ed8936';
+                    }
+                    if (name.startsWith('workflow')) {
+                        return '#667eea';
+                    }
+                    if (name.startsWith('step')) {
+                        return status === 'COMPLETED' ? '#48bb78' : '#f56565';
+                    }
+                    return '#4299e1';
+                }
+
+                function calculateLayout(node, startTime, depth, layout = []) {
+                    if (!node) return layout;
+
+                    const nodeStart = new Date(node.start_time).getTime();
+                    const nodeEnd = new Date(node.end_time).getTime();
+                    
+                    layout.push({
+                        node,
+                        depth,
+                        start: nodeStart - startTime,
+                        end: nodeEnd - startTime,
+                        duration: node.duration_ms
+                    });
+
+                    if (node.children) {
+                        node.children.forEach(child => {
+                            calculateLayout(child, startTime, depth + 1, layout);
+                        });
+                    }
+
+                    return layout;
+                }
+
+                function renderFlameGraph() {
+                    const canvas = flameCanvas.value;
+                    const wrapper = canvasWrapper.value;
+                    if (!canvas || !wrapper || !traceData.value?.root) return;
+
+                    const ctx = canvas.getContext('2d');
+                    const root = traceData.value.root;
+
+                    const startTime = new Date(root.start_time).getTime();
+                    const endTime = new Date(root.end_time).getTime();
+                    const totalDuration = endTime - startTime;
+
+                    const layout = calculateLayout(root, startTime, 0);
+                    
+                    const maxDepth = Math.max(...layout.map(l => l.depth)) + 1;
+                    const rowHeight = 30;
+                    const padding = 20;
+                    const canvasHeight = maxDepth * rowHeight + padding * 2;
+                    const canvasWidth = Math.max(wrapper.clientWidth - 40, 800);
+
+                    canvas.width = canvasWidth;
+                    canvas.height = canvasHeight;
+                    canvas.style.width = canvasWidth + 'px';
+                    canvas.style.height = canvasHeight + 'px';
+
+                    const timeScale = (canvasWidth - padding * 2) / totalDuration;
+
+                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                    spanRects.value = [];
+
+                    layout.forEach(item => {
+                        const x = padding + item.start * timeScale;
+                        const y = padding + item.depth * rowHeight;
+                        const width = Math.max(item.duration * timeScale, 2);
+                        const height = rowHeight - 4;
+
+                        const isHighlighted = highlightedSpans.value.has(item.node.span_id);
+                        const color = getSpanColor(item.node, isHighlighted);
+
+                        ctx.fillStyle = color;
+                        ctx.beginPath();
+                        ctx.roundRect(x, y, width, height, 3);
+                        ctx.fill();
+
+                        if (isHighlighted) {
+                            ctx.strokeStyle = '#c53030';
+                            ctx.lineWidth = 3;
+                            ctx.stroke();
+                        }
+
+                        if (width > 60) {
+                            ctx.fillStyle = 'white';
+                            ctx.font = '11px -apple-system, sans-serif';
+                            ctx.textBaseline = 'middle';
+                            const name = item.node.name.length > Math.floor(width / 8) 
+                                ? item.node.name.substring(0, Math.floor(width / 8)) + '...'
+                                : item.node.name;
+                            ctx.fillText(name, x + 6, y + height / 2);
+                        }
+
+                        spanRects.value.push({
+                            x, y, width, height,
+                            data: {
+                                name: item.node.name,
+                                status: item.node.status,
+                                duration_ms: item.node.duration_ms,
+                                start_time: item.node.start_time,
+                                end_time: item.node.end_time,
+                                attributes: item.node.attributes || {}
+                            }
+                        });
+                    });
+
+                    ctx.fillStyle = '#999';
+                    ctx.font = '10px -apple-system, sans-serif';
+                    ctx.textAlign = 'center';
+                    const tickCount = 10;
+                    for (let i = 0; i <= tickCount; i++) {
+                        const x = padding + (i / tickCount) * (canvasWidth - padding * 2);
+                        const time = Math.round((i / tickCount) * totalDuration);
+                        ctx.fillText(`${time}ms`, x, canvasHeight - 5);
+                        ctx.beginPath();
+                        ctx.moveTo(x, padding);
+                        ctx.lineTo(x, canvasHeight - padding);
+                        ctx.strokeStyle = '#f0f0f0';
+                        ctx.stroke();
+                    }
+                }
+
+                function handleMouseMove(e) {
+                    const rect = canvasWrapper.value.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    let found = null;
+                    for (let i = spanRects.value.length - 1; i >= 0; i--) {
+                        const sr = spanRects.value[i];
+                        if (x >= sr.x && x <= sr.x + sr.width && y >= sr.y && y <= sr.y + sr.height) {
+                            found = sr;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        tooltip.value = {
+                            show: true,
+                            x: x + 15,
+                            y: y + 15,
+                            data: found.data
+                        };
+                    } else {
+                        tooltip.value.show = false;
+                    }
+                }
+
+                function hideTooltip() {
+                    tooltip.value.show = false;
+                }
+
+                function analyzeBottlenecks() {
+                    if (!traceData.value?.root) return;
+
+                    const allSpans = getAllSpans(traceData.value.root);
+                    const totalDuration = traceData.value.root.duration_ms;
+
+                    const bottlenecks = allSpans
+                        .filter(span => span.duration_ms >= threshold.value)
+                        .sort((a, b) => b.duration_ms - a.duration_ms)
+                        .slice(0, 10)
+                        .map(span => ({
+                            name: span.name,
+                            duration_ms: span.duration_ms,
+                            percentage: ((span.duration_ms / totalDuration) * 100).toFixed(1),
+                            span_id: span.span_id
+                        }));
+
+                    analysisResults.value = bottlenecks;
+                    highlightedSpans.value = new Set(bottlenecks.map(b => b.span_id));
+                    renderFlameGraph();
+                }
+
+                function clearAnalysis() {
+                    analysisResults.value = [];
+                    highlightedSpans.value.clear();
+                    renderFlameGraph();
+                }
+
+                onMounted(() => {
+                    window.addEventListener('resize', () => {
+                        if (traceData.value) {
+                            renderFlameGraph();
+                        }
+                    });
+                });
+
+                return {
+                    traceId,
+                    traceData,
+                    loading,
+                    error,
+                    threshold,
+                    analysisResults,
+                    analysisStats,
+                    flameCanvas,
+                    canvasWrapper,
+                    tooltip,
+                    fetchTrace,
+                    handleMouseMove,
+                    hideTooltip,
+                    analyzeBottlenecks,
+                    clearAnalysis
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
