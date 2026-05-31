@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矿山地形3D重构标注系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Microsoft YaHei', sans-serif; }
+        #renderCanvas { width: 100%; height: 100%; touch-action: none; }
+        .ui-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+
+        .toolbar {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(30, 41, 59, 0.95); border-radius: 8px; padding: 15px;
+            pointer-events: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); min-width: 280px;
+            max-height: calc(100vh - 40px); overflow-y: auto;
+        }
+        .toolbar h2 { color: #fff; font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid #475569; padding-bottom: 8px; }
+        .toolbar .section-title { color: #94a3b8; font-size: 12px; margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-group { display: flex; flex-direction: column; gap: 8px; }
+        .btn-row { display: flex; gap: 8px; }
+        .btn-row .btn { flex: 1; }
+
+        .btn {
+            background: #3b82f6; color: white; border: none; padding: 8px 12px;
+            border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap;
+        }
+        .btn:hover { background: #2563eb; }
+        .btn.active { background: #10b981; }
+        .btn.danger { background: #ef4444; }
+        .btn.danger:hover { background: #dc2626; }
+        .btn.small { padding: 5px 10px; font-size: 12px; }
+        .btn.secondary { background: #475569; }
+        .btn.secondary:hover { background: #64748b; }
+
+        .mine-selector { margin-bottom: 12px; }
+        .mine-selector label { color: #94a3b8; font-size: 12px; display: block; margin-bottom: 4px; }
+        .mine-selector select { width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #475569; background: #1e293b; color: #fff; font-size: 13px; }
+
+        .slice-control { margin-top: 8px; }
+        .slice-control label { color: #94a3b8; font-size: 12px; display: block; margin-bottom: 4px; }
+        .slice-control input[type="range"] { width: 100%; margin: 4px 0; }
+        .slice-control .range-values { display: flex; justify-content: space-between; color: #94a3b8; font-size: 11px; }
+
+        .info-panel {
+            position: absolute; bottom: 20px; left: 20px;
+            background: rgba(30, 41, 59, 0.95); border-radius: 8px; padding: 15px;
+            pointer-events: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); min-width: 250px; color: #fff;
+        }
+        .info-panel h3 { font-size: 14px; margin-bottom: 8px; color: #94a3b8; }
+        .info-item { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+        .info-label { color: #94a3b8; }
+        .info-value { color: #fff; font-weight: 500; }
+
+        .right-panel {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(30, 41, 59, 0.95); border-radius: 8px;
+            pointer-events: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            min-width: 280px; max-width: 320px;
+        }
+
+        .panel-tabs {
+            display: flex; border-bottom: 1px solid #475569;
+        }
+        .panel-tab {
+            flex: 1; padding: 10px 8px; text-align: center; cursor: pointer;
+            color: #94a3b8; font-size: 12px; border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .panel-tab:hover { color: #fff; }
+        .panel-tab.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+
+        .panel-content { padding: 12px; display: none; max-height: 350px; overflow-y: auto; }
+        .panel-content.active { display: block; }
+
+        .area-list { display: flex; flex-direction: column; gap: 8px; }
+        .area-item {
+            background: rgba(71, 85, 105, 0.5); border-radius: 6px; padding: 10px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .area-item:hover { background: rgba(71, 85, 105, 0.8); }
+        .area-name { color: #fff; font-weight: 500; font-size: 13px; margin-bottom: 3px; }
+        .area-info { color: #94a3b8; font-size: 11px; }
+
+        .layer-item { margin-bottom: 6px; }
+        .layer-header { display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: rgba(71, 85, 105, 0.4); border-radius: 6px; }
+        .layer-toggle, .layer-lock { background: none; border: none; cursor: pointer; font-size: 14px; padding: 2px; }
+        .layer-icon { font-size: 14px; }
+        .layer-name { color: #fff; font-size: 12px; flex: 1; }
+        .layer-count { color: #94a3b8; font-size: 11px; }
+        .layer-item.layer-hidden .layer-header { opacity: 0.5; }
+        .layer-item.layer-locked .layer-name { color: #94a3b8; }
+        .layer-opacity-control { display: flex; align-items: center; gap: 6px; padding: 4px 8px; }
+        .layer-opacity-control input[type="range"] { flex: 1; }
+        .opacity-value { color: #94a3b8; font-size: 11px; min-width: 32px; text-align: right; }
+
+        .perf-metric { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(71,85,105,0.3); }
+        .perf-label { color: #94a3b8; font-size: 12px; }
+        .perf-value { color: #10b981; font-size: 12px; font-weight: 500; }
+        .perf-value.warning { color: #f59e0b; }
+        .perf-value.critical { color: #ef4444; }
+
+        .loading {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(30, 41, 59, 0.95); border-radius: 8px; padding: 30px;
+            text-align: center; color: #fff; display: none; z-index: 100;
+        }
+        .loading.active { display: block; }
+        .spinner { width: 40px; height: 40px; border: 3px solid #475569; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .progress-bar { width: 200px; height: 6px; background: #475569; border-radius: 3px; margin: 10px auto 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: #3b82f6; border-radius: 3px; transition: width 0.3s; width: 0%; }
+
+        .status-bar {
+            position: absolute; bottom: 20px; right: 20px;
+            background: rgba(30, 41, 59, 0.95); border-radius: 8px; padding: 8px 12px;
+            pointer-events: auto; color: #fff; font-size: 12px;
+        }
+        .status-item { display: inline-block; margin-right: 12px; }
+        .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+        .status-dot.online { background: #10b981; }
+        .status-dot.offline { background: #ef4444; }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <div class="ui-container">
+        <div class="toolbar">
+            <h2>🏔️ 矿山地形3D标注系统</h2>
+            <div class="mine-selector">
+                <label>选择矿区</label>
+                <select id="mineSelector">
+                    <option value="mine_001">矿区001 - 西山矿区</option>
+                    <option value="mine_002">矿区002 - 东山矿区</option>
+                </select>
+            </div>
+            <div class="section-title">数据加载</div>
+            <div class="btn-group">
+                <button class="btn" id="btnLoadPointCloud"><span>📊</span> 加载点云(分页)</button>
+                <button class="btn" id="btnCreateTerrain"><span>🏔️</span> 重建地形表面</button>
+            </div>
+            <div class="section-title">标注工具</div>
+            <div class="btn-group">
+                <div class="btn-row">
+                    <button class="btn" id="btnAnnotate"><span>✏️</span> 圈画开采范围</button>
+                    <button class="btn secondary" id="btnClear"><span>🔄</span> 清除</button>
+                </div>
+                <button class="btn danger small" id="btnReset"><span>🎯</span> 重置视角</button>
+            </div>
+            <div class="section-title">地形剖切</div>
+            <div class="slice-control">
+                <label>剖切高度: <span id="sliceHeightValue">0.0</span>m</label>
+                <input type="range" id="sliceHeightSlider" min="-20" max="60" step="1" value="0">
+                <div class="range-values"><span>-20m</span><span>60m</span></div>
+                <div class="btn-row" style="margin-top: 6px;">
+                    <button class="btn small secondary" id="btnAddSlice"><span>🔪</span> 添加剖切面</button>
+                    <button class="btn small secondary" id="btnMultiSlice"><span>📑</span> 多层剖切</button>
+                </div>
+                <div class="btn-row" style="margin-top: 4px;">
+                    <button class="btn small secondary" id="btnClipAbove"><span>⬆️</span> 裁剪上方</button>
+                    <button class="btn small secondary" id="btnClipBelow"><span>⬇️</span> 裁剪下方</button>
+                    <button class="btn small secondary" id="btnClearClip"><span>↩️</span> 清除裁剪</button>
+                </div>
+            </div>
+            <div class="section-title">性能优化</div>
+            <div class="btn-group">
+                <div class="btn-row">
+                    <button class="btn small secondary" id="btnOptimize"><span>⚡</span> 启用优化</button>
+                    <button class="btn small secondary" id="btnFreeze"><span>❄️</span> 冻结静态</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="panel-tabs">
+                <div class="panel-tab active" data-tab="areas">📋 标注区域</div>
+                <div class="panel-tab" data-tab="layers">🗂️ 图层管理</div>
+                <div class="panel-tab" data-tab="perf">⚡ 性能监控</div>
+            </div>
+            <div class="panel-content active" id="tabAreas">
+                <div class="area-list" id="areaList">
+                    <div class="area-info" style="text-align: center; padding: 20px; color: #94a3b8;">暂无标注数据</div>
+                </div>
+            </div>
+            <div class="panel-content" id="tabLayers">
+                <div id="layerList"></div>
+            </div>
+            <div class="panel-content" id="tabPerf">
+                <div id="perfMetrics">
+                    <div class="perf-metric"><span class="perf-label">帧率 (FPS)</span><span class="perf-value" id="perfFPS">60</span></div>
+                    <div class="perf-metric"><span class="perf-label">活跃网格</span><span class="perf-value" id="perfMeshes">0</span></div>
+                    <div class="perf-metric"><span class="perf-label">总顶点数</span><span class="perf-value" id="perfVertices">0</span></div>
+                    <div class="perf-metric"><span class="perf-label">冻结网格</span><span class="perf-value" id="perfFrozen">0</span></div>
+                    <div class="perf-metric"><span class="perf-label">缩放级别</span><span class="perf-value" id="perfScaling">1.00x</span></div>
+                    <div class="perf-metric"><span class="perf-label">点云数量</span><span class="perf-value" id="perfPointCount">0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>📌 当前状态</h3>
+            <div class="info-item"><span class="info-label">模式:</span><span class="info-value" id="currentMode">浏览模式</span></div>
+            <div class="info-item"><span class="info-label">点云数量:</span><span class="info-value" id="pointCount">0</span></div>
+            <div class="info-item"><span class="info-label">已选区域:</span><span class="info-value" id="selectedArea">无</span></div>
+            <div class="info-item"><span class="info-label">标注点数:</span><span class="info-value" id="annotationPoints">0</span></div>
+            <div class="info-item"><span class="info-label">剖切层数:</span><span class="info-value" id="sliceCount">0</span></div>
+        </div>
+
+        <div class="status-bar">
+            <span class="status-item"><span class="status-dot online"></span> 在线</span>
+            <span class="status-item">FPS: <span id="fpsValue">60</span></span>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div id="loadingText">加载中...</div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
