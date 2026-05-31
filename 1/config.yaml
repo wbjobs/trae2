@@ -1,0 +1,79 @@
+gateway_id: edge-gateway-001
+log_level: info
+
+modbus:
+  enabled: true
+  slave_id: 1
+  address: 192.168.1.100
+  port: 502
+  timeout: 5
+  poll_period: 10
+  registers:
+    - name: temperature
+      address: 0
+      quantity: 2
+      type: holding
+    - name: humidity
+      address: 2
+      quantity: 2
+      type: holding
+    - name: pressure
+      address: 4
+      quantity: 1
+      type: input
+    - name: status
+      address: 0
+      quantity: 1
+      type: coil
+
+opcua:
+  enabled: false
+  endpoint: opc.tcp://192.168.1.101:4840
+  security: None
+  policy: None
+  mode: None
+  username: ""
+  password: ""
+  poll_period: 15
+  nodes:
+    - name: motor_speed
+      node_id: MotorSpeed
+      namespace: 2
+    - name: motor_temp
+      node_id: MotorTemperature
+      namespace: 2
+    - name: production_count
+      node_id: ProductionCount
+      namespace: 2
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  user: root
+  password: password
+  database: edge_gateway
+  max_open: 20
+  max_idle: 10
+
+influxdb:
+  url: http://127.0.0.1:8086
+  token: your-influxdb-token
+  org: edge-iot
+  bucket: sensor_data
+
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  client_id: edge-gateway-001
+  username: mqtt_user
+  password: mqtt_password
+  topic: edge/data
+  qos: 1
+
+message_queue:
+  max_retry_attempts: 5
+  retry_base_delay: 1
+  max_retry_delay: 60
+  dead_letter_limit: 1000
+  offline_cache_limit: 100000
+  cache_flush_interval: 10
