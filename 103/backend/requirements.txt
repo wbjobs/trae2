@@ -1,0 +1,15 @@
+Django==4.2.11
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.3.1
+django-redis==5.4.0
+django-filter==23.5
+minio==7.2.5
+redis==5.0.1
+Pillow==10.2.0
+python-dotenv==1.0.0
+drf-spectacular==0.27.1
+psycopg2-binary==2.9.9
+mysqlclient==2.2.4
+celery==5.3.6
+django-timezone-field==6.1.0

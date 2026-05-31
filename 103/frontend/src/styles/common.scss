@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  color: $text-primary;
+  background-color: $bg-color-page;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  &:hover {
+    color: lighten($primary-color, 10%);
+  }
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.container {
+  padding: 20px;
+}
+
+.card-container {
+  background: #fff;
+  border-radius: $border-radius;
+  padding: 20px;
+  box-shadow: $box-shadow;
+  margin-bottom: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .page-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+}
+
+.search-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: $border-radius;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table-container {
+  background: #fff;
+  border-radius: $border-radius;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+  .pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+
+  &.success {
+    background: rgba(0, 180, 42, 0.1);
+    color: $success-color;
+  }
+  &.warning {
+    background: rgba(255, 125, 0, 0.1);
+    color: $warning-color;
+  }
+  &.danger {
+    background: rgba(245, 63, 63, 0.1);
+    color: $danger-color;
+  }
+  &.primary {
+    background: rgba(22, 93, 255, 0.1);
+    color: $primary-color;
+  }
+  &.info {
+    background: rgba(134, 144, 156, 0.1);
+    color: $info-color;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition-duration;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}

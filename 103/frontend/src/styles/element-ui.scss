@@ -1,0 +1,141 @@
+@import 'variables.scss';
+
+.el-button--primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+    border-color: lighten($primary-color, 10%);
+  }
+  &:active {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+}
+
+.el-button--success {
+  background-color: $success-color;
+  border-color: $success-color;
+}
+
+.el-button--warning {
+  background-color: $warning-color;
+  border-color: $warning-color;
+}
+
+.el-button--danger {
+  background-color: $danger-color;
+  border-color: $danger-color;
+}
+
+.el-tag--success {
+  background-color: rgba(0, 180, 42, 0.1);
+  border-color: transparent;
+  color: $success-color;
+}
+
+.el-tag--warning {
+  background-color: rgba(255, 125, 0, 0.1);
+  border-color: transparent;
+  color: $warning-color;
+}
+
+.el-tag--danger {
+  background-color: rgba(245, 63, 63, 0.1);
+  border-color: transparent;
+  color: $danger-color;
+}
+
+.el-tag--primary {
+  background-color: rgba(22, 93, 255, 0.1);
+  border-color: transparent;
+  color: $primary-color;
+}
+
+.el-menu {
+  border-right: none;
+}
+
+.el-menu-item,
+.el-submenu__title {
+  height: 50px;
+  line-height: 50px;
+}
+
+.el-menu-item.is-active {
+  background-color: rgba(22, 93, 255, 0.1);
+  color: $primary-color;
+}
+
+.el-pagination {
+  .el-pager li.active {
+    background-color: $primary-color;
+  }
+}
+
+.el-dialog__header {
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 15px;
+}
+
+.el-dialog__footer {
+  border-top: 1px solid $border-color;
+  padding-top: 15px;
+}
+
+.el-table th {
+  background-color: $bg-color;
+  color: $text-regular;
+  font-weight: 600;
+}
+
+.el-card {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  transition: all $transition-duration;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.el-badge__content {
+  background-color: $danger-color;
+}
+
+.el-upload-dragger {
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+.el-upload--text {
+  .el-upload-dragger.is-dragover {
+    border-color: $primary-color;
+    background-color: rgba(22, 93, 255, 0.05);
+  }
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+
+.el-radio__input.is-checked .el-radio__inner {
+  border-color: $primary-color;
+  background: $primary-color;
+}
+
+.el-select-dropdown__item.selected {
+  color: $primary-color;
+}
+
+.el-input__inner:focus {
+  border-color: $primary-color;
+}
+
+.el-textarea__inner:focus {
+  border-color: $primary-color;
+}

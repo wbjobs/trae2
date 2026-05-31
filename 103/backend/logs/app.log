@@ -1,0 +1,203 @@
+权限初始化完成
+权限初始化完成
+角色初始化完成
+超级管理员创建完成: admin/admin123
+权限初始化完成
+角色初始化完成
+Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+初始化 MinIO 客户端失败: HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /experiment-files?location= (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Bad Request: /api/auth/login/
+Unhandled exception: unsupported operand type(s) for +: 'datetime.datetime' and 'int'
+Traceback (most recent call last):
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\标注项目\trae2\103\backend\apps\accounts\views.py", line 33, in login
+    result = AuthService.login(user, request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\标注项目\trae2\103\backend\apps\accounts\services.py", line 16, in login
+    refresh = RefreshToken.for_user(user)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 207, in for_user
+    token = cls()
+            ^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 67, in __init__
+    self.set_exp(from_time=self.current_time, lifetime=self.lifetime)
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 162, in set_exp
+    self.payload[claim] = datetime_to_epoch(from_time + lifetime)
+                                            ~~~~~~~~~~^~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'datetime.datetime' and 'int'
+Internal Server Error: /api/auth/login/
+E:\标注项目\trae2\103\backend\config\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Unhandled exception: It is redundant to specify `source='status_text'` on field 'CharField' in serializer 'InstrumentSimpleSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+Traceback (most recent call last):
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 43, in list
+    return self.get_paginated_response(serializer.data)
+                                       ^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 687, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 357, in fields
+    fields[key] = value
+    ~~~~~~^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\utils\serializer_helpers.py", line 169, in __setitem__
+    field.bind(field_name=key, parent=self.serializer)
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\fields.py", line 367, in bind
+    assert self.source != field_name, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: It is redundant to specify `source='status_text'` on field 'CharField' in serializer 'InstrumentSimpleSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+Internal Server Error: /api/instruments/
+Unhandled exception: It is redundant to specify `source='role_name'` on field 'CharField' in serializer 'UserProfileSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+Traceback (most recent call last):
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\标注项目\trae2\103\backend\apps\accounts\views.py", line 59, in get_profile
+    'data': serializer.data
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 555, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 507, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 368, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 357, in fields
+    fields[key] = value
+    ~~~~~~^^^^^
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\utils\serializer_helpers.py", line 169, in __setitem__
+    field.bind(field_name=key, parent=self.serializer)
+  File "C:\Users\gengq\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\fields.py", line 367, in bind
+    assert self.source != field_name, (
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: It is redundant to specify `source='role_name'` on field 'CharField' in serializer 'UserProfileSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+Internal Server Error: /api/auth/profile/
+E:\标注项目\trae2\103\backend\apps\instruments\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\accounts\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\reservations\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+初始化 MinIO 客户端失败: HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /experiment-files?location= (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+E:\标注项目\trae2\103\backend\apps\reservations\services.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\reservations\services.py changed, reloading.
+Watching for file changes with StatReloader
+Conflict: /api/reservations/
+Method Not Allowed: /api/files/upload/
+E:\标注项目\trae2\103\backend\apps\files\services.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\files\services.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /api/reservations/
+Bad Request: /api/reservations/
+Method Not Allowed: /api/files/upload/
+E:\标注项目\trae2\103\backend\apps\reservations\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Conflict: /api/reservations/
+Conflict: /api/reservations/
+Method Not Allowed: /api/files/upload/
+Conflict: /api/reservations/
+Method Not Allowed: /api/files/upload/
+Conflict: /api/reservations/
+Bad Request: /api/files/
+Conflict: /api/reservations/
+Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+初始化 MinIO 客户端失败: HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /experiment-files?location= (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+E:\标注项目\trae2\103\backend\apps\records\models.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\services.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\services.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\views.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /api/use-records/
+Not Found: /api/use-records/
+Bad Request: /api/records/92b8a934-bf7f-4433-bf00-13aee042e576/evaluate/
+Bad Request: /api/records/92b8a934-bf7f-4433-bf00-13aee042e576/flag_violation/
+Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+初始化 MinIO 客户端失败: HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /experiment-files?location= (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+Bad Request: /api/files/88f7d062-8a48-4584-a9d0-d13d76d5e41d/new_version/
+E:\标注项目\trae2\103\backend\apps\records\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\records\views.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\files\services.py changed, reloading.
+Watching for file changes with StatReloader
+E:\标注项目\trae2\103\backend\apps\files\services.py changed, reloading.
+Watching for file changes with StatReloader
+Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+初始化 MinIO 客户端失败: HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /experiment-files?location= (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
+E:\标注项目\trae2\103\backend\apps\records\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。")': /experiment-files?location=
+初始化 MinIO 客户端失败: HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /experiment-files?location= (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=9000): Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。"))
