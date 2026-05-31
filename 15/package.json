@@ -1,0 +1,22 @@
+{
+  "name": "mystery-realm-puzzle",
+  "version": "1.0.0",
+  "description": "秘境场景道具交互解谜类游戏 - 支持多客户端实时同步、道具组合解谜、本地+云端双存档",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "keywords": [
+    "game",
+    "puzzle",
+    "multiplayer",
+    "websocket",
+    "mystery"
+  ],
+  "author": "",
+  "license": "MIT"
+}

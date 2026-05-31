@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>秘境探索</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+body{background:#0a0a12;color:#e0e0e0;user-select:none}
+#app{display:flex;flex-direction:column;height:100vh;width:100vw}
+#gameCanvas{display:block;background:#1a1a2e;cursor:pointer;flex:1;touch-action:none}
+#ui-layer{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+#ui-layer>*{pointer-events:auto}
+.top-bar{position:absolute;top:0;left:0;right:0;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(0,0,0,0.7) 0%,transparent 100%);z-index:10}
+.scene-title{font-size:18px;font-weight:bold;text-shadow:0 2px 8px rgba(0,0,0,0.8)}
+.conn-status{display:flex;align-items:center;gap:6px;font-size:13px}
+.conn-dot{width:8px;height:8px;border-radius:50%;background:#444;transition:background 0.3s}
+.conn-dot.connected{background:#4caf50;box-shadow:0 0 8px #4caf50}
+.conn-dot.connecting{background:#ff9800;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.bottom-panel{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(10,10,18,0.95) 0%,rgba(10,10,18,0.7) 80%,transparent 100%);padding:12px 16px 20px;z-index:10}
+.inventory-title{font-size:13px;color:#888;margin-bottom:8px}
+.inventory{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.inventory::-webkit-scrollbar{display:none}
+.inventory-item{width:56px;height:56px;flex-shrink:0;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:all 0.2s;position:relative}
+.inventory-item:hover{border-color:#4caf50;transform:translateY(-2px)}
+.inventory-item.selected{border-color:#ff9800;background:rgba(255,152,0,0.2);box-shadow:0 0 12px rgba(255,152,0,0.5)}
+.inventory-item .tooltip{position:absolute;bottom:62px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);padding:6px 10px;border-radius:6px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:100}
+.inventory-item:hover .tooltip{opacity:1}
+.action-buttons{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{padding:10px 16px;background:rgba(76,175,80,0.2);border:1px solid rgba(76,175,80,0.5);color:#4caf50;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s}
+.btn:hover{background:rgba(76,175,80,0.35)}
+.btn:active{transform:scale(0.96)}
+.btn.secondary{background:rgba(158,158,158,0.15);border-color:rgba(158,158,158,0.4);color:#bdbdbd}
+.btn.secondary:hover{background:rgba(158,158,158,0.3)}
+.btn.danger{background:rgba(244,67,54,0.2);border-color:rgba(244,67,54,0.5);color:#f44336}
+.btn.danger:hover{background:rgba(244,67,54,0.35)}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.dialog-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:100}
+.dialog-overlay.active{display:flex}
+.dialog{background:#1e1e2e;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px;max-width:420px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+.dialog h2{margin-bottom:16px;font-size:20px}
+.dialog h3{margin:16px 0 8px;font-size:14px;color:#888}
+.save-list{max-height:200px;overflow-y:auto}
+.save-item{padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.save-item .info{font-size:13px}
+.save-item .info .name{font-weight:bold}
+.save-item .info .meta{color:#888;font-size:11px;margin-top:2px}
+.save-item .actions{display:flex;gap:4px}
+.save-item button{padding:4px 10px;font-size:12px;background:rgba(76,175,80,0.2);border:1px solid rgba(76,175,80,0.4);color:#4caf50;border-radius:4px;cursor:pointer}
+.save-item button.del{background:rgba(244,67,54,0.2);border-color:rgba(244,67,54,0.4);color:#f44336}
+.dialog-actions{display:flex;gap:8px;margin-top:16px}
+.dialog-actions .btn{flex:1}
+.input-row{display:flex;gap:8px;margin-bottom:12px}
+.input-row input{flex:1;padding:10px 12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#e0e0e0;font-size:14px}
+.input-row input:focus{outline:none;border-color:#4caf50}
+.toast-container{position:absolute;top:80px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{padding:10px 20px;background:rgba(30,30,46,0.95);border:1px solid rgba(255,255,255,0.2);border-radius:8px;font-size:14px;animation:toastIn 0.3s ease,toastOut 0.3s ease 2.5s forwards}
+.toast.success{border-color:rgba(76,175,80,0.5);color:#4caf50}
+.toast.error{border-color:rgba(244,67,54,0.5);color:#f44336}
+.toast.info{border-color:rgba(33,150,243,0.5);color:#2196f3}
+@keyframes toastIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(-10px)}}
+.scene-desc{position:absolute;top:60px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:10px 20px;border-radius:8px;font-size:14px;max-width:80%;text-align:center;z-index:5}
+.craft-panel{display:none;position:absolute;bottom:200px;left:50%;transform:translateX(-50%);background:rgba(30,30,46,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:16px;z-index:50}
+.craft-panel.active{display:block}
+.craft-panel h3{font-size:14px;margin-bottom:12px;text-align:center}
+.craft-slots{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+.craft-slot{width:48px;height:48px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer}
+.craft-slot.filled{border-style:solid;border-color:rgba(255,152,0,0.5);background:rgba(255,152,0,0.1)}
+.hint-text{position:absolute;top:120px;left:50%;transform:translateX(-50%);background:rgba(255,152,0,0.2);border:1px solid rgba(255,152,0,0.5);padding:8px 16px;border-radius:8px;font-size:13px;color:#ffb74d;display:none;z-index:5}
+.hint-text.active{display:block;animation:toastIn 0.3s ease}
+@media (max-width:640px){.inventory-item{width:48px;height:48px;font-size:24px}.scene-title{font-size:15px}.btn{padding:8px 12px;font-size:13px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="gameCanvas"></canvas>
+  <div id="ui-layer">
+    <div class="top-bar">
+      <div class="scene-title" id="sceneTitle">秘境入口</div>
+      <div class="conn-status">
+        <div class="conn-dot" id="connDot"></div>
+        <span id="connText">连接中...</span>
+      </div>
+    </div>
+    <div class="scene-desc" id="sceneDesc"></div>
+    <div class="hint-text" id="hintText"></div>
+    <div class="toast-container" id="toastContainer"></div>
+    <div class="craft-panel" id="craftPanel">
+      <h3>🔧 合成台</h3>
+      <div class="craft-slots" id="craftSlots"></div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn" id="craftBtn" disabled>合成</button>
+        <button class="btn secondary" id="craftCancelBtn">取消</button>
+      </div>
+    </div>
+    <div class="bottom-panel">
+      <div class="inventory-title">🎒 背包 <span id="invCount">(0)</span></div>
+      <div class="inventory" id="inventory"></div>
+      <div class="action-buttons">
+        <button class="btn" id="craftModeBtn">🔧 合成</button>
+        <button class="btn" id="hintBtn">💡 线索</button>
+        <button class="btn secondary" id="saveBtn">💾 存档</button>
+        <button class="btn secondary" id="loadBtn">📂 读档</button>
+        <button class="btn danger" id="resetBtn">🔄 重置</button>
+      </div>
+    </div>
+    <div class="dialog-overlay" id="dialogOverlay">
+      <div class="dialog" id="dialog"></div>
+    </div>
+  </div>
+</div>
+<script src="/client/client.js"></script>
+</body>
+</html>
