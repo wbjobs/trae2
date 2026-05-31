@@ -1,0 +1,82 @@
+# 尾矿库坝体渗流场有限元分析配置文件示例
+
+# 坝体几何参数
+dam_geometry:
+  dam_height: 30.0           # 坝高 (m)
+  crest_width: 8.0            # 坝顶宽度 (m)
+  upstream_slope: 2.5         # 上游坡度 (1:m)
+  downstream_slope: 2.0       # 下游坡度 (1:m)
+  foundation_depth: 10.0      # 基础深度 (m)
+  reservoir_water_level: 28.0 # 库水位 (m)
+  tailwater_level: 2.0        # 下游水位 (m)
+  dam_length: 100.0           # 坝长 (m)
+
+# 土层材料参数
+soil_layers:
+  - name: "坝体填土"
+    thickness: 30.0
+    permeability_x: 1.0e-5
+    permeability_y: 5.0e-6
+    porosity: 0.35
+    density: 2000.0
+    saturation: 1.0
+  
+  - name: "基础层"
+    thickness: 15.0
+    permeability_x: 1.0e-6
+    permeability_y: 1.0e-6
+    porosity: 0.30
+    density: 2100.0
+    saturation: 1.0
+
+# 边界条件
+boundary_conditions:
+  - type: "head"
+    location: "upstream"
+    value: 28.0
+    description: "上游库水位边界"
+  
+  - type: "head"
+    location: "downstream"
+    value: 2.0
+    description: "下游水位边界"
+  
+  - type: "flow"
+    location: "bottom"
+    value: 0.0
+    description: "底部不透水边界"
+
+# 计算参数
+simulation_params:
+  simulation_type: "steady_state"  # steady_state 或 transient
+  max_iterations: 1000
+  convergence_tolerance: 1.0e-6
+  time_step: 1.0
+  total_time: 100.0
+
+# 网格参数
+mesh_params:
+  element_type: "quad4"
+  mesh_size: 2.0
+  refinement_level: 1
+  boundary_refinement: false
+  max_aspect_ratio: 5.0
+
+# 输出参数
+output_params:
+  output_dir: "./output"
+  save_vtk: true
+  save_numpy: true
+  generate_report: true
+  plot_contours: true
+  plot_vectors: false
+
+# 集群配置 (可选)
+cluster_config:
+  enabled: false
+  num_processes: 4
+  scheduler: "local"
+  queue_name: "default"
+  wall_time: "02:00:00"
+  nodes: 1
+  tasks_per_node: 1

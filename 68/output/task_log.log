@@ -1,0 +1,9 @@
+2026-05-27 20:09:46,400 - task_monitor_fb52a38c - INFO - 任务 fb52a38c 已启动
+2026-05-27 20:09:46,407 - task_monitor_fb52a38c - INFO - 进入阶段: parsing_params
+2026-05-27 20:09:46,521 - task_monitor_fb52a38c - INFO - 进入阶段: generating_mesh
+2026-05-27 20:09:46,821 - task_monitor_fb52a38c - INFO - 进入阶段: solving
+2026-05-27 20:09:46,945 - task_monitor_fb52a38c - INFO - 进入阶段: solving
+2026-05-27 20:09:52,666 - task_monitor_fb52a38c - INFO - 进入阶段: post_processing
+2026-05-27 20:09:53,360 - task_monitor_fb52a38c - INFO - 进入阶段: generating_report
+2026-05-27 20:09:53,360 - task_monitor_fb52a38c - INFO - 进入阶段: finalizing
+2026-05-27 20:09:53,360 - task_monitor_fb52a38c - INFO - 任务 fb52a38c 已完成
