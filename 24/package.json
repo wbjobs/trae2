@@ -1,0 +1,27 @@
+{
+  "name": "broadcast-transcode-scheduler",
+  "version": "1.0.0",
+  "description": "广电信号码流转码调度API服务组 - 转码任务分配、资源动态调度、码流校验、任务状态回调",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [
+    "broadcast",
+    "transcode",
+    "streaming",
+    "scheduler",
+    "video",
+    "media"
+  ],
+  "dependencies": {
+    "express": "^4.18.2",
+    "redis": "^4.6.11",
+    "node-fetch": "^2.7.0",
+    "uuid": "^9.0.0",
+    "joi": "^17.11.0",
+    "winston": "^3.11.0",
+    "dotenv": "^16.3.1"
+  }
+}
