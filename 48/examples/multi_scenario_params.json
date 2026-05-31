@@ -1,0 +1,32 @@
+{
+    "baseline_config": "examples/example_params.json",
+    "description": "多工况边坡稳定性对比分析配置",
+    "variations": [
+        {
+            "param_type": "geometry",
+            "param_path": "angle",
+            "description": "边坡角度",
+            "values": [30, 35, 40, 45, 50]
+        },
+        {
+            "param_type": "geometry",
+            "param_path": "height",
+            "description": "边坡高度",
+            "values": [8, 10, 12, 15]
+        },
+        {
+            "param_type": "soil_layer",
+            "param_path": "cohesion",
+            "description": "表层填土黏聚力",
+            "layer_index": 0,
+            "values": [15000, 20000, 25000, 30000]
+        },
+        {
+            "param_type": "soil_layer",
+            "param_path": "friction_angle",
+            "description": "表层填土内摩擦角",
+            "layer_index": 0,
+            "values": [25, 28, 30, 32, 35]
+        }
+    ]
+}

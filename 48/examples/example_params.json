@@ -1,0 +1,89 @@
+{
+    "project_info": {
+        "name": "某高速公路边坡稳定性分析",
+        "project_id": "SLP-2024-001",
+        "date": "2024-01-15",
+        "engineer": "张工程师"
+    },
+    "slope_geometry": {
+        "height": 15.0,
+        "angle": 45.0,
+        "crest_width": 10.0,
+        "toe_width": 5.0,
+        "slope_length": 21.21,
+        "total_width": 30.0
+    },
+    "soil_layers": [
+        {
+            "name": "表层填土",
+            "thickness": 3.0,
+            "density": 1850.0,
+            "young_modulus": 15e6,
+            "poisson_ratio": 0.35,
+            "cohesion": 15e3,
+            "friction_angle": 28.0,
+            "dilation_angle": 3.0
+        },
+        {
+            "name": "粉质黏土",
+            "thickness": 8.0,
+            "density": 1950.0,
+            "young_modulus": 25e6,
+            "poisson_ratio": 0.32,
+            "cohesion": 25e3,
+            "friction_angle": 32.0,
+            "dilation_angle": 5.0
+        },
+        {
+            "name": "强风化岩",
+            "thickness": 10.0,
+            "density": 2200.0,
+            "young_modulus": 100e6,
+            "poisson_ratio": 0.28,
+            "cohesion": 50e3,
+            "friction_angle": 38.0,
+            "dilation_angle": 8.0
+        }
+    ],
+    "boundary_conditions": {
+        "left_boundary": {
+            "type": "roller",
+            "constraint": "x"
+        },
+        "right_boundary": {
+            "type": "roller",
+            "constraint": "x"
+        },
+        "bottom_boundary": {
+            "type": "fixed",
+            "constraint": "xy"
+        },
+        "surface_load": {
+            "magnitude": 0.0,
+            "direction": "vertical"
+        }
+    },
+    "analysis_settings": {
+        "type": "static",
+        "method": "strength_reduction",
+        "reduction_factor_start": 1.0,
+        "reduction_factor_end": 2.5,
+        "reduction_step": 0.1,
+        "max_iterations": 500,
+        "tolerance": 1e-6
+    },
+    "mesh_settings": {
+        "element_type": "triangular",
+        "min_element_size": 0.3,
+        "max_element_size": 2.0,
+        "boundary_refinement_level": 2
+    },
+    "output_settings": {
+        "save_displacement": true,
+        "save_stress": true,
+        "save_strain": true,
+        "save_pore_pressure": false,
+        "generate_report": true,
+        "visualization": true
+    }
+}

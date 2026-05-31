@@ -1,0 +1,35 @@
+slope_fem:
+  project_name: "边坡稳定性分析"
+  version: "1.0.0"
+  
+  computation:
+    mode: "local"
+    max_iterations: 1000
+    tolerance: 1e-6
+    time_step: 0.1
+    total_time: 10.0
+    
+  mesh:
+    element_type: "triangular"
+    min_size: 0.5
+    max_size: 5.0
+    boundary_refinement: true
+    
+  materials:
+    default_soil:
+      density: 1800.0
+      young_modulus: 20e6
+      poisson_ratio: 0.3
+      cohesion: 20e3
+      friction_angle: 30.0
+      dilation_angle: 5.0
+      
+  output:
+    format: "vtk"
+    save_frequency: 10
+    report_template: "templates/report_template.html"
+    
+  monitoring:
+    enabled: false
+    server_url: "http://localhost:8080/api"
+    update_interval: 5.0
