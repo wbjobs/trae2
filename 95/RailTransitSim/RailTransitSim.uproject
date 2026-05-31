@@ -1,0 +1,41 @@
+
+{
+    "FileVersion": 3,
+    "EngineAssociation": "5.4",
+    "Category": "Simulation",
+    "Description": "Rail Transit Signal Simulation Training System - A comprehensive training platform for railway signal operations",
+    "Modules": [
+        {
+            "Name": "RailTransitSim",
+            "Type": "Runtime",
+            "LoadingPhase": "Default",
+            "AdditionalDependencies": [
+                "Engine",
+                "CoreUObject"
+            ]
+        }
+    ],
+    "Plugins": [
+        {
+            "Name": "WebSockets",
+            "Enabled": true
+        },
+        {
+            "Name": "ProceduralMeshComponent",
+            "Enabled": true
+        },
+        {
+            "Name": "Json",
+            "Enabled": true
+        },
+        {
+            "Name": "JsonUtilities",
+            "Enabled": true
+        }
+    ],
+    "TargetPlatforms": [
+        "Windows"
+    ],
+    "bIsEnterpriseProject": false,
+    "bEnabledPluginsProjectSettings": true
+}
